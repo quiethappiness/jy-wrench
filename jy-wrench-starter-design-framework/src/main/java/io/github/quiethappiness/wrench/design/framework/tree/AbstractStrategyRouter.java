@@ -15,7 +15,7 @@ public abstract class AbstractStrategyRouter<T, D, R> implements StrategyMapper<
 	@Setter
 	protected StrategyHandler<T, D, R> defaultStrategyHandler = DEFAULT;
 	
-	public R router(T requestParameter, D dynamicContext) throws Exception
+	public R router(T requestParameter, D dynamicContext) throws Throwable
 	{
 		StrategyHandler<T, D, R> strategyHandler = get(requestParameter, dynamicContext);
         if (null != strategyHandler)

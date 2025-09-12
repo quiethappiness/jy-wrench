@@ -1,0 +1,226 @@
+25-09-12.20:56:04.616 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [io.github.quiethappiness.wrench.Application]; nested exception is java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+25-09-12.20:56:04.650 [main            ] ERROR SpringApplication      - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [io.github.quiethappiness.wrench.Application]; nested exception is java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:188)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at io.github.quiethappiness.wrench.Application.main(Application.java:12)
+Caused by: java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getSuperClass(ConfigurationClassParser.java:1010)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:340)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:198)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:303)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174)
+	... 13 common frames omitted
+25-09-12.21:02:14.392 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [io.github.quiethappiness.wrench.Application]; nested exception is java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+25-09-12.21:02:14.406 [main            ] ERROR SpringApplication      - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [io.github.quiethappiness.wrench.Application]; nested exception is java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:188)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:748)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:564)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at io.github.quiethappiness.wrench.Application.main(Application.java:12)
+Caused by: java.io.FileNotFoundException: class path resource [io/github/quiethappiness/wrench/design/framework/tree/AbstractMultiThreadStrategyRouter.class] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:199)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.getClassReader(SimpleMetadataReader.java:55)
+	at org.springframework.core.type.classreading.SimpleMetadataReader.<init>(SimpleMetadataReader.java:48)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:103)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.createMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:86)
+	at org.springframework.boot.type.classreading.ConcurrentReferenceCachingMetadataReaderFactory.getMetadataReader(ConcurrentReferenceCachingMetadataReaderFactory.java:73)
+	at org.springframework.core.type.classreading.SimpleMetadataReaderFactory.getMetadataReader(SimpleMetadataReaderFactory.java:81)
+	at org.springframework.context.annotation.ConfigurationClassParser.asSourceClass(ConfigurationClassParser.java:696)
+	at org.springframework.context.annotation.ConfigurationClassParser$SourceClass.getSuperClass(ConfigurationClassParser.java:1010)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:340)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:198)
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:303)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:206)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:174)
+	... 13 common frames omitted
+25-09-12.21:20:32.327 [redisson-netty-1-23] ERROR rejectedExecution      - Failed to submit a listener notification task. Event loop shut down?
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:351)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:344)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817)
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:862)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:500)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:97)
+	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200)
+	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1164)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:755)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:731)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:620)
+	at io.netty.channel.nio.NioEventLoop.closeAll(NioEventLoop.java:838)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:595)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-12.21:20:48.138 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:20:52.707 [http-nio-9191-exec-2] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:20:52.893 [http-nio-9191-exec-4] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:20:53.667 [http-nio-9191-exec-5] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:20:53.667 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:20:53.863 [http-nio-9191-exec-7] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:20:54.050 [http-nio-9191-exec-6] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:20:54.051 [http-nio-9191-exec-6] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:20:54.169 [http-nio-9191-exec-9] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:20:54.169 [http-nio-9191-exec-9] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:09.560 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:12.888 [http-nio-9191-exec-2] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:13.405 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:13.627 [http-nio-9191-exec-5] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:13.627 [http-nio-9191-exec-5] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:13.627 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:13.820 [http-nio-9191-exec-7] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:13.821 [http-nio-9191-exec-7] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:13.821 [http-nio-9191-exec-7] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:14.004 [http-nio-9191-exec-8] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:14.210 [http-nio-9191-exec-1] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:14.210 [http-nio-9191-exec-1] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:14.210 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:14.389 [http-nio-9191-exec-3] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:14.389 [http-nio-9191-exec-3] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:14.389 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:14.566 [http-nio-9191-exec-5] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:14.566 [http-nio-9191-exec-5] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:14.566 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:14.732 [http-nio-9191-exec-7] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:14.732 [http-nio-9191-exec-7] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:14.732 [http-nio-9191-exec-7] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:14.893 [http-nio-9191-exec-8] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:15.037 [http-nio-9191-exec-10] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:15.037 [http-nio-9191-exec-10] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:15.037 [http-nio-9191-exec-10] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:15.331 [http-nio-9191-exec-2] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:15.331 [http-nio-9191-exec-2] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:15.331 [http-nio-9191-exec-2] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:15.474 [http-nio-9191-exec-4] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:15.474 [http-nio-9191-exec-4] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:15.474 [http-nio-9191-exec-4] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:15.633 [http-nio-9191-exec-6] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:15.633 [http-nio-9191-exec-6] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:15.633 [http-nio-9191-exec-6] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:15.804 [http-nio-9191-exec-9] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:15.804 [http-nio-9191-exec-9] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:15.804 [http-nio-9191-exec-9] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:15.971 [http-nio-9191-exec-10] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:26:16.149 [http-nio-9191-exec-1] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:16.149 [http-nio-9191-exec-1] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:16.149 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:16.308 [http-nio-9191-exec-3] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:16.308 [http-nio-9191-exec-3] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:16.308 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:16.476 [http-nio-9191-exec-5] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:16.476 [http-nio-9191-exec-5] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:16.476 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:16.634 [http-nio-9191-exec-7] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:16.634 [http-nio-9191-exec-7] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:16.634 [http-nio-9191-exec-7] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:16.820 [http-nio-9191-exec-8] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:26:16.820 [http-nio-9191-exec-8] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:26:16.820 [http-nio-9191-exec-8] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:26:16.981 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:28:56.117 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:07.342 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:09.301 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:10.557 [http-nio-9191-exec-4] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:11.404 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:11.580 [http-nio-9191-exec-6] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:12.756 [http-nio-9191-exec-9] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.21:36:12.917 [http-nio-9191-exec-1] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:36:12.917 [http-nio-9191-exec-1] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:36:12.917 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:36:13.070 [http-nio-9191-exec-3] WARN  PPSCheckNode           - 【PPSCheckNode】:限流-获取通行证失败
+25-09-12.21:36:13.071 [http-nio-9191-exec-3] ERROR PPSCheckNode           - 【PPSCheckNode】:限流-超频次拦截：ddd
+25-09-12.21:36:13.071 [http-nio-9191-exec-3] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:36:24.639 [http-nio-9191-exec-4] ERROR BlackListNode          - 【BlackListNode】:进行限流-黑名单拦截(24h)：ddd
+25-09-12.21:36:24.639 [http-nio-9191-exec-4] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:36:30.235 [http-nio-9191-exec-5] ERROR BlackListNode          - 【BlackListNode】:进行限流-黑名单拦截(24h)：ddd
+25-09-12.21:36:30.235 [http-nio-9191-exec-5] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.21:36:35.637 [http-nio-9191-exec-7] ERROR BlackListNode          - 【BlackListNode】:进行限流-黑名单拦截(24h)：ddd
+25-09-12.21:36:35.637 [http-nio-9191-exec-7] WARN  EndNode                - 【结束节点】:是否限流-->true
+25-09-12.22:13:36.436 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false
+25-09-12.22:17:45.123 [redisson-netty-1-23] ERROR rejectedExecution      - Failed to submit a listener notification task. Event loop shut down?
+java.util.concurrent.RejectedExecutionException: event executor terminated
+	at io.netty.util.concurrent.SingleThreadEventExecutor.reject(SingleThreadEventExecutor.java:934)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.offerTask(SingleThreadEventExecutor.java:351)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.addTask(SingleThreadEventExecutor.java:344)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:836)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute0(SingleThreadEventExecutor.java:827)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.execute(SingleThreadEventExecutor.java:817)
+	at io.netty.util.concurrent.DefaultPromise.safeExecute(DefaultPromise.java:862)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:500)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess(DefaultPromise.java:97)
+	at io.netty.channel.group.DefaultChannelGroupFuture.setSuccess0(DefaultChannelGroupFuture.java:200)
+	at io.netty.channel.group.DefaultChannelGroupFuture.access$400(DefaultChannelGroupFuture.java:41)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:75)
+	at io.netty.channel.group.DefaultChannelGroupFuture$1.operationComplete(DefaultChannelGroupFuture.java:48)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:590)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:583)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:559)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:492)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:636)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:625)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:105)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1164)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:755)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:731)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:620)
+	at io.netty.channel.nio.NioEventLoop.closeAll(NioEventLoop.java:838)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:595)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-12.22:23:49.753 [http-nio-9191-exec-1] WARN  EndNode                - 【结束节点】:是否限流-->false

@@ -3,13 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>io.github.quiethappiness</groupId>
-		<artifactId>jy-wrench</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	
+	<!-- <parent> -->
+	<!-- 	<groupId>io.github.quiethappiness</groupId> -->
+	<!-- 	<artifactId>jy-wrench</artifactId> -->
+	<!-- 	<version>1.0.0</version> -->
+	<!-- </parent> -->
+	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench-bom</artifactId>
+	<version>1.0.0</version>
 	
 	<packaging>pom</packaging>
 	
@@ -25,27 +26,27 @@
 		</license>
 	</licenses>
 	
-	<!-- <developers>
-		 <developer>
-			 <id>ossrh</id>
-			 <name>fuzhengwei</name>
-			 <email>184172133@qq.com</email>
-			 <url>https://github.com/fuzhengwei</url>
-			 <organization>xfg-wrench</organization>
-			 <organizationUrl>https://github.com/fuzhengwei/xfg-wrench</organizationUrl>
-			 <roles>
-				 <role>Project Manager</role>
-				 <role>Developer</role>
-			 </roles>
-			 <timezone>Asia/Shanghai</timezone>
-		 </developer>
-	 </developers>-->
+	<developers>
+		<developer>
+			<id>maven</id>
+			<name>jingyue</name>
+			<email>zhlele2003@qq.com</email>
+			<url>https://github.com/quiethappiness</url>
+			<organization>jy-wrench</organization>
+			<organizationUrl>https://github.com/quiethappiness/jy-wrench</organizationUrl>
+			<roles>
+				<role>Project Manager</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>Asia/Shanghai</timezone>
+		</developer>
+	</developers>
 	
 	<scm>
-		<connection>scm:git:https://gitee.com/quiethappiness/jy-wrench.git</connection>
-		<developerConnection>scm:git:https://gitee.com/quiethappiness/jy-wrench.git</developerConnection>
+		<connection>scm:git:https://github.com/quiethappiness/jy-wrench.git</connection>
+		<developerConnection>scm:git:https://github.com/quiethappiness/jy-wrench.git</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://gitee.com/quiethappiness/jy-wrench</url>
+		<url>https://github.com/quiethappiness/jy-wrench</url>
 	</scm>
 	
 	<dependencyManagement>
@@ -56,7 +57,7 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 			</dependency>
 			
 			<!-- jy wrench dcc 动态配置中心 -->
@@ -64,14 +65,14 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-design-framework</artifactId>
-				<version>1.0.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 			</dependency>
 		
 		</dependencies>
 	</dependencyManagement>
 	
 	<build>
-		<!--<plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -86,8 +87,8 @@
 					</resources>
 				</configuration>
 			</plugin>
-
-			&lt;!&ndash;   central发布插件    &ndash;&gt;
+			
+			<!--   central发布插件    -->
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
@@ -97,11 +98,11 @@
 					<publishingServerId>ossrh</publishingServerId>
 					<tokenAuth>true</tokenAuth>
 					<autoPublish>true</autoPublish>
-					&lt;!&ndash;                    <waitUntil>published</waitUntil>&ndash;&gt;
+					<waitUntil>published</waitUntil>
 				</configuration>
 			</plugin>
-
-			&lt;!&ndash;   source源码插件 &ndash;&gt;
+			
+			<!--   source源码插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -115,8 +116,8 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			&lt;!&ndash;   javadoc插件 &ndash;&gt;
+			
+			<!--   javadoc插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -136,13 +137,15 @@
 						</goals>
 						<configuration>
 							<additionalparam>-Xdoclint:none</additionalparam>
-							&lt;!&ndash;  /Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/bin/javadoc &ndash;&gt;
-							<javadocExecutable>${java.home}${file.separator}..${file.separator}bin${file.separator}javadoc</javadocExecutable>
+							<!--  /Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/bin/javadoc -->
+							<javadocExecutable>
+								${java.home}${file.separator}..${file.separator}bin${file.separator}javadoc
+							</javadocExecutable>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -168,15 +171,22 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			&lt;!&ndash;gpg加密&ndash;&gt;
+			
+			<!--gpg加密-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>1.5</version>
+				<version>3.1.0</version>
 				<configuration>
-					&lt;!&ndash;指定用于签名的 GPG 密钥名称。&ndash;&gt;
-					<keyname>ossrh</keyname>
+					<!--指定用于签名的 GPG 密钥名称。-->
+					<keyname>maven</keyname>
+					<passphrase>${gpg.passphrase}</passphrase>
+					
+					<!-- 对于较新的 GPG 版本需要此配置 -->
+					<gpgArguments>
+						<arg>--pinentry-mode</arg>
+						<arg>loopback</arg>
+					</gpgArguments>
 				</configuration>
 				<executions>
 					<execution>
@@ -188,7 +198,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>net.nicoulaj.maven.plugins</groupId>
 				<artifactId>checksum-maven-plugin</artifactId>
@@ -229,6 +239,6 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>-->
+		</plugins>
 	</build>
 </project>

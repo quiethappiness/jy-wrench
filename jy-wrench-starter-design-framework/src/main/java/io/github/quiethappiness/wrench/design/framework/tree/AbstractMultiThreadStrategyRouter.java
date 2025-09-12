@@ -11,7 +11,7 @@ import java.util.concurrent.TimeoutException;
 public abstract class AbstractMultiThreadStrategyRouter<T, D, R> extends AbstractStrategyRouter<T, D, R>
 {
 	@Override
-	public R apply(T requestParameter, D dynamicContext) throws Exception
+	public R apply(T requestParameter, D dynamicContext) throws Throwable
 	{
 		// 异步加载数据
 		multiThread(requestParameter, dynamicContext);
@@ -27,5 +27,5 @@ public abstract class AbstractMultiThreadStrategyRouter<T, D, R> extends Abstrac
 	/**
 	 * 业务流程受理
 	 */
-	protected abstract R doApply(T requestParameter, D dynamicContext) throws Exception;
+	protected abstract R doApply(T requestParameter, D dynamicContext) throws Throwable;
 }

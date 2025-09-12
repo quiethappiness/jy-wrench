@@ -3,34 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
-	<groupId>io.github.quiethappiness</groupId>
-	<artifactId>jy-wrench</artifactId>
-	<version>1.0.0</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>jy-wrench-starter-dynamic-config-center</module>
-		<module>jy-wrench-test</module>
-		<module>jy-wrench-starter-design-framework</module>
-		<module>jy-wrench-bom</module>
-		<module>jy-wrench-starter-rate-limiter</module>
-	</modules>
-	<name>jy-wrench</name>
-	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
-		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<maven-checksum-plugin.version>1.10</maven-checksum-plugin.version>
-	</properties>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.12</version>
-		<relativePath/>
+		<groupId>io.github.quiethappiness</groupId>
+		<artifactId>jy-wrench</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
+	
+	<packaging>jar</packaging>
+	<artifactId>jy-wrench-starter-design-framework</artifactId>
+	<name>jy-wrench-starter-design-framework</name>
+	<description>jy wrench modules design framework</description>
+	<url>https://github.com/quiethappiness/jy-wrench</url>
+	
 	<licenses>
 		<license>
 			<name>Apache License</name>
@@ -61,107 +45,55 @@
 		<tag>HEAD</tag>
 		<url>https://github.com/quiethappiness/jy-wrench</url>
 	</scm>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>32.1.3-jre</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>2.6</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-codec</groupId>
-				<artifactId>commons-codec</artifactId>
-				<version>1.15</version>
-			</dependency>
-			<dependency>
-				<groupId>com.alibaba</groupId>
-				<artifactId>fastjson</artifactId>
-				<version>2.0.49</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>4.13.1</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.redisson</groupId>
-				<artifactId>redisson-spring-boot-starter</artifactId>
-				<version>3.26.0</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+	</dependencies>
 	
 	<build>
-		<finalName>jy-wrench</finalName>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
-			</resource>
-			<resource>
-				<directory>src/assembly/resources</directory>
-				<filtering>false</filtering>
+				<includes>
+					<include>**/**</include>
+				</includes>
 			</resource>
 		</resources>
 		<testResources>
 			<testResource>
 				<directory>src/test/resources</directory>
 				<filtering>true</filtering>
-			</testResource>
-			<testResource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<includes>
+					<include>**/**</include>
+				</includes>
 			</testResource>
 		</testResources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-archetype-plugin</artifactId>
-				<version>3.2.0</version>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.5</version>
+				<version>3.2.0</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<resources>
+						<resource>
+							<directory>src/main/resources</directory>
+							<filtering>false</filtering>
+						</resource>
+					</resources>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.18.0</version>
-			</plugin>
-			<!-- 			<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-resources-plugin</artifactId>
-							<version>3.2.0</version>
-							<configuration>
-								<encoding>UTF-8</encoding>
-								<resources>
-									<resource>
-										<directory>src/main/resources</directory>
-										<filtering>false</filtering>
-									</resource>
-								</resources>
-							</configuration>
-						</plugin> -->
 			
 			<!--   central发布插件    -->
 			<plugin>
@@ -170,10 +102,9 @@
 				<version>0.4.0</version>
 				<extensions>true</extensions>
 				<configuration>
-					<publishingServerId>ossrh</publishingServerId>
+					<publishingServerId>maven</publishingServerId>
 					<tokenAuth>true</tokenAuth>
 					<autoPublish>true</autoPublish>
-					<waitUntil>published</waitUntil>
 				</configuration>
 			</plugin>
 			
@@ -232,6 +163,10 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<createDependencyReducedPom>true</createDependencyReducedPom>
+							<dependencyReducedPomLocation>
+								${project.build.directory}/${project.artifactId}-${project.version}.pom
+							</dependencyReducedPomLocation>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
@@ -254,7 +189,10 @@
 				<version>3.1.0</version>
 				<configuration>
 					<!--指定用于签名的 GPG 密钥名称。-->
-					<keyname>maven</keyname>
+					<!-- <keyname>maven</keyname> -->
+					<!-- <keyname>6AFF59A65A576782FB6C3E286F0C57757F97BF61</keyname> -->
+					<!-- 明确指定使用 maven 密钥的邮箱 -->
+					<keyname>jingyue20220129@163.com</keyname>
 					<passphrase>${gpg.passphrase}</passphrase>
 					
 					<!-- 对于较新的 GPG 版本需要此配置 -->
@@ -316,4 +254,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

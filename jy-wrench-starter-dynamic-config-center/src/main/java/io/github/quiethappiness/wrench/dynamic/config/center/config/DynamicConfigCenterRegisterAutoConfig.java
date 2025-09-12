@@ -48,7 +48,7 @@ public class DynamicConfigCenterRegisterAutoConfig
 			.setKeepAlive(properties.isKeepAlive())
 		;
 		RedissonClient redissonClient = Redisson.create(config);
-		log.debug("jy-wrench，注册器（redis）链接初始化完成。{} {} {}", properties.getHost(), properties.getPoolSize(), !redissonClient.isShutdown());
+		log.info("jy-wrench，注册器（redis）链接初始化完成。{} {} {}", properties.getHost(), properties.getPoolSize(), !redissonClient.isShutdown());
 		return redissonClient;
 	}
 	
@@ -57,7 +57,7 @@ public class DynamicConfigCenterRegisterAutoConfig
 		DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,
 		RedissonClient jyWrenchRedissonClient)
 	{
-		log.debug("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
+		log.info("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
 		return new DynamicConfigCenterServiceImpl(dynamicConfigCenterAutoProperties, jyWrenchRedissonClient);
 	}
 	
@@ -66,7 +66,7 @@ public class DynamicConfigCenterRegisterAutoConfig
 	public DynamicConfigCenterAdjustListener dynamicConfigCenterAdjustListener(
 		IDynamicConfigCenterService dynamicConfigCenterService)
 	{
-		log.debug("jy-wrench，注册器（redis）监听器 dynamicConfigCenterAdjustListener 初始化完成。");
+		log.info("jy-wrench，注册器（redis）监听器 dynamicConfigCenterAdjustListener 初始化完成。");
 		return new DynamicConfigCenterAdjustListener(dynamicConfigCenterService);
 	}
 	
@@ -79,7 +79,7 @@ public class DynamicConfigCenterRegisterAutoConfig
 		RTopic dynamicConfigCenterTopic = jyWrenchRedissonClient.getTopic(
 			Constants.getTopic(dynamicConfigCenterAutoProperties.getSystem()));
 		dynamicConfigCenterTopic.addListener(AttributeVO.class, dynamicConfigCenterAdjustListener);
-		log.debug("jy-wrench，注册器（redis）Topic dynamicConfigCenterTopic 创建完成。");
+		log.info("jy-wrench，注册器（redis）Topic dynamicConfigCenterTopic 创建完成。");
 		return dynamicConfigCenterTopic;
 	}
 }
