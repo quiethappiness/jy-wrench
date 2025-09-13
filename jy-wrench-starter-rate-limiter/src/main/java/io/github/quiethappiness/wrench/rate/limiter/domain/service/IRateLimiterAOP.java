@@ -3,8 +3,6 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * IRateLimiterAOP
  * @author quietHappiness @jingyue
@@ -18,6 +16,6 @@ public interface IRateLimiterAOP
 	default void aopPoint() {
 	}
 	
-	Object fallbackMethodResult(JoinPoint jp, String fallbackMethod) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException;
+	Object fallbackMethodResult(JoinPoint jp, String fallbackMethod) throws Exception;
 	
 }

@@ -6,7 +6,7 @@
 	
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>jy-wrench-starter-dynamic-config-center</module>
@@ -93,6 +93,11 @@
 				<groupId>org.redisson</groupId>
 				<artifactId>redisson-spring-boot-starter</artifactId>
 				<version>3.26.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.36</version> <!-- 建议使用较新版本 -->
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

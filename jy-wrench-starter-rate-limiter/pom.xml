@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.github.quiethappiness</groupId>
 		<artifactId>jy-wrench</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.3</version>
 	</parent>
 	
 	<artifactId>jy-wrench-starter-rate-limiter</artifactId>
@@ -51,6 +51,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<!-- 排除 Spring Boot 默认的日志 starter -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- 添加 SLF4J API 依赖 -->
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -91,13 +104,13 @@
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.3</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-design-framework</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.3</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

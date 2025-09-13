@@ -19,7 +19,8 @@ public class DesignFrameworkTest {
     private DefaultStrategyFactory defaultStrategyFactory;
 
     @Test
-    public void test() throws Exception {
+    public void test() throws Throwable
+    {
         StrategyHandler<String, DefaultStrategyFactory.DynamicContext, String> strategyHandler = defaultStrategyFactory.strategyHandler();
         String result = strategyHandler.apply("xiaofuge", new DefaultStrategyFactory.DynamicContext());
 

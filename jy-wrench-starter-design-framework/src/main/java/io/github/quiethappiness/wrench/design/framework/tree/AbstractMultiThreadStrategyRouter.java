@@ -1,8 +1,5 @@
 package io.github.quiethappiness.wrench.design.framework.tree;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
-
 /**
  * @author quiethappiness @jingyue
  * @description 异步资源加载策略
@@ -22,7 +19,7 @@ public abstract class AbstractMultiThreadStrategyRouter<T, D, R> extends Abstrac
 	/**
 	 * 异步加载数据
 	 */
-	protected abstract void multiThread(T requestParameter, D dynamicContext) throws ExecutionException, InterruptedException, TimeoutException;
+	protected abstract void multiThread(T requestParameter, D dynamicContext) throws Exception;
 	
 	/**
 	 * 业务流程受理

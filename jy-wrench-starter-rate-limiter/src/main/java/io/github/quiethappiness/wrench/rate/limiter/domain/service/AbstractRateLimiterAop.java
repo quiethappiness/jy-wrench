@@ -7,7 +7,6 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +33,7 @@ public abstract class AbstractRateLimiterAop implements IRateLimiterAOP
 	 * 调用用户配置的回调方法，当拦截后，返回回调结果。
 	 */
 	@Override
-	public Object fallbackMethodResult(JoinPoint jp, String fallbackMethod) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	public Object fallbackMethodResult(JoinPoint jp, String fallbackMethod) throws Exception
 	{
 		Signature sig = jp.getSignature();
 		MethodSignature methodSignature = (MethodSignature) sig;

@@ -10,7 +10,7 @@
 	<!-- </parent> -->
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench-bom</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.3</version>
 	
 	<packaging>pom</packaging>
 	
@@ -57,7 +57,7 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.3</version>
 			</dependency>
 			
 			<!-- jy wrench dcc 动态配置中心 -->
@@ -65,7 +65,14 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-design-framework</artifactId>
-				<version>1.0.0</version>
+				<version>1.0.3</version>
+			</dependency>
+			
+			<!-- jy wrench rate limiter -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-rate-limiter</artifactId>
+				<version>1.0.3</version>
 			</dependency>
 		
 		</dependencies>

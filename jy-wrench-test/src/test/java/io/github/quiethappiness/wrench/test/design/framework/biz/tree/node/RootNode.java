@@ -16,7 +16,8 @@ public class RootNode extends AbstractXxxSupport
     private SwitchRoot switchRoot;
 
     @Override
-    protected String doApply(String requestParameter, DefaultStrategyFactory.DynamicContext dynamicContext) throws Exception {
+    protected String doApply(String requestParameter, DefaultStrategyFactory.DynamicContext dynamicContext) throws Throwable
+    {
         log.info("【开关节点】规则决策树 userId:{}", requestParameter);
         return router(requestParameter, dynamicContext);
     }

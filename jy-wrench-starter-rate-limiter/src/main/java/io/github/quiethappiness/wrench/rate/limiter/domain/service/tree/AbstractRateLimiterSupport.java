@@ -7,14 +7,12 @@ import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeoutException;
 
 public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStrategyRouter<RequestParameterEntity, RateLimiterStrategyFactory.DynamicContext, ResponseResultEntity>
 {
 	
 	@Override
-	protected void multiThread(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws ExecutionException, InterruptedException, TimeoutException
+	protected void multiThread(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		// 缺省的方法
 	}
