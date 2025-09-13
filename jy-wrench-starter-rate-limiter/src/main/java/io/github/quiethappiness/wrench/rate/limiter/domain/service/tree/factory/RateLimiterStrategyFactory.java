@@ -18,16 +18,16 @@ import org.springframework.stereotype.Service;
 public class RateLimiterStrategyFactory
 {
 	
-	private final RootNode rootNode;
+	private final RootNode rateLimiterRootNode;
 	
-	public RateLimiterStrategyFactory(RootNode rootNode)
+	public RateLimiterStrategyFactory(RootNode rateLimiterRootNode)
 	{
-		this.rootNode = rootNode;
+		this.rateLimiterRootNode = rateLimiterRootNode;
 	}
 	
 	public StrategyHandler<RequestParameterEntity, DynamicContext, ResponseResultEntity> strategyHandler()
 	{
-		return rootNode;
+		return rateLimiterRootNode;
 	}
 	
 	@Data

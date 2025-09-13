@@ -6,7 +6,7 @@
 	
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>jy-wrench-starter-dynamic-config-center</module>

@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Slf4j
-@Component
+@Component("rateLimiterPPSCheckNode")
 public class PPSCheckNode extends AbstractRateLimiterSupport
 {
 	@Resource
-	private EndNode endNode;
+	private EndNode rateLimiterEndNode;
 	
 	@Override
 	protected ResponseResultEntity doApply(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
@@ -65,6 +65,6 @@ public class PPSCheckNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RequestParameterEntity, RateLimiterStrategyFactory.DynamicContext, ResponseResultEntity> get(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		return endNode;
+		return rateLimiterEndNode;
 	}
 }

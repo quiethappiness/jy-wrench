@@ -5,7 +5,7 @@ import io.github.quiethappiness.wrench.design.framework.link.model2.LinkedList;
 import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.handler.IBranchLogicHandler;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  * @description 业务链路
  * @create 2025-01-18 10:27
  */

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.github.quiethappiness</groupId>
 		<artifactId>jy-wrench</artifactId>
-		<version>1.0.3</version>
+		<version>1.0.4</version>
 	</parent>
 	
 	<artifactId>jy-wrench-test</artifactId>
@@ -53,18 +53,18 @@
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-design-framework</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 			<!-- <scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-rate-limiter</artifactId>
-			<version>1.0.3</version>
+			<version>1.0.4</version>
 			<scope>compile</scope>
 		</dependency>
 	

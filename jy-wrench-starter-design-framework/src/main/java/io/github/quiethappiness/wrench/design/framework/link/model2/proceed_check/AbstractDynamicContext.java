@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * 链路动态上下文
  *
- * @author xiaofuge bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  * 2025/7/12 16:34
  */
 public abstract class AbstractDynamicContext

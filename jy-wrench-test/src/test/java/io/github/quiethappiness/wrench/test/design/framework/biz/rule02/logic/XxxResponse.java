@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.test.design.framework.biz.rule02.logic;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  * @description
  * @create 2025-01-18 13:46
  */

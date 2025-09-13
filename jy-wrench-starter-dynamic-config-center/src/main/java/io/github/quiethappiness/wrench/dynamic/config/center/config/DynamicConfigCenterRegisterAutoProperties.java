@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * 动态配置中心配置文件
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  */
 @ConfigurationProperties(prefix = "jy.wrench.config.register", ignoreInvalidFields = true)
 public class DynamicConfigCenterRegisterAutoProperties {

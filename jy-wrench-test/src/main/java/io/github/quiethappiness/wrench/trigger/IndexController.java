@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  * 	2025-05-07 14:41
  */
 @Slf4j

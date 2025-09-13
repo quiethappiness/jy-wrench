@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Slf4j
-@Component
+@Component("rateLimiterRootNode")
 public class RootNode extends AbstractRateLimiterSupport
 {
 	@Resource
-	private SwitchRoot switchRoot;
+	private SwitchNode rateLimiterSwitchNode;
 	
 	@Resource
-	private EndNode endNode;
+	private EndNode rateLimiterEndNode;
 	
 	@Override
 	protected ResponseResultEntity doApply(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
@@ -37,8 +37,8 @@ public class RootNode extends AbstractRateLimiterSupport
 		// 开关确定关闭，即不开启限流，则直接返回结果
 		if (!dynamicContext.isDecideLimit())
 		{
-			return endNode;
+			return rateLimiterEndNode;
 		}
-		return switchRoot;
+		return rateLimiterSwitchNode;
 	}
 }

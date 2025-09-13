@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Slf4j
-@Component
-public class SwitchRoot extends AbstractRateLimiterSupport
+@Component("rateLimiterSwitchNode")
+public class SwitchNode extends AbstractRateLimiterSupport
 {
 	
 	@Resource
-	private BlackListNode blackListNode;
+	private BlackListNode rateLimiterBlackListNode;
 	
 	@Override
 	protected ResponseResultEntity doApply(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
@@ -44,6 +44,6 @@ public class SwitchRoot extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RequestParameterEntity, RateLimiterStrategyFactory.DynamicContext, ResponseResultEntity> get(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		return blackListNode;
+		return rateLimiterBlackListNode;
 	}
 }

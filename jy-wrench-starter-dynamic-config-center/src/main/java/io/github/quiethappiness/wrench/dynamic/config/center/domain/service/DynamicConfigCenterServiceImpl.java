@@ -152,10 +152,11 @@ public class DynamicConfigCenterServiceImpl implements IDynamicConfigCenterServi
 			field.set(targetBean, value);
 			// 恢复字段的访问权限
 			field.setAccessible(false);
-			log.info("DCC 节点监听，动态设置值 {} {}", key, value);
+			log.warn("DCC 节点监听，动态设置值 {} {}", key, value);
 		}
 		catch (Exception e)
 		{
+			log.error("DCC 节点监听，动态设置值失败 {}: {}", key, value);
 			// 如果在设置字段值的过程中发生非法访问异常，则抛出运行时异常
 			throw new RuntimeException(e);
 		}

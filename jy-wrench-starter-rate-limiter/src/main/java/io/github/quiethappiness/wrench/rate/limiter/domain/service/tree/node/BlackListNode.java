@@ -14,14 +14,14 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 @Slf4j
-@Component
+@Component("rateLimiterBlackListNode")
 public class BlackListNode extends AbstractRateLimiterSupport
 {
 	@Resource
-	private PPSCheckNode ppsCheckNode;
+	private PPSCheckNode rateLimiterPPSCheckNode;
 	
 	@Resource
-	private EndNode endNode;
+	private EndNode rateLimiterEndNode;
 	@Override
 	protected ResponseResultEntity doApply(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
@@ -46,8 +46,8 @@ public class BlackListNode extends AbstractRateLimiterSupport
 		// 决定限流
 		if (dynamicContext.isDecideLimit())
 		{
-			return endNode;
+			return rateLimiterEndNode;
 		}
-		return ppsCheckNode;
+		return rateLimiterPPSCheckNode;
 	}
 }

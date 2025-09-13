@@ -3,7 +3,7 @@ package io.github.quiethappiness.wrench.design.framework.link.model2.proceed_che
 import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.AbstractDynamicContext;
 
 /**
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jignyue
  * @description 逻辑处理器
  * @create 2025-01-18 09:43
  */

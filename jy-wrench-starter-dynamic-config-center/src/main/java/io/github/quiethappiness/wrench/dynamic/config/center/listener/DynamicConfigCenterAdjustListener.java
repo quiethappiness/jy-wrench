@@ -28,7 +28,7 @@ public class DynamicConfigCenterAdjustListener implements MessageListener<Attrib
 	{
 		try
 		{
-			log.info("jy-wrench dcc config attribute:{} value:{}", attributeVO.getName(), attributeVO.getValue());
+			log.warn("jy-wrench dcc config attribute:{} value:{}", attributeVO.getName(), attributeVO.getValue());
 			dynamicConfigCenterService.adjustAttributeValue(attributeVO);
 		}
 		catch (Exception e)
