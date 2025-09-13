@@ -1,18 +1,18 @@
 package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree;
 
 import io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter;
-import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RequestParameterEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.ResponseResultEntity;
+import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
+import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
 
-public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStrategyRouter<RequestParameterEntity, RateLimiterStrategyFactory.DynamicContext, ResponseResultEntity>
+public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStrategyRouter<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity>
 {
 	
 	@Override
-	protected void multiThread(RequestParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	protected void multiThread(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		// 缺省的方法
 	}
@@ -27,6 +27,7 @@ public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStra
 			return args[0].toString();
 		}
 		String filedValue = null;
+		// 在多个参数中查找包含目标属性的对象
 		for (Object arg : args)
 		{
 			try

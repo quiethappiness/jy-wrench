@@ -3,8 +3,8 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory
 import com.google.common.cache.Cache;
 import com.google.common.util.concurrent.RateLimiter;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RequestParameterEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.ResponseResultEntity;
+import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
+import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RootNode;
 import io.github.quiethappiness.wrench.rate.limiter.types.annotations.RateLimiterAccessInterceptor;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class RateLimiterStrategyFactory
 		this.rateLimiterRootNode = rateLimiterRootNode;
 	}
 	
-	public StrategyHandler<RequestParameterEntity, DynamicContext, ResponseResultEntity> strategyHandler()
+	public StrategyHandler<RateLimiterParameterEntity, DynamicContext, RateLimiterReturnResultEntity> strategyHandler()
 	{
 		return rateLimiterRootNode;
 	}

@@ -6,18 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * RequestParameterEntity
+ * RateLimiterReturnResultEntity
  * @author quietHappiness @jingyue
  * @version 1.0
- * @description 请求参数
- * @date 2025/9/12 18:35
+ * @description 返回值
+ * @date 2025/9/12 19:14
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RequestParameterEntity
+public class RateLimiterReturnResultEntity
 {
-	private String rateLimiterSwitch;
-	
+	private boolean decideLimit;
 }
