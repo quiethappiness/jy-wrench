@@ -11,9 +11,27 @@ jy:
                 host: s-pay-mall.top
                 # redis port
                 port: 16379
-
+        # 任务调度配置
+        task:
+            job:
+                enabled: true
+                pool-size: 5
+                thread-name-prefix: "test-task-scheduler-"
+                wait-for-tasks-to-complete-on-shutdown: true
+                await-termination-seconds: 30
+                refresh-interval: 30000
+                clean-invalid-tasks-cron: "0 0/5 * * * ?"
 # 日志
 logging:
     level:
         root: debug
     config: classpath:logback-spring.xml
+thread:
+    pool:
+        executor:
+            config:
+                core-pool-size: 20
+                max-pool-size: 50
+                keep-alive-time: 5000
+                policy: CallerRunsPolicy
+                block-queue-size: 5000

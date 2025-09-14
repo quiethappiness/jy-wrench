@@ -1,0 +1,55 @@
+25-09-14.08:54:51.946 [main            ] WARN  TaskJobAutoConfig      - xfg-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.08:58:21.029 [main            ] WARN  TaskJobAutoConfig      - xfg-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.08:59:43.434 [main            ] WARN  TaskJobAutoConfig      - xfg-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.09:52:50.266 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.09:54:03.042 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.09:58:09.325 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.09:58:10.600 [main            ] WARN  TaskJobServiceImpl     - 未找到任务执行器: testTaskExecutor, 跳过任务: 7777
+25-09-14.09:58:10.600 [main            ] WARN  TaskJobServiceImpl     - 未找到任务执行器: testTaskExecutor, 跳过任务: 6666
+25-09-14.09:58:40.604 [main            ] WARN  AbstractTaskJobService - 未找到要移除的任务，ID: 7777
+25-09-14.09:59:21.742 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.09:59:23.174 [main            ] WARN  TaskJobServiceImpl     - 未找到任务执行器: testTaskExecutor, 跳过任务: 6666
+25-09-14.09:59:53.180 [main            ] WARN  AbstractTaskJobService - 未找到要移除的任务，ID: 7777
+25-09-14.10:00:23.193 [main            ] WARN  AbstractTaskJobService - 未找到要移除的任务，ID: 6666
+25-09-14.15:12:02.249 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:32:26.289 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:35:27.259 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:37:32.528 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:39:01.175 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:39:38.115 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:41:55.932 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.15:43:22.752 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.17:12:41.680 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-09-14.17:13:30.658 [test-task-scheduler-4] ERROR TestTaskDataProvider02 - 测试任务2执行被中断
+java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleep(Native Method)
+	at io.github.quiethappiness.wrench.test.task.TestTaskDataProvider02.lambda$queryAllValidTaskSchedule$0(TestTaskDataProvider02.java:38)
+	at io.github.quiethappiness.wrench.task.job.domain.model.TaskJobScheduleVO.lambda$setTaskLogic$1(TaskJobScheduleVO.java:71)
+	at io.github.quiethappiness.wrench.task.job.domain.service.TaskJobServiceImpl.executeTaskWithFunction(TaskJobServiceImpl.java:69)
+	at io.github.quiethappiness.wrench.task.job.domain.service.TaskJobServiceImpl.lambda$scheduleTask$0(TaskJobServiceImpl.java:45)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-14.17:13:30.658 [test-task-scheduler-5] ERROR TaskJobServiceImpl     - 执行任务时发生错误（函数式），ID: 4
+java.lang.RuntimeException: java.lang.InterruptedException: sleep interrupted
+	at io.github.quiethappiness.wrench.test.task.TestTaskDataProvider03.lambda$queryAllValidTaskSchedule$0(TestTaskDataProvider03.java:44)
+	at io.github.quiethappiness.wrench.task.job.domain.service.TaskJobServiceImpl.executeTaskWithFunction(TaskJobServiceImpl.java:69)
+	at io.github.quiethappiness.wrench.task.job.domain.service.TaskJobServiceImpl.lambda$scheduleTask$0(TaskJobServiceImpl.java:45)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at org.springframework.scheduling.concurrent.ReschedulingRunnable.run(ReschedulingRunnable.java:95)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleep(Native Method)
+	at io.github.quiethappiness.wrench.test.task.TestTaskDataProvider03.lambda$queryAllValidTaskSchedule$0(TestTaskDataProvider03.java:40)
+	... 10 common frames omitted
+25-09-14.17:13:38.503 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-

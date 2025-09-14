@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.quiethappiness</groupId>
+		<artifactId>jy-wrench</artifactId>
+		<version>1.0.4</version>
+	</parent>
+	
+	<artifactId>jy-wrench-starter-task-job</artifactId>
+	
+	<name>xfg-wrench-starter-task-job</name>
+	<description>xfg wrench modules task job scheduler</description>
+	<url>https://github.com/quiethappiness/jy-wrench</url>
+	
+	<licenses>
+		<license>
+			<name>Apache License</name>
+			<url>https://opensource.org/license/apache-2-0/</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	
+	<scm>
+		<connection>scm:git:https://github.com/quiethappiness/jy-wrench.git</connection>
+		<developerConnection>scm:git:https://github.com/quiethappiness/jy-wrench.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/quiethappiness/jy-wrench</url>
+	</scm>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<exclusions>
+				<!-- 排除 Spring Boot 默认的日志 starter -->
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+</project>

@@ -14,6 +14,7 @@
 		<module>jy-wrench-starter-design-framework</module>
 		<module>jy-wrench-bom</module>
 		<module>jy-wrench-starter-rate-limiter</module>
+		<module>jy-wrench-starter-task-job</module>
 	</modules>
 	<name>jy-wrench</name>
 	<properties>

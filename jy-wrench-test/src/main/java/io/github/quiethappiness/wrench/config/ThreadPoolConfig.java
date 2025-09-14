@@ -1,6 +1,5 @@
 package io.github.quiethappiness.wrench.config;
 
-import io.github.quiethappiness.wrench.config.ThreadPoolConfigProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

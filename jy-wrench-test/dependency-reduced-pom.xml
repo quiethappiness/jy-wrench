@@ -173,5 +173,11 @@
       <version>1.0.4</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>io.github.quiethappiness</groupId>
+      <artifactId>jy-wrench-starter-task-job</artifactId>
+      <version>1.0.4</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 </project>

@@ -74,6 +74,13 @@
 				<artifactId>jy-wrench-starter-rate-limiter</artifactId>
 				<version>1.0.4</version>
 			</dependency>
+			
+			<!-- jy wrench task job -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-task-job</artifactId>
+				<version>1.0.4</version>
+			</dependency>
 		
 		</dependencies>
 	</dependencyManagement>

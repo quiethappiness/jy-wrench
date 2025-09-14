@@ -25,7 +25,7 @@ public class RateLimiterAOP extends AbstractRateLimiterAop
 	@DCCValue("open")
 	private String rateLimiterSwitch;
 	
-	@Resource
+	@Resource(name = "rateLimiterStrategyFactory")
 	private RateLimiterStrategyFactory defaultStrategyFactory;
 	
 	/**
