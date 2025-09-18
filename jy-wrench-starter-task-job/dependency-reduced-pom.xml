@@ -3,12 +3,12 @@
   <parent>
     <artifactId>jy-wrench</artifactId>
     <groupId>io.github.quiethappiness</groupId>
-    <version>1.0.4</version>
+    <version>1.1.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jy-wrench-starter-task-job</artifactId>
-  <name>xfg-wrench-starter-task-job</name>
-  <description>xfg wrench modules task job scheduler</description>
+  <name>jy-wrench-starter-task-job</name>
+  <description>jy wrench modules task job scheduler</description>
   <url>https://github.com/quiethappiness/jy-wrench</url>
   <licenses>
     <license>
