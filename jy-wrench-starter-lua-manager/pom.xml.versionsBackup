@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>io.github.quiethappiness</groupId>
 		<artifactId>jy-wrench</artifactId>
-		<version>1.2.1</version>
+		<version>1.0.4</version>
 	</parent>
 	
 	<artifactId>jy-wrench-starter-lua-manager</artifactId>
 	<name>jy-wrench-starter-lua-manager</name>
-	<description>jy wrench modules lua manager</description>
+	<description>xfg wrench modules task job scheduler</description>
 	<url>https://github.com/quiethappiness/jy-wrench</url>
 	
 	<licenses>
@@ -46,10 +46,10 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- 	<groupId>org.springframework</groupId> -->
-		<!-- 	<artifactId>spring-tx</artifactId> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -69,23 +69,10 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.redisson</groupId>
-			<artifactId>redisson-spring-boot-starter</artifactId>
+			<groupId>io.github.quiethappiness</groupId>
+			<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
+			<version>1.0.4</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- 	<groupId>io.github.quiethappiness</groupId> -->
-		<!-- 	<artifactId>jy-wrench-starter-dynamic-config-center</artifactId> -->
-		<!-- 	<version>1.1.0</version> -->
-		<!-- 	<scope>provided</scope> -->
-		<!-- </dependency> -->
 	</dependencies>
 </project>

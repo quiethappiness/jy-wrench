@@ -2,23 +2,37 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node;
 
 import com.google.common.cache.Cache;
 import com.google.common.util.concurrent.RateLimiter;
+import com.google.common.util.concurrent.SimpleTimeLimiter;
+import com.google.common.util.concurrent.TimeLimiter;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.AbstractRateLimiterSupport;
+import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.rate.limiter.types.annotations.RateLimiterAccessInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import static io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitBlackListNode.blackListCheck;
 
 @Slf4j
-@Component("rateLimiterPPSCheckNode")
-public class PPSCheckNode extends AbstractRateLimiterSupport
+@Component("RateLimitPPSNode")
+public class RateLimitPPSNode extends AbstractRateLimiterSupport
 {
-	@Resource
-	private EndNode rateLimiterEndNode;
+	private final RateLimitEndNode RateLimitEndNode;
+	
+	private final TimeLimiter timeLimiter;
+	
+	public RateLimitPPSNode(
+		RateLimitEndNode RateLimitEndNode,
+		ExecutorService executor)
+	{
+		this.RateLimitEndNode = RateLimitEndNode;
+		this.timeLimiter = SimpleTimeLimiter.create(executor);
+	}
 	
 	/**
 	 * PPS（每秒请求数）校验节点处理方法
@@ -28,11 +42,14 @@ public class PPSCheckNode extends AbstractRateLimiterSupport
 	 * 3. 尝试获取令牌，若失败则进行限流处理
 	 * 4. 若启用了黑名单机制，在超频时将请求加入黑名单
 	 * 5. 记录相应的日志信息并返回处理结果
+	 *
 	 * @param requestParameter
 	 * 	限流参数实体
 	 * @param dynamicContext
 	 * 	动态上下文环境
+	 *
 	 * @return 限流处理结果实体
+	 *
 	 * @throws Throwable
 	 * 	处理过程中可能抛出的异常
 	 */
@@ -40,61 +57,51 @@ public class PPSCheckNode extends AbstractRateLimiterSupport
 	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：开始执行PPS校验逻辑
-		log.info("【PPSCheckNode】：PPS 校验...");
+		log.info("【RateLimitPPSNode】：PPS 校验...");
 		// 获取黑名单缓存实例，用于记录超频请求
 		Cache<String, Long> blacklist = dynamicContext.getBlacklist();
 		// 获取登录记录缓存实例，存储各请求的限流器
 		Cache<String, RateLimiter> loginRecord = dynamicContext.getLoginRecord();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
 		RateLimiterAccessInterceptor rateLimiterAccessInterceptor = dynamicContext.getRateLimiterAccessInterceptor();
+		double permitsPerSecond = rateLimiterAccessInterceptor.permitsPerSecond();
+		long warmupPeriod = rateLimiterAccessInterceptor.warmupPeriod();
+		TimeUnit unit = rateLimiterAccessInterceptor.unit();
 		// 获取当前请求对应的属性值（用于作为限流判断的KEY）
 		String keyAttr = dynamicContext.getKeyAttr();
 		// 条件判断：只有当PPS限流功能启用时才执行后续逻辑
-		if (Boolean.TRUE.equals(rateLimiterAccessInterceptor.enabledPPS()))
+		// 从缓存中尝试获取对应key的限流器实例
+		// 获取限流 -> Guava 缓存1分钟
+		// 为每个用户创建一个限流器实例，在1分钟内，限制访问次数
+		RateLimiter rateLimiter = loginRecord.getIfPresent(keyAttr);
+		// 如果缓存中不存在对应的限流器，则创建一个新的
+		if (null == rateLimiter)
 		{
-			// 从缓存中尝试获取对应key的限流器实例
-			// 获取限流 -> Guava 缓存1分钟
-			// 为每个用户创建一个限流器实例，在1分钟内，限制访问次数
-			RateLimiter rateLimiter = loginRecord.getIfPresent(keyAttr);
-			// 如果缓存中不存在对应的限流器，则创建一个新的
-			if (null == rateLimiter)
-			{
-				// 使用配置的每秒许可数创建新的令牌桶限流器
-				rateLimiter = RateLimiter.create(rateLimiterAccessInterceptor.permitsPerSecond());
-				// 将新创建的限流器放入缓存中供下次使用
-				loginRecord.put(keyAttr, rateLimiter);
-			}
-			// 尝试获取令牌（即进行限流判断）
-			// 如果无法获取到令牌，表示请求频率过高，需要进行限流处理
-			if (!rateLimiter.tryAcquire())
-			{
-				// 记录警告日志：获取通行证失败，触发限流
-				log.warn("【PPSCheckNode】:限流-获取通行证失败");
-				// 检查是否启用了黑名单机制且设置了阈值
-				if (rateLimiterAccessInterceptor.blacklistCount() != 0)
-				{
-					// 查询当前key在黑名单中的计数
-					if (null == blacklist.getIfPresent(keyAttr))
-					{
-						// 如果之前没有记录，则初始化为1
-						blacklist.put(keyAttr, 1L);
-					}
-					else
-					{
-						// 如果已有记录，则增加计数
-						blacklist.put(keyAttr, blacklist.getIfPresent(keyAttr) + 1L);
-					}
-				}
-				// 记录错误日志：检测到超频次拦截事件
-				log.error("【PPSCheckNode】:限流-超频次拦截：{}", keyAttr);
-				// 设置限流决策标志为true，表示需要进行限流处理
-				dynamicContext.setDecideLimit(true);
-			}
-			else
-			{
-				// 记录信息日志：成功获取通行证，允许通过
-				log.info("【PPSCheckNode】:限流-获取通行证成功");
-			}
+			// 使用配置的每秒许可数创建新的令牌桶限流器
+			rateLimiter = timeLimiter.callWithTimeout(
+				() -> RateLimiter.create(permitsPerSecond, warmupPeriod, unit),
+				5, TimeUnit.SECONDS
+			);
+			// 将新创建的限流器放入缓存中供下次使用
+			loginRecord.put(keyAttr, rateLimiter);
+		}
+		// 尝试获取令牌（即进行限流判断）
+		// 如果无法获取到令牌，表示请求频率过高，需要进行限流处理
+		if (!rateLimiter.tryAcquire())
+		{
+			// 记录警告日志：获取通行证失败，触发限流
+			log.warn("【RateLimitPPSNode】:限流-获取通行证失败");
+			// 检查是否启用了黑名单机制且设置了阈值
+			blackListCheck(rateLimiterAccessInterceptor.mode(),  blacklist, keyAttr);
+			// 记录错误日志：检测到超频次拦截事件
+			log.error("【RateLimitPPSNode】:限流-超频次拦截：{}", keyAttr);
+			// 设置限流决策标志为true，表示需要进行限流处理
+			dynamicContext.setDecideLimit(true);
+		}
+		else
+		{
+			// 记录信息日志：成功获取通行证，允许通过
+			log.info("【RateLimitPPSNode】:限流-获取通行证成功");
 		}
 		// 调用路由方法，继续向下个节点传递处理结果
 		return router(requestParameter, dynamicContext);
@@ -103,6 +110,6 @@ public class PPSCheckNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		return rateLimiterEndNode;
+		return RateLimitEndNode;
 	}
 }

@@ -1,9 +1,8 @@
-package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree;
+package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory;
 
 import io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;

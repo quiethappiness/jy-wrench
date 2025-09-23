@@ -3,7 +3,7 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.AbstractRateLimiterSupport;
+import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 @Slf4j
-@Component("rateLimiterRootNode")
-public class RootNode extends AbstractRateLimiterSupport
+@Component("RateLimitRootNode")
+public class RateLimitRootNode extends AbstractRateLimiterSupport
 {
 	@Resource
-	private SwitchNode rateLimiterSwitchNode;
+	private RateLimitSwitchNode RateLimitSwitchNode;
 	
 	@Resource
-	private EndNode rateLimiterEndNode;
+	private RateLimitEndNode RateLimitEndNode;
 	
 	@Override
 	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
@@ -37,8 +37,8 @@ public class RootNode extends AbstractRateLimiterSupport
 		// 开关确定关闭，即不开启限流，则直接返回结果
 		if (!dynamicContext.isDecideLimit())
 		{
-			return rateLimiterEndNode;
+			return RateLimitEndNode;
 		}
-		return rateLimiterSwitchNode;
+		return RateLimitSwitchNode;
 	}
 }

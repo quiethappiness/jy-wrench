@@ -2,14 +2,14 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node;
 
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.AbstractRateLimiterSupport;
+import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component("rateLimiterEndNode")
-public class EndNode extends AbstractRateLimiterSupport
+@Component("RateLimitEndNode")
+public class RateLimitEndNode extends AbstractRateLimiterSupport
 {
 	/**
 	 * 限流处理流程结束节点

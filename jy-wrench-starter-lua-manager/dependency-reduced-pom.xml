@@ -6,9 +6,9 @@
     <version>1.2.1</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>jy-wrench-starter-task-job</artifactId>
-  <name>jy-wrench-starter-task-job</name>
-  <description>jy wrench modules task job scheduler</description>
+  <artifactId>jy-wrench-starter-lua-manager</artifactId>
+  <name>jy-wrench-starter-lua-manager</name>
+  <description>jy wrench modules lua manager</description>
   <url>https://github.com/quiethappiness/jy-wrench</url>
   <licenses>
     <license>
@@ -43,12 +43,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>5.3.27</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
       <artifactId>spring-context-support</artifactId>
       <version>5.3.27</version>
       <scope>provided</scope>
@@ -72,6 +66,24 @@
       <version>1.18.26</version>
       <scope>provided</scope>
       <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <version>2.7.12</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.redisson</groupId>
+      <artifactId>redisson-spring-boot-starter</artifactId>
+      <version>3.26.0</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

@@ -230,17 +230,17 @@
 25-09-13.23:25:51.122 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterServiceImpl' via constructor to bean named 'jyWrenchRedissonClient'
 25-09-13.23:25:51.122 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.122 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterStrategyFactory'
-25-09-13.23:25:51.123 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRootNode'
+25-09-13.23:25:51.123 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRateLimitRootNode'
 25-09-13.23:25:51.142 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterSwitchNode'
 25-09-13.23:25:51.149 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterBlackListNode'
 25-09-13.23:25:51.157 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterPPSCheckNode'
-25-09-13.23:25:51.165 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterEndNode'
+25-09-13.23:25:51.165 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRateLimitEndNode'
 25-09-13.23:25:51.174 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.174 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.174 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.175 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.175 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
-25-09-13.23:25:51.175 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'rateLimiterStrategyFactory' via constructor to bean named 'rateLimiterRootNode'
+25-09-13.23:25:51.175 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'rateLimiterStrategyFactory' via constructor to bean named 'rateLimiterRateLimitRootNode'
 25-09-13.23:25:51.176 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:51.177 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'demo01'
 25-09-13.23:25:51.177 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'demo01' via factory method to bean named 'ruleLogic201'
@@ -2685,17 +2685,17 @@ Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bea
 25-09-13.23:29:12.202 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterServiceImpl' via constructor to bean named 'jyWrenchRedissonClient'
 25-09-13.23:29:12.202 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.202 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterStrategyFactory'
-25-09-13.23:29:12.202 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRootNode'
+25-09-13.23:29:12.202 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRateLimitRootNode'
 25-09-13.23:29:12.216 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterSwitchNode'
 25-09-13.23:29:12.223 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterBlackListNode'
 25-09-13.23:29:12.232 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterPPSCheckNode'
-25-09-13.23:29:12.253 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterEndNode'
+25-09-13.23:29:12.253 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterRateLimitEndNode'
 25-09-13.23:29:12.263 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.263 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.264 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.264 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.264 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
-25-09-13.23:29:12.264 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'rateLimiterStrategyFactory' via constructor to bean named 'rateLimiterRootNode'
+25-09-13.23:29:12.264 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'rateLimiterStrategyFactory' via constructor to bean named 'rateLimiterRateLimitRootNode'
 25-09-13.23:29:12.266 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:12.266 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'demo01'
 25-09-13.23:29:12.267 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'demo01' via factory method to bean named 'ruleLogic201'

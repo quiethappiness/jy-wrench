@@ -3,23 +3,26 @@ package io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity;
-import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.AbstractRateLimiterSupport;
+import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.rate.limiter.types.annotations.RateLimiterAccessInterceptor;
+import io.github.quiethappiness.wrench.rate.limiter.types.enumvo.RateLimitMode;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 @Slf4j
-@Component("rateLimiterSwitchNode")
-public class SwitchNode extends AbstractRateLimiterSupport
+@Component("RateLimitSwitchNode")
+@RequiredArgsConstructor
+public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 {
 	
-	@Resource
-	private BlackListNode rateLimiterBlackListNode;
+	private final RateLimitBlackListNode RateLimitBlackListNode;
+	
+	private final RateLimitPPSNode RateLimitPPSNode;
+	private final RateLimitSWRNode RateLimitSWRNode;
 	
 	/**
 	 * 限流流程切换节点处理方法
@@ -29,11 +32,14 @@ public class SwitchNode extends AbstractRateLimiterSupport
 	 * 3. 解析限流关键字段值
 	 * 4. 设置动态上下文信息供后续节点使用
 	 * 5. 继续执行后续的限流处理流程
+	 *
 	 * @param requestParameter
 	 * 	限流参数实体
 	 * @param dynamicContext
 	 * 	动态上下文环境，包含限流处理所需的所有信息
+	 *
 	 * @return 限流处理结果实体
+	 *
 	 * @throws Throwable
 	 * 	处理过程中可能抛出的异常
 	 */
@@ -41,7 +47,7 @@ public class SwitchNode extends AbstractRateLimiterSupport
 	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：开始执行限流处理流程的初始化阶段
-		log.info("【SwitchNode】:限流-开始");
+		log.info("【RateLimitSwitchNode】:限流-开始");
 		// 初始化限流决策标志为false，表示尚未进行限流决策
 		// 这是为了确保在没有明确触发限流的情况下，默认不进行拦截
 		dynamicContext.setDecideLimit(false);
@@ -64,7 +70,7 @@ public class SwitchNode extends AbstractRateLimiterSupport
 		// 通过解析SpEL表达式，从方法参数中提取实际的限流标识
 		String keyAttr = getAttrValue(key, jp.getArgs());
 		// 记录日志：获取到AOP限流字段的值，便于调试和监控
-		log.info("【SwitchNode】:限流-获取aop attr {}", keyAttr);
+		log.info("【RateLimitSwitchNode】:限流-获取aop attr {}", keyAttr);
 		// 将获取到的限流字段值设置到动态上下文中，供后续流程节点使用
 		// 这个值将成为后续所有限流判断的基础标识
 		dynamicContext.setKeyAttr(keyAttr);
@@ -76,6 +82,24 @@ public class SwitchNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		return rateLimiterBlackListNode;
+		RateLimiterAccessInterceptor interceptor = dynamicContext.getRateLimiterAccessInterceptor();
+		RateLimitMode mode = interceptor.mode();
+		if (mode.equals(RateLimitMode.PPS_BLACKLIST) || mode.equals(RateLimitMode.SWR_BLACKLIST))
+		{
+			log.warn("【RateLimitSwitchNode】:限流-即将进入黑名单节点");
+			return RateLimitBlackListNode;
+		}
+		else if (mode.equals(RateLimitMode.PPS))
+		{
+			log.warn("【RateLimitSwitchNode】:限流-即将进入PPS节点");
+			return RateLimitPPSNode;
+		}
+		else if (mode.equals(RateLimitMode.SWR))
+		{
+			log.warn("【RateLimitSwitchNode】:限流-即将进入SWR节点");
+			return RateLimitSWRNode;
+		}
+		log.error("【RateLimitSwitchNode】:限流-未知模式,使用默认处理器");
+		return defaultStrategyHandler;
 	}
 }
