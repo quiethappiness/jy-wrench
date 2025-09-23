@@ -23,10 +23,10 @@ public class LuaManagerAutoConfig
 {
 	@Bean
 	public ILuaScriptManager luaScriptManager(
-		@Autowired RedissonClient redissonClient, @Autowired LuaManagerAutoProperties luaManagerAutoProperties)
+		@Autowired RedissonClient jyWrenchRedissonClient, @Autowired LuaManagerAutoProperties luaManagerAutoProperties)
 	{
 		log.info("luaScriptManager 正在初始化...");
-		return new LuaScriptManagerImpl(redissonClient, luaManagerAutoProperties);
+		return new LuaScriptManagerImpl(jyWrenchRedissonClient, luaManagerAutoProperties);
 	}
 	
 	@Bean
@@ -37,9 +37,9 @@ public class LuaManagerAutoConfig
 	}
 	
 	@Bean
-	public IRedisService redisService(RedissonClient redissonClient)
+	public IRedisService redisService(RedissonClient jyWrenchRedissonClient)
 	{
 		log.info("redisService 正在初始化...");
-		return new RedissonService(redissonClient);
+		return new RedissonService(jyWrenchRedissonClient);
 	}
 }

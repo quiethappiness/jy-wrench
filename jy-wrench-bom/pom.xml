@@ -10,7 +10,7 @@
 	<!-- </parent> -->
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench-bom</artifactId>
-	<version>1.2.1</version>
+	<version>1.2.2-SNAPSHOT</version>
 	
 	<packaging>pom</packaging>
 	
@@ -25,7 +25,19 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+	<repositories>
+		<repository>
+			<name>Central Portal Snapshots</name>
+			<id>central-portal-snapshots</id>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<developers>
 		<developer>
 			<id>maven</id>
@@ -57,7 +69,7 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench design framework  -->
@@ -65,35 +77,35 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-design-framework</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench rate limiter -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-rate-limiter</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench task job -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-task-job</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench lua manager -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-lua-manager</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench rabbitmq util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-rabbitmq-util</artifactId>
-				<version>1.2.1</version>
+				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -119,7 +131,7 @@
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>0.4.0</version>
+				<version>0.8.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<publishingServerId>ossrh</publishingServerId>

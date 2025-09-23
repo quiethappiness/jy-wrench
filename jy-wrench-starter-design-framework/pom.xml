@@ -6,12 +6,12 @@
 	<parent>
 		<groupId>io.github.quiethappiness</groupId>
 		<artifactId>jy-wrench</artifactId>
-		<version>1.2.1</version>
+		<version>1.2.2-SNAPSHOT</version>
 	</parent>
 	
 	<packaging>jar</packaging>
 	<artifactId>jy-wrench-starter-design-framework</artifactId>
-	<name>jy-wrench-starter-design-framework</name>
+	<name>${project.artifactId}</name>
 	<description>jy wrench modules design framework</description>
 	<url>https://github.com/quiethappiness/jy-wrench</url>
 	
@@ -22,7 +22,19 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+	<repositories>
+		<repository>
+			<name>Central Portal Snapshots</name>
+			<id>central-portal-snapshots</id>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<developers>
 		<developer>
 			<id>maven</id>
@@ -110,15 +122,15 @@
 			
 			<!--   central发布插件    -->
 			<plugin>
-
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>0.4.0</version>
+				<version>0.8.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<publishingServerId>ossrh</publishingServerId>
 					<tokenAuth>true</tokenAuth>
 					<autoPublish>true</autoPublish>
+					<ignorePublishedComponents>false</ignorePublishedComponents>
 				</configuration>
 			</plugin>
 			

@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.github.quiethappiness</groupId>
 		<artifactId>jy-wrench</artifactId>
-		<version>1.2.1</version>
+		<version>1.2.2-SNAPSHOT</version>
 	</parent>
 	
 	<artifactId>jy-wrench-test</artifactId>
@@ -53,29 +53,29 @@
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-design-framework</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2-SNAPSHOT</version>
 			<!-- <scope>test</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-rate-limiter</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-task-job</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
 			<artifactId>jy-wrench-starter-lua-manager</artifactId>
-			<version>1.2.1</version>
+			<version>1.2.2-SNAPSHOT</version>
 		</dependency>
 	
 	</dependencies>

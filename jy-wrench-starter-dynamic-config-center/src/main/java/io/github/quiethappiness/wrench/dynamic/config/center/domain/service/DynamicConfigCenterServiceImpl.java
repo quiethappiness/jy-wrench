@@ -31,10 +31,10 @@ public class DynamicConfigCenterServiceImpl implements IDynamicConfigCenterServi
 	private final RedissonClient redissonClient;
 	private Map<String, Object> dccBeanGroup = new ConcurrentHashMap<>();
 	
-	public DynamicConfigCenterServiceImpl(DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,  RedissonClient redissonClient)
+	public DynamicConfigCenterServiceImpl(DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,  RedissonClient jyWrenchRedissonClient)
 	{
 		this.properties = dynamicConfigCenterAutoProperties;
-		this.redissonClient = redissonClient;
+		this.redissonClient = jyWrenchRedissonClient;
 	}
 	
 	@Override

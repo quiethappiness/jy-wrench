@@ -38,8 +38,6 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 		super.scriptPath = luaManagerAutoProperties.getPath();
 	}
 	
-
-	
 	/**
 	 * 每分钟检查脚本更新，避免高频日志输出
 	 */

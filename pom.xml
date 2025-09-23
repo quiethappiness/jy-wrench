@@ -6,7 +6,7 @@
 	
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench</artifactId>
-	<version>1.2.1</version>
+	<version>1.2.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>jy-wrench-starter-dynamic-config-center</module>
@@ -41,7 +41,19 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+	<repositories>
+		<repository>
+			<name>Central Portal Snapshots</name>
+			<id>central-portal-snapshots</id>
+			<url>https://central.sonatype.com/repository/maven-snapshots/</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	<developers>
 		<developer>
 			<id>maven</id>
@@ -175,7 +187,7 @@
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>0.4.0</version>
+				<version>0.8.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<publishingServerId>ossrh</publishingServerId>
