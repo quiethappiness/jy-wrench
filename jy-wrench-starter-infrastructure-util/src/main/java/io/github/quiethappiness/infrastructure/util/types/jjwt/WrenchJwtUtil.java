@@ -114,7 +114,7 @@ public class WrenchJwtUtil
 		}
 		catch (IllegalArgumentException e)
 		{
-			log.error("JWT claims string is empty");
+			log.error("JWT token compact of handler type could not be parsed");
 		}
 		return null;
 	}
