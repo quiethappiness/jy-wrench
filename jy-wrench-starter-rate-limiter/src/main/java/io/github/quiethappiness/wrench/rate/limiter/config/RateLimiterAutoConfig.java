@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2025/9/12 15:41
  */
 @Configuration
-@ComponentScan(value = {"io.github.quiethappiness.wrench.rate.limiter.domain"})
+@ComponentScan(value = {"io.github.quiethappiness.wrench.rate.limiter.domain.service"})
 @Slf4j
 public class RateLimiterAutoConfig
 {

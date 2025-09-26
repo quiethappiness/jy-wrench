@@ -1,4 +1,4 @@
-package io.github.quiethappiness.rabbitmq.util.publisher;
+package io.github.quiethappiness.infrastructure.util.rabbitmq.publisher;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageDeliveryMode;

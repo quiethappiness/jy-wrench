@@ -12,7 +12,6 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -24,7 +23,7 @@ import java.lang.reflect.Method;
  * @description 动态配置中心服务实现类
  * @date 2025/9/10 16:38
  */
-@Component
+// @Component
 @Slf4j
 @RequiredArgsConstructor
 public class LuaBeanPostProcessor implements BeanPostProcessor

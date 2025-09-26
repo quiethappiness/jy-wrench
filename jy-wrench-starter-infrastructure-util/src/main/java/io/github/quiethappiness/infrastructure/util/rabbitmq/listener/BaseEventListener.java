@@ -1,4 +1,4 @@
-package io.github.quiethappiness.rabbitmq.util.listener;
+package io.github.quiethappiness.infrastructure.util.rabbitmq.listener;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;

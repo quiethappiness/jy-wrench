@@ -104,7 +104,7 @@
 			<!-- jy wrench rabbitmq util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-starter-rabbitmq-util</artifactId>
+				<artifactId>jy-wrench-starter-infrastructure-util</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
@@ -135,7 +135,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<publishingServerId>ossrh</publishingServerId>
-					<tokenAuth>true</tokenAuth>
+					<!-- <tokenAuth>true</tokenAuth> -->
 					<autoPublish>true</autoPublish>
 					<waitUntil>published</waitUntil>
 				</configuration>

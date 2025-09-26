@@ -10,14 +10,13 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @EnableConfigurationProperties(value = {LuaManagerAutoProperties.class})
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = {"io.github.quiethappiness.lua.manager"})
+// @ComponentScan(basePackages = {"io.github.quiethappiness.lua.manager"})
 @Slf4j
 public class LuaManagerAutoConfig
 {
@@ -28,7 +27,14 @@ public class LuaManagerAutoConfig
 		log.info("luaScriptManager 正在初始化...");
 		return new LuaScriptManagerImpl(jyWrenchRedissonClient, luaManagerAutoProperties);
 	}
-	
+	@Bean
+	public LuaBeanPostProcessor luaBeanPostProcessor(
+		ILuaScriptManager luaScriptManager
+	)
+	{
+		log.info("LuaBeanPostProcessor 正在初始化...");
+		return new LuaBeanPostProcessor(luaScriptManager);
+	}
 	@Bean
 	public LuaScriptServiceAop luaScriptServiceAop()
 	{
@@ -37,7 +43,8 @@ public class LuaManagerAutoConfig
 	}
 	
 	@Bean
-	public IRedisService redisService(RedissonClient jyWrenchRedissonClient)
+	public IRedisService redisService(
+		RedissonClient jyWrenchRedissonClient)
 	{
 		log.info("redisService 正在初始化...");
 		return new RedissonService(jyWrenchRedissonClient);
