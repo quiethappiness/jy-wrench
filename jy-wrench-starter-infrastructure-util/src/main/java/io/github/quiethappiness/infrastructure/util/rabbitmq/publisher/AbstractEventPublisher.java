@@ -3,6 +3,7 @@ package io.github.quiethappiness.infrastructure.util.rabbitmq.publisher;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.util.concurrent.ListenableFutureCallback;
@@ -27,6 +28,23 @@ public abstract class AbstractEventPublisher
 	{
 		this.this_exchange = this_exchange;
 		this.rabbitTemplate = rabbitTemplate;
+	}
+	
+	public void publish_Topic_Event(IMessage ms, Consumer<String> func)
+	{
+		String exchange = null;
+		try
+		{
+			exchange = ms.exchange() != null ? ms.exchange() : this_exchange;
+			log.info("发送MQ消息 exchangeName:{},  IMessage:{}", exchange, ms);
+			CorrelationData cd = buildCorrelationData(ms.uuid(), func);
+			sendWithCol(exchange, ms.routingKey(), ms.body(), cd);
+		}
+		catch (Exception e)
+		{
+			log.error("发送MQ消息失败 exchangeName:{}, IMessage:{}", exchange, ms, e);
+			throw e;
+		}
 	}
 	
 	protected CorrelationData buildCorrelationData(String onlyId, Consumer<String> failedMethod)
@@ -72,23 +90,37 @@ public abstract class AbstractEventPublisher
 		return cd;
 	}
 	
-	protected void sendWithCol(String routingKey, String message, CorrelationData cd)
+	protected void sendWithCol(IMessage ms, CorrelationData cd)
+	{
+		String exchange = ms.exchange() != null ? ms.exchange() : this_exchange;
+		String routingKey = ms.routingKey();
+		String message = ms.body();
+		sendWithCol(exchange, routingKey, message, cd);
+	}
+	
+	protected void sendWithCol(final String exchange, final String routingKey, final String message, final CorrelationData cd)
 	{
 		MessagePostProcessor messagePostProcessor = m ->
 		{
 			// 持久化消息配置
-			m.getMessageProperties()
-				.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+			MessageProperties properties = m.getMessageProperties();
+			properties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+			properties.setMessageId(cd.getId());
 			return m;
 		};
 		if (cd != null)
 		{
-			rabbitTemplate.convertAndSend(this_exchange, routingKey, message, messagePostProcessor, cd);
+			rabbitTemplate.convertAndSend(exchange, routingKey, message, messagePostProcessor, cd);
 		}
 		else
 		{
-			rabbitTemplate.convertAndSend(this_exchange, routingKey, message, messagePostProcessor);
+			rabbitTemplate.convertAndSend(exchange, routingKey, message, messagePostProcessor);
 		}
+	}
+	
+	protected void sendWithCol(String routingKey, String message, CorrelationData cd)
+	{
+		sendWithCol(this_exchange, routingKey, message, cd);
 	}
 	
 	public void sendWithDelay(String routingKey, Object message, long delay, TimeUnit timeUnit)

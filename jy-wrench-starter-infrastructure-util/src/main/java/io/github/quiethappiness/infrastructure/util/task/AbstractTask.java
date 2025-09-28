@@ -13,19 +13,20 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * AbstractTaskJob
+ * AbstractTask
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description task的抽象实现
  * @date 2025/9/20 23:55
  */
 @Slf4j
-public abstract class AbstractTaskJob<T extends IJob> implements ITaskJob<T>
+public abstract class AbstractTask<T extends IJob> implements ITask<T>
 {
 	
 	protected Function<T, TaskJobResult> process;
-	protected Function<T, TaskJobResult> success;
-	protected Function<T, TaskJobResult> error;
+	protected Function<T, TaskJobResult> handleSuccess;
+	protected Function<T, TaskJobResult> handleError;
+	protected Function<T, TaskJobResult> handleUnknown = job -> TaskJobResult.RETRY;
 	
 	@Override
 	@Async
@@ -34,7 +35,6 @@ public abstract class AbstractTaskJob<T extends IJob> implements ITaskJob<T>
 		Map<String, Integer> map = execJob(Collections.singletonList(notifyTaskEntity));
 		log.info("execTaskJob end, map:{}", JSON.toJSONString(map));
 	}
-	
 	
 	@Override
 	public Map<String, Integer> execJob(List<T> list) throws Exception
@@ -74,25 +74,34 @@ public abstract class AbstractTaskJob<T extends IJob> implements ITaskJob<T>
 		// 更新状态判断&变更数据库表回调任务状态
 		if (TaskJobResult.SUCCESS.equals(response))
 		{
+			// 结果返回success或者retry
 			return handleSuccessResponse(job);
 		}
 		else if (TaskJobResult.ERROR.equals(response))
 		{
+			// 结果返回 error 或者retry
 			return handleErrorResponse(job);
 		}
-		return TaskJobResult.RETRY; // 默认返回重试
+		else
+		{
+			// 结果返回 unknown或者retry
+			return handleUnknownResponse(job);
+		}
 	}
 	
 	private TaskJobResult handleSuccessResponse(T notifyTask)
 	{
-		return success.apply(notifyTask);
+		return handleSuccess.apply(notifyTask);
 	}
 	
 	private TaskJobResult handleErrorResponse(T notifyTask)
 	{
-		return error.apply(notifyTask);
+		return handleError.apply(notifyTask);
 	}
-	
+	private TaskJobResult handleUnknownResponse(T notifyTask)
+	{
+		return handleUnknown.apply(notifyTask);
+	}
 	protected Map<String, Integer> buildResultMap(int waitCount, int successCount, int errorCount, int retryCount)
 	{
 		Map<String, Integer> resultMap = new HashMap<>();
@@ -110,6 +119,7 @@ public abstract class AbstractTaskJob<T extends IJob> implements ITaskJob<T>
 		SUCCESS("success"),
 		ERROR("error"),
 		RETRY("retry"),
+		UNKNOWN("unknown"),
 		;
 		private final String code;
 		
