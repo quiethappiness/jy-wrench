@@ -13,7 +13,7 @@
 		<module>jy-wrench-test</module>
 		<module>jy-wrench-starter-design-framework</module>
 		<module>jy-wrench-bom</module>
-		<module>jy-wrench-starter-rate-limiter</module>
+		<module>jy-wrench-starter-traffic-control</module>
 		<module>jy-wrench-starter-task-job</module>
 		<module>jy-wrench-starter-lua-manager</module>
 		<module>jy-wrench-starter-infrastructure-util</module>

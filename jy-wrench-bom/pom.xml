@@ -80,10 +80,10 @@
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
-			<!-- jy wrench rate limiter -->
+			<!-- jy wrench traffic control -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-starter-rate-limiter</artifactId>
+				<artifactId>jy-wrench-starter-traffic-control</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
@@ -178,7 +178,7 @@
 							<additionalparam>-Xdoclint:none</additionalparam>
 							<!--  /Library/Java/JavaVirtualMachines/jdk1.8.0_311.jdk/Contents/Home/bin/javadoc -->
 							<javadocExecutable>
-								${java.home}${file.separator}..${file.separator}bin${file.separator}javadoc
+								${java.home}${file.separator}bin${file.separator}javadoc
 							</javadocExecutable>
 						</configuration>
 					</execution>

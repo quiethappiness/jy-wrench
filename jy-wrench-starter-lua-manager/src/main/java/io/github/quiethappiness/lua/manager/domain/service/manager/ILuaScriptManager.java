@@ -1,6 +1,9 @@
 package io.github.quiethappiness.lua.manager.domain.service.manager;
 
-import io.github.quiethappiness.lua.manager.domain.model.valobj.LuaScriptVO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.redisson.api.RScript;
 import org.springframework.core.io.Resource;
 
@@ -35,4 +38,18 @@ public interface ILuaScriptManager
 	Map<String, LuaScriptVO> getAllScriptInfo();
 	
 	void initSingleScript(Resource resource, String version);
+	
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Data
+	@Builder
+	class LuaScriptVO
+	{
+		private String name;
+		private String cache;
+		private String sha;
+		private Long lastModified=0L;
+		private String version;
+		private String path;
+	}
 }

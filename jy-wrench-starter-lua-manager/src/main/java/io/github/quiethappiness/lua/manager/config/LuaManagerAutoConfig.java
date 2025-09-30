@@ -1,8 +1,8 @@
 package io.github.quiethappiness.lua.manager.config;
 
-import io.github.quiethappiness.lua.manager.domain.service.aop.LuaScriptServiceAop;
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.lua.manager.domain.service.manager.LuaScriptManagerImpl;
+import io.github.quiethappiness.lua.manager.domain.service.aop.LuaScriptServiceAop;
 import io.github.quiethappiness.lua.manager.domain.service.redis.IRedisService;
 import io.github.quiethappiness.lua.manager.domain.service.redis.impl.RedissonService;
 import lombok.extern.slf4j.Slf4j;

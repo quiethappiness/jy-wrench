@@ -1,7 +1,6 @@
 package io.github.quiethappiness.lua.manager.domain.service.manager;
 
 import io.github.quiethappiness.lua.manager.config.LuaManagerAutoProperties;
-import io.github.quiethappiness.lua.manager.domain.model.valobj.LuaScriptVO;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RScript;
 import org.redisson.api.RedissonClient;

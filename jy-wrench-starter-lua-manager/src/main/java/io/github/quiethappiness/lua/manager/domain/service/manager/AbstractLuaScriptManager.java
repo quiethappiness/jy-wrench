@@ -1,6 +1,5 @@
 package io.github.quiethappiness.lua.manager.domain.service.manager;
 
-import io.github.quiethappiness.lua.manager.domain.model.valobj.LuaScriptVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;

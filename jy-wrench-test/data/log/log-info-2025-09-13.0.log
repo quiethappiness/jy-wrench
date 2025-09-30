@@ -62,7 +62,7 @@
 25-09-13.23:25:48.976 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
 25-09-13.23:25:48.980 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'errorPageRegistrarBeanPostProcessor'
 25-09-13.23:25:48.984 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig'
-25-09-13.23:25:49.005 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.RateLimiterAccessInterceptor) throws java.lang.Throwable
+25-09-13.23:25:49.005 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.AccessRateLimiter) throws java.lang.Throwable
 25-09-13.23:25:49.035 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig$$EnhancerBySpringCGLIB$$3293b756] - unable to determine constructor/method parameter names
 25-09-13.23:25:49.035 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dynamicConfigCenterService'
 25-09-13.23:25:49.035 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig'
@@ -643,7 +643,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\IDE
 25-09-13.23:25:53.016 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterTopic' via factory method to bean named 'dynamicConfigCenterAdjustListener'
 25-09-13.23:25:53.099 [main            ] INFO  DynamicConfigCenterRegisterAutoConfig - jy-wrench，注册器（redis）Topic dynamicConfigCenterTopic 创建完成。
 25-09-13.23:25:53.106 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
-25-09-13.23:25:53.106 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.rate.limiter.config.RateLimiterAutoConfig'
+25-09-13.23:25:53.106 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.rate.limiter.config.TrafficControlAutoConfig'
 25-09-13.23:25:53.112 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:25:53.112 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterAOP'
 25-09-13.23:25:53.115 [main            ] INFO  RateLimiterAutoConfig  - RateLimiterAOP init...
@@ -2325,7 +2325,7 @@ Unconditional classes:
 
     org.springframework.boot.actuate.autoconfigure.health.HealthContributorAutoConfiguration
 
-    io.github.quiethappiness.wrench.rate.limiter.config.RateLimiterAutoConfig
+    io.github.quiethappiness.wrench.rate.limiter.config.TrafficControlAutoConfig
 
     org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration
 
@@ -2517,7 +2517,7 @@ Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bea
 25-09-13.23:29:10.198 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
 25-09-13.23:29:10.204 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'errorPageRegistrarBeanPostProcessor'
 25-09-13.23:29:10.207 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig'
-25-09-13.23:29:10.232 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.RateLimiterAccessInterceptor) throws java.lang.Throwable
+25-09-13.23:29:10.232 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.AccessRateLimiter) throws java.lang.Throwable
 25-09-13.23:29:10.257 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig$$EnhancerBySpringCGLIB$$c9f1039f] - unable to determine constructor/method parameter names
 25-09-13.23:29:10.258 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dynamicConfigCenterService'
 25-09-13.23:29:10.258 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig'
@@ -3098,7 +3098,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\IDE
 25-09-13.23:29:14.086 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterTopic' via factory method to bean named 'dynamicConfigCenterAdjustListener'
 25-09-13.23:29:14.155 [main            ] INFO  DynamicConfigCenterRegisterAutoConfig - jy-wrench，注册器（redis）Topic dynamicConfigCenterTopic 创建完成。
 25-09-13.23:29:14.161 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
-25-09-13.23:29:14.161 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.rate.limiter.config.RateLimiterAutoConfig'
+25-09-13.23:29:14.161 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.rate.limiter.config.TrafficControlAutoConfig'
 25-09-13.23:29:14.170 [main            ] DEBUG DynamicConfigCenterAutoConfig - jy-wrench，动态配置-注册，代理对象创建完成。
 25-09-13.23:29:14.171 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'rateLimiterAOP'
 25-09-13.23:29:14.174 [main            ] INFO  RateLimiterAutoConfig  - RateLimiterAOP init...
@@ -5473,7 +5473,7 @@ Unconditional classes:
 
     org.springframework.boot.actuate.autoconfigure.health.HealthContributorAutoConfiguration
 
-    io.github.quiethappiness.wrench.rate.limiter.config.RateLimiterAutoConfig
+    io.github.quiethappiness.wrench.rate.limiter.config.TrafficControlAutoConfig
 
     org.springframework.boot.autoconfigure.availability.ApplicationAvailabilityAutoConfiguration
 

@@ -1,1 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.rate.limiter.config.RateLimiterAutoConfig

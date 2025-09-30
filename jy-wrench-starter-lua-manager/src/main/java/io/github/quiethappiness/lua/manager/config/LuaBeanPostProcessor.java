@@ -61,7 +61,7 @@ public class LuaBeanPostProcessor implements BeanPostProcessor
 				assert !StringUtils.isBlank(fileFullPath);
 				ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 				Resource resource = resolver.getResource(fileFullPath);
-				log.info("正在注册Lua脚本...");
+				log.info("正在单个注册Lua脚本...{}", fileFullPath);
 				luaScriptManager.initSingleScript(resource, annotation.version());
 			}
 		}
@@ -70,7 +70,7 @@ public class LuaBeanPostProcessor implements BeanPostProcessor
 			// 扫描并注册脚本
 			String folderPath = annotation.folderPath();
 			assert !StringUtils.isBlank(folderPath);
-			log.info("正在注册Lua脚本...");
+			log.info("正在多个注册Lua脚本...{}", folderPath);
 			luaScriptManager.initScripts(folderPath, annotation.version());
 			// 返回原始bean对象
 		}

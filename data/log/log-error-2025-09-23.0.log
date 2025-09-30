@@ -1,0 +1,1500 @@
+25-09-23.14:48:36.038 [main            ] WARN  AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'rateLimiterStrategyFactory' defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\factory\RateLimiterStrategyFactory.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'rateLimiterRootNode': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'rateLimiterSwitchNode' defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitSwitchNode.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'rateLimiterBlackListNode' defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitBlackListNode.class]: Unsatisfied dependency expressed through constructor parameter 3; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler<?, ?, ?>' available: expected single matching bean but found 5: rateLimiterEndNode,rateLimiterCheckPPSNode,rateLimiterRootNode,rateLimiterCheckSWRNode,rateLimiterSwitchNode
+25-09-23.14:48:36.116 [main            ] ERROR LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 3 of constructor in io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitBlackListNode required a single bean, but 5 were found:
+	- rateLimiterEndNode: defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitEndNode.class]
+	- rateLimiterCheckPPSNode: defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitPPSNode.class]
+	- rateLimiterRootNode: defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitRootNode.class]
+	- rateLimiterCheckSWRNode: defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitSWRNode.class]
+	- rateLimiterSwitchNode: defined in file [H:\JetBrains\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-starter-rate-limiter\target\classes\io\github\quiethappiness\wrench\rate\limiter\domain\service\tree\node\RateLimitSwitchNode.class]
+
+
+Action:
+
+Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed
+
+25-09-23.15:03:00.729 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:03:00.734 [http-nio-9191-exec-1] ERROR [dispatcherServlet]    - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException: Cannot invoke "io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity.isDecideLimit()" because "result" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "io.github.quiethappiness.wrench.rate.limiter.domain.model.entity.RateLimiterReturnResultEntity.isDecideLimit()" because "result" is null
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(RateLimiterAOP.java:56)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at io.github.quiethappiness.wrench.trigger.IndexController$$EnhancerBySpringCGLIB$$e0991a39.draw(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:06:55.783 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:06:55.783 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:06:55.787 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:07:01.497 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:01.497 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:01.497 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:07:05.017 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:05.017 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:05.017 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:07:05.233 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:05.233 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:05.233 [http-nio-9191-exec-4] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:07:05.233 [http-nio-9191-exec-4] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ww
+25-09-23.15:07:05.233 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:05.436 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:05.436 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:05.436 [http-nio-9191-exec-5] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:07:05.436 [http-nio-9191-exec-5] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ww
+25-09-23.15:07:05.436 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:22.914 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:22.914 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:22.914 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:07:23.065 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.065 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:23.065 [http-nio-9191-exec-7] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:07:23.065 [http-nio-9191-exec-7] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ww
+25-09-23.15:07:23.065 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:23.239 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.239 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:07:23.239 [http-nio-9191-exec-8] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:07:23.239 [http-nio-9191-exec-8] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ww
+25-09-23.15:07:23.239 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:23.418 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.418 [http-nio-9191-exec-9] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:23.418 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:23.576 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.576 [http-nio-9191-exec-10] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:23.576 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:23.737 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.737 [http-nio-9191-exec-1] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:23.737 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:23.895 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:23.895 [http-nio-9191-exec-2] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:23.895 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:24.068 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:24.068 [http-nio-9191-exec-3] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:24.068 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:24.223 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:24.223 [http-nio-9191-exec-4] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:24.223 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:24.391 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:24.391 [http-nio-9191-exec-5] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:24.391 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:24.592 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:24.592 [http-nio-9191-exec-6] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:24.592 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:24.736 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:24.736 [http-nio-9191-exec-7] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:24.736 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:26.017 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:26.017 [http-nio-9191-exec-8] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:26.017 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:07:27.441 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:07:27.441 [http-nio-9191-exec-9] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：ww
+25-09-23.15:07:27.441 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:19:51.318 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:19:51.328 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:19:59.326 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:19:59.326 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:20:00.428 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:20:00.428 [http-nio-9191-exec-3] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:20:00.428 [http-nio-9191-exec-3] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ee
+25-09-23.15:20:00.428 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:20:08.458 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:20:08.458 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:20:09.787 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:20:09.787 [http-nio-9191-exec-5] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:20:09.787 [http-nio-9191-exec-5] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ee
+25-09-23.15:20:09.787 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:20:14.522 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:20:14.522 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:20:15.093 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:20:15.093 [http-nio-9191-exec-7] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:20:15.093 [http-nio-9191-exec-7] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：ee
+25-09-23.15:20:15.093 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:22:50.964 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:22:50.978 [http-nio-9191-exec-8] ERROR LuaScriptManagerImpl   - Redis script execution failed: rateLimit. Keys: [userId], Args: [1758612170964, 1000, 50]
+org.redisson.client.RedisException: ERR Error running script (call to f_3e8aac915ddb7eadfd9b0c7b579a4d8b35001212): @user_script:12: user_script:12: attempt to perform arithmetic on local 'now' (a nil value). channel: [id: 0x445ebd3c, L:/192.168.247.1:4198 - R:192.168.247.133/192.168.247.133:16379] command: (EVALSHA), promise: java.util.concurrent.CompletableFuture@71e9797[Not completed, 1 dependents], params: [3e8aac915ddb7eadfd9b0c7b579a4d8b35001212, 1, userId, PooledUnsafeDirectByteBuf(ridx: 0, widx: 15, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 4, cap: 256)]
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:411)
+	at org.redisson.client.handler.CommandDecoder.decodeCommand(CommandDecoder.java:216)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:144)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:120)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:529)
+	at io.netty.handler.codec.ReplayingDecoder.callDecode(ReplayingDecoder.java:366)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:22:50.978 [http-nio-9191-exec-8] ERROR LuaScriptManagerImpl   - Non-NOSCRIPT Redis error occurred during script execution: rateLimit
+org.redisson.client.RedisException: ERR Error running script (call to f_3e8aac915ddb7eadfd9b0c7b579a4d8b35001212): @user_script:12: user_script:12: attempt to perform arithmetic on local 'now' (a nil value). channel: [id: 0x445ebd3c, L:/192.168.247.1:4198 - R:192.168.247.133/192.168.247.133:16379] command: (EVALSHA), promise: java.util.concurrent.CompletableFuture@71e9797[Not completed, 1 dependents], params: [3e8aac915ddb7eadfd9b0c7b579a4d8b35001212, 1, userId, PooledUnsafeDirectByteBuf(ridx: 0, widx: 15, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 4, cap: 256)]
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:411)
+	at org.redisson.client.handler.CommandDecoder.decodeCommand(CommandDecoder.java:216)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:144)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:120)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:529)
+	at io.netty.handler.codec.ReplayingDecoder.callDecode(ReplayingDecoder.java:366)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:23:01.542 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:23:01.549 [http-nio-9191-exec-10] ERROR LuaScriptManagerImpl   - Redis script execution failed: rateLimit. Keys: [userId], Args: [1758612181542, 1000, 50]
+org.redisson.client.RedisException: ERR Error running script (call to f_3e8aac915ddb7eadfd9b0c7b579a4d8b35001212): @user_script:12: user_script:12: attempt to perform arithmetic on local 'now' (a nil value). channel: [id: 0xd6a1085e, L:/192.168.247.1:4199 - R:192.168.247.133/192.168.247.133:16379] command: (EVALSHA), promise: java.util.concurrent.CompletableFuture@6efa3001[Not completed, 1 dependents], params: [3e8aac915ddb7eadfd9b0c7b579a4d8b35001212, 1, userId, PooledUnsafeDirectByteBuf(ridx: 0, widx: 15, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 4, cap: 256)]
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:411)
+	at org.redisson.client.handler.CommandDecoder.decodeCommand(CommandDecoder.java:216)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:144)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:120)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:529)
+	at io.netty.handler.codec.ReplayingDecoder.callDecode(ReplayingDecoder.java:366)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:23:01.549 [http-nio-9191-exec-10] ERROR LuaScriptManagerImpl   - Non-NOSCRIPT Redis error occurred during script execution: rateLimit
+org.redisson.client.RedisException: ERR Error running script (call to f_3e8aac915ddb7eadfd9b0c7b579a4d8b35001212): @user_script:12: user_script:12: attempt to perform arithmetic on local 'now' (a nil value). channel: [id: 0xd6a1085e, L:/192.168.247.1:4199 - R:192.168.247.133/192.168.247.133:16379] command: (EVALSHA), promise: java.util.concurrent.CompletableFuture@6efa3001[Not completed, 1 dependents], params: [3e8aac915ddb7eadfd9b0c7b579a4d8b35001212, 1, userId, PooledUnsafeDirectByteBuf(ridx: 0, widx: 15, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 6, cap: 256), PooledUnsafeDirectByteBuf(ridx: 0, widx: 4, cap: 256)]
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:411)
+	at org.redisson.client.handler.CommandDecoder.decodeCommand(CommandDecoder.java:216)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:144)
+	at org.redisson.client.handler.CommandDecoder.decode(CommandDecoder.java:120)
+	at io.netty.handler.codec.ByteToMessageDecoder.decodeRemovalReentryProtection(ByteToMessageDecoder.java:529)
+	at io.netty.handler.codec.ReplayingDecoder.callDecode(ReplayingDecoder.java:366)
+	at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
+	at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:788)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:28:54.038 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:28:54.048 [http-nio-9191-exec-1] ERROR [dispatcherServlet]    - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.Integer (java.lang.Long and java.lang.Integer are in module java.base of loader 'bootstrap')] with root cause
+java.lang.ClassCastException: class java.lang.Long cannot be cast to class java.lang.Integer (java.lang.Long and java.lang.Integer are in module java.base of loader 'bootstrap')
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.func.SlidingWindowRateLimiter.tryAcquire(SlidingWindowRateLimiter.java:37)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitSWRNode.doApply(RateLimitSWRNode.java:37)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitSWRNode.doApply(RateLimitSWRNode.java:18)
+	at io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:16)
+	at io.github.quiethappiness.wrench.design.framework.tree.AbstractStrategyRouter.router(AbstractStrategyRouter.java:23)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitSwitchNode.doApply(RateLimitSwitchNode.java:79)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitSwitchNode.doApply(RateLimitSwitchNode.java:16)
+	at io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:16)
+	at io.github.quiethappiness.wrench.design.framework.tree.AbstractStrategyRouter.router(AbstractStrategyRouter.java:23)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitRootNode.doApply(RateLimitRootNode.java:31)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.tree.node.RateLimitRootNode.doApply(RateLimitRootNode.java:14)
+	at io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter.apply(AbstractMultiThreadStrategyRouter.java:16)
+	at io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(RateLimiterAOP.java:44)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:175)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708)
+	at io.github.quiethappiness.wrench.trigger.IndexController$$EnhancerBySpringCGLIB$$d3c7a4b9.SWR(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1072)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:965)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:529)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:209)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:178)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:153)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:926)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+25-09-23.15:31:04.919 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:04.926 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:31:10.698 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:10.704 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:31:11.450 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:11.455 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:31:12.090 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:12.094 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:31:12.274 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:12.279 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:31:12.444 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:31:12.448 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:51.420 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:51.427 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:53.161 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:53.166 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:54.124 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:54.128 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:54.451 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:54.456 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:55.113 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:55.117 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:33:55.117 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:33:55.117 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:33:55.297 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:55.301 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:55.529 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:55.532 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:33:55.677 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:33:55.680 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:33:55.680 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:33:55.680 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:00.065 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:00.069 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:01.049 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:01.053 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:01.722 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:01.724 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:01.890 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:01.892 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:01.892 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:01.892 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:02.123 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:02.127 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:15.778 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:15.778 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:15.780 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:17.146 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:17.146 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:17.149 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:18.348 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:18.348 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:18.350 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:19.340 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:19.340 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:19.342 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:19.730 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:19.730 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:19.732 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:19.906 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:19.906 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:19.909 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:19.910 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:19.910 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:20.080 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:20.080 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:20.081 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:20.083 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:20.083 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:20.272 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:20.272 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:20.274 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:20.274 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:20.274 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:21.147 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:21.147 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:21.149 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:21.329 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:21.329 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:21.331 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:21.514 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:21.514 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:21.516 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:21.516 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:21.516 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:21.712 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:21.712 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:21.714 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:21.714 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:21.714 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:22.267 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:22.267 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:22.269 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:22.459 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:22.459 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:22.460 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:22.669 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:22.669 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:22.671 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:22.671 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:22.671 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:22.811 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:22.811 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:22.814 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:22.815 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:22.815 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:22.992 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:22.992 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:22.994 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:22.994 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:22.994 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:23.361 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:23.361 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:23.364 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:23.552 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:23.552 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:23.553 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:23.746 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:23.746 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:23.748 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:23.748 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:23.748 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:23.928 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:23.928 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:23.931 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:23.931 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:23.931 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:24.099 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:24.099 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:24.101 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:24.101 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:24.102 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:24.424 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:24.424 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:24.426 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:24.618 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:24.618 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:24.620 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:24.804 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:24.804 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:24.806 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:24.806 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:24.806 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:24.985 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:24.985 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:24.987 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:24.987 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:24.987 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:25.154 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:25.154 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:25.155 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:25.155 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:25.155 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:25.345 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:25.345 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:25.347 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:25.347 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:25.347 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:25.535 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:25.535 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:25.537 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:25.713 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:25.713 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:25.715 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:25.913 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:25.913 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:25.915 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:25.915 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:25.915 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:26.107 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:26.107 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:26.109 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:26.109 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:26.109 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:26.307 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:26.307 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:26.309 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:26.310 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:26.310 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:26.487 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:26.487 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:26.489 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:26.489 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:26.489 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:26.670 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:26.670 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:26.671 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:26.856 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:26.856 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:26.857 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:27.051 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:27.051 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:27.054 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:27.054 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:27.055 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:27.225 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:27.225 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:27.227 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:27.227 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:27.227 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:27.441 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:27.441 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:27.653 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:27.653 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:27.653 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:27.768 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:27.768 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:27.771 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:27.969 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:27.969 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:27.970 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:28.376 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:28.376 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:28.380 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:28.380 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:28.380 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:28.631 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:28.631 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:28.633 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:28.633 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:28.633 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:47.318 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:47.318 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:47.321 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:47.469 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:47.469 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:47.472 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:47.660 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:47.660 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:47.664 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:47.664 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:47.664 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:47.845 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:47.845 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:47.850 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:47.850 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:47.850 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:48.071 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:48.071 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:48.076 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:48.076 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:48.076 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:48.227 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:48.227 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:48.232 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:48.232 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:48.232 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:48.402 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:48.402 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:48.405 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:48.699 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:48.699 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:48.701 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:48.905 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:48.905 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:48.908 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:48.908 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:48.908 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:49.087 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.087 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.089 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:49.090 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:49.090 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:49.273 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.273 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.275 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:49.275 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:49.275 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:49.467 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.467 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.470 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:49.676 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.676 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.678 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:49.678 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:49.678 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:49.816 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.816 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.819 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:49.993 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:49.993 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:49.996 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:49.996 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:49.996 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:50.172 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:50.172 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:50.175 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:50.175 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:50.175 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:50.361 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:50.361 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:50.363 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:50.363 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:50.363 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:50.561 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:50.561 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:50.565 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:50.737 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:50.737 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:50.741 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:50.741 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:50.741 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:50.930 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:50.930 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:50.932 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:51.120 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:51.120 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:51.122 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:51.122 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:51.122 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:51.305 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:51.305 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:51.308 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:51.308 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:51.308 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:51.505 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:51.505 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:51.642 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:51.642 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:51.642 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:51.746 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:51.746 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:51.778 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:51.897 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:51.897 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:51.899 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:51.900 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:51.900 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:52.209 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:52.209 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:52.211 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:52.391 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:52.391 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:52.395 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:52.395 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:52.395 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:52.577 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:52.577 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:52.579 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:52.579 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:52.579 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:52.763 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:52.763 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:52.765 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:52.948 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:52.948 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:52.950 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:52.950 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:52.950 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:53.138 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:53.138 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:53.140 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:53.140 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:53.140 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:53.306 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:53.306 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:53.308 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:53.498 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:53.498 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:53.500 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:53.500 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:53.500 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:53.688 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:53.688 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:53.690 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:53.690 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:53.690 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:53.880 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:53.880 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:53.883 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:54.092 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:54.092 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:54.095 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:54.095 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:54.095 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:54.264 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:54.264 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:54.266 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:54.266 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:54.266 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:34:55.777 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:55.777 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:55.779 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:55.972 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:55.972 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:55.974 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:34:56.185 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:34:56.185 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:34:56.187 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:34:56.187 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:34:56.187 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:00.987 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:00.987 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:00.991 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:01.752 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:01.752 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:01.753 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:02.577 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:02.577 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:02.579 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:02.768 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:02.768 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:02.770 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:02.953 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:02.953 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:02.955 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:02.955 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:02.955 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:03.120 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.120 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.121 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:03.121 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:03.121 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:03.288 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.288 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.290 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:03.290 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:03.290 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:03.456 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.456 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.458 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:03.458 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:03.458 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:03.648 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.648 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.650 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:03.815 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.815 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.817 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:03.985 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:03.985 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:03.987 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:03.987 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:03.987 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:04.153 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:04.153 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:04.158 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:04.159 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:04.159 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:04.328 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:04.328 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:04.329 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:04.329 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:04.329 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:04.488 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:04.488 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:04.489 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:04.489 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:04.489 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:04.666 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:04.666 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:04.668 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:04.834 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:04.834 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:04.835 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:05.007 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.007 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.009 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:05.009 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:05.009 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:05.184 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.184 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.186 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:05.186 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:05.186 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:05.354 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.354 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.356 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:05.356 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:05.356 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:05.545 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.545 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.547 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:05.547 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:05.547 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:05.728 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.729 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.730 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:05.905 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:05.905 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:05.907 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:06.073 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:06.073 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:06.075 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:06.075 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:06.075 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:06.250 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:06.250 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:06.251 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:06.251 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:06.251 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:06.456 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:06.456 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:06.458 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:06.458 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:06.458 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:06.636 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:06.638 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:06.640 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:06.640 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:06.640 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:06.817 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:06.817 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:06.820 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:07.000 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.000 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.003 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:07.200 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.201 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.203 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:07.203 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:07.203 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:07.384 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.384 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.386 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:07.386 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:07.386 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:07.568 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.568 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.570 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:07.570 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:07.570 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:07.764 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.764 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.765 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:07.766 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:07.766 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:07.937 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:07.937 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:07.939 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:08.129 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:08.129 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:08.131 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:36:08.327 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:08.327 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:08.330 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:08.330 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:08.330 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:08.522 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:08.522 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:08.523 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:08.523 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:08.523 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:36:08.703 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-黑名单模式
+25-09-23.15:36:08.703 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:36:08.705 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:36:08.705 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:36:08.705 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:39:51.916 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:39:51.916 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:39:51.916 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:39:51.916 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:39:51.923 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:39:59.731 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:39:59.731 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:39:59.731 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:39:59.731 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:39:59.737 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:39:59.922 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:39:59.922 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:39:59.922 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:39:59.922 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:39:59.926 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:40:00.117 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:40:00.117 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:40:00.117 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:40:00.118 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:40:00.121 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:40:00.123 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:40:00.123 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:40:07.001 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:40:07.001 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:40:07.001 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:40:07.001 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:40:07.005 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:40:18.954 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:40:18.954 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:40:18.954 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:40:18.954 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:40:18.958 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:46:20.975 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:20.975 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:20.975 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:20.975 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:20.985 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:46:34.763 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:34.763 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:34.763 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:34.763 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:34.768 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:46:34.955 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:34.955 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:34.955 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:34.955 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:34.959 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:46:35.145 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:35.145 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:35.145 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:35.145 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:35.150 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:46:35.150 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:46:35.152 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:46:35.152 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:46:35.338 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:35.338 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:35.338 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:35.338 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:35.342 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:46:35.342 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:46:35.343 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:46:35.343 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:46:42.690 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:46:42.690 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:46:42.690 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:46:42.690 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:46:42.694 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:00.080 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:00.080 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:00.080 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:00.080 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:00.085 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:00.282 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:00.282 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:00.282 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:00.284 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:00.287 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:00.467 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:00.467 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:00.467 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:00.467 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:00.470 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:00.470 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:00.470 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:00.470 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:00.618 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:00.618 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:00.618 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:00.618 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:00.621 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:00.621 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:00.621 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:00.621 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:00.785 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:00.785 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:00.785 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:00.785 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:00.787 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:00.787 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:00.787 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:00.787 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:01.017 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:01.017 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:01.017 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:01.017 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:01.022 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:01.022 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:01.022 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:01.022 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:01.257 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:01.257 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:01.257 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:01.257 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:01.259 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:01.426 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:01.426 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:01.426 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:01.426 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:01.429 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:01.633 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:01.633 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:01.633 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:01.633 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:01.637 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:01.637 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:01.637 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:01.637 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:01.851 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:01.852 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:01.852 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:01.852 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:01.856 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:01.856 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:01.856 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:01.856 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:02.041 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.041 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.041 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.041 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.044 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:02.045 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:02.045 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:02.045 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:02.240 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.240 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.240 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.240 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.243 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:02.243 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:02.243 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:02.243 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:02.436 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.436 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.436 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.436 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.437 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:02.601 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.601 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.601 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.601 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.603 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:02.786 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.786 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.786 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.787 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.789 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:02.789 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:02.789 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:02.789 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:02.963 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:02.963 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:02.963 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:02.963 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:02.966 [http-nio-9191-exec-2] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:02.966 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:02.966 [http-nio-9191-exec-2] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:02.966 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:03.154 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:03.154 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:03.154 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:03.154 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:03.157 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:03.157 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:03.157 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:03.157 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:03.378 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:03.379 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:03.379 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:03.379 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:03.383 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:03.383 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:03.383 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:03.383 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:03.522 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:03.522 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:03.522 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:03.522 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:03.524 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:03.795 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:03.795 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:03.795 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:03.795 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:03.798 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:03.992 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:03.992 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:03.992 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:03.992 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:03.994 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:03.994 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:03.994 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:03.994 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:04.203 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:04.203 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:04.203 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:04.203 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:04.207 [http-nio-9191-exec-7] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:04.207 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:04.207 [http-nio-9191-exec-7] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:04.207 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:04.377 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:04.377 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:04.377 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:04.377 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:04.379 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:04.379 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:04.379 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:04.379 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:04.544 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:04.544 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:04.544 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:04.544 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:04.546 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:47:04.730 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:04.730 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:04.730 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:04.730 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:04.732 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:47:04.732 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:47:04.732 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:47:04.732 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:47:04.897 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:47:04.897 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：kk, 黑名单访问次数为：null
+25-09-23.15:47:04.897 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:47:04.897 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:47:04.900 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:48:16.777 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:16.777 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：null
+25-09-23.15:48:16.777 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:16.777 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:16.786 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:48:19.890 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:19.890 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：null
+25-09-23.15:48:19.890 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:19.892 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:19.892 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:48:20.084 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:20.084 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：null
+25-09-23.15:48:20.084 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:20.085 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:20.085 [http-nio-9191-exec-6] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:48:20.085 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：
+25-09-23.15:48:20.085 [http-nio-9191-exec-6] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：
+25-09-23.15:48:20.085 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：1
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：
+25-09-23.15:48:20.267 [http-nio-9191-exec-8] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：
+25-09-23.15:48:20.268 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：2
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：
+25-09-23.15:48:20.685 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:29.441 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:29.441 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：3
+25-09-23.15:48:29.441 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:29.441 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:29.441 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:48:30.659 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:30.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：3
+25-09-23.15:48:30.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:30.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入PPS节点
+25-09-23.15:48:30.660 [http-nio-9191-exec-3] WARN  RateLimitPPSNode       - 【RateLimitPPSNode】:限流-获取通行证失败
+25-09-23.15:48:30.660 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：
+25-09-23.15:48:30.660 [http-nio-9191-exec-3] ERROR RateLimitPPSNode       - 【RateLimitPPSNode】:限流-超频次拦截：
+25-09-23.15:48:30.660 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:35.460 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:35.460 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:48:35.460 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:35.460 [http-nio-9191-exec-1] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:48:35.460 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:37.595 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:37.595 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:48:37.595 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:37.595 [http-nio-9191-exec-2] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:48:37.595 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:38.441 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:38.441 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:48:38.441 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:38.441 [http-nio-9191-exec-9] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:48:38.441 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:48:39.235 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:48:39.235 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:48:39.235 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：3.0
+25-09-23.15:48:39.235 [http-nio-9191-exec-5] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:48:39.235 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:49:35.127 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:35.127 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:49:35.127 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:35.127 [http-nio-9191-exec-4] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:49:35.127 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:49:37.065 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:37.065 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：, 黑名单访问次数为：4
+25-09-23.15:49:37.065 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:37.065 [http-nio-9191-exec-6] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：
+25-09-23.15:49:37.065 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:49:44.890 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:44.890 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:49:44.890 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:44.890 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:49:44.893 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:49:49.435 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:49.435 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:49:49.435 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:49.435 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:49:49.437 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:49:50.106 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:50.106 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:49:50.106 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:50.106 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:49:50.108 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:49:50.283 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:50.283 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:49:50.283 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:50.283 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:49:50.285 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:49:50.285 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：userId
+25-09-23.15:49:50.285 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：userId
+25-09-23.15:49:50.285 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:49:50.482 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:49:50.482 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:49:50.482 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:49:50.482 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:49:50.483 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:16.247 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:16.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:53:16.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:16.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:16.253 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:17.709 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:17.709 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:53:17.709 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:17.709 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:17.714 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:18.753 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:18.753 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:53:18.753 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:18.753 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:18.758 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:19.504 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:19.504 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:53:19.504 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:19.504 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:19.508 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:19.676 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:19.676 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.15:53:19.676 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:19.676 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:19.680 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:53:19.680 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.15:53:19.682 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.15:53:19.682 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:20.100 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:20.100 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.15:53:20.100 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:20.100 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:20.104 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.15:53:20.298 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:20.298 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.15:53:20.298 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:20.298 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:20.301 [http-nio-9191-exec-4] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:53:20.301 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.15:53:20.302 [http-nio-9191-exec-4] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.15:53:20.303 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:20.495 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:20.496 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：2
+25-09-23.15:53:20.496 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:20.496 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.15:53:20.500 [http-nio-9191-exec-8] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.15:53:20.500 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.15:53:20.500 [http-nio-9191-exec-8] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.15:53:20.500 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:20.665 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:20.665 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.15:53:20.665 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:20.665 [http-nio-9191-exec-10] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.15:53:20.665 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:27.426 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:27.426 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.15:53:27.426 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:27.426 [http-nio-9191-exec-7] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.15:53:27.426 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:28.482 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:28.482 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.15:53:28.482 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:28.482 [http-nio-9191-exec-1] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.15:53:28.482 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.15:53:29.241 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.15:53:29.241 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.15:53:29.241 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.15:53:29.241 [http-nio-9191-exec-3] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.15:53:29.241 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:02:34.882 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:02:34.882 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:02:34.882 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:02:34.882 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:02:34.895 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:02:40.088 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:02:40.088 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:02:40.088 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:02:40.088 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:02:40.093 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:03:31.942 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:03:31.942 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:03:31.942 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:03:31.942 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:03:31.950 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:05:31.700 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:31.700 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:05:31.700 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:31.700 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:31.705 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:05:32.203 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:32.203 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:05:32.203 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:32.203 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:32.208 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:05:32.659 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:32.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:05:32.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:32.659 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:32.663 [http-nio-9191-exec-3] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:05:32.663 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:05:32.665 [http-nio-9191-exec-3] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:05:32.665 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:33.194 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:33.194 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.16:05:33.194 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:33.194 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:33.198 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:05:33.618 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:33.618 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.16:05:33.619 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:33.619 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:33.622 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:05:33.875 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:33.875 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.16:05:33.875 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:33.875 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:33.878 [http-nio-9191-exec-10] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:05:33.878 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:05:33.880 [http-nio-9191-exec-10] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:05:33.880 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:34.146 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:34.146 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：2
+25-09-23.16:05:34.146 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:34.146 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:05:34.149 [http-nio-9191-exec-1] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:05:34.149 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:05:34.149 [http-nio-9191-exec-1] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:05:34.149 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:34.464 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:34.464 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:05:34.464 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:34.464 [http-nio-9191-exec-7] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:05:34.464 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:34.722 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:34.722 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:05:34.722 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:34.722 [http-nio-9191-exec-2] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:05:34.723 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:34.995 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:34.995 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:05:34.995 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:34.995 [http-nio-9191-exec-4] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:05:34.995 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:45.594 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:45.594 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:05:45.594 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:45.594 [http-nio-9191-exec-5] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:05:45.594 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:05:46.046 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:05:46.046 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:05:46.046 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:05:46.046 [http-nio-9191-exec-6] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:05:46.046 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:34.247 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:34.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:13:34.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:34.247 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:34.253 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:35.499 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:35.499 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:13:35.499 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:35.499 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:35.504 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:37.194 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:37.194 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:13:37.194 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:37.194 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:37.198 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:37.385 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:37.385 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:13:37.385 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:37.385 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:37.390 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:37.560 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:37.560 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：null
+25-09-23.16:13:37.560 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:37.560 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:37.566 [http-nio-9191-exec-5] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:13:37.566 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:13:37.567 [http-nio-9191-exec-5] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:13:37.567 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:37.755 [http-nio-9191-exec-6] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:37.755 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：1
+25-09-23.16:13:37.755 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:37.755 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:37.759 [http-nio-9191-exec-6] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:13:37.759 [http-nio-9191-exec-6] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:13:37.761 [http-nio-9191-exec-6] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:13:37.761 [http-nio-9191-exec-6] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:38.778 [http-nio-9191-exec-3] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:38.778 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：2
+25-09-23.16:13:38.779 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:38.779 [http-nio-9191-exec-3] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:38.782 [http-nio-9191-exec-3] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:38.952 [http-nio-9191-exec-8] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:38.952 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：2
+25-09-23.16:13:38.952 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:38.952 [http-nio-9191-exec-8] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:38.956 [http-nio-9191-exec-8] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->false
+25-09-23.16:13:39.137 [http-nio-9191-exec-9] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:39.137 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：2
+25-09-23.16:13:39.137 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:39.137 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitSwitchNode】:限流-进入SWR节点
+25-09-23.16:13:39.140 [http-nio-9191-exec-9] WARN  RateLimitSWRNode       - 【RateLimitSWRNode】:限流-获取通行证失败
+25-09-23.16:13:39.140 [http-nio-9191-exec-9] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：u
+25-09-23.16:13:39.140 [http-nio-9191-exec-9] ERROR RateLimitSWRNode       - 【RateLimitSWRNode】:限流-超频次拦截：u
+25-09-23.16:13:39.140 [http-nio-9191-exec-9] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:40.041 [http-nio-9191-exec-10] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:40.041 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:40.041 [http-nio-9191-exec-10] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:40.041 [http-nio-9191-exec-10] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:40.041 [http-nio-9191-exec-10] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:40.225 [http-nio-9191-exec-1] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:40.225 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:40.225 [http-nio-9191-exec-1] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:40.225 [http-nio-9191-exec-1] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:40.225 [http-nio-9191-exec-1] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:40.410 [http-nio-9191-exec-2] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:40.410 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:40.410 [http-nio-9191-exec-2] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:40.410 [http-nio-9191-exec-2] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:40.410 [http-nio-9191-exec-2] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:40.600 [http-nio-9191-exec-7] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:40.600 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:40.600 [http-nio-9191-exec-7] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:40.600 [http-nio-9191-exec-7] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:40.600 [http-nio-9191-exec-7] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:42.153 [http-nio-9191-exec-4] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:42.153 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:42.153 [http-nio-9191-exec-4] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:42.153 [http-nio-9191-exec-4] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:42.153 [http-nio-9191-exec-4] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true
+25-09-23.16:13:42.801 [http-nio-9191-exec-5] WARN  RateLimitSwitchNode    - 【RateLimitSwitchNode】:限流-即将进入黑名单节点
+25-09-23.16:13:42.801 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单KEY为：u, 黑名单访问次数为：3
+25-09-23.16:13:42.801 [http-nio-9191-exec-5] WARN  RateLimitBlackListNode - 【RateLimitBlackListNode】:黑名单阈值为：2.0
+25-09-23.16:13:42.801 [http-nio-9191-exec-5] ERROR RateLimitBlackListNode - 【RateLimitBlackListNode】:进行限流-黑名单拦截(24h)：u
+25-09-23.16:13:42.801 [http-nio-9191-exec-5] WARN  RateLimitEndNode       - 【结束节点】:是否限流-->true

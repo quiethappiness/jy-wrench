@@ -291,7 +291,13 @@ public interface IRedisService
 	
 	RBitSet getBitSet(String key);
 	
-	default int getIndexFromUserId(String userId)
+	/**
+	 * 获取BitIndex
+	 * @param userId ,可以是各种 id，例如手机号，邮箱，用户名等等
+	 * 	用户ID
+	 * @return BitIndex
+	 */
+	default int getBitIndex(String userId)
 	{
 		try
 		{
