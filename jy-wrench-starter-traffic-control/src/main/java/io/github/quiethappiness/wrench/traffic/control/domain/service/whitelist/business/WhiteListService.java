@@ -1,29 +1,26 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
-import io.github.quiethappiness.lua.manager.domain.service.redis.IRedisService;
-import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.lua.manager.domain.service.redis.impl.IRedisService;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RBitSet;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.redisson.api.RKeys;
+import org.redisson.api.RLocalCachedMap;
+import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.func.SlidingWindowRateLimiter.MAO_HAO;
-
 // 你的组件核心服务
-@ConditionalOnBean(WhiteListDataProvider.class)
+// @ConditionalOnBean(WhiteListDataProvider.class)
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class WhiteListService
+public class WhiteListService extends AbstractWhiteListService
 {
 	private final IRedisService redisService;
 	private final List<WhiteListDataProvider> dataProviders;
-	private final DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties;
 	// private final ILuaScriptManager scriptManager;
 	// 通过构造器注入依赖
 	
@@ -32,24 +29,33 @@ public class WhiteListService
 	{
 		dataProviders.parallelStream()
 			.forEach((dataProvider) ->
-			{
-				WhiteListType type = dataProvider.getType();
-				RBitSet bitSet = redisService.getBitSet(spliceBitSetName(type.getDataProviderName()));
-				log.info("Initializing whitelist for {}", type.getCode());
-				dataProvider.getWhitelistData()
-					.forEach((userId ->
-						bitSet.set(redisService.getBitIndex(userId), true)));
-			});
+				{
+					log.info("Initializing whitelist for {}", dataProvider.getType());
+					dataProvider.getWhitelistData()
+						.forEach(data ->
+						{
+							String spliceHashMapName = spliceHashMapName(data.getUri());
+							log.info("Creating local cached map for {}", spliceHashMapName);
+							// 使用新的包路径创建配置选项
+							LocalCachedMapOptions<WhiteListType, List<String>> options = LocalCachedMapOptions.name(spliceHashMapName);
+							setLocalCacheMapOptions(options);
+							RLocalCachedMap<WhiteListType, List<String>> map = redisService.getLocalCachedMap(options);
+							map.putAll(data.getWhiteList());
+						});
+				}
+			);
 	}
 	
-	public boolean checkWhitelistId(WhiteListType type, String userId)
+	public boolean checkWhitelistId(String uri, WhiteListType type, String userId)
 	{
-		return redisService.getBitSet(spliceBitSetName(type.getDataProviderName()))
-			.get(redisService.getBitIndex(userId));
-	}
-	
-	private String spliceBitSetName(String name)
-	{
-		return dynamicConfigCenterAutoProperties.getSystem() + MAO_HAO + "whitelist" + MAO_HAO + getClass().getTypeName() + MAO_HAO + name;
+		// 这个只是全匹配，没法模糊匹配
+		RKeys key = redisService.getKey();
+		key.
+		String spliceHashMapName = spliceHashMapName(uri);
+		LocalCachedMapOptions<WhiteListType, List<String>> options = LocalCachedMapOptions.name(spliceHashMapName);
+		RLocalCachedMap<WhiteListType, List<String>> whiteList = redisService.getLocalCachedMap(options);
+		log.info("Checking whitelist for {}", userId);
+		List<String> strings = whiteList.get(type);
+		return strings != null && strings.contains(userId);
 	}
 }

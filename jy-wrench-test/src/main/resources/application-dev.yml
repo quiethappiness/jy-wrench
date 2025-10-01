@@ -24,7 +24,7 @@ jy:
         traffic:
             enabled: true
             rules:
-                -   uri: /api/user/**
+                -   uri: /api/v1/index/**
                     limit: 1000
                     timeUnit: HOURS
                     whiteList:

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.lua.manager.domain.service.redis.impl;
 
-import io.github.quiethappiness.lua.manager.domain.service.redis.IRedisService;
 import org.redisson.api.*;
+import org.redisson.api.options.LocalCachedMapOptions;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -11,13 +11,19 @@ import java.util.concurrent.TimeUnit;
  * @author Fuzhengwei bugstack.cn @小傅哥
  */
 
-public class RedissonService implements IRedisService
+public class RedissonService  implements IRedisService
 {
 	private final RedissonClient redissonClient;
 	
 	public RedissonService(RedissonClient redissonClient)
 	{
 		this.redissonClient = redissonClient;
+	}
+	
+	@Override
+	public RKeys getKey()
+	{
+		return this.redissonClient.getKeys();
 	}
 	
 	public <T> void setValue(String key, T value)
@@ -56,14 +62,12 @@ public class RedissonService implements IRedisService
 	{
 		return redissonClient.getDelayedQueue(rBlockingQueue);
 	}
-	
 	@Override
 	public void setAtomicLong(String key, long value)
 	{
 		redissonClient.getAtomicLong(key)
 			.set(value);
 	}
-	
 	
 	@Override
 	public Long getAtomicLong(String key)
@@ -100,7 +104,11 @@ public class RedissonService implements IRedisService
 			.addAndGet(-delta);
 	}
 	
-
+	@Override
+	public RTopic getTopic(String key)
+	{
+		return redissonClient.getTopic(key);
+	}
 	
 	@Override
 	public void remove(String key)
@@ -114,6 +122,54 @@ public class RedissonService implements IRedisService
 	{
 		return redissonClient.getBucket(key)
 			.isExists();
+	}
+	
+	@Override
+	public <V> RSortedSet<V> getSortedSet(String name)
+	{
+		return redissonClient.getSortedSet(name);
+	}
+	
+	@Override
+	public <V> RScoredSortedSet<V> getScoredSortedSet(String name)
+	{
+		return redissonClient.getScoredSortedSet(name);
+	}
+	
+	@Override
+	public RLexSortedSet getLexSortedSet(String name)
+	{
+		return redissonClient.getLexSortedSet(name);
+	}
+	
+	@Override
+	public <K, V> RListMultimap<K, V> getListMultimap(String name)
+	{
+		return redissonClient.getListMultimap(name);
+	}
+	
+	@Override
+	public <K, V> RListMultimapCache<K, V> getListMultimapCache(String name)
+	{
+		return redissonClient.getListMultimapCache(name);
+	}
+	
+	@Override
+	public <V> RList<V> getList(String name)
+	{
+		return redissonClient.getList(name);
+	}
+	
+	@Override
+	public <V> RSetCache<V> getSetCache(String name)
+	{
+		return redissonClient.getSetCache(name);
+	}
+	
+	@Override
+	public <V> RSet<V> getSet(String name)
+	{
+		return redissonClient.getSet(name);
 	}
 	
 	public void addToSet(String key, String value)
@@ -144,6 +200,29 @@ public class RedissonService implements IRedisService
 	public <K, V> RMap<K, V> getMap(String key)
 	{
 		return redissonClient.getMap(key);
+	}
+	
+	@Override
+	public <K, V> RMapCache<K, V> getMapCache(String name)
+	{
+		return redissonClient.getMapCache(name);
+	}
+	@Override
+	public <K, V> RLocalCachedMap<K, V> getLocalCachedMap( LocalCachedMapOptions<K, V> options)
+	{
+		return redissonClient.getLocalCachedMap(options);
+	}
+	
+	@Override
+	public <K, V> RSetMultimapCache<K, V> getSetMultimapCache(String name)
+	{
+		return redissonClient.getSetMultimapCache(name);
+	}
+	
+	@Override
+	public <K, V> RSetMultimap<K, V> getSetMultimap(String name)
+	{
+		return redissonClient.getSetMultimap(name);
 	}
 	
 	public void addToMap(String key, String field, String value)
@@ -226,10 +305,10 @@ public class RedissonService implements IRedisService
 		return redissonClient.getBucket(key)
 			.trySet("lock", expired, timeUnit);
 	}
-	
 	@Override
 	public RBitSet getBitSet(String key)
 	{
 		return redissonClient.getBitSet(key);
 	}
+
 }

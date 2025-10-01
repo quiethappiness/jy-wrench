@@ -29,10 +29,10 @@ public @interface WhiteListChecker
 	 * 支持正则匹配：#{user.name.matches('[a-zA-Z]+')}
 	 */
 	@AliasFor("whiteListField")
-	String key();
+	String key() default "";
 	
 	@AliasFor("key")
-	String whiteListField();
+	String whiteListField() default "";
 	
 	/**
 	 * 白名单类型
