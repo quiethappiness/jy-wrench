@@ -5,7 +5,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.White
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +27,9 @@ public class WhiteListDataNode extends AbstractWhiteListSupport
 	@Override
 	protected WhiteListResultEntity doApply(WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
-		WhiteListChecker whiteListChecker = requestParameter.getWhiteListChecker();
+		TcWhiteList tcWhiteList = requestParameter.getTcWhiteList();
 		ProceedingJoinPoint jp = requestParameter.getJp();
-		final AttrValueResult attrValue = getAttrValue(jp, whiteListChecker);
+		final AttrValueResult attrValue = getAttrValue(jp, tcWhiteList);
 		// todo:设置 白名单校验对象 attrValueResult
 		dynamicContext.setAttrValueResult(attrValue);
 		return router(requestParameter, dynamicContext);
@@ -41,10 +41,10 @@ public class WhiteListDataNode extends AbstractWhiteListSupport
 		return whiteListLocalCheckNode;
 	}
 	
-	private static AttrValueResult getAttrValue(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker)
+	private static AttrValueResult getAttrValue(ProceedingJoinPoint jp, TcWhiteList tcWhiteList)
 	{
-		String key = StringUtils.hasText(whiteListChecker.key()) ? whiteListChecker.key() : whiteListChecker.whiteListField();
-		WhiteListType type = whiteListChecker.type();
+		String key = StringUtils.hasText(tcWhiteList.key()) ? tcWhiteList.key() : tcWhiteList.whiteListField();
+		WhiteListType type = tcWhiteList.type();
 		MethodSignature signature = (MethodSignature) jp.getSignature();
 		String[] paramNames = signature.getParameterNames();
 		Object[] args = jp.getArgs();

@@ -22,6 +22,8 @@ jy:
                 refresh-interval: 30000
                 clean-invalid-tasks-cron: "0 0/5 * * * ?"
         traffic:
+            hystrix:
+                enabled: true
             ratemiter:
                 enabled: true
             whitelist:
@@ -47,6 +49,7 @@ jy:
                             PHONE:
                                 - "13800138000"
                                 - "13900139000"
+
 
 # 日志
 logging:

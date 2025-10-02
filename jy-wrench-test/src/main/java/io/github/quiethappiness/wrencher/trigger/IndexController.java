@@ -1,9 +1,10 @@
 package io.github.quiethappiness.wrencher.trigger;
 
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.extern.slf4j.Slf4j;
@@ -31,49 +32,67 @@ public class IndexController
 	@Resource
 	private ILuaScriptManager luaScriptManager;
 	
+	@TcHystrix(timeout = 100,returnJson = "", fallbackMethod = "drawHystrix")
+	@GetMapping(value = "hystrix")
+	public String HYSTRIX(String userId) throws InterruptedException
+	{
+		Thread.sleep(2000);
+		return "test";
+	}
+	
 	/**
 	 * curl --request GET \
 	 * --url 'http://127.0.0.1:9191/api/v1/index/draw?userId=xiaofuge'
 	 */
-	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID,fallbackMethod = "drawErrorRateLimiter")
+	@TcWhiteList(key = "#{userId}", type = WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
 	@GetMapping(value = "whitelist")
 	public String WHITELIST(String userId)
 	{
 		return "test";
 	}
 	
-	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID,fallbackMethod = "drawErrorRateLimiter")
-	@AccessRateLimiter(key = "userId", mode = TrafficMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
+	@TcWhiteList(key = "#{userId}", type = WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
+	@TcRateLimiter(key = "userId", mode = TrafficMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
 	@GetMapping(value = "PPS_BLACKLIST")
 	public String PPS_BLACKLIST(String userId)
 	{
 		return "test";
 	}
 	
-	@AccessRateLimiter(key = "userId", mode = TrafficMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
+	@TcRateLimiter(key = "userId", mode = TrafficMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
 	@GetMapping(value = "PPS")
 	public String PPS(String userId)
 	{
 		return "test";
 	}
 	
-	@AccessRateLimiter(key = "userId", mode = TrafficMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
+	@TcRateLimiter(key = "userId", mode = TrafficMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
 	@GetMapping(value = "SWR")
 	public String SWR(String userId)
 	{
 		return "test";
 	}
 	
-	@AccessRateLimiter(key = "userId", mode = TrafficMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
+	@TcRateLimiter(key = "userId", mode = TrafficMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
 	@GetMapping(value = "SWR_BLACKLIST")
 	public String SWR_BLACKLIST(String userId)
 	{
 		return "test";
 	}
 	
+	public String drawWhiteList(String userId)
+	{
+		return "whiteList";
+	}
+	
 	public String drawErrorRateLimiter(String userId)
 	{
 		return "rateLimiter";
+	}
+	
+	public String drawHystrix(String userId)
+	{
+		return "hystrix";
 	}
 	
 	// @Scheduled(cron = "0/5 * * * * ?")

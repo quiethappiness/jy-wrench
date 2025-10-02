@@ -4,7 +4,7 @@ import org.aspectj.lang.annotation.Pointcut;
 
 public interface IWhiteListAOP
 {
-	@Pointcut("@annotation(io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker)")
+	@Pointcut("@annotation(io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList)")
 	default void whiteListCheckerPointCut()
 	{
 	}

@@ -5,7 +5,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,13 +53,13 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 		dynamicContext.setDecideLimit(false);
 		// 获取限流访问拦截器实例，用于获取限流相关的配置信息
 		// 该实例包含了注解中定义的各种限流参数
-		AccessRateLimiter accessRateLimiter = dynamicContext.getAccessRateLimiter();
+		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
 		// 获取连接点信息，包含方法调用的相关上下文信息
 		// 包括方法签名、参数列表等，用于解析限流字段值
 		ProceedingJoinPoint jp = dynamicContext.getJp();
 		// 获取限流注解中的key属性值，该值用于生成限流的唯一标识符
 		// 这个key通常是一个SpEL表达式，用于从方法参数中提取特定字段
-		String key = accessRateLimiter.key();
+		String key = tcRateLimiter.key();
 		// 判断key是否为空或空白字符，如果为空则抛出运行时异常
 		// 这是必要的参数校验，确保限流逻辑能够正确执行
 		if (StringUtils.isBlank(key))
@@ -82,7 +82,7 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		AccessRateLimiter interceptor = dynamicContext.getAccessRateLimiter();
+		TcRateLimiter interceptor = dynamicContext.getTcRateLimiter();
 		TrafficMode mode = interceptor.mode();
 		if (mode.equals(TrafficMode.PPS_BLACKLIST) || mode.equals(TrafficMode.SWR_BLACKLIST))
 		{

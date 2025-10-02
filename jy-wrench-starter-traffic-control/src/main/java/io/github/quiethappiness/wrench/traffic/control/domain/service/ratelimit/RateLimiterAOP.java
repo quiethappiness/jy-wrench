@@ -7,7 +7,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -37,12 +37,12 @@ public class RateLimiterAOP extends AbstractRateLimiterAop
 	 * 限流拦截器的核心处理方法，用于执行限流策略并决定是否允许请求继续执行
 	 *
 	 * @param jp 切点对象，包含被拦截方法的执行信息
-	 * @param accessRateLimiter 限流注解对象，包含限流配置信息
+	 * @param tcRateLimiter 限流注解对象，包含限流配置信息
 	 * @return 如果未被限流则返回原方法执行结果，如果被限流则返回降级方法的结果
 	 * @throws Throwable 方法执行异常时抛出
 	 */
-	@Around("accessRateLimiterPointcut() && @annotation(accessRateLimiter)")
-	public Object doAccessRateLimiter(ProceedingJoinPoint jp, AccessRateLimiter accessRateLimiter) throws Throwable
+	@Around("accessRateLimiterPointcut() && @annotation(tcRateLimiter)")
+	public Object doAccessRateLimiter(ProceedingJoinPoint jp, TcRateLimiter tcRateLimiter) throws Throwable
 	{
 		// 检查是否来自白名单AOP的标记
 		if (TrafficControlContext.isInWhiteList()) {
@@ -59,13 +59,13 @@ public class RateLimiterAOP extends AbstractRateLimiterAop
 				.blacklist(blacklist)
 				.loginRecord(loginRecord)
 				.jp(jp)
-				.accessRateLimiter(accessRateLimiter)
+				.tcRateLimiter(tcRateLimiter)
 				.build());
 		
 		// 如果策略决定进行限流，则执行降级方法并返回结果
 		if (result.isDecideLimit())
 		{
-			return IRateLimiterAOP.fallbackMethodResult(jp, accessRateLimiter.fallbackMethod());
+			return IRateLimiterAOP.fallbackMethodResult(jp, tcRateLimiter.fallbackMethod());
 		}
 		// 返回结果
 		return jp.proceed();

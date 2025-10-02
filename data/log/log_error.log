@@ -1130,3 +1130,21 @@ java.lang.IllegalAccessException: User not in whitelist
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+25-10-02.17:12:14.437 [http-nio-9191-exec-1] WARN  WhiteListDataNode      - User ID is null or empty, setting to 'unknown'
+25-10-02.17:12:14.437 [http-nio-9191-exec-1] WARN  WhiteListLocalCheckNode - 开始检查本地白名单 id: unknown
+25-10-02.17:12:14.437 [http-nio-9191-exec-1] WARN  WhiteListLocalCheckNode - [WhiteListProperties.Rule(uri=/api/v1/index/**, limit=1000, timeUnit=HOURS, whiteList={USER_ID=[1001, 1002, admin], IP=[192.168.1.100, 10.0.0.0/8]}), WhiteListProperties.Rule(uri=/api/order/**, limit=100, timeUnit=MINUTES, whiteList={USER_ID=[vip-user], PHONE=[13800138000, 13900139000]})]
+25-10-02.17:12:14.437 [http-nio-9191-exec-1] WARN  WhiteListRedisCheckNode - 开始检查数据库白名单 id: unknown
+25-10-02.17:12:14.454 [http-nio-9191-exec-1] ERROR WhiteListAOP           - User not in whitelist
+25-10-02.17:12:18.232 [http-nio-9191-exec-2] WARN  WhiteListDataNode      - User ID is null or empty, setting to 'unknown'
+25-10-02.17:12:18.232 [http-nio-9191-exec-2] WARN  WhiteListLocalCheckNode - 开始检查本地白名单 id: unknown
+25-10-02.17:12:18.232 [http-nio-9191-exec-2] WARN  WhiteListLocalCheckNode - [WhiteListProperties.Rule(uri=/api/v1/index/**, limit=1000, timeUnit=HOURS, whiteList={USER_ID=[1001, 1002, admin], IP=[192.168.1.100, 10.0.0.0/8]}), WhiteListProperties.Rule(uri=/api/order/**, limit=100, timeUnit=MINUTES, whiteList={USER_ID=[vip-user], PHONE=[13800138000, 13900139000]})]
+25-10-02.17:12:18.232 [http-nio-9191-exec-2] WARN  WhiteListRedisCheckNode - 开始检查数据库白名单 id: unknown
+25-10-02.17:12:18.253 [http-nio-9191-exec-2] ERROR WhiteListAOP           - User not in whitelist
+25-10-02.17:12:18.911 [http-nio-9191-exec-3] WARN  WhiteListDataNode      - User ID is null or empty, setting to 'unknown'
+25-10-02.17:12:18.911 [http-nio-9191-exec-3] WARN  WhiteListLocalCheckNode - 开始检查本地白名单 id: unknown
+25-10-02.17:12:18.911 [http-nio-9191-exec-3] WARN  WhiteListLocalCheckNode - [WhiteListProperties.Rule(uri=/api/v1/index/**, limit=1000, timeUnit=HOURS, whiteList={USER_ID=[1001, 1002, admin], IP=[192.168.1.100, 10.0.0.0/8]}), WhiteListProperties.Rule(uri=/api/order/**, limit=100, timeUnit=MINUTES, whiteList={USER_ID=[vip-user], PHONE=[13800138000, 13900139000]})]
+25-10-02.17:12:18.911 [http-nio-9191-exec-3] WARN  WhiteListRedisCheckNode - 开始检查数据库白名单 id: unknown
+25-10-02.17:12:18.924 [http-nio-9191-exec-3] ERROR WhiteListAOP           - User not in whitelist
+25-10-02.23:32:20.868 [http-nio-9191-exec-1] WARN  URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+25-10-02.23:33:53.263 [http-nio-9191-exec-1] WARN  URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+25-10-02.23:34:16.431 [http-nio-9191-exec-1] WARN  URLConfigurationSource - No URLs will be polled as dynamic configuration sources.

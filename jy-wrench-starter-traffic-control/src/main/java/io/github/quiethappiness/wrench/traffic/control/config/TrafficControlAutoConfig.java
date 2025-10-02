@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.config;
 
+import io.github.quiethappiness.wrench.traffic.control.config.property.HystrixProperties;
 import io.github.quiethappiness.wrench.traffic.control.config.property.RateLimiterProperties;
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @Slf4j
-@EnableConfigurationProperties({RateLimiterProperties.class, WhiteListProperties.class})
+@EnableConfigurationProperties({RateLimiterProperties.class, WhiteListProperties.class, HystrixProperties.class})
 @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control.config.configuration")
 @EnableAspectJAutoProxy
 // @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control")

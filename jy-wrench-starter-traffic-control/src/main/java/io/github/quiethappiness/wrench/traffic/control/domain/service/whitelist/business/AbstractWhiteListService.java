@@ -10,7 +10,7 @@ import org.redisson.api.options.LocalCachedMapOptions;
 import java.time.Duration;
 import java.util.List;
 
-import static io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.func.SlidingWindowRateLimiter.MAO_HAO;
+import static io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.business.SlidingWindowRateLimiter.MAO_HAO;
 
 public abstract class AbstractWhiteListService
 {

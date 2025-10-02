@@ -6,7 +6,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +49,7 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 		// 记录日志：开始处理黑名单拦截逻辑
 		log.info("【RateLimitBlackListNode】:黑名单拦截...");
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		AccessRateLimiter accessRateLimiter = dynamicContext.getAccessRateLimiter();
+		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
 		// 获取当前请求对应的属性值（用于作为黑名单判断的KEY）
 		String keyAttr = dynamicContext.getKeyAttr();
 		// 获取黑名单缓存实例，用于查询访问次数统计
@@ -61,7 +61,7 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 		// 4. 该记录的访问次数超过了设定的黑名单阈值
 		Long ifPresent = blacklist.getIfPresent(keyAttr);
 		log.warn("【RateLimitBlackListNode】:黑名单KEY为：{}, 黑名单访问次数为：{}", keyAttr, ifPresent);
-		double blacklistCount = accessRateLimiter.blacklistCount();
+		double blacklistCount = tcRateLimiter.blacklistCount();
 		log.warn("【RateLimitBlackListNode】:黑名单阈值为：{}", blacklistCount);
 		if (blacklistCount > 0
 			&& null != ifPresent
@@ -98,7 +98,7 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		AccessRateLimiter interceptor = dynamicContext.getAccessRateLimiter();
+		TcRateLimiter interceptor = dynamicContext.getTcRateLimiter();
 		TrafficMode mode = interceptor.mode();
 		// 决定限流
 		if (dynamicContext.isDecideLimit())

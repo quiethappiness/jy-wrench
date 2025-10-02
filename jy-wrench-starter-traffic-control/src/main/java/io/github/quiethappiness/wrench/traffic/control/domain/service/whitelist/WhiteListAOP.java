@@ -7,7 +7,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.Traff
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,11 +27,11 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 		super(whiteListProperties, whiteListStrategyFactory);
 	}
 	
-	@Around(value = "whiteListCheckerWithRateLimiter() &&@annotation(whiteListChecker)  ", argNames = "jp,whiteListChecker")
-	public Object doWhitelistCheck(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
+	@Around(value = "whiteListCheckerWithRateLimiter() &&@annotation(tcWhiteList)  ", argNames = "jp,tcWhiteList")
+	public Object doWhitelistCheck(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
 		// 解析key表达式获取userId
-		WhiteListResultEntity resultEntity = doCheck(jp, whiteListChecker);
+		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
 		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
 		if (inWhitListResult == null || inWhitListResult.userId == null)
 		{
@@ -59,11 +59,11 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 		}
 	}
 	
-	@Around(value = "whiteListCheckerWithoutRateLimiter() && @annotation(whiteListChecker) ", argNames = "jp,whiteListChecker")
-	public Object doWhitelistCheckWithoutRateLimiter(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
+	@Around(value = "whiteListCheckerWithoutRateLimiter() && @annotation(tcWhiteList) ", argNames = "jp,tcWhiteList")
+	public Object doWhitelistCheckWithoutRateLimiter(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
 		// 解析key表达式获取userId
-		WhiteListResultEntity resultEntity = doCheck(jp, whiteListChecker);
+		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
 		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
 		if (inWhitListResult == null || inWhitListResult.userId == null)
 		{
@@ -80,7 +80,7 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId);
 			// 用户不在白名单中，抛出异常或返回错误
 			log.error("User not in whitelist");
-			return IRateLimiterAOP.fallbackMethodResult(jp, whiteListChecker.fallbackMethod());
+			return IRateLimiterAOP.fallbackMethodResult(jp, tcWhiteList.fallbackMethod());
 		}
 	}
 }

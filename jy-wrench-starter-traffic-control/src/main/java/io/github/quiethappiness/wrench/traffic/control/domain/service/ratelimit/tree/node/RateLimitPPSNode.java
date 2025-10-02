@@ -9,7 +9,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -60,10 +60,10 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 		// 获取登录记录缓存实例，存储各请求的限流器
 		Cache<String, RateLimiter> loginRecord = dynamicContext.getLoginRecord();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		AccessRateLimiter accessRateLimiter = dynamicContext.getAccessRateLimiter();
-		double permitsPerSecond = accessRateLimiter.permitsPerSecond();
-		long warmupPeriod = accessRateLimiter.warmupPeriod();
-		TimeUnit unit = accessRateLimiter.unit();
+		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
+		double permitsPerSecond = tcRateLimiter.permitsPerSecond();
+		long warmupPeriod = tcRateLimiter.warmupPeriod();
+		TimeUnit unit = tcRateLimiter.unit();
 		// 获取当前请求对应的属性值（用于作为限流判断的KEY）
 		String keyAttr = dynamicContext.getKeyAttr();
 		// 条件判断：只有当PPS限流功能启用时才执行后续逻辑
@@ -89,7 +89,7 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 			// 记录警告日志：获取通行证失败，触发限流
 			log.warn("【RateLimitPPSNode】:限流-获取通行证失败");
 			// 检查是否启用了黑名单机制且设置了阈值
-			blackListCheck(accessRateLimiter.mode(), blacklist, keyAttr);
+			blackListCheck(tcRateLimiter.mode(), blacklist, keyAttr);
 			// 记录错误日志：检测到超频次拦截事件
 			log.error("【RateLimitPPSNode】:限流-超频次拦截：{}", keyAttr);
 			// 设置限流决策标志为true，表示需要进行限流处理

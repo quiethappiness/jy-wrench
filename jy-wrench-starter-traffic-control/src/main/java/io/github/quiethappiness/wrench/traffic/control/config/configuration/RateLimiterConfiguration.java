@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(name = "jy.wrench.traffic.ee.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "jy.wrench.traffic.ratelimit.enabled", havingValue = "true")
 @ComponentScan(basePackages = {"io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit"})
 @Slf4j
 public class RateLimiterConfiguration

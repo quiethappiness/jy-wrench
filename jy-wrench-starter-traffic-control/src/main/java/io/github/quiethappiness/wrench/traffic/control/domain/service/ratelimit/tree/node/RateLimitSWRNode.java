@@ -6,8 +6,8 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.func.SlidingWindowRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.business.SlidingWindowRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -29,16 +29,16 @@ public class RateLimitSWRNode extends AbstractRateLimiterSupport
 		// 获取黑名单缓存实例，用于记录超频请求
 		Cache<String, Long> blacklist = dynamicContext.getBlacklist();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		AccessRateLimiter accessRateLimiter = dynamicContext.getAccessRateLimiter();
+		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
 		String keyAttr = dynamicContext.getKeyAttr();
-		long windowSizeMs = accessRateLimiter.windowSizeMs();
-		long maxRequests = accessRateLimiter.maxRequests();
+		long windowSizeMs = tcRateLimiter.windowSizeMs();
+		long maxRequests = tcRateLimiter.maxRequests();
 		if(!slidingWindowRateLimiter.tryAcquire(keyAttr, windowSizeMs, maxRequests))
 		{
 			// 记录警告日志：获取通行证失败，触发限流
 			log.warn("【RateLimitSWRNode】:限流-获取通行证失败");
 			// 检查是否启用了黑名单机制且设置了阈值
-			blackListCheck(accessRateLimiter.mode(),  blacklist, keyAttr);
+			blackListCheck(tcRateLimiter.mode(),  blacklist, keyAttr);
 			// 记录错误日志：检测到超频次拦截事件
 			log.error("【RateLimitSWRNode】:限流-超频次拦截：{}", keyAttr);
 			// 设置限流决策标志为true，表示需要进行限流处理

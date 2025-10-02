@@ -6,7 +6,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.White
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IWhiteListAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 public abstract class AbstractWhiteListAOP implements IWhiteListAOP
@@ -21,10 +21,10 @@ public abstract class AbstractWhiteListAOP implements IWhiteListAOP
 		this.whiteListStrategyFactory = whiteListStrategyFactory;
 	}
 	
-	protected WhiteListResultEntity doCheck(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
+	protected WhiteListResultEntity doCheck(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
 		StrategyHandler<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity> strategyHandler = whiteListStrategyFactory.strategyHandler();
-		return strategyHandler.apply(new WhiteListParameterEntity(whiteListChecker, jp, whiteListProperties), new WhiteListStrategyFactory.DynamicContext());
+		return strategyHandler.apply(new WhiteListParameterEntity(tcWhiteList, jp, whiteListProperties), new WhiteListStrategyFactory.DynamicContext());
 	}
 	
 }
