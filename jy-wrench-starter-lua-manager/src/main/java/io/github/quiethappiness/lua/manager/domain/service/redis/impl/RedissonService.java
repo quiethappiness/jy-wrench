@@ -1,5 +1,6 @@
 package io.github.quiethappiness.lua.manager.domain.service.redis.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.redisson.api.*;
 import org.redisson.api.options.LocalCachedMapOptions;
 
@@ -11,14 +12,10 @@ import java.util.concurrent.TimeUnit;
  * @author Fuzhengwei bugstack.cn @小傅哥
  */
 
+@RequiredArgsConstructor(access = lombok.AccessLevel.PACKAGE)
 public class RedissonService  implements IRedisService
 {
 	private final RedissonClient redissonClient;
-	
-	public RedissonService(RedissonClient redissonClient)
-	{
-		this.redissonClient = redissonClient;
-	}
 	
 	@Override
 	public RKeys getKey()

@@ -2,32 +2,26 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit
 
 import com.google.common.cache.Cache;
 import com.google.common.util.concurrent.RateLimiter;
+import io.github.quiethappiness.wrench.design.framework.tree.AbstractStrategyFactory;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node.RateLimitRootNode;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RateLimiterStrategyFactory
+@RequiredArgsConstructor
+public class RateLimiterStrategyFactory extends AbstractStrategyFactory<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity>
 {
 	
-	private final RateLimitRootNode rateLimiterRateLimitRootNode;
-	
-	public RateLimiterStrategyFactory(RateLimitRootNode rateLimiterRateLimitRootNode)
-	{
-		this.rateLimiterRateLimitRootNode = rateLimiterRateLimitRootNode;
-	}
+	private final RateLimitRootNode rateLimitRootNode;
 	
 	public StrategyHandler<RateLimiterParameterEntity, DynamicContext, RateLimiterReturnResultEntity> strategyHandler()
 	{
-		return rateLimiterRateLimitRootNode;
+		return rateLimitRootNode;
 	}
 	
 	@Data

@@ -1,10 +1,9 @@
 package io.github.quiethappiness.lua.manager.config;
 
+import io.github.quiethappiness.lua.manager.domain.service.aop.LuaScriptServiceAop;
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.lua.manager.domain.service.manager.LuaScriptManagerImpl;
-import io.github.quiethappiness.lua.manager.domain.service.aop.LuaScriptServiceAop;
 import io.github.quiethappiness.lua.manager.domain.service.redis.impl.IRedisService;
-import io.github.quiethappiness.lua.manager.domain.service.redis.impl.RedissonService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,7 @@ public class LuaManagerAutoConfig
 		log.info("luaScriptManager 正在初始化...");
 		return new LuaScriptManagerImpl(jyWrenchRedissonClient, luaManagerAutoProperties);
 	}
+	
 	@Bean
 	public LuaBeanPostProcessor luaBeanPostProcessor(
 		ILuaScriptManager luaScriptManager
@@ -35,6 +35,7 @@ public class LuaManagerAutoConfig
 		log.info("LuaBeanPostProcessor 正在初始化...");
 		return new LuaBeanPostProcessor(luaScriptManager);
 	}
+	
 	@Bean
 	public LuaScriptServiceAop luaScriptServiceAop()
 	{
@@ -47,6 +48,6 @@ public class LuaManagerAutoConfig
 		RedissonClient jyWrenchRedissonClient)
 	{
 		log.info("redisService 正在初始化...");
-		return new RedissonService(jyWrenchRedissonClient);
+		return IRedisService.defaultRedisService(jyWrenchRedissonClient);
 	}
 }

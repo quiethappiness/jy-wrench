@@ -1,31 +1,43 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
 import io.github.quiethappiness.lua.manager.domain.service.redis.impl.IRedisService;
+import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RKeys;
 import org.redisson.api.RLocalCachedMap;
 import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
 
 // 你的组件核心服务
-// @ConditionalOnBean(WhiteListDataProvider.class)
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class WhiteListService extends AbstractWhiteListService
 {
-	private final IRedisService redisService;
 	private final List<WhiteListDataProvider> dataProviders;
 	// private final ILuaScriptManager scriptManager;
 	// 通过构造器注入依赖
 	
+	public WhiteListService(
+		List<WhiteListDataProvider> dataProviders,
+		DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,
+		IRedisService redisService
+	)
+	{
+		log.info("Initializing whitelist service");
+		this.dataProviders = dataProviders;
+		super.dynamicConfigCenterAutoProperties = dynamicConfigCenterAutoProperties;
+		super.redisService = redisService;
+	}
+	
 	@PostConstruct
-	private void initWhitelist()
+	@Override
+	protected void initWhitelist()
 	{
 		dataProviders.parallelStream()
 			.forEach((dataProvider) ->
@@ -46,16 +58,35 @@ public class WhiteListService extends AbstractWhiteListService
 			);
 	}
 	
+	@Override
 	public boolean checkWhitelistId(String uri, WhiteListType type, String userId)
 	{
 		// 这个只是全匹配，没法模糊匹配
-		RKeys key = redisService.getKey();
-		key.
-		String spliceHashMapName = spliceHashMapName(uri);
-		LocalCachedMapOptions<WhiteListType, List<String>> options = LocalCachedMapOptions.name(spliceHashMapName);
-		RLocalCachedMap<WhiteListType, List<String>> whiteList = redisService.getLocalCachedMap(options);
 		log.info("Checking whitelist for {}", userId);
-		List<String> strings = whiteList.get(type);
-		return strings != null && strings.contains(userId);
+		String spliceHashMapName = spliceHashMapName(uri);
+		boolean result = doCheckFromRMap(type, spliceHashMapName, userId);
+		if (result)
+		{
+			return true;
+		}
+		// 这里尝试模糊匹配
+		String uriPrefix = uri.substring(0, uri.lastIndexOf("/"));
+		String spliceHashMapNameWithPrefix = spliceHashMapName(uriPrefix + "/*");
+		RKeys rKeys = redisService.getKey();
+		Iterable<String> keysByPattern = rKeys.getKeysWithLimit(spliceHashMapNameWithPrefix, 100);
+		final AntPathMatcher matcher = new AntPathMatcher();
+		for (String key : keysByPattern)
+		{
+			boolean match = matcher.match(key, uri);
+			if (!match)
+			{
+				continue;
+			}
+			if (doCheckFromRMap(type, key, userId))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

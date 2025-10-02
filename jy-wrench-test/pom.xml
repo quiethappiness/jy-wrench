@@ -117,7 +117,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>io.github.quiethappiness.wrench.Application</mainClass>
+					<mainClass>io.github.quiethappiness.wrencher.Application</mainClass>
 					<layout>JAR</layout>
 				</configuration>
 			</plugin>

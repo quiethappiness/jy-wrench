@@ -7,13 +7,12 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.AccessRateLimiter;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * RateLimiterAOP
@@ -25,13 +24,13 @@ import javax.annotation.Resource;
 @Aspect
 @Component
 @Order(2)
+@RequiredArgsConstructor
 public class RateLimiterAOP extends AbstractRateLimiterAop
 {
 	@DCCValue("open")
 	private String rateLimiterSwitch;
 	
-	@Resource(name = "rateLimiterStrategyFactory")
-	private RateLimiterStrategyFactory rateLimiterStrategyFactory;
+	private final RateLimiterStrategyFactory rateLimiterStrategyFactory;
 	
 	/**
 	 * 限流拦截器的核心处理方法，用于执行限流策略并决定是否允许请求继续执行

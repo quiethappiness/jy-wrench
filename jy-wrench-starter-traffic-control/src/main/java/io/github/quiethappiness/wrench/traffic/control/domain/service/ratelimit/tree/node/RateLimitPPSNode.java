@@ -42,14 +42,11 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 	 * 3. 尝试获取令牌，若失败则进行限流处理
 	 * 4. 若启用了黑名单机制，在超频时将请求加入黑名单
 	 * 5. 记录相应的日志信息并返回处理结果
-	 *
 	 * @param requestParameter
 	 * 	限流参数实体
 	 * @param dynamicContext
 	 * 	动态上下文环境
-	 *
 	 * @return 限流处理结果实体
-	 *
 	 * @throws Throwable
 	 * 	处理过程中可能抛出的异常
 	 */
@@ -92,7 +89,7 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 			// 记录警告日志：获取通行证失败，触发限流
 			log.warn("【RateLimitPPSNode】:限流-获取通行证失败");
 			// 检查是否启用了黑名单机制且设置了阈值
-			blackListCheck(accessRateLimiter.mode(),  blacklist, keyAttr);
+			blackListCheck(accessRateLimiter.mode(), blacklist, keyAttr);
 			// 记录错误日志：检测到超频次拦截事件
 			log.error("【RateLimitPPSNode】:限流-超频次拦截：{}", keyAttr);
 			// 设置限流决策标志为true，表示需要进行限流处理

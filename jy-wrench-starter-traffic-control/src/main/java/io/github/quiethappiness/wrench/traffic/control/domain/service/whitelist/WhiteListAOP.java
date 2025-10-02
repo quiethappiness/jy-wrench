@@ -1,49 +1,63 @@
 
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist;
 
+import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
+import io.github.quiethappiness.wrench.traffic.control.config.TrafficControlProperties;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.RateLimiterAOP;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.IWhiteListAOP;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Aspect
 @Component
-@ConditionalOnBean(RateLimiterAOP.class)
+// @ConditionalOnBean(RateLimiterAOP.class)
 @Order(1)
 @Slf4j
-public class WhiteListAOP extends AbstractWhiteListAop
+@RequiredArgsConstructor
+public class WhiteListAOP implements IWhiteListAOP
 {
+	private final TrafficControlProperties trafficControlProperties;
+	
+	private final WhiteListStrategyFactory whiteListStrategyFactory;
+	
+	private WhiteListResultEntity doCheck(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
+	{
+		StrategyHandler<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity> strategyHandler = whiteListStrategyFactory.strategyHandler();
+		return strategyHandler.apply(new WhiteListParameterEntity(whiteListChecker, jp, trafficControlProperties), new WhiteListStrategyFactory.DynamicContext());
+	}
+	
 	@Around(value = "whiteListCheckerWithRateLimiter() &&@annotation(whiteListChecker)  ", argNames = "jp,whiteListChecker")
 	public Object doWhitelistCheck(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
 	{
-		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		if (attributes == null)
+		// 解析key表达式获取userId
+		WhiteListResultEntity resultEntity = doCheck(jp, whiteListChecker);
+		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
+		if (inWhitListResult == null || inWhitListResult.userId == null)
 		{
-			log.error("Request attributes not found, cannot proceed with whitelist check");
 			return jp.proceed();
 		}
-		// 解析key表达式获取userId
-		Result result = doCheck(jp, attributes, whiteListChecker);
-		if (result.isInWhitelist)
+		if (inWhitListResult.isInWhitelist)
 		{
-			log.info("User {} is in whitelist, proceeding normally without rate limiting", result.userId);
+			log.info("User {} is in whitelist, proceeding normally without rate limiting", inWhitListResult.userId);
 			// 用户在白名单中，直接放行，不触发限流
 		}
 		else
 		{
-			log.info("User {} is not in whitelist, will check rate limit", result.userId);
+			log.info("User {} is not in whitelist, will check rate limit", inWhitListResult.userId);
 			// 用户不在白名单中，添加一个标记然后继续执行
 			// 这里我们使用ThreadLocal来传递状态
 		}
-		TrafficControlContext.setInWhiteList(result.isInWhitelist);
+		TrafficControlContext.setInWhiteList(inWhitListResult.isInWhitelist);
 		try
 		{
 			return jp.proceed();
@@ -57,23 +71,22 @@ public class WhiteListAOP extends AbstractWhiteListAop
 	@Around(value = "whiteListCheckerWithoutRateLimiter() && @annotation(whiteListChecker) ", argNames = "jp,whiteListChecker")
 	public Object doWhitelistCheckWithoutRateLimiter(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
 	{
-		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		if (attributes == null)
+		// 解析key表达式获取userId
+		WhiteListResultEntity resultEntity = doCheck(jp, whiteListChecker);
+		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
+		if (inWhitListResult == null || inWhitListResult.userId == null)
 		{
-			log.error("Request attributes not found, cannot proceed with whitelist check");
 			return jp.proceed();
 		}
-		// 解析key表达式获取userId
-		Result result = doCheck(jp, attributes, whiteListChecker);
-		if (result.isInWhitelist)
+		if (inWhitListResult.isInWhitelist)
 		{
-			log.info("User {} is in whitelist, proceeding normally", result.userId);
+			log.info("User {} is in whitelist, proceeding normally", inWhitListResult.userId);
 			// 用户在白名单中，直接放行
 			return jp.proceed();
 		}
 		else
 		{
-			log.info("User {} is not in whitelist, access denied", result.userId);
+			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId);
 			// 用户不在白名单中，抛出异常或返回错误
 			throw new IllegalAccessException("User not in whitelist");
 		}

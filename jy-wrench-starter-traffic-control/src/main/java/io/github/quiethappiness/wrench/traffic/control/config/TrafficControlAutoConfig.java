@@ -3,6 +3,7 @@ package io.github.quiethappiness.wrench.traffic.control.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * TrafficControlAutoConfig
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 @EnableConfigurationProperties(TrafficControlProperties.class)
+@EnableAspectJAutoProxy
+// @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control")
 public class TrafficControlAutoConfig
 {
 	// @Bean
@@ -21,4 +24,7 @@ public class TrafficControlAutoConfig
 	// 	log.info("RateLimiterAOP init...");
 	// 	return new RateLimiterAOP();
 	// }
+	{
+		log.info("TrafficControlAutoConfig init...");
+	}
 }

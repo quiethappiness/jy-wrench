@@ -5,21 +5,19 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
-
 @Slf4j
 @Component("RateLimitRootNode")
+@RequiredArgsConstructor
 public class RateLimitRootNode extends AbstractRateLimiterSupport
 {
-	@Resource
-	private RateLimitSwitchNode RateLimitSwitchNode;
+	private final RateLimitSwitchNode RateLimitSwitchNode;
 	
-	@Resource
-	private RateLimitEndNode RateLimitEndNode;
+	private final RateLimitEndNode RateLimitEndNode;
 	
 	@Override
 	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable

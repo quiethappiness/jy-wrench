@@ -1,7 +1,10 @@
 package io.github.quiethappiness.wrench.traffic.control.config;
 
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -18,6 +21,9 @@ public class TrafficControlProperties
 	private Rule[] rules;
 	
 	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
 	public static class Rule
 	{
 		/**

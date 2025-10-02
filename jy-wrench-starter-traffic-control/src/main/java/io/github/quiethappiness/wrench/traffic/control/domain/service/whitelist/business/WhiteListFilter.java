@@ -25,8 +25,9 @@ public class WhiteListFilter extends OncePerRequestFilter
 		// 这里会同时检测yml/properties文件和redis中的配置
 		// 获取IP地址
 		String ip = request.getRemoteAddr();
+		String requestURI = request.getRequestURI();
 		// 检查IP是否在白名单中
-		if (!whitelistService.checkWhitelistId(WhiteListType.IP, ip))
+		if (!whitelistService.checkWhitelistId(requestURI, WhiteListType.IP, ip))
 		{
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}
