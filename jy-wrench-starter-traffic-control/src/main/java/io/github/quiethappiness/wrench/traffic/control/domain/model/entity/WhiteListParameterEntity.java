@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.model.entity;
 
-import io.github.quiethappiness.wrench.traffic.control.config.TrafficControlProperties;
+import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -12,5 +12,5 @@ public class WhiteListParameterEntity
 {
 	private final WhiteListChecker whiteListChecker;
 	private final ProceedingJoinPoint jp;
-	private final TrafficControlProperties trafficControlProperties;
+	private final WhiteListProperties whiteListProperties;
 }

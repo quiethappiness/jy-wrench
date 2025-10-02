@@ -38,5 +38,10 @@ public @interface WhiteListChecker
 	 * 白名单类型
 	 */
 	WhiteListType type() default WhiteListType.USER_ID;
+	
+	/**
+	 * 降级方法，仅在只使用白名单服务时并且失败时触发
+	 */
+	String fallbackMethod();
 }
 

@@ -22,28 +22,31 @@ jy:
                 refresh-interval: 30000
                 clean-invalid-tasks-cron: "0 0/5 * * * ?"
         traffic:
-            enabled: true
-            rules:
-                -   uri: /api/v1/index/**
-                    limit: 1000
-                    timeUnit: HOURS
-                    whiteList:
-                        USER_ID:
-                            - "1001"
-                            - "1002"
-                            - "admin"
-                        IP:
-                            - "192.168.1.100"
-                            - "10.0.0.0/8"
-                -   uri: /api/order/**
-                    limit: 100
-                    timeUnit: MINUTES
-                    whiteList:
-                        USER_ID:
-                            - "vip-user"
-                        PHONE:
-                            - "13800138000"
-                            - "13900139000"
+            ratemiter:
+                enabled: true
+            whitelist:
+                enabled: true
+                rules:
+                    -   uri: /api/v1/index/**
+                        limit: 1000
+                        timeUnit: HOURS
+                        whiteList:
+                            USER_ID:
+                                - "1001"
+                                - "1002"
+                                - "admin"
+                            IP:
+                                - "192.168.1.100"
+                                - "10.0.0.0/8"
+                    -   uri: /api/order/**
+                        limit: 100
+                        timeUnit: MINUTES
+                        whiteList:
+                            USER_ID:
+                                - "vip-user"
+                            PHONE:
+                                - "13800138000"
+                                - "13900139000"
 
 # 日志
 logging:

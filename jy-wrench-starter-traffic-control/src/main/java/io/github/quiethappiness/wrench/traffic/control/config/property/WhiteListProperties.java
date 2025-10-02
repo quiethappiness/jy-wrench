@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.traffic.control.config;
+package io.github.quiethappiness.wrench.traffic.control.config.property;
 
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@ConditionalOnProperty(name = "jy.wrench.traffic.enabled", havingValue = "true")
-@ConfigurationProperties(prefix = "jy.wrench.traffic", ignoreInvalidFields = true)
+@ConditionalOnProperty(name = "jy.wrench.traffic.whitelist.enabled", havingValue = "true", matchIfMissing = false)
+@ConfigurationProperties(prefix = "jy.wrench.traffic.whitelist", ignoreInvalidFields = true)
 @Data
-public class TrafficControlProperties
+public class WhiteListProperties
 {
 	private boolean enabled = true;
 	private Rule[] rules;

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.node;
 
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.config.TrafficControlProperties;
+import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
@@ -24,14 +24,14 @@ public class WhiteListLocalCheckNode extends AbstractWhiteListSupport
 	@Override
 	protected WhiteListResultEntity doApply(WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
-		final TrafficControlProperties trafficControlProperties = requestParameter.getTrafficControlProperties();
+		final WhiteListProperties whiteListProperties = requestParameter.getWhiteListProperties();
 		final AttrValueResult attrValue = dynamicContext.getAttrValueResult();
 		final String uri = dynamicContext.getUri();
 		log.warn("开始检查本地白名单 id: {}", attrValue.userId);
-		log.warn(Arrays.toString(trafficControlProperties.getRules()));
+		log.warn(Arrays.toString(whiteListProperties.getRules()));
 		final boolean[] isInWhitelist = {false};
 		final String finalUserId = attrValue.userId;
-		Arrays.stream(trafficControlProperties.getRules())
+		Arrays.stream(whiteListProperties.getRules())
 			.filter(localRule ->
 			{
 				// 添加null检查

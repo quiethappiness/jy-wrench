@@ -35,14 +35,14 @@ public class IndexController
 	 * curl --request GET \
 	 * --url 'http://127.0.0.1:9191/api/v1/index/draw?userId=xiaofuge'
 	 */
-	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID)
+	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID,fallbackMethod = "drawErrorRateLimiter")
 	@GetMapping(value = "whitelist")
 	public String WHITELIST(String userId)
 	{
 		return "test";
 	}
 	
-	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID)
+	@WhiteListChecker(key = "#{userId}", type = WhiteListType.USER_ID,fallbackMethod = "drawErrorRateLimiter")
 	@AccessRateLimiter(key = "userId", mode = TrafficMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
 	@GetMapping(value = "PPS_BLACKLIST")
 	public String PPS_BLACKLIST(String userId)

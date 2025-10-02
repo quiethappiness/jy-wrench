@@ -1,7 +1,7 @@
 
 package io.github.quiethappiness.wrench.traffic.control.types.annotations.enable;
 
-import io.github.quiethappiness.wrench.traffic.control.configuration.RateLimiterConfiguration;
+import io.github.quiethappiness.wrench.traffic.control.config.configuration.RateLimiterConfiguration;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

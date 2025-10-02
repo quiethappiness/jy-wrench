@@ -1,16 +1,13 @@
 
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist;
 
-import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.config.TrafficControlProperties;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
+import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.IWhiteListAOP;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.WhiteListChecker;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,17 +20,11 @@ import org.springframework.stereotype.Component;
 // @ConditionalOnBean(RateLimiterAOP.class)
 @Order(1)
 @Slf4j
-@RequiredArgsConstructor
-public class WhiteListAOP implements IWhiteListAOP
+public class WhiteListAOP extends AbstractWhiteListAOP
 {
-	private final TrafficControlProperties trafficControlProperties;
-	
-	private final WhiteListStrategyFactory whiteListStrategyFactory;
-	
-	private WhiteListResultEntity doCheck(ProceedingJoinPoint jp, WhiteListChecker whiteListChecker) throws Throwable
+	public WhiteListAOP(WhiteListProperties whiteListProperties, WhiteListStrategyFactory whiteListStrategyFactory)
 	{
-		StrategyHandler<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity> strategyHandler = whiteListStrategyFactory.strategyHandler();
-		return strategyHandler.apply(new WhiteListParameterEntity(whiteListChecker, jp, trafficControlProperties), new WhiteListStrategyFactory.DynamicContext());
+		super(whiteListProperties, whiteListStrategyFactory);
 	}
 	
 	@Around(value = "whiteListCheckerWithRateLimiter() &&@annotation(whiteListChecker)  ", argNames = "jp,whiteListChecker")
@@ -88,7 +79,8 @@ public class WhiteListAOP implements IWhiteListAOP
 		{
 			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId);
 			// 用户不在白名单中，抛出异常或返回错误
-			throw new IllegalAccessException("User not in whitelist");
+			log.error("User not in whitelist");
+			return IRateLimiterAOP.fallbackMethodResult(jp, whiteListChecker.fallbackMethod());
 		}
 	}
 }

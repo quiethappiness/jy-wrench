@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.trigger;
 
-import io.github.quiethappiness.wrench.traffic.control.config.TrafficControlProperties;
+import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import org.springframework.stereotype.Component;
@@ -20,10 +20,10 @@ public class UserIdDataProvider implements WhiteListDataProvider
 	}
 	
 	@Override
-	public List<TrafficControlProperties.Rule> getWhitelistData()
+	public List<WhiteListProperties.Rule> getWhitelistData()
 	{
-		ArrayList<TrafficControlProperties.Rule> rules = new ArrayList<>();
-		TrafficControlProperties.Rule rule = new TrafficControlProperties.Rule();
+		ArrayList<WhiteListProperties.Rule> rules = new ArrayList<>();
+		WhiteListProperties.Rule rule = new WhiteListProperties.Rule();
 		rule.setUri("/api/v1/index/whitelist");
 		rule.setLimit(100);
 		rule.setTimeUnit(TimeUnit.SECONDS);
