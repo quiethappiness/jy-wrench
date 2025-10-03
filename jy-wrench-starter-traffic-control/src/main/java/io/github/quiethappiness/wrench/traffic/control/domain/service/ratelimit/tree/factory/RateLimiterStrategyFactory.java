@@ -1,7 +1,5 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory;
 
-import com.google.common.cache.Cache;
-import com.google.common.util.concurrent.RateLimiter;
 import io.github.quiethappiness.wrench.design.framework.tree.AbstractStrategyFactory;
 import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
@@ -32,13 +30,8 @@ public class RateLimiterStrategyFactory extends AbstractStrategyFactory<RateLimi
 	{
 		private boolean switchOpen;
 		private boolean decideLimit;
-		private ProceedingJoinPoint jp;
-		private TcRateLimiter tcRateLimiter;
+
 		private String keyAttr;
-		// 个人限频记录1分钟
-		private Cache<String, RateLimiter> loginRecord;
-		
-		// 个人限频黑名单24h - 分布式业务场景，可以记录到 Redis 中
-		private Cache<String, Long> blacklist;
+
 	}
 }

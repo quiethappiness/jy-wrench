@@ -56,11 +56,11 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 		// 记录日志：开始执行PPS校验逻辑
 		log.info("【RateLimitPPSNode】：PPS 校验...");
 		// 获取黑名单缓存实例，用于记录超频请求
-		Cache<String, Long> blacklist = dynamicContext.getBlacklist();
+		final Cache<String, Long> blacklist = requestParameter.getBlacklist();
 		// 获取登录记录缓存实例，存储各请求的限流器
-		Cache<String, RateLimiter> loginRecord = dynamicContext.getLoginRecord();
+		final Cache<String, RateLimiter> loginRecord = requestParameter.getLoginRecord();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
 		double permitsPerSecond = tcRateLimiter.permitsPerSecond();
 		long warmupPeriod = tcRateLimiter.warmupPeriod();
 		TimeUnit unit = tcRateLimiter.unit();

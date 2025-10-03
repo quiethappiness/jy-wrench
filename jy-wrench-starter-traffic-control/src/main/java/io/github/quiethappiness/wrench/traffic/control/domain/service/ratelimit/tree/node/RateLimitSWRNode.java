@@ -27,9 +27,9 @@ public class RateLimitSWRNode extends AbstractRateLimiterSupport
 		// 记录日志：开始执行PPS校验逻辑
 		log.info("【RateLimitSWRNode】：SWR 校验...");
 		// 获取黑名单缓存实例，用于记录超频请求
-		Cache<String, Long> blacklist = dynamicContext.getBlacklist();
+		final Cache<String, Long> blacklist = requestParameter.getBlacklist();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
 		String keyAttr = dynamicContext.getKeyAttr();
 		long windowSizeMs = tcRateLimiter.windowSizeMs();
 		long maxRequests = tcRateLimiter.maxRequests();

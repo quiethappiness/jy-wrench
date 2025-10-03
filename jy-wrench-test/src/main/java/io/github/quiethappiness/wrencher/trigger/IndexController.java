@@ -1,11 +1,12 @@
 package io.github.quiethappiness.wrencher.trigger;
 
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
+import io.github.quiethappiness.method.extention.type.annotations.MeMethodExtension;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
+import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +32,35 @@ public class IndexController
 	
 	@Resource
 	private ILuaScriptManager luaScriptManager;
-	
+	@MeMethodExtension(beforeMethod = "before", beforeReturnJson = "{}", afterReturnMethod = "afterReturn", afterThrowingMethod = "afterThrowing", afterMethod = "after")
+	@GetMapping(value = "method")
+	public String methodExtension(String userId) throws InterruptedException
+	{
+		// Thread.sleep(2000);
+		throw new InterruptedException("test");
+		// return "test";
+	}
+	public String before(String userId) throws InterruptedException
+	{
+		log.info("before");
+		// throw new InterruptedException("test");
+		return "before";
+	}
+	public String after(String userId) throws InterruptedException
+	{
+		log.info("after");
+		return "after";
+	}
+	public String afterReturn(String userId) throws InterruptedException
+	{
+		log.info("afterReturn");
+		return "afterReturn";
+	}
+	public String afterThrowing(String userId) throws InterruptedException
+	{
+		log.info("afterThrowing");
+		return "afterThrowing";
+	}
 	@TcHystrix(timeout = 100,returnJson = "", fallbackMethod = "drawHystrix")
 	@GetMapping(value = "hystrix")
 	public String HYSTRIX(String userId) throws InterruptedException
@@ -52,28 +81,28 @@ public class IndexController
 	}
 	
 	@TcWhiteList(key = "#{userId}", type = WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
-	@TcRateLimiter(key = "userId", mode = TrafficMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
+	@TcRateLimiter(key = "userId", mode = RateLimiterMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
 	@GetMapping(value = "PPS_BLACKLIST")
 	public String PPS_BLACKLIST(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "userId", mode = TrafficMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
+	@TcRateLimiter(key = "userId", mode = RateLimiterMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
 	@GetMapping(value = "PPS")
 	public String PPS(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "userId", mode = TrafficMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
+	@TcRateLimiter(key = "userId", mode = RateLimiterMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
 	@GetMapping(value = "SWR")
 	public String SWR(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "userId", mode = TrafficMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
+	@TcRateLimiter(key = "userId", mode = RateLimiterMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
 	@GetMapping(value = "SWR_BLACKLIST")
 	public String SWR_BLACKLIST(String userId)
 	{

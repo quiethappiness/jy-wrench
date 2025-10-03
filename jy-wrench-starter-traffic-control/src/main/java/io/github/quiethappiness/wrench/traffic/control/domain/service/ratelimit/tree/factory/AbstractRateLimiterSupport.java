@@ -78,26 +78,26 @@ public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStra
 	
 	/**
 	 * 根据名称获取方法，该方法同时兼顾继承类获取父类的属性
-	 * @param item
+	 * @param bean
 	 * 	对象
 	 * @param name
 	 * 	属性名
 	 * @return 该属性对应方法
 	 * @author tang
 	 */
-	public Field getFieldByName(Object item, String name)
+	public Field getFieldByName(Object bean, String name)
 	{
 		try
 		{
 			Field field;
 			try
 			{
-				field = item.getClass()
+				field = bean.getClass()
 					.getDeclaredField(name);
 			}
 			catch (NoSuchFieldException e)
 			{
-				field = item.getClass()
+				field = bean.getClass()
 					.getSuperclass()
 					.getDeclaredField(name);
 			}

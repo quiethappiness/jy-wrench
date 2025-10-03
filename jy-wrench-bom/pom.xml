@@ -107,6 +107,13 @@
 				<artifactId>jy-wrench-starter-infrastructure-util</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
+			
+			<!-- jy wrench method extention -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-method-extention</artifactId>
+				<version>1.2.2-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

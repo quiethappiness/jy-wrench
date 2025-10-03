@@ -7,7 +7,7 @@ import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateL
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
+import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -49,11 +49,11 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 		// 记录日志：开始处理黑名单拦截逻辑
 		log.info("【RateLimitBlackListNode】:黑名单拦截...");
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		TcRateLimiter tcRateLimiter = dynamicContext.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
 		// 获取当前请求对应的属性值（用于作为黑名单判断的KEY）
 		String keyAttr = dynamicContext.getKeyAttr();
 		// 获取黑名单缓存实例，用于查询访问次数统计
-		Cache<String, Long> blacklist = dynamicContext.getBlacklist();
+		final Cache<String, Long> blacklist = requestParameter.getBlacklist();
 		// 条件判断：当满足以下所有条件时执行黑名单拦截逻辑
 		// 1. 黑名单功能已启用
 		// 2. 黑名单阈值大于0
@@ -76,9 +76,9 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 		return router(requestParameter, dynamicContext);
 	}
 	
-	public static void blackListCheck(TrafficMode limitMode, Cache<String, Long> blacklist, String keyAttr)
+	public static void blackListCheck(RateLimiterMode limitMode, Cache<String, Long> blacklist, String keyAttr)
 	{
-		if (limitMode.equals(TrafficMode.PPS_BLACKLIST)|| limitMode.equals(TrafficMode.SWR_BLACKLIST))
+		if (limitMode.equals(RateLimiterMode.PPS_BLACKLIST)|| limitMode.equals(RateLimiterMode.SWR_BLACKLIST))
 		{
 			log.warn("【RateLimitBlackListNode】:正在加入黑名单，黑名单KEY为：{}", keyAttr);
 			// 查询当前key在黑名单中的计数
@@ -98,19 +98,19 @@ public class RateLimitBlackListNode extends AbstractRateLimiterSupport
 	@Override
 	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		TcRateLimiter interceptor = dynamicContext.getTcRateLimiter();
-		TrafficMode mode = interceptor.mode();
+		final TcRateLimiter interceptor = requestParameter.getTcRateLimiter();
+		RateLimiterMode mode = interceptor.mode();
 		// 决定限流
 		if (dynamicContext.isDecideLimit())
 		{
 			return RateLimitEndNode;
 		}
-		else if (mode.equals(TrafficMode.PPS_BLACKLIST))
+		else if (mode.equals(RateLimiterMode.PPS_BLACKLIST))
 		{
 			log.warn("【RateLimitSwitchNode】:限流-进入PPS节点");
 			return RateLimitPPSNode;
 		}
-		else if (mode.equals(TrafficMode.SWR_BLACKLIST))
+		else if (mode.equals(RateLimiterMode.SWR_BLACKLIST))
 		{
 			log.warn("【RateLimitSwitchNode】:限流-进入SWR节点");
 			return RateLimitSWRNode;

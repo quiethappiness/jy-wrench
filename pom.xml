@@ -17,6 +17,7 @@
 		<module>jy-wrench-starter-task-job</module>
 		<module>jy-wrench-starter-lua-manager</module>
 		<module>jy-wrench-starter-infrastructure-util</module>
+		<module>jy-wrench-starter-method-extention</module>
 	</modules>
 	<name>jy-wrench</name>
 	<properties>
@@ -31,7 +32,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.12</version>
+		<version>2.7.18</version>
 		<relativePath/>
 	</parent>
 	<licenses>

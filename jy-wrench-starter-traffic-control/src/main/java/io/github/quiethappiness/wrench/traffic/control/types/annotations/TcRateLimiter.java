@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.types.annotations;
 
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.TrafficMode;
+import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
@@ -26,7 +26,7 @@ public @interface TcRateLimiter
 	/**
 	 * 限流模式
 	 */
-	TrafficMode mode() default TrafficMode.PPS_BLACKLIST;
+	RateLimiterMode mode() default RateLimiterMode.PPS_BLACKLIST;
 	
 	/**
 	 * 拦截后的执行方法
