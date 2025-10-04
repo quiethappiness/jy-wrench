@@ -3,11 +3,11 @@ package io.github.quiethappiness.wrencher.trigger;
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.method.extention.type.annotations.MeMethodExtension;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
-import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 @RestController()
 @CrossOrigin("*")
 @RequestMapping("/api/v1/index/")
+// @EnableMethodExtension
 public class IndexController
 {
 	@Resource
@@ -37,8 +38,8 @@ public class IndexController
 	public String methodExtension(String userId) throws InterruptedException
 	{
 		// Thread.sleep(2000);
-		throw new InterruptedException("test");
-		// return "test";
+		// throw new InterruptedException("test");
+		return "test";
 	}
 	public String before(String userId) throws InterruptedException
 	{

@@ -41,7 +41,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	... 17 common frames omitted
 Caused by: java.lang.NullPointerException: Cannot invoke "org.redisson.api.map.WriteMode.toString()" because the return value of "org.redisson.api.options.LocalCachedMapParams.getWriteMode()" is null
 	at org.redisson.Redisson.getLocalCachedMap(Redisson.java:376)
-	at io.github.quiethappiness.lua.manager.domain.service.redis.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
+	at io.github.quiethappiness.lua.manager.domain.service.base.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$0(WhiteListService.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$1(WhiteListService.java:34)
@@ -109,7 +109,7 @@ Caused by: org.springframework.beans.factory.BeanCreationException: Error creati
 	... 17 common frames omitted
 Caused by: java.lang.NullPointerException: Cannot invoke "org.redisson.api.map.WriteMode.toString()" because the return value of "org.redisson.api.options.LocalCachedMapParams.getWriteMode()" is null
 	at org.redisson.Redisson.getLocalCachedMap(Redisson.java:376)
-	at io.github.quiethappiness.lua.manager.domain.service.redis.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
+	at io.github.quiethappiness.lua.manager.domain.service.base.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$0(WhiteListService.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$1(WhiteListService.java:34)
@@ -179,7 +179,7 @@ Caused by: java.lang.IllegalArgumentException: writerRetryAttempts must be bigge
 	at org.redisson.api.MapOptions.writerRetryAttempts(MapOptions.java:187)
 	at org.redisson.api.LocalCachedMapOptions.writerRetryAttempts(LocalCachedMapOptions.java:471)
 	at org.redisson.Redisson.getLocalCachedMap(Redisson.java:379)
-	at io.github.quiethappiness.lua.manager.domain.service.redis.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
+	at io.github.quiethappiness.lua.manager.domain.service.base.impl.RedissonService.getLocalCachedMap(RedissonService.java:210)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$0(WhiteListService.java:41)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business.WhiteListService.lambda$initWhitelist$1(WhiteListService.java:34)

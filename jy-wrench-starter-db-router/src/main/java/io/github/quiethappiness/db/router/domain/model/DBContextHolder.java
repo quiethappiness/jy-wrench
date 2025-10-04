@@ -1,0 +1,36 @@
+package io.github.quiethappiness.db.router.domain.model;
+
+/**
+ * 使用了两个本地线程类记录分库、分表的路由结果。
+ */
+public class DBContextHolder
+{
+	private static final ThreadLocal<String> dbKey = new ThreadLocal<String>();
+	private static final ThreadLocal<String> tbKey = new ThreadLocal<String>();
+	
+	public static void setDBKey(String dbKey)
+	{
+		DBContextHolder.dbKey.set(dbKey);
+	}
+	
+	public static String getDBKey()
+	{
+		return dbKey.get();
+	}
+	
+	public static void setTBKey(String tbKey)
+	{
+		DBContextHolder.tbKey.set(tbKey);
+	}
+	
+	public static String getTBKey()
+	{
+		return tbKey.get();
+	}
+	
+	public static void clear()
+	{
+		dbKey.remove();
+		tbKey.remove();
+	}
+}

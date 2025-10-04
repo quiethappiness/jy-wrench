@@ -1,6 +1,6 @@
-package io.github.quiethappiness.lua.manager.domain.service.redis.impl;
+package io.github.quiethappiness.lua.manager.domain.service.base.impl;
 
-import io.github.quiethappiness.lua.manager.domain.service.redis.inter.*;
+import io.github.quiethappiness.lua.manager.domain.service.base.inter.*;
 import org.redisson.api.RedissonClient;
 
 /**

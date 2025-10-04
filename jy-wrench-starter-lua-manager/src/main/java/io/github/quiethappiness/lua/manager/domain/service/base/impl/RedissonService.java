@@ -1,4 +1,4 @@
-package io.github.quiethappiness.lua.manager.domain.service.redis.impl;
+package io.github.quiethappiness.lua.manager.domain.service.base.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.*;

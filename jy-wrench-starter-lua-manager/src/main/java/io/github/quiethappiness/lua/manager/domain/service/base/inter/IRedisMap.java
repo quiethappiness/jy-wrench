@@ -1,4 +1,4 @@
-package io.github.quiethappiness.lua.manager.domain.service.redis.inter;
+package io.github.quiethappiness.lua.manager.domain.service.base.inter;
 import org.redisson.api.options.LocalCachedMapOptions;
 import org.redisson.api.*;
 

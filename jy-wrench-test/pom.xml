@@ -87,6 +87,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.springframework.data</groupId> -->
+		<!-- 	<artifactId>spring-data-elasticsearch</artifactId> -->
+		<!-- 	<version>5.5.4</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>org.elasticsearch.plugin</groupId> -->
+		<!-- 	<artifactId>x-pack-sql-jdbc</artifactId> -->
+		<!-- 	<version>7.17.28</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 	
 	<build>

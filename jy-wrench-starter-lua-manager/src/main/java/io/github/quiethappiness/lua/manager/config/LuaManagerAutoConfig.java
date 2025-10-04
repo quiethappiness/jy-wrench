@@ -3,7 +3,7 @@ package io.github.quiethappiness.lua.manager.config;
 import io.github.quiethappiness.lua.manager.domain.service.aop.LuaScriptServiceAop;
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.lua.manager.domain.service.manager.LuaScriptManagerImpl;
-import io.github.quiethappiness.lua.manager.domain.service.redis.impl.IRedisService;
+import io.github.quiethappiness.lua.manager.domain.service.base.impl.IRedisService;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
