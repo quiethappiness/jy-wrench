@@ -1,13 +1,11 @@
 package io.github.quiethappiness.wrench.traffic.control.config;
 
-import io.github.quiethappiness.wrench.traffic.control.config.property.HystrixProperties;
-import io.github.quiethappiness.wrench.traffic.control.config.property.RateLimiterProperties;
-import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
+import io.github.quiethappiness.wrench.traffic.control.config.configuration.HystrixConfiguration;
+import io.github.quiethappiness.wrench.traffic.control.config.configuration.RateLimiterConfiguration;
+import io.github.quiethappiness.wrench.traffic.control.config.configuration.WhiteListConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 
 /**
  * TrafficControlAutoConfig
@@ -17,11 +15,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2025/9/12 15:41
  */
 @Configuration
-@Slf4j
-@EnableConfigurationProperties({RateLimiterProperties.class, WhiteListProperties.class, HystrixProperties.class})
-@ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control.config.configuration")
 @EnableAspectJAutoProxy
-// @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control")
+// @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control.config.configuration")
+@Import({RateLimiterConfiguration.class, WhiteListConfiguration.class, HystrixConfiguration.class})
 public class TrafficControlAutoConfig
 {
 	// @Bean
@@ -29,7 +25,4 @@ public class TrafficControlAutoConfig
 	// 	log.info("RateLimiterAOP init...");
 	// 	return new RateLimiterAOP();
 	// }
-	{
-		log.info("TrafficControlAutoConfig init...");
-	}
 }

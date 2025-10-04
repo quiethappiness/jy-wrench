@@ -61,9 +61,9 @@
 25-09-13.23:25:48.963 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'persistenceExceptionTranslationPostProcessor' via factory method to bean named 'environment'
 25-09-13.23:25:48.976 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
 25-09-13.23:25:48.980 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'errorPageRegistrarBeanPostProcessor'
-25-09-13.23:25:48.984 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig'
+25-09-13.23:25:48.984 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor'
 25-09-13.23:25:49.005 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.AccessRateLimiter) throws java.lang.Throwable
-25-09-13.23:25:49.035 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig$$EnhancerBySpringCGLIB$$3293b756] - unable to determine constructor/method parameter names
+25-09-13.23:25:49.035 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor$$EnhancerBySpringCGLIB$$3293b756] - unable to determine constructor/method parameter names
 25-09-13.23:25:49.035 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dynamicConfigCenterService'
 25-09-13.23:25:49.035 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig'
 25-09-13.23:25:49.043 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig' of type [io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig$$EnhancerBySpringCGLIB$$75adf8b9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
@@ -178,7 +178,7 @@
 25-09-13.23:25:50.884 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterService' via factory method to bean named 'jyWrenchRedissonClient'
 25-09-13.23:25:50.884 [main            ] INFO  DynamicConfigCenterRegisterAutoConfig - jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。
 25-09-13.23:25:50.891 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dynamicConfigCenterService' of type [io.github.quiethappiness.wrench.dynamic.config.center.domain.service.DynamicConfigCenterServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-25-09-13.23:25:50.891 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig' via constructor to bean named 'dynamicConfigCenterService'
+25-09-13.23:25:50.891 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor' via constructor to bean named 'dynamicConfigCenterService'
 25-09-13.23:25:50.899 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'healthEndpointGroupsBeanPostProcessor'
 25-09-13.23:25:50.909 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'meterRegistryPostProcessor'
 25-09-13.23:25:50.911 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'meterRegistryPostProcessor' via factory method to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@e6516e'
@@ -2313,7 +2313,7 @@ Unconditional classes:
 
     org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration
 
-    io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig
+    io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor
 
     org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration
 
@@ -2516,9 +2516,9 @@ Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bea
 25-09-13.23:29:10.185 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'persistenceExceptionTranslationPostProcessor' via factory method to bean named 'environment'
 25-09-13.23:29:10.198 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'webServerFactoryCustomizerBeanPostProcessor'
 25-09-13.23:29:10.204 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'errorPageRegistrarBeanPostProcessor'
-25-09-13.23:29:10.207 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig'
+25-09-13.23:29:10.207 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor'
 25-09-13.23:29:10.232 [main            ] DEBUG ReflectiveAspectJAdvisorFactory - Found AspectJ method: public java.lang.Object io.github.quiethappiness.wrench.rate.limiter.domain.service.ratelimit.RateLimiterAOP.doRouter(org.aspectj.lang.ProceedingJoinPoint,io.github.quiethappiness.wrench.rate.limiter.types.annotations.AccessRateLimiter) throws java.lang.Throwable
-25-09-13.23:29:10.257 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig$$EnhancerBySpringCGLIB$$c9f1039f] - unable to determine constructor/method parameter names
+25-09-13.23:29:10.257 [main            ] DEBUG LocalVariableTableParameterNameDiscoverer - Cannot find '.class' file for class [class io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor$$EnhancerBySpringCGLIB$$c9f1039f] - unable to determine constructor/method parameter names
 25-09-13.23:29:10.258 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dynamicConfigCenterService'
 25-09-13.23:29:10.258 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig'
 25-09-13.23:29:10.264 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig' of type [io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig$$EnhancerBySpringCGLIB$$d0b4502] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
@@ -2633,7 +2633,7 @@ Caused by: org.springframework.beans.factory.BeanNotOfRequiredTypeException: Bea
 25-09-13.23:29:11.984 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dynamicConfigCenterService' via factory method to bean named 'jyWrenchRedissonClient'
 25-09-13.23:29:11.985 [main            ] INFO  DynamicConfigCenterRegisterAutoConfig - jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。
 25-09-13.23:29:11.990 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dynamicConfigCenterService' of type [io.github.quiethappiness.wrench.dynamic.config.center.domain.service.DynamicConfigCenterServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-25-09-13.23:29:11.991 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig' via constructor to bean named 'dynamicConfigCenterService'
+25-09-13.23:29:11.991 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor' via constructor to bean named 'dynamicConfigCenterService'
 25-09-13.23:29:11.998 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'healthEndpointGroupsBeanPostProcessor'
 25-09-13.23:29:12.003 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'meterRegistryPostProcessor'
 25-09-13.23:29:12.004 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'meterRegistryPostProcessor' via factory method to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@e6516e'
@@ -5461,7 +5461,7 @@ Unconditional classes:
 
     org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration
 
-    io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoConfig
+    io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor
 
     org.springframework.boot.autoconfigure.context.LifecycleAutoConfiguration
 

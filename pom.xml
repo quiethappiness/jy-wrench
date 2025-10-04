@@ -22,8 +22,8 @@
 	</modules>
 	<name>jy-wrench</name>
 	<properties>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>

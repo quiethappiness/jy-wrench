@@ -1,4 +1,4 @@
-package io.github.quiethappiness.method.extention.config.condition;
+package io.github.quiethappiness.wrench.traffic.control.config.condition.ratelimiter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
@@ -8,9 +8,9 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 // 条件1：检查YAML配置
 @Slf4j
-public class OnMePropertyCondition extends SpringBootCondition
+public class OnRateLimiterPropertyCondition extends SpringBootCondition
 {
-	String propertyName = "jy.wrench.methode.enabled";
+	String propertyName = "jy.wrench.traffic.ratemiter.enabled";
 	
 	@Override
 	public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata)
@@ -20,9 +20,9 @@ public class OnMePropertyCondition extends SpringBootCondition
 			.getProperty(propertyName, Boolean.class, false);
 		if (enabled)
 		{
-			// log.info("通过YAML配置启用了MethodExtension功能");
-			return ConditionOutcome.match("通过YAML配置启用了MethodExtension功能");
+			// log.info("通过YAML配置启用了 ratemiter 功能");
+			return ConditionOutcome.match("通过YAML配置启用了 ratemiter 功能");
 		}
-		return ConditionOutcome.noMatch("未在YAML配置中启用MethodExtension功能");
+		return ConditionOutcome.noMatch("未在YAML配置中启用 ratemiter 功能");
 	}
 }

@@ -27,7 +27,7 @@ jy:
                 refresh-interval: 30000
                 clean-invalid-tasks-cron: "0 0/5 * * * ?"
         methode:
-            enabled: false
+            enabled: true
         traffic:
             hystrix:
                 enabled: true

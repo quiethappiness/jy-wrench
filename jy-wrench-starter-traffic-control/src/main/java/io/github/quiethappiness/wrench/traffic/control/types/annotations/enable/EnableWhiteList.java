@@ -1,9 +1,6 @@
 
 package io.github.quiethappiness.wrench.traffic.control.types.annotations.enable;
 
-import io.github.quiethappiness.wrench.traffic.control.config.configuration.WhiteListConfiguration;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -19,7 +16,6 @@ import java.lang.annotation.Target;
 // @Import(WhiteListImportSelector.class)
 @Retention(RetentionPolicy.RUNTIME) // 注解在运行时保留，这是必须的[2,4](@ref)
 @Target(ElementType.TYPE) // 注解用于类、接口或枚举声明[4](@ref)
-@Import(WhiteListConfiguration.class)
 public @interface EnableWhiteList
 {
 }

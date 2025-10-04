@@ -35,6 +35,7 @@ public class DynamicConfigCenterServiceImpl implements IDynamicConfigCenterServi
 	{
 		this.properties = dynamicConfigCenterAutoProperties;
 		this.redissonClient = jyWrenchRedissonClient;
+		log.info("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
 	}
 	
 	@Override
