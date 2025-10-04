@@ -2,7 +2,7 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit
 
 import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.lua.manager.types.annotations.LuaScriptPath;
-import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RScript;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class SlidingWindowRateLimiter
 	public static final String PREFIX_RATE_LIMIT_SUFFIX = MAO_HAO + RATE_LIMIT + MAO_HAO;
 	private final ILuaScriptManager scriptManager;
 	
-	private final DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties;
+	private final DCCAutoProperties DCCAutoProperties;
 	
 	/**
 	 * 尝试获取一个许可
@@ -52,6 +52,6 @@ public class SlidingWindowRateLimiter
 	
 	private String spliceRateLimiterKey(String key)
 	{
-		return dynamicConfigCenterAutoProperties.getSystem() + PREFIX_RATE_LIMIT_SUFFIX + getClass().getSimpleName() + MAO_HAO + key;
+		return DCCAutoProperties.getSystem() + PREFIX_RATE_LIMIT_SUFFIX + getClass().getSimpleName() + MAO_HAO + key;
 	}
 }

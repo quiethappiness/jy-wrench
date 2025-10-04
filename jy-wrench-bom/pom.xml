@@ -114,6 +114,20 @@
 				<artifactId>jy-wrench-starter-method-extention</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
+			
+			<!-- jy wrench db router -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-db-router</artifactId>
+				<version>1.2.2-SNAPSHOT</version>
+			</dependency>
+			
+			<!-- jy wrench aop util -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-aop-util</artifactId>
+				<version>1.2.2-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	

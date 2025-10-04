@@ -102,6 +102,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<!-- <version>1.18.40</version> -->
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
@@ -120,22 +125,27 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>33.5.0-jre</version>
-		</dependency>
+		<!-- <dependency> -->
+		<!-- 	<groupId>com.google.guava</groupId> -->
+		<!-- 	<artifactId>guava</artifactId> -->
+		<!-- 	<version>33.5.0-jre</version> -->
+		<!-- </dependency> -->
 		<!-- <dependency> -->
 		<!-- 	<groupId>io.github.quiethappiness</groupId> -->
 		<!-- 	<artifactId>jy-wrench-starter-dynamic-config-center</artifactId> -->
 		<!-- 	<version>1.2.2-SNAPSHOT</version> -->
 		<!-- 	<scope>provided</scope> -->
 		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- 	<groupId>io.github.quiethappiness</groupId> -->
+		<!-- 	<artifactId>jy-wrench-starter-design-framework</artifactId> -->
+		<!-- 	<version>1.2.2-SNAPSHOT</version> -->
+		<!-- 	<scope>provided</scope> -->
+		<!-- </dependency>	 -->
 		<dependency>
 			<groupId>io.github.quiethappiness</groupId>
-			<artifactId>jy-wrench-starter-design-framework</artifactId>
+			<artifactId>jy-wrench-starter-aop-util</artifactId>
 			<version>1.2.2-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>

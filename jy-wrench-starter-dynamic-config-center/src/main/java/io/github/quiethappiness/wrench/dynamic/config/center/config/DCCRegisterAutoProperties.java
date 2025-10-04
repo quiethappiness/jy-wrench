@@ -7,7 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author quiethappiness @jignyue
  */
 @ConfigurationProperties(prefix = "jy.wrench.config.register", ignoreInvalidFields = true)
-public class DynamicConfigCenterRegisterAutoProperties {
+public class DCCRegisterAutoProperties
+{
 
     /** redis host */
     private String host;

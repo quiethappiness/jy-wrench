@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterBeanPostProcessor,io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterRegisterAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.dynamic.config.center.config.DCCBeanPostProcessor,io.github.quiethappiness.wrench.dynamic.config.center.config.DCCRegisterAutoConfig

@@ -19,6 +19,7 @@
 		<module>jy-wrench-starter-infrastructure-util</module>
 		<module>jy-wrench-starter-method-extention</module>
 		<module>jy-wrench-starter-db-router</module>
+		<module>jy-wrench-starter-aop-util</module>
 	</modules>
 	<name>jy-wrench</name>
 	<properties>

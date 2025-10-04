@@ -4,7 +4,6 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
@@ -14,6 +13,8 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import static io.github.quiethappiness.aop.util.WrenchAopUtil.fallbackMethodResult;
 
 @Aspect
 @Component
@@ -80,7 +81,7 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId);
 			// 用户不在白名单中，抛出异常或返回错误
 			log.error("User not in whitelist");
-			return IRateLimiterAOP.fallbackMethodResult(jp, tcWhiteList.fallbackMethod());
+			return fallbackMethodResult(jp, tcWhiteList.fallbackMethod());
 		}
 	}
 }

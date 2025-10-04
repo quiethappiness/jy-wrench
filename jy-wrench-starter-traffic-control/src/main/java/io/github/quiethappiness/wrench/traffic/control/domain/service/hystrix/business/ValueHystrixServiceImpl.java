@@ -2,13 +2,14 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.hystrix.b
 
 import com.alibaba.fastjson.JSON;
 import com.netflix.hystrix.*;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
+
+import static io.github.quiethappiness.aop.util.WrenchAopUtil.fallbackMethodResult;
 
 @Slf4j
 public class ValueHystrixServiceImpl extends HystrixCommand<Object> implements IValveHystrixService
@@ -83,7 +84,7 @@ public class ValueHystrixServiceImpl extends HystrixCommand<Object> implements I
 		}
 		try
 		{
-			return IRateLimiterAOP.fallbackMethodResult(jp, doHystrix.fallbackMethod());
+			return fallbackMethodResult(jp, doHystrix.fallbackMethod());
 		}
 		catch (Exception e)
 		{

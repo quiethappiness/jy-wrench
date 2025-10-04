@@ -28,6 +28,15 @@ public class DBContextHolder
 		return tbKey.get();
 	}
 	
+	public static void clearDBKey()
+	{
+		dbKey.remove();
+	}
+	
+	public static void clearTBKey()
+	{
+		tbKey.remove();
+	}
 	public static void clear()
 	{
 		dbKey.remove();

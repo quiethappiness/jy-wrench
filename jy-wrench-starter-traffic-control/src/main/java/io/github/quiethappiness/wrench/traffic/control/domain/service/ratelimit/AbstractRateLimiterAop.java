@@ -39,7 +39,7 @@ public abstract class AbstractRateLimiterAop implements IRateLimiterAOP
 	protected RateLimiterReturnResultEntity doAccess(final ProceedingJoinPoint jp, final TcRateLimiter tcRateLimiter, String rateLimiterSwitch) throws Throwable
 	{
 		StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> strategyHandler = rateLimiterStrategyFactory.strategyHandler();
-		RateLimiterReturnResultEntity result = strategyHandler.apply(
+		return strategyHandler.apply(
 			RateLimiterParameterEntity.builder()
 				.rateLimiterSwitch(rateLimiterSwitch)
 				.blacklist(blacklist)
@@ -49,6 +49,5 @@ public abstract class AbstractRateLimiterAop implements IRateLimiterAOP
 				.build(),
 			RateLimiterStrategyFactory.DynamicContext.builder()
 				.build());
-		return result;
 	}
 }

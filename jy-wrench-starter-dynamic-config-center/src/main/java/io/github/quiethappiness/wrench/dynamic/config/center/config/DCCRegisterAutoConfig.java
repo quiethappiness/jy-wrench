@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.dynamic.config.center.config;
 
+import io.github.quiethappiness.wrench.dynamic.config.center.domain.listener.DCCAdjustListener;
 import io.github.quiethappiness.wrench.dynamic.config.center.domain.model.valobj.AttributeVO;
-import io.github.quiethappiness.wrench.dynamic.config.center.domain.listener.DynamicConfigCenterAdjustListener;
 import io.github.quiethappiness.wrench.dynamic.config.center.types.common.Constants;
 import org.redisson.Redisson;
 import org.redisson.api.RTopic;
@@ -16,22 +16,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * DynamicConfigCenterRegisterAutoConfig
+ * DCCRegisterAutoConfig
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 动态配置-注册
  * @date 2025/9/10 16:31
  */
 @AutoConfiguration
-@EnableConfigurationProperties(value = {DynamicConfigCenterRegisterAutoProperties.class, DynamicConfigCenterAutoProperties.class})
+@EnableConfigurationProperties(value = {DCCRegisterAutoProperties.class, DCCAutoProperties.class})
 @ComponentScan("io.github.quiethappiness.wrench.dynamic.config.center.domain")
-public class DynamicConfigCenterRegisterAutoConfig
+public class DCCRegisterAutoConfig
 {
-	private final Logger log = LoggerFactory.getLogger(DynamicConfigCenterRegisterAutoConfig.class);
+	private final Logger log = LoggerFactory.getLogger(DCCRegisterAutoConfig.class);
 	
 	@Bean("jyWrenchRedissonClient")
 	public RedissonClient jyWrenchRedissonClient(
-		DynamicConfigCenterRegisterAutoProperties properties
+		DCCRegisterAutoProperties properties
 	)
 	{
 		Config config = new Config();
@@ -55,32 +55,32 @@ public class DynamicConfigCenterRegisterAutoConfig
 	}
 	
 	// @Bean
-	// public IDynamicConfigCenterService dynamicConfigCenterService(
-	// 	DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,
+	// public IDCCService dynamicConfigCenterService(
+	// 	DCCAutoProperties dynamicConfigCenterAutoProperties,
 	// 	RedissonClient jyWrenchRedissonClient)
 	// {
 	//
-	// 	return new DynamicConfigCenterServiceImpl(dynamicConfigCenterAutoProperties, jyWrenchRedissonClient);
+	// 	return new DCCServiceImpl(dynamicConfigCenterAutoProperties, jyWrenchRedissonClient);
 	// }
 	
 	
 	// @Bean
-	// public DynamicConfigCenterAdjustListener dynamicConfigCenterAdjustListener(
-	// 	IDynamicConfigCenterService dynamicConfigCenterService)
+	// public DCCAdjustListener dynamicConfigCenterAdjustListener(
+	// 	IDCCService dynamicConfigCenterService)
 	// {
 	//
-	// 	return new DynamicConfigCenterAdjustListener(dynamicConfigCenterService);
+	// 	return new DCCAdjustListener(dynamicConfigCenterService);
 	// }
 	
 	@Bean
 	public RTopic dynamicConfigCenterTopic(
-		DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,
+		DCCAutoProperties DCCAutoProperties,
 		RedissonClient jyWrenchRedissonClient,
-		DynamicConfigCenterAdjustListener dynamicConfigCenterAdjustListener)
+		DCCAdjustListener DCCAdjustListener)
 	{
 		RTopic dynamicConfigCenterTopic = jyWrenchRedissonClient.getTopic(
-			Constants.getTopic(dynamicConfigCenterAutoProperties.getSystem()));
-		dynamicConfigCenterTopic.addListener(AttributeVO.class, dynamicConfigCenterAdjustListener);
+			Constants.getTopic(DCCAutoProperties.getSystem()));
+		dynamicConfigCenterTopic.addListener(AttributeVO.class, DCCAdjustListener);
 		log.info("jy-wrench，注册器（redis）Topic dynamicConfigCenterTopic 创建完成。");
 		return dynamicConfigCenterTopic;
 	}

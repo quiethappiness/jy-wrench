@@ -56,6 +56,30 @@ jy:
                             PHONE:
                                 - "13800138000"
                                 - "13900139000"
+        
+        
+        db-router:
+            jdbc:
+                datasource:
+                    dbCount: 2
+                    tbCount: 4
+                    list: db01,db02
+                    db01:
+                        driver-class-name: com.mysql.cj.jdbc.Driver
+                        url: jdbc:mysql://192.168.247.133:13306/bugstack_01?useUnicode=true
+                        username: root
+                        password: 123456
+                    db02:
+                        driver-class-name: com.mysql.cj.jdbc.Driver
+                        url: jdbc:mysql://192.168.247.133:13306/bugstack_02?useUnicode=true
+                        username: root
+                        password: 123456
+mybatis:
+    mapper-locations: classpath:/mybatis/mapper/*.xml
+    config-location: classpath:/mybatis/config/mybatis-config.xml
+      
+      # 路由配置
+
 
 
 # 日志

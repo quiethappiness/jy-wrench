@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.dynamic.config.center.domain.service;
 
-import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.dynamic.config.center.domain.model.valobj.AttributeVO;
 import io.github.quiethappiness.wrench.dynamic.config.center.types.annotations.DCCValue;
 import org.apache.commons.lang.StringUtils;
@@ -17,23 +17,23 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * DynamicConfigCenterServiceImpl
+ * DCCServiceImpl
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 动态配置中心服务实现类
  * @date 2025/9/10 16:38
  */
 @Service
-public class DynamicConfigCenterServiceImpl implements IDynamicConfigCenterService
+public class DCCServiceImpl implements IDCCService
 {
-	private final Logger log = LoggerFactory.getLogger(DynamicConfigCenterServiceImpl.class);
-	private final DynamicConfigCenterAutoProperties properties;
+	private final Logger log = LoggerFactory.getLogger(DCCServiceImpl.class);
+	private final DCCAutoProperties properties;
 	private final RedissonClient redissonClient;
 	private Map<String, Object> dccBeanGroup = new ConcurrentHashMap<>();
 	
-	public DynamicConfigCenterServiceImpl(DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,  RedissonClient jyWrenchRedissonClient)
+	public DCCServiceImpl(DCCAutoProperties DCCAutoProperties, RedissonClient jyWrenchRedissonClient)
 	{
-		this.properties = dynamicConfigCenterAutoProperties;
+		this.properties = DCCAutoProperties;
 		this.redissonClient = jyWrenchRedissonClient;
 		log.info("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
 	}

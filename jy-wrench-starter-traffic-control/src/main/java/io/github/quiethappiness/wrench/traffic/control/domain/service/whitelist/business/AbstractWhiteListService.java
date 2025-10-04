@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
 import io.github.quiethappiness.lua.manager.domain.service.base.impl.IRedisService;
-import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import org.redisson.api.RLocalCachedMap;
 import org.redisson.api.map.WriteMode;
@@ -14,13 +14,13 @@ import static io.github.quiethappiness.wrench.traffic.control.domain.service.rat
 
 public abstract class AbstractWhiteListService
 {
-	protected DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties;
+	protected DCCAutoProperties DCCAutoProperties;
 	
 	protected IRedisService redisService;
 	
 	protected String spliceHashMapName(String name)
 	{
-		return dynamicConfigCenterAutoProperties.getSystem() + MAO_HAO + "whitelist" + MAO_HAO + getClass().getSimpleName() + MAO_HAO + name;
+		return DCCAutoProperties.getSystem() + MAO_HAO + "whitelist" + MAO_HAO + getClass().getSimpleName() + MAO_HAO + name;
 	}
 	
 	protected static void setLocalCacheMapOptions(LocalCachedMapOptions<WhiteListType, List<String>> options)

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
 import io.github.quiethappiness.lua.manager.domain.service.base.impl.IRedisService;
-import io.github.quiethappiness.wrench.dynamic.config.center.config.DynamicConfigCenterAutoProperties;
+import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +25,13 @@ public class WhiteListService extends AbstractWhiteListService
 	
 	public WhiteListService(
 		List<WhiteListDataProvider> dataProviders,
-		DynamicConfigCenterAutoProperties dynamicConfigCenterAutoProperties,
+		DCCAutoProperties DCCAutoProperties,
 		IRedisService redisService
 	)
 	{
 		log.info("Initializing whitelist service");
 		this.dataProviders = dataProviders;
-		super.dynamicConfigCenterAutoProperties = dynamicConfigCenterAutoProperties;
+		super.DCCAutoProperties = DCCAutoProperties;
 		super.redisService = redisService;
 	}
 	
