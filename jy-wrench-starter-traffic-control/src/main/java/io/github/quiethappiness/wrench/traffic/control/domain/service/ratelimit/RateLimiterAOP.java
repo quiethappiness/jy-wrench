@@ -11,7 +11,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.fallbackMethodResult;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.fallbackMethodResult;
 
 /**
  * RateLimiterAOP

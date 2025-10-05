@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
-import io.github.quiethappiness.lua.manager.domain.service.base.impl.IRedisService;
+import io.github.quiethappiness.wrench.lua.manager.domain.service.base.impl.IRedisService;
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;

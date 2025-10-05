@@ -104,7 +104,7 @@
 			<!-- jy wrench rabbitmq util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-starter-infrastructure-util</artifactId>
+				<artifactId>jy-wrench-util-infrastructure-starter</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 			
@@ -125,7 +125,7 @@
 			<!-- jy wrench aop util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-starter-aop-util</artifactId>
+				<artifactId>jy-wrench-util-aop</artifactId>
 				<version>1.2.2-SNAPSHOT</version>
 			</dependency>
 		</dependencies>

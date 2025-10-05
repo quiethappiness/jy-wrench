@@ -13,7 +13,7 @@ import java.util.function.BiConsumer;
 
 /**
  * 测试任务数据提供者
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jingyue
  */
 @Service
 public class TestTaskDataProvider01 implements ITaskDataProvider

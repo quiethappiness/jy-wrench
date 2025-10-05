@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.getAttrValue;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getAttrValue;
 
 @Slf4j
 @Component("RateLimitSwitchNode")

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrencher.trigger;
 
-import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
-import io.github.quiethappiness.method.extention.type.annotations.MeMethodExtension;
+import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
+import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;

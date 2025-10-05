@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.isAnnotationPresentOnAnyBean;
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.isConfigurationClass;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.isAnnotationPresentOnAnyBean;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.isConfigurationClass;
 
 // 条件2：检查是否存在@EnableMethodExtension注解
 @Slf4j

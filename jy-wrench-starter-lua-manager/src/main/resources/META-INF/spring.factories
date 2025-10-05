@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.lua.manager.config.LuaManagerAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.lua.manager.config.LuaManagerAutoConfig

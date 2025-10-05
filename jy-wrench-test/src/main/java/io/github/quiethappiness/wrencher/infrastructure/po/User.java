@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.infrastructure.po;
 
-import io.github.quiethappiness.db.router.domain.model.DBRouterBase;
+import io.github.quiethappiness.wrench.db.router.domain.model.DBRouterBase;
 import lombok.*;
 
 import java.util.Date;

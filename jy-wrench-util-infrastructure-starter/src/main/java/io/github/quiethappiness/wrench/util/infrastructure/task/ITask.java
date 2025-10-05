@@ -1,0 +1,25 @@
+package io.github.quiethappiness.wrench.util.infrastructure.task;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ITask
+ * @author quietHappiness @jingyue
+ * @version 1.0
+ * @description 处理回调任务
+ * @date 2025/9/17 17:11
+ */
+public interface ITask<T>
+{
+	
+	void execJobAsync(T notifyTaskEntity) throws Exception;
+	
+	/**
+	 * 执行回调通知完成结算
+	 * @param notifyTaskEntityList
+	 * @return
+	 * @throws Exception
+	 */
+	Map<String, Integer> execJob(List<T> notifyTaskEntityList) throws Exception;
+}

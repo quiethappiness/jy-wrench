@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrencher.sample;
 
-import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
-import io.github.quiethappiness.lua.manager.types.annotations.LuaScriptPath;
+import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
+import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RScript;

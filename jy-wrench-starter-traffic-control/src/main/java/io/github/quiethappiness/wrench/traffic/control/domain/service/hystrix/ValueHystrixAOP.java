@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Service;
 
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.getTargetMethodFromJP;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getTargetMethodFromJP;
 
 @Service
 @Slf4j

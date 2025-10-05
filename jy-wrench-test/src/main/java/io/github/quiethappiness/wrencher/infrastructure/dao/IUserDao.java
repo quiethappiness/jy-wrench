@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.infrastructure.dao;
 
-import io.github.quiethappiness.db.router.types.annotations.DBRouter;
+import io.github.quiethappiness.wrench.db.router.types.annotations.DBRouter;
 import io.github.quiethappiness.wrencher.infrastructure.po.User;
 import org.apache.ibatis.annotations.Mapper;
 

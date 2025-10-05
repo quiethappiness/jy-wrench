@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.business;
 
-import io.github.quiethappiness.lua.manager.domain.service.manager.ILuaScriptManager;
-import io.github.quiethappiness.lua.manager.types.annotations.LuaScriptPath;
+import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
+import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RScript;

@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * 任务调度功能测试
- * @author Fuzhengwei bugstack.cn @小傅哥
+ * @author quiethappiness @jingyue
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

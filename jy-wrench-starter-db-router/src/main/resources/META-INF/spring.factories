@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.db.router.config.DBRouterAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.db.router.config.DBRouterAutoConfiguration

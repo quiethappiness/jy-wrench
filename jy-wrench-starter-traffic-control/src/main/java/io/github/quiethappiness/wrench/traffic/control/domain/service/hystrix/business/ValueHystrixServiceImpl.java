@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
-import static io.github.quiethappiness.aop.util.WrenchAopUtil.fallbackMethodResult;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.fallbackMethodResult;
 
 @Slf4j
 public class ValueHystrixServiceImpl extends HystrixCommand<Object> implements IValveHystrixService
