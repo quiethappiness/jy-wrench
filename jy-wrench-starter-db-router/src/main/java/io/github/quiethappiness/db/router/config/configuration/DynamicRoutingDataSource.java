@@ -13,9 +13,9 @@ import java.util.Map;
  * •在这个方法中使用 DBContextHolder.getDBKey()，获取路由设置到 ThreadLocal 的结果。
  */
 @Component
-public class DynamicDataSource extends AbstractRoutingDataSource
+public class DynamicRoutingDataSource extends AbstractRoutingDataSource
 {
-	public DynamicDataSource(
+	public DynamicRoutingDataSource(
 		DataSourceEnvironment dataSourceEnvironment)
 	{
 		//  创建数据源

@@ -7,7 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class PropertyUtil
+public abstract class PropertyUtil
 {
 	private static int springBootVersion = 1;
 	
@@ -74,9 +74,12 @@ public class PropertyUtil
 			Method bindMethod = binderClass.getDeclaredMethod("bind", String.class, Class.class);
 			Object binderObject = getMethod.invoke(null, environment);
 			String prefixParam = prefix.endsWith(".") ? prefix.substring(0, prefix.length() - 1) : prefix;
+			// 这里获得的结果是一个BindResult<T>对象，里面有get方法，返回结果是我们需要的对象
 			Object bindResultObject = bindMethod.invoke(binderObject, prefixParam, targetClass);
+			// 获取BindResult对象的get方法，返回结果 ourTargetObject
 			Method resultGetMethod = bindResultObject.getClass()
 				.getDeclaredMethod("get");
+			// 这里返回的类型也应该是targetClass
 			return resultGetMethod.invoke(bindResultObject);
 		}
 		catch (final ClassNotFoundException | NoSuchMethodException | SecurityException | IllegalAccessException

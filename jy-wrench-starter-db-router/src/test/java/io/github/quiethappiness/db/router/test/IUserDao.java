@@ -11,6 +11,6 @@ import io.github.quiethappiness.db.router.types.annotations.DBRouter;
 public interface IUserDao
 {
 	
-	@DBRouter(key = "userId")
+	@DBRouter(field = "userId")
 	void insertUser(String req);
 }

@@ -7,6 +7,9 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface DBRouter {
 	
-	String key() default "";
+	/**
+	 * 分库分表的路由key
+	 */
+	String field() default "";
 	
 }

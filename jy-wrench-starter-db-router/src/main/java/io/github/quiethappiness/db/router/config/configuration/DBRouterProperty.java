@@ -5,12 +5,12 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component("dbRouterConfig")
-public class DBRouterConfig
+public class DBRouterProperty
 {
 	private int dbCount;  //分库数
 	private int tbCount;  //分表数
 	
-	public DBRouterConfig(
+	public DBRouterProperty(
 		DataSourceEnvironment dataSourceEnvironment)
 	{
 		this.dbCount = dataSourceEnvironment.getDbCount();

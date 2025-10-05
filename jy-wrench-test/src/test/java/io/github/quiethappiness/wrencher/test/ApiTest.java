@@ -50,7 +50,7 @@ public class ApiTest {
     @Test
     public void test_insertUser() {
         User user = new User();
-        user.setUserId("480765132");
+        user.setUserId("485765132");
         user.setUserNickName("小傅哥");
         user.setUserHead("01_50");
         user.setUserPassword("123456");

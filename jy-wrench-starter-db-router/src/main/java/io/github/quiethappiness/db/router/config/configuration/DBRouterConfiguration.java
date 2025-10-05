@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Import;
 @Slf4j
 @ComponentScan("io.github.quiethappiness.db.router.domain.service")
 @EnableConfigurationProperties(DBRouterProperties.class)
-@Import({DataSourceEnvironment.class, DBRouterConfig.class, DynamicDataSource.class})
+@Import({DataSourceEnvironment.class, DBRouterProperty.class, DynamicRoutingDataSource.class})
 public class DBRouterConfiguration
 {
 	{

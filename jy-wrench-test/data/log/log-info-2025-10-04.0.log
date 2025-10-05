@@ -304,7 +304,7 @@
 25-10-04.23:50:11.969 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourceScriptDatabaseInitializer'
 25-10-04.23:50:11.969 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.sql.init.DataSourceInitializationConfiguration'
 25-10-04.23:50:11.972 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:11.972 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:11.972 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:11.974 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:50:11.975 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 8976) op = 82
 25-10-04.23:50:11.975 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 8976) op = 80
@@ -317,11 +317,11 @@
 25-10-04.23:50:11.977 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.dbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:50:11.977 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.tbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:50:11.983 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:11.983 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
+25-10-04.23:50:11.983 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:50:11.997 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:11.997 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:50:12.002 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:12.003 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:12.003 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:12.003 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:50:12.011 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:12.011 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionTemplate'
@@ -333,7 +333,7 @@
 25-10-04.23:50:12.026 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' via constructor to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@5aa0dbf4'
 25-10-04.23:50:12.036 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:12.038 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionFactory'
-25-10-04.23:50:12.038 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:12.038 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:12.192 [main            ] DEBUG VFS                    - Using VFS adapter org.mybatis.spring.boot.autoconfigure.SpringBootVFS
 25-10-04.23:50:12.195 [main            ] DEBUG SqlSessionFactoryBean  - Parsed configuration file: 'class path resource [mybatis/config/mybatis-config.xml]'
 25-10-04.23:50:12.232 [main            ] DEBUG SqlSessionFactoryBean  - Parsed mapper file: 'file [H:\JetBrains\projects\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-test\target\classes\mybatis\mapper\User_Mapper.xml]'
@@ -949,7 +949,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:13.188 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourcePoolMetadataMeterBinder'
 25-10-04.23:50:13.188 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration$DataSourcePoolMetadataMetricsConfiguration'
 25-10-04.23:50:13.191 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:13.191 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:13.191 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:13.194 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:13.240 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'hikariPoolDataSourceMetadataProvider'
 25-10-04.23:50:13.240 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration'
@@ -1667,7 +1667,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:14.782 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:14.783 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:50:14.784 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:14.784 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:14.784 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:14.784 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:50:14.800 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:14.800 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'redisHealthContributor'
@@ -2199,7 +2199,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:15.359 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTemplate'
 25-10-04.23:50:15.359 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:50:15.361 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:15.361 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:15.361 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:15.361 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:50:15.382 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:15.383 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.NamedParameterJdbcTemplateConfiguration'
@@ -2220,7 +2220,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:15.400 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:15.400 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'transactionManager'
 25-10-04.23:50:15.400 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'environment'
-25-10-04.23:50:15.400 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:15.400 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:15.404 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'platformTransactionManagerCustomizers'
 25-10-04.23:50:15.404 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration'
 25-10-04.23:50:15.406 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
@@ -2326,21 +2326,21 @@ Positive matches:
    DataSourceHealthContributorAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource' (OnClassCondition)
       - @ConditionalOnEnabledHealthIndicator management.health.defaults.enabled is considered true (OnEnabledHealthIndicatorCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceHealthContributorAutoConfiguration#dbHealthContributor matched:
       - @ConditionalOnMissingBean (names: dbHealthIndicator,dbHealthContributor; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourceInitializationConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:
       - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
 
    DataSourcePoolMetricsAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'io.micrometer.core.instrument.MeterRegistry' (OnClassCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource', 'simpleMeterRegistry' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource', 'simpleMeterRegistry' (OnBeanCondition)
 
    DataSourcePoolMetricsAutoConfiguration.DataSourcePoolMetadataMetricsConfiguration matched:
       - @ConditionalOnBean (types: org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider; SearchStrategy: all) found bean 'hikariPoolDataSourceMetadataProvider' (OnBeanCondition)
@@ -2352,7 +2352,7 @@ Positive matches:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.transaction.TransactionManager' (OnClassCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration matched:
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration#transactionManager matched:
       - @ConditionalOnMissingBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -2554,7 +2554,7 @@ Positive matches:
 
    JdbcTemplateAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    JdbcTemplateConfiguration matched:
       - @ConditionalOnMissingBean (types: org.springframework.jdbc.core.JdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -2614,7 +2614,7 @@ Positive matches:
 
    MybatisAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    MybatisAutoConfiguration#sqlSessionFactory matched:
       - @ConditionalOnMissingBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -3148,7 +3148,7 @@ Negative matches:
 
    DataSourceAutoConfiguration.PooledDataSourceConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicDataSource (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource (OnBeanCondition)
       Matched:
          - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
 
@@ -4511,16 +4511,16 @@ Unconditional classes:
 25-10-04.23:50:31.972 [RMI TCP Connection(1)-192.168.247.1] DEBUG loader                 - RMI TCP Connection(1)-192.168.247.1: name = "javax.management.ObjectName", codebase = ""
 25-10-04.23:50:31.973 [RMI TCP Connection(1)-192.168.247.1] DEBUG rmi                    - connectionId=rmi://192.168.247.1  1, name=java.lang:type=OperatingSystem, attribute=ProcessCpuLoad
 25-10-04.23:50:31.974 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:31.975 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:31.975 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:31.977 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:50:31.981 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.dbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:50:31.981 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.tbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:50:31.987 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:31.988 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
+25-10-04.23:50:31.988 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:50:32.006 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:32.006 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:50:32.012 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:32.012 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:32.012 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:32.012 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:50:32.022 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:32.023 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionTemplate'
@@ -4539,7 +4539,7 @@ Unconditional classes:
 25-10-04.23:50:32.034 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' via constructor to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@5400db36'
 25-10-04.23:50:32.044 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:32.045 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionFactory'
-25-10-04.23:50:32.045 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:32.045 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:32.157 [main            ] DEBUG VFS                    - Using VFS adapter org.mybatis.spring.boot.autoconfigure.SpringBootVFS
 25-10-04.23:50:32.160 [main            ] DEBUG SqlSessionFactoryBean  - Parsed configuration file: 'class path resource [mybatis/config/mybatis-config.xml]'
 25-10-04.23:50:32.189 [main            ] DEBUG SqlSessionFactoryBean  - Parsed mapper file: 'file [H:\JetBrains\projects\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-test\target\classes\mybatis\mapper\User_Mapper.xml]'
@@ -5162,7 +5162,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:33.309 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourcePoolMetadataMeterBinder'
 25-10-04.23:50:33.309 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration$DataSourcePoolMetadataMetricsConfiguration'
 25-10-04.23:50:33.311 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:33.312 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:33.312 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:33.316 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:33.361 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'hikariPoolDataSourceMetadataProvider'
 25-10-04.23:50:33.361 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration'
@@ -5878,7 +5878,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:35.106 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:35.107 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:50:35.108 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:35.109 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:35.109 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:35.109 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:50:35.125 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:35.126 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'redisHealthContributor'
@@ -6411,7 +6411,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:35.708 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTemplate'
 25-10-04.23:50:35.709 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:50:35.711 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:50:35.711 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:35.711 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:35.711 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:50:35.726 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:35.726 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.NamedParameterJdbcTemplateConfiguration'
@@ -6432,7 +6432,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:50:35.744 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:50:35.744 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'transactionManager'
 25-10-04.23:50:35.745 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'environment'
-25-10-04.23:50:35.745 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:50:35.745 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:50:35.749 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'platformTransactionManagerCustomizers'
 25-10-04.23:50:35.749 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration'
 25-10-04.23:50:35.751 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
@@ -6538,21 +6538,21 @@ Positive matches:
    DataSourceHealthContributorAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource' (OnClassCondition)
       - @ConditionalOnEnabledHealthIndicator management.health.defaults.enabled is considered true (OnEnabledHealthIndicatorCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceHealthContributorAutoConfiguration#dbHealthContributor matched:
       - @ConditionalOnMissingBean (names: dbHealthIndicator,dbHealthContributor; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourceInitializationConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:
       - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
 
    DataSourcePoolMetricsAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'io.micrometer.core.instrument.MeterRegistry' (OnClassCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource', 'simpleMeterRegistry' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource', 'simpleMeterRegistry' (OnBeanCondition)
 
    DataSourcePoolMetricsAutoConfiguration.DataSourcePoolMetadataMetricsConfiguration matched:
       - @ConditionalOnBean (types: org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider; SearchStrategy: all) found bean 'hikariPoolDataSourceMetadataProvider' (OnBeanCondition)
@@ -6564,7 +6564,7 @@ Positive matches:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.transaction.TransactionManager' (OnClassCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration matched:
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration#transactionManager matched:
       - @ConditionalOnMissingBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -6766,7 +6766,7 @@ Positive matches:
 
    JdbcTemplateAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    JdbcTemplateConfiguration matched:
       - @ConditionalOnMissingBean (types: org.springframework.jdbc.core.JdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -6826,7 +6826,7 @@ Positive matches:
 
    MybatisAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    MybatisAutoConfiguration#sqlSessionFactory matched:
       - @ConditionalOnMissingBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -7360,7 +7360,7 @@ Negative matches:
 
    DataSourceAutoConfiguration.PooledDataSourceConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicDataSource (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource (OnBeanCondition)
       Matched:
          - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
 
@@ -8722,12 +8722,12 @@ Unconditional classes:
 25-10-04.23:51:31.818 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourceScriptDatabaseInitializer'
 25-10-04.23:51:31.818 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.sql.init.DataSourceInitializationConfiguration'
 25-10-04.23:51:31.820 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:31.821 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:31.821 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:31.822 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:51:31.827 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.dbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:51:31.827 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.tbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:51:31.834 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:31.834 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
+25-10-04.23:51:31.834 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:51:31.842 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 9067) op = 82
 25-10-04.23:51:31.842 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 9067) op = 80
 25-10-04.23:51:31.842 [RMI TCP Connection(1)-192.168.247.1] DEBUG loader                 - RMI TCP Connection(1)-192.168.247.1: name = "javax.management.ObjectName", codebase = ""
@@ -8739,7 +8739,7 @@ Unconditional classes:
 25-10-04.23:51:31.848 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:31.849 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:51:31.853 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:31.853 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:31.853 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:31.853 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:51:31.864 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:31.864 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionTemplate'
@@ -8751,7 +8751,7 @@ Unconditional classes:
 25-10-04.23:51:31.873 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' via constructor to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@4c4d362a'
 25-10-04.23:51:31.883 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:31.884 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionFactory'
-25-10-04.23:51:31.885 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:31.885 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:32.059 [main            ] DEBUG VFS                    - Using VFS adapter org.mybatis.spring.boot.autoconfigure.SpringBootVFS
 25-10-04.23:51:32.062 [main            ] DEBUG SqlSessionFactoryBean  - Parsed configuration file: 'class path resource [mybatis/config/mybatis-config.xml]'
 25-10-04.23:51:32.102 [main            ] DEBUG SqlSessionFactoryBean  - Parsed mapper file: 'file [H:\JetBrains\projects\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-test\target\classes\mybatis\mapper\User_Mapper.xml]'
@@ -9374,7 +9374,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:51:33.211 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourcePoolMetadataMeterBinder'
 25-10-04.23:51:33.211 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration$DataSourcePoolMetadataMetricsConfiguration'
 25-10-04.23:51:33.213 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:33.213 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:33.213 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:33.217 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:33.259 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'hikariPoolDataSourceMetadataProvider'
 25-10-04.23:51:33.259 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration'
@@ -10090,7 +10090,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:51:34.956 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:34.956 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:51:34.958 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:34.958 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:34.958 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:34.958 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:51:34.973 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 9067) op = 82
 25-10-04.23:51:34.973 [RMI TCP Connection(1)-192.168.247.1] DEBUG tcp                    - RMI TCP Connection(1)-192.168.247.1: (port 9067) op = 80
@@ -10623,7 +10623,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:51:35.558 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTemplate'
 25-10-04.23:51:35.559 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:51:35.561 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:51:35.561 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:35.561 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:35.561 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:51:35.580 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:35.580 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.NamedParameterJdbcTemplateConfiguration'
@@ -10644,7 +10644,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:51:35.599 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:51:35.599 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'transactionManager'
 25-10-04.23:51:35.599 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'environment'
-25-10-04.23:51:35.599 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:51:35.599 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:51:35.604 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'platformTransactionManagerCustomizers'
 25-10-04.23:51:35.604 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration'
 25-10-04.23:51:35.606 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
@@ -10750,21 +10750,21 @@ Positive matches:
    DataSourceHealthContributorAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource' (OnClassCondition)
       - @ConditionalOnEnabledHealthIndicator management.health.defaults.enabled is considered true (OnEnabledHealthIndicatorCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceHealthContributorAutoConfiguration#dbHealthContributor matched:
       - @ConditionalOnMissingBean (names: dbHealthIndicator,dbHealthContributor; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourceInitializationConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:
       - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
 
    DataSourcePoolMetricsAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'io.micrometer.core.instrument.MeterRegistry' (OnClassCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource', 'simpleMeterRegistry' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource', 'simpleMeterRegistry' (OnBeanCondition)
 
    DataSourcePoolMetricsAutoConfiguration.DataSourcePoolMetadataMetricsConfiguration matched:
       - @ConditionalOnBean (types: org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider; SearchStrategy: all) found bean 'hikariPoolDataSourceMetadataProvider' (OnBeanCondition)
@@ -10776,7 +10776,7 @@ Positive matches:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.transaction.TransactionManager' (OnClassCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration matched:
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration#transactionManager matched:
       - @ConditionalOnMissingBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -10978,7 +10978,7 @@ Positive matches:
 
    JdbcTemplateAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    JdbcTemplateConfiguration matched:
       - @ConditionalOnMissingBean (types: org.springframework.jdbc.core.JdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -11038,7 +11038,7 @@ Positive matches:
 
    MybatisAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    MybatisAutoConfiguration#sqlSessionFactory matched:
       - @ConditionalOnMissingBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -11572,7 +11572,7 @@ Negative matches:
 
    DataSourceAutoConfiguration.PooledDataSourceConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicDataSource (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource (OnBeanCondition)
       Matched:
          - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
 
@@ -12942,16 +12942,16 @@ Unconditional classes:
 25-10-04.23:52:09.698 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourceScriptDatabaseInitializer'
 25-10-04.23:52:09.698 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.sql.init.DataSourceInitializationConfiguration'
 25-10-04.23:52:09.700 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:09.701 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:09.701 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:09.702 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:52:09.705 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.dbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:52:09.705 [main            ] DEBUG ConfigurationPropertySourcesPropertyResolver$DefaultResolver - Found key 'jy.wrench.db-router.jdbc.datasource.tbCount' in PropertySource 'Config resource 'class path resource [application-dev.yml]' via location 'optional:classpath:/'' with value of type Integer
 25-10-04.23:52:09.711 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:09.711 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
+25-10-04.23:52:09.711 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' via constructor to bean named 'io.github.quiethappiness.db.router.config.configuration.DataSourceEnvironment'
 25-10-04.23:52:09.724 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:09.724 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:52:09.729 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:09.729 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:09.729 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:09.729 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourceScriptDatabaseInitializer' via factory method to bean named 'spring.sql.init-org.springframework.boot.autoconfigure.sql.init.SqlInitializationProperties'
 25-10-04.23:52:09.737 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:09.737 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionTemplate'
@@ -12963,7 +12963,7 @@ Unconditional classes:
 25-10-04.23:52:09.748 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' via constructor to bean named 'org.springframework.web.context.support.GenericWebApplicationContext@4c4d362a'
 25-10-04.23:52:09.757 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:09.759 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'sqlSessionFactory'
-25-10-04.23:52:09.759 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:09.759 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'sqlSessionFactory' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:09.907 [main            ] DEBUG VFS                    - Using VFS adapter org.mybatis.spring.boot.autoconfigure.SpringBootVFS
 25-10-04.23:52:09.910 [main            ] DEBUG SqlSessionFactoryBean  - Parsed configuration file: 'class path resource [mybatis/config/mybatis-config.xml]'
 25-10-04.23:52:09.944 [main            ] DEBUG SqlSessionFactoryBean  - Parsed mapper file: 'file [H:\JetBrains\projects\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-test\target\classes\mybatis\mapper\User_Mapper.xml]'
@@ -13578,7 +13578,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:52:10.872 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'dataSourcePoolMetadataMeterBinder'
 25-10-04.23:52:10.872 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.actuate.autoconfigure.metrics.jdbc.DataSourcePoolMetricsAutoConfiguration$DataSourcePoolMetadataMetricsConfiguration'
 25-10-04.23:52:10.875 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:10.875 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:10.875 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dataSourcePoolMetadataMeterBinder' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:10.879 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:10.924 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'hikariPoolDataSourceMetadataProvider'
 25-10-04.23:52:10.925 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration'
@@ -14296,7 +14296,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:52:12.582 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:12.582 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:52:12.583 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:12.583 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:12.583 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:12.583 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'dbHealthContributor' via factory method to bean named 'management.health.db-org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties'
 25-10-04.23:52:12.602 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:12.602 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'redisHealthContributor'
@@ -14828,7 +14828,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:52:13.182 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'jdbcTemplate'
 25-10-04.23:52:13.183 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:52:13.184 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
-25-10-04.23:52:13.184 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:13.184 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:13.184 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'jdbcTemplate' via factory method to bean named 'spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties'
 25-10-04.23:52:13.197 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:13.197 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.jdbc.NamedParameterJdbcTemplateConfiguration'
@@ -14849,7 +14849,7 @@ org.apache.tomcat.jni.LibraryNotFoundError: Can't load library: H:\JetBrains\pro
 25-10-04.23:52:13.218 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
 25-10-04.23:52:13.218 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'transactionManager'
 25-10-04.23:52:13.218 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'environment'
-25-10-04.23:52:13.218 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'
+25-10-04.23:52:13.218 [main            ] DEBUG DefaultListableBeanFactory - Autowiring by type from bean name 'transactionManager' via factory method to bean named 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'
 25-10-04.23:52:13.224 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'platformTransactionManagerCustomizers'
 25-10-04.23:52:13.224 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration'
 25-10-04.23:52:13.226 [main            ] DEBUG DCCBeanPostProcessor   - jy-wrench，动态配置-注册，代理对象创建完成。
@@ -14955,21 +14955,21 @@ Positive matches:
    DataSourceHealthContributorAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource' (OnClassCondition)
       - @ConditionalOnEnabledHealthIndicator management.health.defaults.enabled is considered true (OnEnabledHealthIndicatorCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource; SearchStrategy: all) found bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceHealthContributorAutoConfiguration#dbHealthContributor matched:
       - @ConditionalOnMissingBean (names: dbHealthIndicator,dbHealthContributor; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourceInitializationConfiguration matched:
       - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
 
    DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:
       - @ConditionalOnClass found required class 'com.zaxxer.hikari.HikariDataSource' (OnClassCondition)
 
    DataSourcePoolMetricsAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'io.micrometer.core.instrument.MeterRegistry' (OnClassCondition)
-      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource', 'simpleMeterRegistry' (OnBeanCondition)
+      - @ConditionalOnBean (types: javax.sql.DataSource,io.micrometer.core.instrument.MeterRegistry; SearchStrategy: all) found beans 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource', 'simpleMeterRegistry' (OnBeanCondition)
 
    DataSourcePoolMetricsAutoConfiguration.DataSourcePoolMetadataMetricsConfiguration matched:
       - @ConditionalOnBean (types: org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider; SearchStrategy: all) found bean 'hikariPoolDataSourceMetadataProvider' (OnBeanCondition)
@@ -14981,7 +14981,7 @@ Positive matches:
       - @ConditionalOnClass found required classes 'org.springframework.jdbc.core.JdbcTemplate', 'org.springframework.transaction.TransactionManager' (OnClassCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration matched:
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration#transactionManager matched:
       - @ConditionalOnMissingBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -15183,7 +15183,7 @@ Positive matches:
 
    JdbcTemplateAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    JdbcTemplateConfiguration matched:
       - @ConditionalOnMissingBean (types: org.springframework.jdbc.core.JdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -15243,7 +15243,7 @@ Positive matches:
 
    MybatisAutoConfiguration matched:
       - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
-      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicDataSource' (OnBeanCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource' (OnBeanCondition)
 
    MybatisAutoConfiguration#sqlSessionFactory matched:
       - @ConditionalOnMissingBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
@@ -15777,7 +15777,7 @@ Negative matches:
 
    DataSourceAutoConfiguration.PooledDataSourceConfiguration:
       Did not match:
-         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicDataSource (OnBeanCondition)
+         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource (OnBeanCondition)
       Matched:
          - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
 
@@ -16810,12 +16810,12 @@ Unconditional classes:
 25-10-04.23:52:14.464 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'Oracle'
 25-10-04.23:52:14.464 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'PostgreSQL'
 25-10-04.23:52:14.464 [main            ] DEBUG DefaultListableBeanFactory - Creating shared instance of singleton bean 'Sybase'
-25-10-04.23:52:14.465 [main            ] DEBUG SQLErrorCodesFactory   - Looking up default SQLErrorCodes for DataSource [io.github.quiethappiness.db.router.config.configuration.DynamicDataSource@11adab6d]
+25-10-04.23:52:14.465 [main            ] DEBUG SQLErrorCodesFactory   - Looking up default SQLErrorCodes for DataSource [io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource@11adab6d]
 25-10-04.23:52:14.468 [main            ] DEBUG DataSourceUtils        - Fetching JDBC Connection from DataSource
 25-10-04.23:52:14.468 [main            ] DEBUG DriverManagerDataSource - Creating new JDBC DriverManager Connection to [jdbc:mysql://192.168.247.133:13306/bugstack_02?useUnicode=true]
 25-10-04.23:52:14.487 [main            ] DEBUG security               -  TLSHandshake: 192.168.247.133:13306, TLSv1.3, TLS_AES_256_GCM_SHA384, 76848613
 25-10-04.23:52:14.505 [main            ] DEBUG SQLErrorCodesFactory   - SQL error codes for 'MySQL' found
-25-10-04.23:52:14.505 [main            ] DEBUG SQLErrorCodesFactory   - Caching SQL error codes for DataSource [io.github.quiethappiness.db.router.config.configuration.DynamicDataSource@11adab6d]: database product name is 'MySQL'
+25-10-04.23:52:14.505 [main            ] DEBUG SQLErrorCodesFactory   - Caching SQL error codes for DataSource [io.github.quiethappiness.db.router.config.configuration.DynamicRoutingDataSource@11adab6d]: database product name is 'MySQL'
 25-10-04.23:52:14.506 [main            ] DEBUG SQLErrorCodeSQLExceptionTranslator - Translating SQLException with SQL state '42S02', error code '1146', message [Table 'bugstack_02.user_00' doesn't exist] for task [
 ### Error updating database.  Cause: java.sql.SQLSyntaxErrorException: Table 'bugstack_02.user_00' doesn't exist
 ### The error may exist in file [H:\JetBrains\projects\IDEA_files\projectsFromVersion2023_cloud\projectsByArchetype\jy-wrench\jy-wrench-test\target\classes\mybatis\mapper\User_Mapper.xml]

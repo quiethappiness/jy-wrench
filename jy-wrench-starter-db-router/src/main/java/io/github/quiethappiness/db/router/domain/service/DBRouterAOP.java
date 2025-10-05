@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 @Aspect
-@Component("db-router-point")
+@Component("db-router-aop")
 @Slf4j
 public class DBRouterAOP extends AbstractDBRouterAOP
 {
@@ -19,7 +19,7 @@ public class DBRouterAOP extends AbstractDBRouterAOP
 	@Around("aopPoint() && @annotation(dbRouter)")
 	public Object doRouter(ProceedingJoinPoint jp, DBRouter dbRouter) throws Throwable
 	{
-		String dbKey = dbRouter.key();
+		String dbKey = dbRouter.field();
 		if (!StringUtils.hasText(dbKey))
 		{
 			throw new RuntimeException("annotation DBRouter key is null！");
