@@ -1,5 +1,6 @@
 package io.github.quiethappiness.db.router.config.configuration;
 
+import io.github.quiethappiness.db.router.config.property.DBRouterProperties;
 import io.github.quiethappiness.db.router.domain.model.DBContextHolder;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -20,17 +21,14 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource
 	{
 		//  创建数据源
 		Map<Object, Object> targetDataSources = new HashMap<>();
-		for (Map.Entry<String, Map<String, Object>> dbInfo : dataSourceEnvironment.getDataSourceMap()
+		for (Map.Entry<String, DBRouterProperties.WrenchDBRouterDataSourceProperty> dbInfo : dataSourceEnvironment.getDataSourceMap()
 			.entrySet())
 		{
 			String dbInfoKey = dbInfo.getKey();
-			Map<String, Object> objMap = dbInfo.getValue();
+			DBRouterProperties.WrenchDBRouterDataSourceProperty objMap = dbInfo.getValue();
 			targetDataSources.put(
 				dbInfoKey,
-				new DriverManagerDataSource(objMap.get("url")
-					.toString(), objMap.get("username")
-					.toString(), objMap.get("password")
-					.toString())
+				new DriverManagerDataSource(objMap.getUrl(), objMap.getUsername(), objMap.getPassword())
 			);
 		}
 		//  设置数据源

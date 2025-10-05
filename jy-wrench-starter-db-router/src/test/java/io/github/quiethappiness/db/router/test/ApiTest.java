@@ -46,7 +46,7 @@ public class ApiTest
 		Class<IUserDao> iUserDaoClass = IUserDao.class;
 		Method method = iUserDaoClass.getMethod("insertUser", String.class);
 		DBRouter dbRouter = method.getAnnotation(DBRouter.class);
-		System.out.println(dbRouter.key());
+		System.out.println(dbRouter.field());
 	}
 }
 
