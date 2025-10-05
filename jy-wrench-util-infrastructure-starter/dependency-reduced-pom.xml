@@ -3,7 +3,7 @@
   <parent>
     <artifactId>jy-wrench</artifactId>
     <groupId>io.github.quiethappiness</groupId>
-    <version>1.2.2-SNAPSHOT</version>
+    <version>1.3.0</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jy-wrench-util-infrastructure-starter</artifactId>

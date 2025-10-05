@@ -10,7 +10,7 @@
 	<!-- </parent> -->
 	<groupId>io.github.quiethappiness</groupId>
 	<artifactId>jy-wrench-bom</artifactId>
-	<version>1.2.2-SNAPSHOT</version>
+	<version>1.3.1-SNAPSHOT</version>
 	
 	<packaging>pom</packaging>
 	
@@ -69,7 +69,7 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-dynamic-config-center</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench design framework  -->
@@ -77,56 +77,56 @@
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-design-framework</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench traffic control -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-traffic-control</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench task job -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-task-job</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench lua manager -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-lua-manager</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench rabbitmq util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-infrastructure-starter</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench method extention -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-method-extention</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench db router -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-db-router</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
 			<!-- jy wrench aop util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-aop</artifactId>
-				<version>1.2.2-SNAPSHOT</version>
+				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
