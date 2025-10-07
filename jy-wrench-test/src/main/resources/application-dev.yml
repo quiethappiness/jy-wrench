@@ -1,79 +1,79 @@
 server:
     port: 9191
-#spring:
-#    elasticsearch:
-#        uris: http://192.168.247.133:9200  # 根据你的Docker ES配置填写
-        # 如果ES启用了安全认证，还需配置用户名和密码
-        # username: elastic
-        # password: your_password
+      #spring:
+      #    elasticsearch:
+    #        uris: http://192.168.247.133:9200  # 根据你的Docker ES配置填写
+    # 如果ES启用了安全认证，还需配置用户名和密码
+    # username: elastic
+    # password: your_password
 # 小傅哥扳手通用组件配置
 jy:
     wrench:
         config:
-            system: test-system
-            register:
+            dynamic:
+                system: test-system
+            # 任务调度配置
+            task:
+                job:
+                    enabled: false
+                    pool-size: 5
+                    thread-name-prefix: "test-task-scheduler-"
+                    wait-for-tasks-to-complete-on-shutdown: true
+                    await-termination-seconds: 30
+                    refresh-interval: 30000
+                    clean-invalid-tasks-cron: "0 0/5 * * * ?"
+            methode:
+                enabled: true
+            traffic:
+                hystrix:
+                    enabled: true
+                ratemiter:
+                    enabled: true
+                whitelist:
+                    enabled: true
+                    rules:
+                        -   uri: /api/v1/index/**
+                            limit: 1000
+                            timeUnit: HOURS
+                            whiteList:
+                                USER_ID:
+                                    - "1001"
+                                    - "1002"
+                                    - "admin"
+                                IP:
+                                    - "192.168.1.100"
+                                    - "10.0.0.0/8"
+                        -   uri: /api/order/**
+                            limit: 100
+                            timeUnit: MINUTES
+                            whiteList:
+                                USER_ID:
+                                    - "vip-user"
+                                PHONE:
+                                    - "13800138000"
+                                    - "13900139000"
+            db-router:
+                jdbc:
+                    datasource:
+                        dbCount: 2
+                        tbCount: 4
+                        map:
+                            db01:
+                                driver-class-name: com.mysql.cj.jdbc.Driver
+                                url: jdbc:mysql://127.0.0.1:13306/bugstack_01?useUnicode=true
+                                username: root
+                                password: 123456
+                            db02:
+                                driver-class-name: com.mysql.cj.jdbc.Driver
+                                url: jdbc:mysql://127.0.0.1:13306/bugstack_02?useUnicode=true
+                                username: root
+                                password: 123456
+        util:
+            redisson:
                 # redis host
-                host: 192.168.247.133
+                host: 127.0.0.1
                 # redis port
                 port: 16379
-        # 任务调度配置
-        task:
-            job:
-                enabled: false
-                pool-size: 5
-                thread-name-prefix: "test-task-scheduler-"
-                wait-for-tasks-to-complete-on-shutdown: true
-                await-termination-seconds: 30
-                refresh-interval: 30000
-                clean-invalid-tasks-cron: "0 0/5 * * * ?"
-        methode:
-            enabled: true
-        traffic:
-            hystrix:
-                enabled: true
-            ratemiter:
-                enabled: true
-            whitelist:
-                enabled: true
-                rules:
-                    -   uri: /api/v1/index/**
-                        limit: 1000
-                        timeUnit: HOURS
-                        whiteList:
-                            USER_ID:
-                                - "1001"
-                                - "1002"
-                                - "admin"
-                            IP:
-                                - "192.168.1.100"
-                                - "10.0.0.0/8"
-                    -   uri: /api/order/**
-                        limit: 100
-                        timeUnit: MINUTES
-                        whiteList:
-                            USER_ID:
-                                - "vip-user"
-                            PHONE:
-                                - "13800138000"
-                                - "13900139000"
-        
-        
-        db-router:
-            jdbc:
-                datasource:
-                    dbCount: 2
-                    tbCount: 4
-                    map:
-                        db01:
-                            driver-class-name: com.mysql.cj.jdbc.Driver
-                            url: jdbc:mysql://192.168.247.133:13306/bugstack_01?useUnicode=true
-                            username: root
-                            password: 123456
-                        db02:
-                            driver-class-name: com.mysql.cj.jdbc.Driver
-                            url: jdbc:mysql://192.168.247.133:13306/bugstack_02?useUnicode=true
-                            username: root
-                            password: 123456
 mybatis:
     mapper-locations: classpath:/mybatis/mapper/*.xml
     config-location: classpath:/mybatis/config/mybatis-config.xml

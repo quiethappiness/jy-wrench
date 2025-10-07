@@ -6,7 +6,7 @@
 -- 安全转换函数
 local function safe_tonumber(str)
     if type(str) == "number" then
-        return str
+        return tonumber(str)
     end
     if type(str) ~= "string" then
         return nil

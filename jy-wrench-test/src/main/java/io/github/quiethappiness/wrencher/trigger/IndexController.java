@@ -9,6 +9,7 @@ import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterM
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -125,11 +126,11 @@ public class IndexController
 		return "hystrix";
 	}
 	
-	// @Scheduled(cron = "0/5 * * * * ?")
+	@Scheduled(cron = "0/5 * * * * ?")
 	public void test()
 	{
-		System.out.println(luaScriptManager.getAllScriptInfo());
-		redisWithLua.incrWithTtl("test", 1, 10, TimeUnit.MINUTES);
+		// System.out.println(luaScriptManager.getAllScriptInfo());
+		redisWithLua.incr_with_ttl("test", 1, 10, TimeUnit.MINUTES);
 		log.info("test");
 	}
 }

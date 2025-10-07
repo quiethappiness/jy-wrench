@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public interface IRedisWithLua
 {
-	long incrWithTtl(String key, long delta, long ttl, TimeUnit unit);
+	long incr_with_ttl(String key, long delta, long ttl, TimeUnit unit);
 	
 	void setWithTtl(String key, long value, long ttl, TimeUnit unit);
 }

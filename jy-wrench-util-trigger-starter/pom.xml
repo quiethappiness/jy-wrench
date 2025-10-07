@@ -295,6 +295,10 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<createDependencyReducedPom>false</createDependencyReducedPom>
+							<dependencyReducedPomLocation>
+								${project.build.directory}/${project.artifactId}-${project.version}.pom
+							</dependencyReducedPomLocation>
 							<filters>
 								<filter>
 									<artifact>*:*</artifact>
