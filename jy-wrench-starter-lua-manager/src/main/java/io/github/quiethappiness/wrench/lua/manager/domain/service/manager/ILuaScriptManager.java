@@ -20,12 +20,8 @@ import java.util.Map;
 public interface ILuaScriptManager
 {
 	
-	void scanAndRegisterScriptsToMapPaths(String folderPath, String version);
-	
 	Object executeScript(
-		String scriptName, RScript.Mode mode, RScript.ReturnType returnType,
-		List<Object> keys, String... args);
-	
+		LuaScriptExecuteVO luaScriptExecuteVO);
 	
 	String registerSingleScriptToMapPaths(Resource resource, String version);
 	
@@ -35,7 +31,7 @@ public interface ILuaScriptManager
 	
 	void initScripts(String folderPath, String version);
 	
-	Map<String, LuaScriptVO> getAllScriptInfo();
+	Map<String, AbstractLuaScriptManager.LuaScriptVO> getAllScriptInfo();
 	
 	void initSingleScript(Resource resource, String version);
 	
@@ -48,8 +44,21 @@ public interface ILuaScriptManager
 		private String name;
 		private String cache;
 		private String sha;
-		private Long lastModified=0L;
+		private Long lastModified = 0L;
 		private String version;
 		private String path;
+	}
+	
+	@AllArgsConstructor
+	@NoArgsConstructor
+	@Data
+	@Builder
+	class LuaScriptExecuteVO
+	{
+		private String scriptName;
+		private RScript.Mode mode;
+		private RScript.ReturnType returnType;
+		private List<Object> keys;
+		private String[] args;
 	}
 }

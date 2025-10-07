@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "jy.wrench.config.lua", ignoreInvalidFields = true)
 @Data
-public class LuaManagerAutoProperties
+public class LuaManagerProperties
 {
 	private String path="script";
 }

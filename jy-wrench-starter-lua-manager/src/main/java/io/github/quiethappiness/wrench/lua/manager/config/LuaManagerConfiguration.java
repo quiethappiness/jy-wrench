@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@EnableConfigurationProperties(value = {LuaManagerAutoProperties.class})
+@EnableConfigurationProperties(value = {LuaManagerProperties.class})
 @Import({LuaBeanPostProcessor.class})
 @ComponentScan(basePackages = {"io.github.quiethappiness.wrench.lua.manager.domain"})
 @Slf4j
@@ -15,7 +15,7 @@ public class LuaManagerConfiguration
 {
 	// @Bean
 	// public ILuaScriptManager luaScriptManager(
-	// 	@Autowired RedissonClient jyWrenchRedissonClient, @Autowired LuaManagerAutoProperties luaManagerAutoProperties)
+	// 	@Autowired RedissonClient jyWrenchRedissonClient, @Autowired LuaManagerProperties luaManagerAutoProperties)
 	// {
 	// 	log.info("luaScriptManager 正在初始化...");
 	// 	return new LuaScriptManagerImpl(jyWrenchRedissonClient, luaManagerAutoProperties);

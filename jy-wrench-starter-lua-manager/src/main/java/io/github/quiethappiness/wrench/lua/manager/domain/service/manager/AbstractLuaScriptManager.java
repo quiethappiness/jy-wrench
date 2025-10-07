@@ -6,7 +6,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.lang.NonNull;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
 
 @Slf4j
 public abstract class AbstractLuaScriptManager implements ILuaScriptManager
@@ -23,44 +24,17 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	protected String scriptPath;
 	public static final String LOCAL_SEPARATOR = "/";
 	// 脚本缓存：脚本名称 -> 脚本内容
-	protected final Map<String, String> nameToURIMap = new ConcurrentHashMap<>();
 	protected final Map<String, LuaScriptVO> uriToVOMap = new ConcurrentHashMap<>();
-	
-	public void initScripts(String folder, String version)
-	{
-		// 自动扫描并注册脚本
-		scanAndRegisterScriptsToMapPaths(folder, version);
-		// 加载所有脚本
-		loadAllScriptsFromMapPathsToMapCache(folder);
-		// 预加载到Redis
-		preloadScriptsFromMapCacheToRedis(folder);
-	}
-	
-	@Override
-	public void initSingleScript(Resource resource, String version)
-	{
-		String name = registerSingleScriptToMapPaths(resource, version);
-		String scriptName = null;
-		if (name == null)
-		{
-			log.error("Failed to register script: {}", resource.getFilename());
-			throw new RuntimeException("Failed to register script: " + resource.getFilename());
-		}
-		scriptName = nameToURIMap.get(name);
-		loadSingleScript(scriptName);
-		preloadScript(scriptName);
-	}
 	
 	/**
 	 * 自动扫描resources/script目录下的lua文件并注册
 	 */
-	@Override
-	public void scanAndRegisterScriptsToMapPaths(String folderPath, String version)
+	protected void scanAndRegisterScriptsToMapPaths(String folderPath, String version)
 	{
 		try
 		{
 			ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-			Resource[] resources = resolver.getResources("classpath*:" + scriptPath + LOCAL_SEPARATOR + folderPath + LOCAL_SEPARATOR + "*.lua");
+			Resource[] resources = resolver.getResources("classpath*:" + spliceLuaFilePath(scriptPath, folderPath,null));
 			Arrays.stream(resources)
 				.forEach(resource -> registerSingleScriptToMapPaths(resource, version));
 			log.info("Auto-registered {} lua scripts", resources.length);
@@ -69,6 +43,15 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 		{
 			log.error("Failed to scan lua scripts", e);
 		}
+	}
+	
+	public static String spliceLuaFilePath(@NonNull String scriptPath,@NonNull String folderPath, String filename)
+	{
+		if (!StringUtils.hasText(filename))
+		{
+			return spliceLuaFilePath(scriptPath, folderPath, "*");
+		}
+		return scriptPath + LOCAL_SEPARATOR + folderPath + LOCAL_SEPARATOR + filename + ".lua";
 	}
 	
 	/**
@@ -92,18 +75,17 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 				String uri = resource.getURI()
 					.toString();
 				// // 获取资源的相对路径
-				String path = uri.substring(uri.indexOf("script/"));
+				String path = uri.substring(uri.indexOf(scriptPath + LOCAL_SEPARATOR));
 				String scriptName = path.substring(0, path.lastIndexOf(".lua"));
 				// 注册脚本，默认版本号为1.0
 				// 从路径中提取脚本名称（包含文件夹路径）
-				nameToURIMap.put(name, scriptName);
 				uriToVOMap.put(scriptName, LuaScriptVO.builder()
 					.name(name)
 					.version(version)
 					.path(path)
 					.build());
 				log.info("Registered script: {} (v{}) at {}", name, version, path);
-				return name;
+				return scriptName;
 			}
 		}
 		catch (Exception e)
@@ -121,14 +103,10 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 		String pattern = scriptPath + LOCAL_SEPARATOR + folder + LOCAL_SEPARATOR;
 		uriToVOMap.keySet()
 			.stream()
-			.filter(new Predicate<String>()
+			.filter(s ->
 			{
-				@Override
-				public boolean test(String s)
-				{
-					log.warn("key: {},pattern: {}", s, pattern);
-					return s.startsWith(pattern);
-				}
+				log.warn("key: {},pattern: {}", s, pattern);
+				return s.startsWith(pattern);
 			})
 			.forEach(this::loadSingleScript);
 	}

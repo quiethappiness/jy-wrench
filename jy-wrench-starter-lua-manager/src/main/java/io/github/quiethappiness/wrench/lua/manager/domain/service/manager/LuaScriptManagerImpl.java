@@ -6,6 +6,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.client.RedisException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,30 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 		@Autowired RedissonClient redissonClient)
 	{
 		this.redissonClient = redissonClient;
+	}
+	
+	@Override
+	public void initScripts(String folder, String version)
+	{
+		// 自动扫描并注册脚本
+		scanAndRegisterScriptsToMapPaths(folder, version);
+		// 加载所有脚本
+		loadAllScriptsFromMapPathsToMapCache(folder);
+		// 预加载到Redis
+		preloadScriptsFromMapCacheToRedis(folder);
+	}
+	
+	@Override
+	public void initSingleScript(Resource resource, String version)
+	{
+		String scriptName = registerSingleScriptToMapPaths(resource, version);
+		if (scriptName == null)
+		{
+			log.error("Failed to register script: {}", resource.getFilename());
+			throw new RuntimeException("Failed to register script: " + resource.getFilename());
+		}
+		loadSingleScript(scriptName);
+		preloadScript(scriptName);
 	}
 	
 	/**
@@ -109,34 +134,24 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 		}
 	}
 	
-	/**
-	 * 执行脚本
-	 * @param name
-	 * 	脚本名称
-	 * @param mode
-	 * 	执行模式
-	 * @param returnType
-	 * 	返回类型
-	 * @param keys
-	 * 	键列表
-	 * @param args
-	 * 	参数列表
-	 * @return 脚本执行结果
-	 */
+
 	@Override
 	public Object executeScript(
-		String name, RScript.Mode mode, RScript.ReturnType returnType,
-		List<Object> keys, String... args)
+		LuaScriptExecuteVO luaScriptExecuteVO)
 	{
+		String scriptName = luaScriptExecuteVO.getScriptName();
+		RScript.Mode mode = luaScriptExecuteVO.getMode();
+		RScript.ReturnType returnType = luaScriptExecuteVO.getReturnType();
+		List<Object> keys = luaScriptExecuteVO.getKeys();
+		String[] args = luaScriptExecuteVO.getArgs();
 		// 添加详细的调试日志
-		log.info("Executing script: {}, Keys: {}, Args: {}", name, keys, Arrays.toString(args));
-		String scriptName = nameToURIMap.get(name);
+		log.info("Executing script: [{}], Keys: {}, Args: {}", scriptName, keys, Arrays.toString(args));
 		LuaScriptVO vo = uriToVOMap.get(scriptName);
 		String sha = vo.getSha();
 		if (sha == null)
 		{
-			log.error("Script SHA not found: {}", name);
-			throw new IllegalArgumentException("Script not preloaded: " + name);
+			log.error("Script SHA not found: {}", scriptName);
+			throw new IllegalArgumentException("Script not preloaded: " + scriptName);
 		}
 		// 确保参数都是字符串类型，避免二进制缓冲区直接传递
 		Object[] processedArgs = new Object[args.length];
@@ -161,35 +176,34 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 					keys,
 					processedArgs
 				);
-			log.debug("Script executed successfully: {}, Result: {}", name, result);
+			log.debug("Script executed successfully: [{}], Result: {}", scriptName, result);
 			return result;
 		}
 		catch (RedisException e)
 		{
 			// 添加更详细的错误日志
-			log.error("Redis script execution failed: {}. Keys: {}, Args: {}", name, keys, Arrays.toString(args), e);
+			log.error("Redis script execution failed: [{}]. Keys: {}, Args: {}", scriptName, keys, Arrays.toString(args), e);
 			// 更安全地判断 NOSCRIPT，防止 getMessage() 为 null
 			String msg = e.getMessage();
 			if (msg != null && msg.contains("NOSCRIPT"))
 			{
-				log.warn("Script not found in Redis (NOSCRIPT): {}, attempting reload...", name);
-				scriptName = nameToURIMap.get(name);
+				log.warn("Script not found in Redis (NOSCRIPT): [{}], attempting reload...", scriptName);
 				preloadScript(scriptName);
 				sha = uriToVOMap.get(scriptName)
 					.getSha();
 				if (sha == null)
 				{
-					log.error("Failed to reload script SHA after NOSCRIPT error: {}", name);
+					log.error("Failed to reload script SHA after NOSCRIPT error: {}", scriptName);
 					throw e;
 				}
 				Object result = redissonClient.getScript()
 					.evalSha(mode, sha, returnType, keys, processedArgs);
-				log.debug("Script reloaded and executed successfully after retry: {}, Result: {}", name, result);
+				log.debug("Script reloaded and executed successfully after retry: [{}], Result: {}", scriptName, result);
 				return result;
 			}
 			else
 			{
-				log.error("Non-NOSCRIPT Redis error occurred during script execution: {}", name, e);
+				log.error("Non-NOSCRIPT Redis error occurred during script execution: {}", scriptName, e);
 				throw e;
 			}
 		}

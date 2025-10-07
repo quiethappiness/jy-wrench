@@ -13,7 +13,7 @@ public class LuaManagerAutoConfiguration
 {
 	// @Bean
 	// public ILuaScriptManager luaScriptManager(
-	// 	@Autowired RedissonClient jyWrenchRedissonClient, @Autowired LuaManagerAutoProperties luaManagerAutoProperties)
+	// 	@Autowired RedissonClient jyWrenchRedissonClient, @Autowired LuaManagerProperties luaManagerAutoProperties)
 	// {
 	// 	log.info("luaScriptManager 正在初始化...");
 	// 	return new LuaScriptManagerImpl(jyWrenchRedissonClient, luaManagerAutoProperties);
