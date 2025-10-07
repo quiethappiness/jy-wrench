@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.util.redisson.domain.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,13 @@ import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor(access = lombok.AccessLevel.PACKAGE)
 @Service
+@Slf4j
 public class RedissonService  implements IRedisService
 {
 	private final RedissonClient redissonClient;
-	
+	{
+		log.info("jy-wrench，注册器（RedissonService）初始化完成");
+	}
 	@Override
 	public RKeys getKey()
 	{
