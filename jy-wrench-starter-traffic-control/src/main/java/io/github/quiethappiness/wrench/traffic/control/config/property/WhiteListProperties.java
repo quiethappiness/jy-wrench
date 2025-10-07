@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@ConfigurationProperties(prefix = "jy.wrench.traffic.whitelist", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "jy.wrench.config.traffic.whitelist", ignoreInvalidFields = true)
 @Data
 public class WhiteListProperties
 {

@@ -33,19 +33,19 @@ public class SlidingWindowRateLimiter
 	@LuaScriptPath(fileFullPath = "script/rateLimit.lua")
 	public boolean tryAcquire(String key, long windowSizeMs, long maxRequests)
 	{
-		String scriptName = RATE_LIMIT;
+		String name = RATE_LIMIT;
 		String rateLimitKey = spliceRateLimiterKey(key);
 		long now = System.currentTimeMillis();
 		// 定义Lua脚本
 		// 执行脚本（返回值1代表通过，0代表拒绝）
 		long result = (long) scriptManager.executeScript(
-			scriptName,
-			RScript.Mode.READ_WRITE,
-			RScript.ReturnType.INTEGER,
-			Collections.singletonList(rateLimitKey),
-			Long.toString(now),                 // ARGV[1]
-			String.valueOf(windowSizeMs),   // ARGV[2]
-			String.valueOf(maxRequests)     // ARGV[3]
+			ILuaScriptManager.LuaScriptExecuteVO.builder()
+				.scriptName(name)
+				.mode(RScript.Mode.READ_WRITE)
+				.returnType(RScript.ReturnType.INTEGER)
+				.keys(Collections.singletonList(rateLimitKey))
+				.args(new String[] {Long.toString(now), String.valueOf(windowSizeMs), String.valueOf(maxRequests)})
+				.build()
 		);
 		return result == 1L;
 	}
