@@ -9,6 +9,7 @@ import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -17,7 +18,6 @@ import java.lang.reflect.Method;
 
 /**
  * LuaBeanPostProcessor
- *
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 动态配置中心服务实现类
@@ -26,14 +26,16 @@ import java.lang.reflect.Method;
 // @Component
 @Slf4j
 @RequiredArgsConstructor
+@AutoConfiguration
 public class LuaBeanPostProcessor implements BeanPostProcessor
 {
 	private final ILuaScriptManager luaScriptManager;
-	
+	{
+		log.info("LuaBeanPostProcessor 正在初始化...");
+	}
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException
 	{
-		
 		// 获取当前bean的类对象
 		Class<?> targetClass = bean.getClass();
 		// 初始化目标对象为传入的bean

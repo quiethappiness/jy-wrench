@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.util.infrastructure.InfrastructureBeanAutoConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.quiethappiness.wrench.util.infrastructure.config.InfrastructureBeanAutoConfig

@@ -21,7 +21,7 @@ public class CommonRequestService
 	@Resource
 	private OkHttpClient okHttpClient;
 	
-	public String request(String apiUrl, String notifyRequestDTOJSON) throws Exception
+	public String post(String apiUrl, String notifyRequestDTOJSON) throws Exception
 	{
 		try
 		{

@@ -20,6 +20,9 @@
 		<module>jy-wrench-starter-method-extention</module>
 		<module>jy-wrench-starter-db-router</module>
 		<module>jy-wrench-util-aop</module>
+		<module>jy-wrench-util-redisson-starter</module>
+		<module>jy-wrench-util-domain-starter</module>
+		<module>jy-wrench-util-trigger-starter</module>
 	</modules>
 	<name>jy-wrench</name>
 	<properties>

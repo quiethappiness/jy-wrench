@@ -19,8 +19,4 @@ public interface IRateLimiterAOP
 	default void accessRateLimiterPointcut()
 	{
 	}
-	
-
-	
-	
 }

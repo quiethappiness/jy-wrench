@@ -1,6 +1,5 @@
 package io.github.quiethappiness.wrench.lua.manager.domain.service.manager;
 
-import io.github.quiethappiness.wrench.lua.manager.config.LuaManagerAutoProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RScript;
 import org.redisson.api.RedissonClient;
@@ -8,6 +7,7 @@ import org.redisson.client.RedisException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -17,7 +17,6 @@ import java.util.Map;
 
 /**
  * LuaScriptManagerImpl
- *
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description lua脚本管理器
@@ -25,16 +24,19 @@ import java.util.Map;
  */
 
 @Slf4j
+@Service
 public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 {
 	private final RedissonClient redissonClient;
 	
+	{
+		log.info("luaScriptManager 正在初始化...");
+	}
+	
 	public LuaScriptManagerImpl(
-		@Autowired RedissonClient redissonClient,
-		@Autowired LuaManagerAutoProperties luaManagerAutoProperties)
+		@Autowired RedissonClient redissonClient)
 	{
 		this.redissonClient = redissonClient;
-		super.scriptPath = luaManagerAutoProperties.getPath();
 	}
 	
 	/**
@@ -76,7 +78,6 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 	
 	/**
 	 * 预加载单个脚本到Redis
-	 *
 	 * @param scriptName
 	 * 	脚本名称
 	 */
@@ -110,7 +111,6 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 	
 	/**
 	 * 执行脚本
-	 *
 	 * @param name
 	 * 	脚本名称
 	 * @param mode
@@ -121,7 +121,6 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 	 * 	键列表
 	 * @param args
 	 * 	参数列表
-	 *
 	 * @return 脚本执行结果
 	 */
 	@Override

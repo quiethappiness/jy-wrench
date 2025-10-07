@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.lua.manager.domain.service.manager;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -18,7 +19,8 @@ import java.util.function.Predicate;
 @Slf4j
 public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 {
-	public String scriptPath = "script";
+	@Value("${jy.wrench.config.lua.path:script}")
+	protected String scriptPath;
 	public static final String LOCAL_SEPARATOR = "/";
 	// 脚本缓存：脚本名称 -> 脚本内容
 	protected final Map<String, String> nameToURIMap = new ConcurrentHashMap<>();
@@ -71,7 +73,6 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	
 	/**
 	 * 注册脚本（不加载内容）
-	 *
 	 * @param resource
 	 * 	资源路径
 	 * @param version
@@ -134,7 +135,6 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	
 	/**
 	 * 加载单个脚本
-	 *
 	 * @param scriptName
 	 * 	脚本名称
 	 */
@@ -195,10 +195,8 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	
 	/**
 	 * 获取脚本版本
-	 *
 	 * @param scriptName
 	 * 	脚本名称
-	 *
 	 * @return 版本号
 	 */
 	@Override
@@ -210,10 +208,8 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	
 	/**
 	 * 获取脚本SHA值
-	 *
 	 * @param scriptName
 	 * 	脚本名称
-	 *
 	 * @return SHA值
 	 */
 	@Override
@@ -225,7 +221,6 @@ public abstract class AbstractLuaScriptManager implements ILuaScriptManager
 	
 	/**
 	 * 获取所有脚本的详细信息，用于监控和调试
-	 *
 	 * @return Map<脚本名, Map < 属性, 值>>
 	 */
 	@Override

@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
 
@@ -21,6 +22,7 @@ import static io.github.quiethappiness.wrench.lua.manager.domain.service.manager
  */
 @Aspect
 @Slf4j
+@Service
 public class LuaScriptServiceAop
 {
 	/**
@@ -35,7 +37,9 @@ public class LuaScriptServiceAop
 	 */
 	// @Pointcut("@annotation(io.github.quiethappiness.lua.manager.types.annotations.LuaScriptPath)")
 	// default void luaScriptMethodPointcut(LuaScriptPath luaScriptMethod) {}
-	
+	{
+		log.info("LuaScriptServiceAop 正在初始化...");
+	}
 	/**
 	 * 环绕通知：处理 Lua 脚本方法调用
 	 */

@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.util.infrastructure.rabbitmq.publisher;
 
+import io.github.quiethappiness.wrench.util.domain.rabbitmq.message.IMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessagePostProcessor;
