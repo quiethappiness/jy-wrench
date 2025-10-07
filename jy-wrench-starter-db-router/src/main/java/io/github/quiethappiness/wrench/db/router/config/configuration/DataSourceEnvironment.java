@@ -15,7 +15,7 @@ import java.util.Objects;
 @Component
 public class DataSourceEnvironment implements EnvironmentAware
 {
-	public final String prefix = "jy.wrench.db-router.jdbc.datasource.";
+	public final String prefix = "jy.wrench.config.db-router.jdbc.datasource.";
 	@Getter
 	private final Map<String, DBRouterProperties.WrenchDBRouterDataSourceProperty> dataSourceMap = new HashMap<>();
 	@Getter

@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
 
-@ConfigurationProperties(prefix = "jy.wrench.db-router.jdbc.datasource", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "jy.wrench.config.db-router.jdbc.datasource", ignoreInvalidFields = true)
 @Data
 public class DBRouterProperties
 {

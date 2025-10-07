@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Slf4j
-@ComponentScan("io.github.quiethappiness.db.router.domain.service")
+@ComponentScan("io.github.quiethappiness.wrench.db.router.domain.service")
 @EnableConfigurationProperties(DBRouterProperties.class)
 @Import({DataSourceEnvironment.class, DBRouterProperty.class, DynamicRoutingDataSource.class})
 public class DBRouterConfiguration
