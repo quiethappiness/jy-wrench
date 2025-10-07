@@ -26,7 +26,7 @@ public class TaskJob
 	/**
 	 * 定时刷新任务调度配置
 	 */
-	@Scheduled(fixedRateString = "${jy.wrench.task.job.refresh-interval:60000}")
+	@Scheduled(fixedRateString = "${jy.wrench.config.task.job.refresh-interval:60000}")
 	public void refreshTasks()
 	{
 		if (!properties.isEnabled())
@@ -39,7 +39,7 @@ public class TaskJob
 	/**
 	 * 定时清理无效任务
 	 */
-	@Scheduled(cron = "${jy.wrench.task.job.clean-invalid-tasks-cron:0 0/10 * * * ?}")
+	@Scheduled(cron = "${jy.wrench.config.task.job.clean-invalid-tasks-cron:0 0/10 * * * ?}")
 	public void cleanInvalidTasks()
 	{
 		if (!properties.isEnabled())

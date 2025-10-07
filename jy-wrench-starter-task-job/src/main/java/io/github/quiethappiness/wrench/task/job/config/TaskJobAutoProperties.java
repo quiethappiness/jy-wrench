@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @description 任务调度器配置属性
  * @date 2025/9/13 20:30
  */
-@ConfigurationProperties(prefix = "jy.wrench.task.job", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "jy.wrench.config.task.job", ignoreInvalidFields = true)
 @Data
 public class TaskJobAutoProperties
 {
