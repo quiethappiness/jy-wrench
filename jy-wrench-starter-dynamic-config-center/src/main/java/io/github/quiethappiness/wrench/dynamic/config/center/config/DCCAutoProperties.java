@@ -14,7 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Setter
 @Getter
-@ConfigurationProperties(prefix = "jy.wrench.config", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = "jy.wrench.config.dynamic", ignoreInvalidFields = true)
 // @AutoConfiguration
 public class DCCAutoProperties
 {

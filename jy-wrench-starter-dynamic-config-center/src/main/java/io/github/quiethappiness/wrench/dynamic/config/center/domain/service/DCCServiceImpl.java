@@ -30,10 +30,12 @@ public class DCCServiceImpl implements IDCCService
 	private final RedissonClient redissonClient;
 	private final Map<String, Object> dccBeanGroup = new ConcurrentHashMap<>();
 	
-	public DCCServiceImpl(DCCAutoProperties DCCAutoProperties, RedissonClient jyWrenchRedissonClient)
+	public DCCServiceImpl(
+		DCCAutoProperties DCCAutoProperties,
+		RedissonClient redissonClient)
 	{
 		this.properties = DCCAutoProperties;
-		this.redissonClient = jyWrenchRedissonClient;
+		this.redissonClient = redissonClient;
 		log.info("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
 	}
 	
