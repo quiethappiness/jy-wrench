@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.infrastructure.rabbitmq.event;
+package io.github.quiethappiness.util.mq.publisher.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

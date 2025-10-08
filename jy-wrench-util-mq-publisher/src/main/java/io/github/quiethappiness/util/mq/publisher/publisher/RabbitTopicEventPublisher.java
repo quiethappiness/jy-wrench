@@ -1,6 +1,6 @@
-package io.github.quiethappiness.wrench.util.infrastructure.rabbitmq.publisher;
+package io.github.quiethappiness.util.mq.publisher.publisher;
 
-import io.github.quiethappiness.wrench.util.domain.rabbitmq.message.IMessage;
+import io.github.quiethappiness.wrench.util.mq.message.domain.IMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.core.MessagePostProcessor;
@@ -13,19 +13,19 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 /**
- * AbstractEventPublisher
+ * RabbitTopicEventPublisher
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 将核心代码抽离
  * @date 2025/9/17 18:00
  */
 @Slf4j
-public abstract class AbstractEventPublisher
+public abstract class RabbitTopicEventPublisher
 {
 	protected final String this_exchange;
 	protected final RabbitTemplate rabbitTemplate;
 	
-	protected AbstractEventPublisher(RabbitTemplate rabbitTemplate, String this_exchange)
+	protected RabbitTopicEventPublisher(RabbitTemplate rabbitTemplate, String this_exchange)
 	{
 		this.this_exchange = this_exchange;
 		this.rabbitTemplate = rabbitTemplate;
