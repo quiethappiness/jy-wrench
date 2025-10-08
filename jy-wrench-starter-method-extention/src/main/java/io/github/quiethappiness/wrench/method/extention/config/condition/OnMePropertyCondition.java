@@ -10,14 +10,15 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 @Slf4j
 public class OnMePropertyCondition extends SpringBootCondition
 {
-	String propertyName = "jy.wrench.methode.enabled";
+	public static final String PROPERTY_PREFIX = "jy.wrench.config.methode";
+	String enableValue = PROPERTY_PREFIX+".enabled";
 	
 	@Override
 	public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata)
 	{
 		// 从环境变量中读取配置，提供默认值 false
 		boolean enabled = context.getEnvironment()
-			.getProperty(propertyName, Boolean.class, false);
+			.getProperty(enableValue, Boolean.class, true);
 		if (enabled)
 		{
 			// log.info("通过YAML配置启用了MethodExtension功能");
