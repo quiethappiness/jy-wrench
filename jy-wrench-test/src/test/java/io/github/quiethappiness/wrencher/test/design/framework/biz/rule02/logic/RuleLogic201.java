@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.logic;
 
-import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.handler.IBranchLogicHandler;
+import io.github.quiethappiness.wrench.util.design_framework.link.model2.proceed_check.handler.IBranchLogicHandler;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.factory.Rule02TradeRuleFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz.tree.factory;
 
-import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
+import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.tree.node.RootNode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.factory;
 
-import io.github.quiethappiness.wrench.design.framework.link.model1.ILogicLink;
+import io.github.quiethappiness.wrench.util.design_framework.link.model1.ILogicLink;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.logic.RuleLogic101;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.logic.RuleLogic102;
 import lombok.AllArgsConstructor;

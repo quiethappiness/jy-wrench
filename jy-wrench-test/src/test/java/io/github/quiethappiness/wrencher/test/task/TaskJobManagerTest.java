@@ -18,10 +18,10 @@ import java.util.Map;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TaskJobTest
+public class TaskJobManagerTest
 {
 	
-	private final Logger log = LoggerFactory.getLogger(TaskJobTest.class);
+	private final Logger log = LoggerFactory.getLogger(TaskJobManagerTest.class);
 	
 	@Resource
 	private ITaskJobService taskJobService;

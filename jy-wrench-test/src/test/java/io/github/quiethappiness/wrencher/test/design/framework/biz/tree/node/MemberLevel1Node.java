@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz.tree.node;
 
 import com.alibaba.fastjson.JSON;
-import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
+import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.tree.AbstractXxxSupport;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.tree.factory.DefaultStrategyFactory;
 import lombok.extern.slf4j.Slf4j;

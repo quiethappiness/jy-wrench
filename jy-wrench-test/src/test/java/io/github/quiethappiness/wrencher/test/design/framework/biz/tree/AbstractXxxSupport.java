@@ -3,7 +3,7 @@ package io.github.quiethappiness.wrencher.test.design.framework.biz.tree;
 
 
 
-import io.github.quiethappiness.wrench.design.framework.tree.AbstractMultiThreadStrategyRouter;
+import io.github.quiethappiness.wrench.util.design_framework.tree.AbstractMultiThreadStrategyRouter;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.tree.factory.DefaultStrategyFactory;
 
 import java.util.concurrent.ExecutionException;

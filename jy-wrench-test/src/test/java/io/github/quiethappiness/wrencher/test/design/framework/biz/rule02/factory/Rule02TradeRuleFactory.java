@@ -1,8 +1,8 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.factory;
 
-import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.AbstractDynamicContext;
-import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.BranchLinkArmory;
-import io.github.quiethappiness.wrench.design.framework.link.model2.proceed_check.chain.BranchLinkedList;
+import io.github.quiethappiness.wrench.util.design_framework.link.model2.proceed_check.AbstractDynamicContext;
+import io.github.quiethappiness.wrench.util.design_framework.link.model2.proceed_check.BranchLinkArmory;
+import io.github.quiethappiness.wrench.util.design_framework.link.model2.proceed_check.chain.BranchLinkedList;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.logic.RuleLogic201;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.logic.RuleLogic202;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.logic.XxxResponse;

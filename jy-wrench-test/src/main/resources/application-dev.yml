@@ -1,7 +1,7 @@
 server:
     port: 9191
       #spring:
-      #    elasticsearch:
+    #    elasticsearch:
     #        uris: http://192.168.247.133:9200  # 根据你的Docker ES配置填写
     # 如果ES启用了安全认证，还需配置用户名和密码
     # username: elastic
@@ -12,10 +12,22 @@ jy:
         config:
             dynamic:
                 system: test-system
+                # 线程池配置
+            thread:
+                pool:
+                    enabled: true
+                    executor:
+                        core-pool-size: 20
+                        max-pool-size: 50
+                        keep-alive-time: 5000
+                        block-queue-size: 5000
+                        policy: CallerRunsPolicy
+
+
             # 任务调度配置
             task:
                 job:
-                    enabled: false
+                    enabled: true
                     pool-size: 5
                     thread-name-prefix: "test-task-scheduler-"
                     wait-for-tasks-to-complete-on-shutdown: true

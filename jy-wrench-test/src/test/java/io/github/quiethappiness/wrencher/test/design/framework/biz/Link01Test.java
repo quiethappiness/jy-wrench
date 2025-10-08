@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrencher.test.design.framework.biz;
 
 import com.alibaba.fastjson.JSON;
-import io.github.quiethappiness.wrench.design.framework.link.model1.ILogicLink;
+import io.github.quiethappiness.wrench.util.design_framework.link.model1.ILogicLink;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.factory.Rule01TradeRuleFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
