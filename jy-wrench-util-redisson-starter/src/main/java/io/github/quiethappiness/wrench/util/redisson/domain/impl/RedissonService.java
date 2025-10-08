@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.util.redisson.domain.impl;
 
+import io.github.quiethappiness.wrench.util.redisson.domain.IRedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;

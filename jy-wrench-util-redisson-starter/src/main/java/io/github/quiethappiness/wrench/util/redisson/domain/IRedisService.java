@@ -1,7 +1,6 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.impl;
+package io.github.quiethappiness.wrench.util.redisson.domain;
 
 import io.github.quiethappiness.wrench.util.redisson.domain.inter.*;
-import org.redisson.api.RedissonClient;
 
 /**
  * Redis 服务
@@ -9,9 +8,5 @@ import org.redisson.api.RedissonClient;
  */
 public interface IRedisService extends IRedisString, IRedisQueue, IRedisAtom, IRedisSet, IRedisList, IRedisMap, IRedisZSet, IRedisBit, IRedisThread, IRedisCommon,IRedisTopic
 {
-	static IRedisService defaultRedisService(RedissonClient redissonClient)
-	{
-		return new RedissonService(redissonClient);
-	}
 
 }
