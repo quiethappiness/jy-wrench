@@ -134,17 +134,36 @@
 				<artifactId>jy-wrench-util-redisson-starter</artifactId>
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
-			<!-- jy wrench domain util -->
+			<!-- jy wrench mq message util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-util-domain-starter</artifactId>
+				<artifactId>jy-wrench-util-mq-message-starter</artifactId>
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			
-			<!-- jy wrench trigger util -->
+			<!-- jy wrench mq listener util -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
-				<artifactId>jy-wrench-util-trigger-starter</artifactId>
+				<artifactId>jy-wrench-util-mq-listener-starter</artifactId>
+				<version>1.3.1-SNAPSHOT</version>
+			</dependency>
+			
+			<!-- jy wrench threadpool manager -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-starter-threadpool-manager</artifactId>
+				<version>1.3.1-SNAPSHOT</version>
+			</dependency>
+			<!-- jy wrench util task -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-util-task</artifactId>
+				<version>1.3.1-SNAPSHOT</version>
+			</dependency>
+			<!-- jy wrench util mq publisher -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-util-mq-publisher</artifactId>
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
