@@ -69,5 +69,18 @@ public class TaskJobScheduleVO
 	public void setTaskLogic(BiConsumer<Long, String> taskLogic)
 	{
 		this.taskExecutor = () -> (Runnable) () -> taskLogic.accept(id, taskParam);
+		// this.taskExecutor=new Supplier<Runnable>() {
+		// 	@Override
+		// 	public Runnable get()
+		// 	{
+		// 		return new Runnable() {
+		// 			@Override
+		// 			public void run()
+		// 			{
+		// 				taskLogic.accept(id, taskParam);
+		// 			}
+		// 		};
+		// 	}
+		// };
 	}
 }

@@ -1,6 +1,7 @@
-package io.github.quiethappiness.wrench.task.job.domain.service;
+package io.github.quiethappiness.wrench.task.job.domain.service.impl;
 
 import io.github.quiethappiness.wrench.task.job.domain.model.TaskJobScheduleVO;
+import io.github.quiethappiness.wrench.task.job.domain.service.ITaskJobService;
 import io.github.quiethappiness.wrench.task.job.provider.ITaskDataProvider;
 import lombok.extern.slf4j.Slf4j;
 

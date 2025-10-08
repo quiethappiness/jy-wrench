@@ -1,11 +1,14 @@
-package io.github.quiethappiness.wrench.task.job.domain.service;
+package io.github.quiethappiness.wrench.task.job.domain.service.impl;
 
 import io.github.quiethappiness.wrench.task.job.domain.model.TaskJobScheduleVO;
 import io.github.quiethappiness.wrench.task.job.provider.ITaskDataProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.ScheduledFuture;
@@ -18,17 +21,20 @@ import java.util.concurrent.ScheduledFuture;
  * @date 2025/9/13 20:25
  */
 @Slf4j
+@Service
 public class TaskJobServiceImpl extends AbstractTaskJobService implements DisposableBean
 {
 	private final TaskScheduler taskScheduler;
 	
 	public TaskJobServiceImpl(
-		TaskScheduler taskScheduler,
-		List<ITaskDataProvider> taskDataProviders
+		@Autowired @Qualifier("jyWrenchTaskScheduler") TaskScheduler jyWrenchTaskScheduler,
+		@Autowired List<ITaskDataProvider> taskDataProviders
 	)
 	{
-		this.taskScheduler = taskScheduler;
+		this.taskScheduler = jyWrenchTaskScheduler;
 		super.taskDataProviders = taskDataProviders;
+		super.initializeTasks();
+		log.info("jy-wrench，任务调度服务(taskJobService)初始化完成。已加载任务数: {}", this.getActiveTaskCount());
 	}
 	
 	/**

@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * TaskJobAutoProperties
+ * TaskJobProperties
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 任务调度器配置属性
@@ -12,13 +12,13 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties(prefix = "jy.wrench.config.task.job", ignoreInvalidFields = true)
 @Data
-public class TaskJobAutoProperties
+public class TaskJobProperties
 {
 	
 	/**
 	 * 是否启用任务调度器
 	 */
-	private boolean enabled = true;
+	private boolean enabled = false;
 	
 	/**
 	 * 线程池大小
