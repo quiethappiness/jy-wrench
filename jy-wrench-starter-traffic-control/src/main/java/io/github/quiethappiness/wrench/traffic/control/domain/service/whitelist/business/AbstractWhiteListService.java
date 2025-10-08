@@ -2,7 +2,7 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist
 
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
-import io.github.quiethappiness.wrench.util.redisson.domain.impl.IRedisService;
+import io.github.quiethappiness.wrench.util.redisson.domain.IRedisService;
 import org.redisson.api.RLocalCachedMap;
 import org.redisson.api.map.WriteMode;
 import org.redisson.api.options.LocalCachedMapOptions;
