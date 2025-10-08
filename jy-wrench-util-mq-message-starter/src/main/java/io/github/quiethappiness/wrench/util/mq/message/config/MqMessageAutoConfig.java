@@ -1,10 +1,10 @@
-package io.github.quiethappiness.wrench.util.domain.config;
+package io.github.quiethappiness.wrench.util.mq.message.config;
 
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 // @ComponentScan(basePackages = "io.github.quiethappiness.infrastructure.util")
-public class DomainBeanAutoConfig
+public class MqMessageAutoConfig
 {
 
 }
