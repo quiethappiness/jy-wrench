@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.domain.task;
+package io.github.quiethappiness.wrench.util.task;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.domain.task;
+package io.github.quiethappiness.wrench.util.task;
 
 import com.alibaba.fastjson.JSON;
 import lombok.AllArgsConstructor;
