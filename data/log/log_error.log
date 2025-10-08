@@ -1,0 +1,21 @@
+25-10-08.10:50:53.429 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.10:50:53.430 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.10:50:53.764 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-10-08.11:18:12.727 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.11:18:12.728 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.11:18:13.028 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-10-08.11:19:22.129 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.11:19:22.129 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.11:19:22.433 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-10-08.11:20:40.768 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.11:20:40.769 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.11:20:41.070 [main            ] WARN  TaskJobAutoConfig      - jy-wrench，任务调度器初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
+25-10-08.11:29:21.553 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.11:29:21.555 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.11:30:24.291 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.11:30:24.292 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.15:10:45.564 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.15:10:45.565 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.15:11:04.893 [main            ] WARN  AbstractLuaScriptManager - key: script/common/set_with_ttl,pattern: script/common/
+25-10-08.15:11:04.894 [main            ] WARN  AbstractLuaScriptManager - key: script/common/incr_with_ttl,pattern: script/common/
+25-10-08.15:11:04.942 [main            ] WARN  TaskJobConfiguration   - jy-wrench，任务调度器(jyWrenchTaskScheduler)初始化完成。线程池大小: 5, 线程名前缀: test-task-scheduler-
