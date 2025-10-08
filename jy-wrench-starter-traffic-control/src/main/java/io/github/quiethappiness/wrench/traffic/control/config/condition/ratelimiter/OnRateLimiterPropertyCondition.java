@@ -17,7 +17,7 @@ public class OnRateLimiterPropertyCondition extends SpringBootCondition
 	{
 		// 从环境变量中读取配置，提供默认值 false
 		boolean enabled = context.getEnvironment()
-			.getProperty(propertyName, Boolean.class, false);
+			.getProperty(propertyName, Boolean.class, true);
 		if (enabled)
 		{
 			// log.info("通过YAML配置启用了 ratemiter 功能");

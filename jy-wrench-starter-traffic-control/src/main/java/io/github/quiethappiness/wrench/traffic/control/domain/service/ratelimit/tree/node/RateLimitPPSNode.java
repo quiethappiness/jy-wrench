@@ -4,7 +4,7 @@ import com.google.common.cache.Cache;
 import com.google.common.util.concurrent.RateLimiter;
 import com.google.common.util.concurrent.SimpleTimeLimiter;
 import com.google.common.util.concurrent.TimeLimiter;
-import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
+import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;

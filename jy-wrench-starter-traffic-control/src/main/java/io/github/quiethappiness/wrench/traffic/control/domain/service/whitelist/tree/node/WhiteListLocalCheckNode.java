@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.node;
 
-import io.github.quiethappiness.wrench.design.framework.tree.StrategyHandler;
+import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
