@@ -1,8 +1,12 @@
 package io.github.quiethappiness.wrench.util.redisson.domain;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -10,7 +14,7 @@ import java.util.function.Supplier;
  * @description 仓储抽象类
  */
 @Slf4j
-public abstract class AbstractRepository
+public abstract class CacheRepository
 {
 	@Resource
 	protected IRedisService redisService;
@@ -26,7 +30,7 @@ public abstract class AbstractRepository
 	 * 	返回类型
 	 * @return 查询结果
 	 */
-	protected <T> T getValueFromCacheOrDb(String cacheKey, Supplier<T> dbFallback)
+	protected <T> T getSingleValueFromCacheOrDb(String cacheKey, Supplier<T> dbFallback)
 	{
 		// 判断是否开启缓存
 		// 从缓存获取
@@ -48,13 +52,45 @@ public abstract class AbstractRepository
 		return dbResult;
 	}
 	
-	protected <T> T getValueFromCacheOrDb(Supplier<String> spliceCacheKey, Supplier<T> dbFallback)
+	protected <T, R> List<R> getListValueFromCacheOrDb(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper, Class<R> rClass)
 	{
 		// 判断是否开启缓存
 		// 从缓存获取
-		String cacheKey = spliceCacheKey.get();
-		return getValueFromCacheOrDb(cacheKey, dbFallback);
+		// List<JSONObject> result = redisService.getValue(cacheKey);
+		// if (!CollectionUtils.isEmpty(result))
+		// {
+		// 	// List<R> cacheResult = JSON.parseObject(string, List.class);
+		// 	// 缓存存在则直接返回
+		// 	return result.stream()
+		// 		.map((jsonObject) -> JSON.parseObject(jsonObject.toString(), rClass))
+		// 		.toList();
+		// }
+		List<R> cacheResult=redisService.getValue(cacheKey);
+		if (!CollectionUtils.isEmpty(cacheResult))
+		{
+			return cacheResult;
+		}
+		// 缓存不存在则从数据库获取
+		List<T> dbResult = dbFallback.get();
+		// 数据库查询结果为空则直接返回
+		if (CollectionUtils.isEmpty(dbResult))
+		{
+			return Collections.emptyList();
+		}
+		List<R> list = dbResult.stream()
+			.map(mapper)
+			.toList();
+		// 写入缓存
+		redisService.setValue(cacheKey, list);
+		return list;
 	}
+	// protected <T> T getValueFromCacheOrDb(Supplier<String> spliceCacheKey, Supplier<T> dbFallback)
+	// {
+	// 	// 判断是否开启缓存
+	// 	// 从缓存获取
+	// 	String cacheKey = spliceCacheKey.get();
+	// 	return getValueFromCacheOrDb(cacheKey, dbFallback);
+	// }
 	
 	/**
 	 * 通用缓存处理方法（带过期时间）

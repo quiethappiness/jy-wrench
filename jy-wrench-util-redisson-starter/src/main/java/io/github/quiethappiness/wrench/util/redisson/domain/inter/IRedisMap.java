@@ -35,7 +35,36 @@ public interface IRedisMap
 	 * @return RLocalCachedMap实例，支持本地缓存功能
 	 */
 	<K, V> RLocalCachedMap<K, V> getLocalCachedMap(LocalCachedMapOptions<K, V> options);
+	/**
+	 * 大数据量型（如新闻列表、用户Feed）
+	 * 数据量巨大，无法全部缓存，需要高效利用有限内存，并防止缓存穿透。
+	 * @param options
+	 */
+	void set_LocalCacheMapOptions_Of_LargeDataVolumeType(LocalCachedMapOptions<?, ?> options);
 	
+	/**
+	 * 强一致型（如库存、秒杀）
+	 * 这是最苛刻的场景，要求所有节点立即看到数据变化，对一致性的要求高于读取性能。
+	 * @param options
+	 */
+	void set_LocalCacheMapOptions_Of_StrongConsistencyType(LocalCachedMapOptions<?, ?> options);
+	
+	/**
+	 * 会话管理型（如用户Session）
+	 * 这类数据读写都比较频繁，且对一致性有一定要求，需要在性能和数据准确性间取得平衡。
+	 * @param options
+	 */
+	void set_LocalCacheMapOptions_Of_SessionManagement(LocalCachedMapOptions<?, ?> options);
+	
+	/**
+	 * 高频读取型（如商品信息、配置数据）
+	 * 这种场景下，数据变化不频繁，但读取请求量巨大，对读取速度和系统吞吐量要求极高。
+	 * @param options
+	 */
+	void set_LocalCacheMapOptions_Of_HighFrequencyReading(LocalCachedMapOptions<?, ?> options);
+	
+	@Deprecated
+	void set_LocalCacheMapOptions(LocalCachedMapOptions<?, ?> options);
 
 	/**
 	 * 将指定的键值对添加到哈希表中

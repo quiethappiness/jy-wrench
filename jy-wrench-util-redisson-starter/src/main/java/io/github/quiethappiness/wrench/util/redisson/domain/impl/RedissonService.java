@@ -4,6 +4,7 @@ import io.github.quiethappiness.wrench.util.redisson.domain.IRedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
+import org.redisson.api.map.WriteMode;
 import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,14 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor(access = lombok.AccessLevel.PACKAGE)
 @Service
 @Slf4j
-public class RedissonService  implements IRedisService
+public class RedissonService implements IRedisService
 {
 	private final RedissonClient redissonClient;
+	
 	{
 		log.info("jy-wrench，注册器（RedissonService）初始化完成");
 	}
+	
 	@Override
 	public RKeys getKey()
 	{
@@ -66,6 +69,7 @@ public class RedissonService  implements IRedisService
 	{
 		return redissonClient.getDelayedQueue(rBlockingQueue);
 	}
+	
 	@Override
 	public void setAtomicLong(String key, long value)
 	{
@@ -211,10 +215,98 @@ public class RedissonService  implements IRedisService
 	{
 		return redissonClient.getMapCache(name);
 	}
+	
 	@Override
-	public <K, V> RLocalCachedMap<K, V> getLocalCachedMap( LocalCachedMapOptions<K, V> options)
+	public <K, V> RLocalCachedMap<K, V> getLocalCachedMap(LocalCachedMapOptions<K, V> options)
 	{
 		return redissonClient.getLocalCachedMap(options);
+	}
+	
+	@Override
+	public void set_LocalCacheMapOptions_Of_LargeDataVolumeType(LocalCachedMapOptions<?, ?> options)
+	{
+		options
+			.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.LRU) // 库存数据量固定，不主动淘汰
+			.storeMode(LocalCachedMapOptions.StoreMode.LOCALCACHE_REDIS)
+			.syncStrategy(LocalCachedMapOptions.SyncStrategy.INVALIDATE)  // 节省带宽
+			.cacheSize(1000) // 可根据内存容量调整
+			.timeToLive(Duration.ofMinutes(2)) // TTL较短，及时更新
+			.maxIdle(Duration.ofMinutes(5))
+			.reconnectionStrategy(LocalCachedMapOptions.ReconnectionStrategy.CLEAR)// 重连后清空，保证会话一致性
+			.writeMode(WriteMode.WRITE_BEHIND)
+			.storeCacheMiss(true);
+	}
+	
+	@Override
+	public void set_LocalCacheMapOptions_Of_StrongConsistencyType(LocalCachedMapOptions<?, ?> options)
+	{
+		options
+			.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.NONE) // 库存数据量固定，不主动淘汰
+			.storeMode(LocalCachedMapOptions.StoreMode.LOCALCACHE_REDIS)
+			.syncStrategy(LocalCachedMapOptions.SyncStrategy.UPDATE) // 或 INVALIDATE，确保强一致性
+			.cacheSize(1000) // 可根据内存容量调整
+			.timeToLive(Duration.ofMinutes(5)) // TTL较短，及时更新
+			.maxIdle(Duration.ofMinutes(5))
+			.reconnectionStrategy(LocalCachedMapOptions.ReconnectionStrategy.CLEAR)// 重连后清空，保证会话一致性
+			.writeMode(WriteMode.WRITE_BEHIND)
+			.storeCacheMiss(false);
+	}
+	
+	@Override
+	public void set_LocalCacheMapOptions_Of_SessionManagement(LocalCachedMapOptions<?, ?> options)
+	{
+		options
+			.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.LRU) // // 淘汰最久未使用的会话
+			.storeMode(LocalCachedMapOptions.StoreMode.LOCALCACHE_REDIS)
+			.syncStrategy(LocalCachedMapOptions.SyncStrategy.INVALIDATE) // 失效策略，平衡性能与一致性
+			.cacheSize(5000) // 可根据内存容量调整
+			.reconnectionStrategy(LocalCachedMapOptions.ReconnectionStrategy.CLEAR)// 重连后清空，保证会话一致性
+			.timeToLive(Duration.ofHours(2)) // 会话最大存活2小时
+			.maxIdle(Duration.ofMinutes(30)) // 30分钟不活动则失效
+			.writeMode(WriteMode.WRITE_BEHIND)
+			.writeRetryAttempts(3) // 网络波动时重试3次
+			.storeCacheMiss(true);// 缓存空结果，防穿透
+	}
+	
+	@Override
+	public void set_LocalCacheMapOptions_Of_HighFrequencyReading(LocalCachedMapOptions<?, ?> options)
+	{
+		options
+			.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.LFU) // 优先保留热点商品
+			.storeMode(LocalCachedMapOptions.StoreMode.LOCALCACHE_REDIS)
+			.syncStrategy(LocalCachedMapOptions.SyncStrategy.UPDATE) // 更新策略保证读性能
+			.cacheSize(10000) // 可根据内存容量调整
+			.timeToLive(Duration.ofMinutes(30)) // 数据有效时间较长
+			.reconnectionStrategy(LocalCachedMapOptions.ReconnectionStrategy.LOAD)// 平衡一致性与性能
+			.writeMode(WriteMode.WRITE_BEHIND)// 异步写入数据库，提升性能
+			.writeRetryAttempts(5) // 网络波动时重试5次
+			.storeCacheMiss(false);
+	}
+	
+	@Override
+	public void set_LocalCacheMapOptions(LocalCachedMapOptions<?, ?> options)
+	{
+		// 定义本地缓存的淘汰策略，如LRU（最近最少使用）、LFU（最不经常使用）[3,5](@ref)
+		options.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.LRU)
+			// 本地缓存的最大容量，如果缓存数量超过此值，会根据淘汰策略移除元素[1,7](@ref)
+			.cacheSize(1000)
+			// 定义本地缓存与Redis主数据之间的同步策略[3,5](@ref)
+			// INVALIDATE: 当数据在Redis中更新时，使所有实例中的该缓存条目失效（默认）
+			// UPDATE: 当数据在Redis中更新时，将新值推送到所有实例的本地缓存
+			// NONE: 不进行同步
+			.syncStrategy(LocalCachedMapOptions.SyncStrategy.INVALIDATE)
+			// 定义与Redis连接断开并重新建立后的处理策略[3,5](@ref)
+			// CLEAR: 清空本地缓存，确保从Redis重新加载最新数据
+			// LOAD: 尝试根据服务端保存的失效日志更新本地缓存
+			// NONE: 不做处理
+			.reconnectionStrategy(LocalCachedMapOptions.ReconnectionStrategy.NONE)
+			.writeMode(WriteMode.WRITE_BEHIND)
+			// 本地缓存条目的生存时间（TTL）[1,7](@ref)
+			.timeToLive(Duration.ofHours(12))
+			// 本地缓存条目的最大空闲时间[1,7](@ref)
+			.maxIdle(Duration.ofMinutes(5))
+			.writeRetryAttempts(10)
+		;
 	}
 	
 	@Override
@@ -309,10 +401,10 @@ public class RedissonService  implements IRedisService
 		return redissonClient.getBucket(key)
 			.trySet("lock", expired, timeUnit);
 	}
+	
 	@Override
 	public RBitSet getBitSet(String key)
 	{
 		return redissonClient.getBitSet(key);
 	}
-
 }
