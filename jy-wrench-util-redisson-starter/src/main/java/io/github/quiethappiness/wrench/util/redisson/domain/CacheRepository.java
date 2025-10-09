@@ -52,7 +52,7 @@ public abstract class CacheRepository
 		return dbResult;
 	}
 	
-	protected <T, R> List<R> getListValueFromCacheOrDb(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper, Class<R> rClass)
+	protected <T, R> List<R> getListValueFromCacheOrDb(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper)
 	{
 		// 判断是否开启缓存
 		// 从缓存获取
