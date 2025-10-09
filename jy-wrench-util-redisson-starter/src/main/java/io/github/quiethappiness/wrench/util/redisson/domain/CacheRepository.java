@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
@@ -65,7 +66,14 @@ public abstract class CacheRepository
 		// 		.map((jsonObject) -> JSON.parseObject(jsonObject.toString(), rClass))
 		// 		.toList();
 		// }
-		List<R> cacheResult=redisService.getValue(cacheKey);
+		Object value = redisService.getValue(cacheKey);
+		log.info("从缓存获取结果：{}", value);
+		List<R> cacheResult=null;
+		if(value instanceof List)
+		{
+			cacheResult = (List<R>) value;
+		}
+		// log.info("从缓存获取结果：{}", cacheResult);
 		if (!CollectionUtils.isEmpty(cacheResult))
 		{
 			return cacheResult;
@@ -81,7 +89,7 @@ public abstract class CacheRepository
 			.map(mapper)
 			.toList();
 		// 写入缓存
-		redisService.setValue(cacheKey, list);
+		redisService.setValue(cacheKey, new ArrayList<>(list));
 		return list;
 	}
 	// protected <T> T getValueFromCacheOrDb(Supplier<String> spliceCacheKey, Supplier<T> dbFallback)

@@ -44,7 +44,7 @@ public class RedissonClientRegisterConfiguration
 		Config config = new Config();
 		// 根据需要可以设定编解码器；https://github.com/redisson/redisson/wiki/4.-%E6%95%B0%E6%8D%AE%E5%BA%8F%E5%88%97%E5%8C%96
 		// 使用更宽松的 Jackson 配置
-		// setCustomCodeC(config);
+		setCustomCodeC(config);
 		SingleServerConfig singleServerConfig = config.useSingleServer()
 			.setAddress("redis://" + properties.getHost() + ":" + properties.getPort())
 			// .setPassword(properties.getPassword())
@@ -67,8 +67,8 @@ public class RedissonClientRegisterConfiguration
 	
 	private static void setCustomCodeC(Config config)
 	{
-		// config.setCodec(JsonJacksonCodec.INSTANCE);
-		config.setCodec(new RedisCodec());
+		config.setCodec(JsonJacksonCodec.INSTANCE);
+		// config.setCodec(new RedisCodec());
 		// config.setCodec(new JSONBCodec( ));
 	}
 	
