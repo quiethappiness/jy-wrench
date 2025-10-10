@@ -11,6 +11,7 @@ import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,16 +27,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class DCCServiceImpl implements IDCCService
 {
-	private final DCCAutoProperties properties;
-	private final RedissonClient redissonClient;
+	@Resource
+	private DCCAutoProperties dccAutoProperties;
+	@Resource
+	private RedissonClient redissonClient;
 	private final Map<String, Object> dccBeanGroup = new ConcurrentHashMap<>();
 	
-	public DCCServiceImpl(
-		DCCAutoProperties DCCAutoProperties,
-		RedissonClient redissonClient)
 	{
-		this.properties = DCCAutoProperties;
-		this.redissonClient = redissonClient;
 		log.info("jy-wrench，注册器（redis）服务 dynamicConfigCenterService 初始化完成。");
 	}
 	
@@ -71,7 +69,7 @@ public class DCCServiceImpl implements IDCCService
 			{
 				throw new RuntimeException("[" + name + "] @DCCValue is not config value config case 「isSwitch/isSwitch:1」");
 			}
-			String key = properties.getKey(name);
+			String key = dccAutoProperties.getKey(name);
 			String setValue = defaultValue;
 			try
 			{
@@ -120,7 +118,7 @@ public class DCCServiceImpl implements IDCCService
 	{
 		String name = attributeVO.getName();
 		String value = attributeVO.getValue();
-		String key = properties.getKey(name);
+		String key = dccAutoProperties.getKey(name);
 		RBucket<Object> rBucket = redissonClient.getBucket(key);
 		if (!rBucket.isExists())
 		{

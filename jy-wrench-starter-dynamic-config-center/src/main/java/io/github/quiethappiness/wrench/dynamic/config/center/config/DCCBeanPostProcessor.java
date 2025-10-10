@@ -1,11 +1,12 @@
 package io.github.quiethappiness.wrench.dynamic.config.center.config;
 
 import io.github.quiethappiness.wrench.dynamic.config.center.domain.service.IDCCService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+
+import javax.annotation.Resource;
 
 /**
  * DCCBeanPostProcessor
@@ -15,16 +16,17 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  * @date 2025/9/10 15:39
  */
 @AutoConfiguration
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 @Slf4j
 public class DCCBeanPostProcessor implements BeanPostProcessor
 {
-	private final IDCCService dynamicConfigCenterService;
+	@Resource
+	private IDCCService idccService;
 	
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException
 	{
 		log.debug("jy-wrench，动态配置-注册，代理对象创建完成。");
-		return dynamicConfigCenterService.proxyObject(bean);
+		return idccService.proxyObject(bean);
 	}
 }

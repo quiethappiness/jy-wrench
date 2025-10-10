@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.util.redisson.config;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.ParserConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -106,7 +107,12 @@ public class RedissonClientRegisterConfiguration
 		};
 		
 		private final Decoder<Object> decoder =
-			(buf, state) -> JSON.parseObject(new ByteBufInputStream(buf), Object.class);
+			(buf, state) ->
+			{
+				ParserConfig.getGlobalInstance()
+					.addAccept("io.github.quiethappiness");
+				return JSON.parseObject(new ByteBufInputStream(buf), Object.class);
+			};
 		
 		@Override
 		public Decoder<Object> getValueDecoder()

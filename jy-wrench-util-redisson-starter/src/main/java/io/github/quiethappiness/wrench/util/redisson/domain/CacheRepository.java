@@ -31,11 +31,11 @@ public abstract class CacheRepository
 	 * 	返回类型
 	 * @return 查询结果
 	 */
-	protected <T> T getSingleValueFromCacheOrDb(String cacheKey, Supplier<T> dbFallback)
+	protected <T, R> R getSingleValueFromCacheOrDb(String cacheKey, Supplier<T> dbFallback, Function<T, R> mapper)
 	{
 		// 判断是否开启缓存
 		// 从缓存获取
-		T cacheResult = redisService.getValue(cacheKey);
+		R cacheResult = redisService.getValue(cacheKey);
 		// 缓存存在则直接返回
 		if (null != cacheResult)
 		{
@@ -48,9 +48,10 @@ public abstract class CacheRepository
 		{
 			return null;
 		}
+		cacheResult = mapper.apply(dbResult);
 		// 写入缓存
-		redisService.setValue(cacheKey, dbResult);
-		return dbResult;
+		redisService.setValue(cacheKey, cacheResult);
+		return cacheResult;
 	}
 	
 	protected <T, R> List<R> getListValueFromCacheOrDb(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper)
@@ -68,8 +69,8 @@ public abstract class CacheRepository
 		// }
 		Object value = redisService.getValue(cacheKey);
 		log.info("从缓存获取结果：{}", value);
-		List<R> cacheResult=null;
-		if(value instanceof List)
+		List<R> cacheResult = null;
+		if (value instanceof List)
 		{
 			cacheResult = (List<R>) value;
 		}
