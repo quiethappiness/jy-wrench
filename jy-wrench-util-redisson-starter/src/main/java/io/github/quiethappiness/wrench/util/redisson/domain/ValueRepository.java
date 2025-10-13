@@ -17,7 +17,7 @@ import java.util.function.Supplier;
  */
 @Slf4j
 @Repository
-public final class ValueRepository
+public class ValueRepository
 {
 	@Resource
 	private IRedisString redisString;
