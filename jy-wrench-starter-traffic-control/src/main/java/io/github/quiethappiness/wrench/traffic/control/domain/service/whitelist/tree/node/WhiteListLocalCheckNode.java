@@ -27,10 +27,10 @@ public class WhiteListLocalCheckNode extends AbstractWhiteListSupport
 		final WhiteListProperties whiteListProperties = requestParameter.getWhiteListProperties();
 		final AttrValueResult attrValue = dynamicContext.getAttrValueResult();
 		final String uri = dynamicContext.getUri();
-		log.warn("开始检查本地白名单 id: {}", attrValue.userId);
+		log.warn("开始检查本地白名单 id: {}", attrValue.userId());
 		log.warn(Arrays.toString(whiteListProperties.getRules()));
 		final boolean[] isInWhitelist = {false};
-		final String finalUserId = attrValue.userId;
+		final String finalUserId = attrValue.userId();
 		Arrays.stream(whiteListProperties.getRules())
 			.filter(localRule ->
 			{
@@ -41,21 +41,21 @@ public class WhiteListLocalCheckNode extends AbstractWhiteListSupport
 				}
 				boolean match = matcher.match(localRule.getUri(), uri);
 				return match && localRule.getWhiteList() != null && localRule.getWhiteList()
-					.containsKey(attrValue.type);
+					.containsKey(attrValue.type());
 			}) // 匹配uri,这里的匹配方式是前缀匹配
 			.findFirst()
 			.ifPresent(localRule ->
 			{
 				// 添加null检查
 				isInWhitelist[0] = localRule.getWhiteList()
-					.get(attrValue.type)
+					.get(attrValue.type())
 					.contains(finalUserId);
 			});
 		if (isInWhitelist[0])
 		{
-			log.warn("用户{}在yml白名单中", attrValue.userId);
+			log.warn("用户{}在yml白名单中", attrValue.userId());
 			return WhiteListResultEntity.builder()
-				.inWhitListResult(new InWhitListResult(attrValue.userId, true))
+				.inWhitListResult(new InWhitListResult(attrValue.userId(), true))
 				.build();
 		}
 		// todo:设置 是否在白名单中 isInWhitelist

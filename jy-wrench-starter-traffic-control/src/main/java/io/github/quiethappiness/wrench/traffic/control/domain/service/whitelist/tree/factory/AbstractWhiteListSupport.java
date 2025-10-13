@@ -1,12 +1,11 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory;
 
-import io.github.quiethappiness.wrench.util.design_framework.tree.AbstractMultiThreadStrategyRouter;
-import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import io.github.quiethappiness.wrench.util.design_framework.tree.AbstractMultiThreadStrategyRouter;
+import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,20 +28,13 @@ public abstract class AbstractWhiteListSupport extends AbstractMultiThreadStrate
 		return defaultStrategyHandler;
 	}
 	
-	@RequiredArgsConstructor
-	@Data
-	public static class AttrValueResult
+	@Builder
+	public record AttrValueResult(WhiteListType type, String userId)
 	{
-		public final WhiteListType type;
-		public final String userId;
 	}
 	
-	@Data
-	@Slf4j
-	@RequiredArgsConstructor
-	public static class InWhitListResult
+	@Builder
+	public record InWhitListResult(String userId, boolean isInWhitelist)
 	{
-		public final String userId;
-		public final boolean isInWhitelist;
 	}
 }

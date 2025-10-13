@@ -16,7 +16,7 @@ public class WhiteListEndNode extends AbstractWhiteListSupport
 	{
 		final AttrValueResult valueResult = dynamicContext.getAttrValueResult();
 		final boolean[] isInWhitelist = dynamicContext.getIsInWhitelist();
-		InWhitListResult inWhitListResult = new InWhitListResult(valueResult.userId, isInWhitelist[0]);
+		InWhitListResult inWhitListResult = new InWhitListResult(valueResult.userId(), isInWhitelist[0]);
 		return new WhiteListResultEntity(inWhitListResult);
 	}
 }

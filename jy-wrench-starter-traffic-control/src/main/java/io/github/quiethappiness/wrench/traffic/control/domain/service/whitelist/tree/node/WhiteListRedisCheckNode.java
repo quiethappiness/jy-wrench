@@ -28,12 +28,12 @@ public class WhiteListRedisCheckNode extends AbstractWhiteListSupport
 		final boolean[] isInWhitelist = dynamicContext.getIsInWhitelist();
 		try
 		{
-			log.warn("开始检查数据库白名单 id: {}", attrValue.userId);
-			isInWhitelist[0] = whitelistService.checkWhitelistId(uri, attrValue.type, attrValue.userId);
+			log.warn("开始检查数据库白名单 id: {}", attrValue.userId());
+			isInWhitelist[0] = whitelistService.checkWhitelistId(uri, attrValue.type(), attrValue.userId());
 		}
 		catch (Exception e)
 		{
-			log.error("Error checking whitelist for user: {}", attrValue.userId, e);
+			log.error("Error checking whitelist for user: {}", attrValue.userId(), e);
 		}
 		return router(requestParameter, dynamicContext);
 	}

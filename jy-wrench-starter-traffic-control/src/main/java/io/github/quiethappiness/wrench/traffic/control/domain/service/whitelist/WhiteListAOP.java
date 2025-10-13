@@ -34,22 +34,22 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 		// 解析key表达式获取userId
 		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
 		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
-		if (inWhitListResult == null || inWhitListResult.userId == null)
+		if (inWhitListResult == null || inWhitListResult.userId() == null)
 		{
 			return jp.proceed();
 		}
-		if (inWhitListResult.isInWhitelist)
+		if (inWhitListResult.isInWhitelist())
 		{
-			log.info("User {} is in whitelist, proceeding normally without rate limiting", inWhitListResult.userId);
+			log.info("User {} is in whitelist, proceeding normally without rate limiting", inWhitListResult.userId());
 			// 用户在白名单中，直接放行，不触发限流
 		}
 		else
 		{
-			log.info("User {} is not in whitelist, will check rate limit", inWhitListResult.userId);
+			log.info("User {} is not in whitelist, will check rate limit", inWhitListResult.userId());
 			// 用户不在白名单中，添加一个标记然后继续执行
 			// 这里我们使用ThreadLocal来传递状态
 		}
-		TrafficControlContext.setInWhiteList(inWhitListResult.isInWhitelist);
+		TrafficControlContext.setInWhiteList(inWhitListResult.isInWhitelist());
 		try
 		{
 			return jp.proceed();
@@ -66,19 +66,19 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 		// 解析key表达式获取userId
 		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
 		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
-		if (inWhitListResult == null || inWhitListResult.userId == null)
+		if (inWhitListResult == null || inWhitListResult.userId() == null)
 		{
 			return jp.proceed();
 		}
-		if (inWhitListResult.isInWhitelist)
+		if (inWhitListResult.isInWhitelist())
 		{
-			log.info("User {} is in whitelist, proceeding normally", inWhitListResult.userId);
+			log.info("User {} is in whitelist, proceeding normally", inWhitListResult.userId());
 			// 用户在白名单中，直接放行
 			return jp.proceed();
 		}
 		else
 		{
-			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId);
+			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId());
 			// 用户不在白名单中，抛出异常或返回错误
 			log.error("User not in whitelist");
 			return fallbackMethodResult(jp, tcWhiteList.fallbackMethod());
