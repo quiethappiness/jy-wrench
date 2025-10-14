@@ -124,6 +124,7 @@ public class DCCServiceImpl implements IDCCService
 		{
 			return;
 		}
+		// 同步更新缓存
 		rBucket.set(value);
 		Object targetBean = dccBeanGroup.get(key);
 		if (targetBean == null)

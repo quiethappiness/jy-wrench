@@ -24,25 +24,6 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class DCCRegisterConfiguration
 {
-	
-	// @Bean
-	// public IDCCService dynamicConfigCenterService(
-	// 	DCCAutoProperties dynamicConfigCenterAutoProperties,
-	// 	RedissonClient jyWrenchRedissonClient)
-	// {
-	//
-	// 	return new DCCServiceImpl(dynamicConfigCenterAutoProperties, jyWrenchRedissonClient);
-	// }
-	
-	
-	// @Bean
-	// public DCCAdjustListener dynamicConfigCenterAdjustListener(
-	// 	IDCCService dynamicConfigCenterService)
-	// {
-	//
-	// 	return new DCCAdjustListener(dynamicConfigCenterService);
-	// }
-	
 	@Bean
 	public RTopic dynamicConfigCenterTopic(
 		DCCAutoProperties DCCAutoProperties,
