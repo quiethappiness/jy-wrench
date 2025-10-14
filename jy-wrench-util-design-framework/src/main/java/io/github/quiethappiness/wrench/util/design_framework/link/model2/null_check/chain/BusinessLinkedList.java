@@ -17,7 +17,7 @@ public class BusinessLinkedList<T, D, R> extends LinkedList<IBusinessLogicHandle
 	}
 	
 	@Override
-	public R apply(T requestParameter, D dynamicContext) throws Exception
+	public R apply(T requestParameter, D dynamicContext) throws Throwable
 	{
 		Node<IBusinessLogicHandler<T, D, R>> current = this.getFirst();
 		do

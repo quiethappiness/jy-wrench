@@ -11,6 +11,6 @@ public interface IBusinessLogicHandler<T, D, R> {
         return null;
     }
 
-    R apply(T requestParameter, D dynamicContext) throws Exception;
+    R apply(T requestParameter, D dynamicContext) throws Throwable;
 
 }

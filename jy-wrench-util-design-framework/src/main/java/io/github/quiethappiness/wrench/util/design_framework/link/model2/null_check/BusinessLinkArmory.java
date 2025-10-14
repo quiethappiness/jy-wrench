@@ -5,6 +5,8 @@ import io.github.quiethappiness.wrench.util.design_framework.link.model2.null_ch
 import lombok.Getter;
 import org.springframework.lang.NonNull;
 
+import java.util.List;
+
 /**
  * @author quiethappiness @jingyue
  * @description 链路装配
@@ -18,6 +20,15 @@ public class BusinessLinkArmory<T, D, R>
 	
 	@SafeVarargs
 	public BusinessLinkArmory(String linkName, @NonNull IBusinessLogicHandler<T, D, R>... logicHandlers)
+	{
+		logicLink = new BusinessLinkedList<>(linkName);
+		for (IBusinessLogicHandler<T, D, R> logicHandler : logicHandlers)
+		{
+			logicLink.add(logicHandler);
+		}
+	}
+	
+	public BusinessLinkArmory(String linkName, @NonNull List<? extends IBusinessLogicHandler<T, D, R>> logicHandlers)
 	{
 		logicLink = new BusinessLinkedList<>(linkName);
 		for (IBusinessLogicHandler<T, D, R> logicHandler : logicHandlers)
