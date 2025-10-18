@@ -13,7 +13,7 @@ public class LinkedList<E> implements ILink<E> {
     /**
      * 责任链名称
      */
-    private final String name;
+    @Getter private final String name;
 
     transient int size = 0;
 
@@ -161,9 +161,4 @@ public class LinkedList<E> implements ILink<E> {
         }
 
     }
-
-    public String getName() {
-        return name;
-    }
-
 }

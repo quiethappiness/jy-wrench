@@ -12,7 +12,6 @@ import java.util.concurrent.*;
 @Slf4j
 @EnableAsync
 @Configuration
-
 public class ThreadPoolConfig
 {
 	

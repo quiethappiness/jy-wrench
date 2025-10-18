@@ -1,9 +1,7 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
 
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RKeys;
-
-import java.util.concurrent.TimeUnit;
 
 public interface IRedisCommon
 {
@@ -35,8 +33,5 @@ public interface IRedisCommon
 	 * @return 返回结果
 	 */
 	<T> RBloomFilter<T> getBloomFilter(String key);
-	
-	Boolean setNx(String key);
-	
-	Boolean setNx(String key, long expired, TimeUnit timeUnit);
+
 }

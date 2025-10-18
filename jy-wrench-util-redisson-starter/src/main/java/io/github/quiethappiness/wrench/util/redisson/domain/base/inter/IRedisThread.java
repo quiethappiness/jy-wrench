@@ -1,9 +1,18 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
 
 import org.redisson.api.*;
 
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
 public interface IRedisThread
 {
+	
+	Boolean setNx(String key);
+	
+	Boolean setNx(String key, long expired, TimeUnit timeUnit);
+	
+	Boolean setNx(String key, Duration expired);
 	/**
 	 * 获取 Redis 锁（可重入锁）
 	 * @param key

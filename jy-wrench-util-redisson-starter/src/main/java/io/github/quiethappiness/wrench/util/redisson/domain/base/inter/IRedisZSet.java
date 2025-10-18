@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
 
 import org.redisson.api.RLexSortedSet;
 import org.redisson.api.RScoredSortedSet;

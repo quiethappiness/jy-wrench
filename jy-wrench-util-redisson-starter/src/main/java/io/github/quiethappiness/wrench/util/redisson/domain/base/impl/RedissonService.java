@@ -1,6 +1,5 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.impl;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.impl;
 
-import io.github.quiethappiness.wrench.util.redisson.domain.IRedisService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
@@ -392,14 +391,20 @@ public class RedissonService implements IRedisService
 	public Boolean setNx(String key)
 	{
 		return redissonClient.getBucket(key)
-			.trySet("lock");
+			.setIfAbsent("lock");
 	}
 	
 	@Override
 	public Boolean setNx(String key, long expired, TimeUnit timeUnit)
 	{
+		Duration duration = Duration.ofMillis(timeUnit.toMillis(expired));
+		return setNx(key, duration);
+	}
+	@Override
+	public Boolean setNx(String key, Duration duration)
+	{
 		return redissonClient.getBucket(key)
-			.trySet("lock", expired, timeUnit);
+			.setIfAbsent("lock", duration);
 	}
 	
 	@Override
