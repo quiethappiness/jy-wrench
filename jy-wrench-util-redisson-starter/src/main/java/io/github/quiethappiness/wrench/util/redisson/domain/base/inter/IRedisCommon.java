@@ -1,7 +1,10 @@
 package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
 
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RFuture;
 import org.redisson.api.RKeys;
+
+import java.util.Collection;
 
 public interface IRedisCommon
 {
@@ -15,7 +18,20 @@ public interface IRedisCommon
 	 * 	键
 	 */
 	void remove(String key);
+	// 方式1：使用RKeys接口
+	void deleteKey(String... keyArray);
 	
+	// 方式2：使用RBucket接口
+	void deleteBucket(String key);
+	
+	// 方式3：批量删除
+	void deleteKeys(Collection<String> keys);
+	
+	// 异步删除
+	RFuture<Long> deleteAsync(String key);
+	
+	// 异步批量删除
+	RFuture<Long> deleteByPatternAsync(String pattern);
 	/**
 	 * 判断指定 key 的值是否存在
 	 * @param key

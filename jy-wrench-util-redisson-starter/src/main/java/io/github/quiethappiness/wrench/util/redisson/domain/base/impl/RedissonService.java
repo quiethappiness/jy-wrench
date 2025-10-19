@@ -8,14 +8,14 @@ import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Redis 服务 - Redisson
  * @author quiethappiness @jingyue
  */
-
-@RequiredArgsConstructor(access = lombok.AccessLevel.PACKAGE)
+@RequiredArgsConstructor
 @Service
 @Slf4j
 public class RedissonService implements IRedisService
@@ -124,6 +124,39 @@ public class RedissonService implements IRedisService
 			.delete();
 	}
 	
+	// 方式1：使用RKeys接口
+	@Override
+	public void deleteKey(String... keyArray) {
+		RKeys keys = redissonClient.getKeys();
+		keys.delete(keyArray);
+	}
+	
+	// 方式2：使用RBucket接口
+	@Override
+	public void deleteBucket(String key) {
+		RBucket<Object> bucket = redissonClient.getBucket(key);
+		bucket.delete();
+	}
+	
+	// 方式3：批量删除
+	@Override
+	public void deleteKeys(Collection<String> keys) {
+		RKeys rKeys = redissonClient.getKeys();
+		rKeys.delete(keys.toArray(new String[0]));
+	}
+	// 异步删除
+	@Override
+	public RFuture<Long> deleteAsync(String key) {
+		RKeys keys = redissonClient.getKeys();
+		return keys.deleteAsync(key);
+	}
+	
+	// 异步批量删除
+	@Override
+	public RFuture<Long> deleteByPatternAsync(String pattern) {
+		RKeys keys = redissonClient.getKeys();
+		return keys.deleteByPatternAsync(pattern);
+	}
 	@Override
 	public boolean isExists(String key)
 	{

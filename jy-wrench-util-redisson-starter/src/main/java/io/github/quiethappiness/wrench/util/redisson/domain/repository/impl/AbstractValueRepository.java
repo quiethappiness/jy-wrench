@@ -1,8 +1,6 @@
 package io.github.quiethappiness.wrench.util.redisson.domain.repository.impl;
 
-import io.github.quiethappiness.wrench.util.redisson.domain.base.inter.IRedisCommon;
-import io.github.quiethappiness.wrench.util.redisson.domain.base.inter.IRedisString;
-import io.github.quiethappiness.wrench.util.redisson.domain.base.inter.IRedisThread;
+import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
 import io.github.quiethappiness.wrench.util.redisson.domain.execption.CacheAccessException;
 import io.github.quiethappiness.wrench.util.redisson.domain.repository.IValueRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +18,7 @@ import java.util.stream.Collectors;
 public abstract class AbstractValueRepository implements IValueRepository
 {
 	@Resource
-	protected IRedisString redisString;
-	@Resource
-	private IRedisCommon redisCommon;
-	@Resource
-	private IRedisThread redisThread;
+	protected IRedisService redisService;
 	protected static final String NULL = "NULL";
 	
 	/**
@@ -49,7 +43,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 		try
 		{
 			// 第一次缓存检查
-			Object cached = redisString.getValue(cacheKey);
+			Object cached = redisService.getValue(cacheKey);
 			if (cached != null)
 			{
 				if (isNullValue(cached))
@@ -60,14 +54,14 @@ public abstract class AbstractValueRepository implements IValueRepository
 			}
 			// 获取分布式锁
 			String lockKey = "lock:" + cacheKey;
-			RLock lock = redisThread.getLock(lockKey);
+			RLock lock = redisService.getLock(lockKey);
 			try
 			{
 				// 合理的等待时间
 				if (lock.tryLock(200, 3000, TimeUnit.MILLISECONDS))
 				{
 					// 第二次缓存检查（双重检查）
-					Object secondCheck = redisString.getValue(cacheKey);
+					Object secondCheck = redisService.getValue(cacheKey);
 					if (secondCheck != null)
 					{
 						if (isNullValue(secondCheck))
@@ -88,7 +82,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 					{
 						R result = mapper.apply(dbResult);
 						// 同步缓存实际值
-						redisString.setValue(cacheKey, result, TimeUnit.MILLISECONDS.convert(expired, timeUnit));
+						redisService.setValue(cacheKey, result, TimeUnit.MILLISECONDS.convert(expired, timeUnit));
 						return Optional.of(result);
 					}
 				}
@@ -150,7 +144,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 		TimeUnit timeUnit)
 	{
 		// 第一次从缓存获取
-		Object value = redisString.getValue(cacheKey);
+		Object value = redisService.getValue(cacheKey);
 		log.debug("第1次从缓存获取结果：{}", value);
 		if (value != null)
 		{
@@ -172,7 +166,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						cacheKey, value.getClass()
 							.getSimpleName(), e);
 					// 类型转换失败，删除异常缓存，继续查询数据库
-					redisCommon.remove(cacheKey);
+					redisService.remove(cacheKey);
 				}
 			}
 			else
@@ -181,12 +175,12 @@ public abstract class AbstractValueRepository implements IValueRepository
 					cacheKey, value.getClass()
 						.getSimpleName());
 				// 删除异常缓存，继续查询数据库
-				redisCommon.remove(cacheKey);
+				redisService.remove(cacheKey);
 			}
 		}
 		// 使用分布式锁防止缓存击穿
 		String lockKey = "lock:" + cacheKey;
-		RLock lock = redisThread.getLock(lockKey);
+		RLock lock = redisService.getLock(lockKey);
 		try
 		{
 			// 尝试获取锁，设置合理的等待时间
@@ -200,7 +194,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 			try
 			{
 				// 第二次从缓存获取（双重检查）
-				Object value2 = redisString.getValue(cacheKey);
+				Object value2 = redisService.getValue(cacheKey);
 				log.debug("第2次从缓存获取结果：{}", value2);
 				if (value2 != null)
 				{
@@ -217,7 +211,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						catch (ClassCastException e)
 						{
 							log.warn("缓存值类型转换异常（第二次检查），key: {}，删除异常缓存", cacheKey, e);
-							redisCommon.remove(cacheKey);
+							redisService.remove(cacheKey);
 						}
 					}
 				}
@@ -237,7 +231,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						.collect(Collectors.toList());
 					// 写入缓存（建议同步写入确保一致性）
 					// 使用ArrayList确保序列化兼容性
-					redisString.setValue(cacheKey, new ArrayList<>(resultList),
+					redisService.setValue(cacheKey, new ArrayList<>(resultList),
 						TimeUnit.MILLISECONDS.convert(expired, timeUnit));
 					return Optional.of(resultList);
 				}
@@ -287,7 +281,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 		TimeUnit timeUnit)
 	{
 		// 第一次从缓存获取
-		Object value = redisString.getValue(cacheKey);
+		Object value = redisService.getValue(cacheKey);
 		log.debug("第1次从缓存获取Map结果：{}", value);
 		if (value != null)
 		{
@@ -309,7 +303,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						cacheKey, value.getClass()
 							.getSimpleName(), e);
 					// 类型转换失败，删除异常缓存，继续查询数据库
-					redisCommon.remove(cacheKey);
+					redisService.remove(cacheKey);
 				}
 			}
 			else
@@ -318,12 +312,12 @@ public abstract class AbstractValueRepository implements IValueRepository
 					cacheKey, value.getClass()
 						.getSimpleName());
 				// 删除异常缓存，继续查询数据库
-				redisCommon.remove(cacheKey);
+				redisService.remove(cacheKey);
 			}
 		}
 		// 使用分布式锁防止缓存击穿
 		String lockKey = "lock:" + cacheKey;
-		RLock lock = redisThread.getLock(lockKey);
+		RLock lock = redisService.getLock(lockKey);
 		try
 		{
 			// 尝试获取锁，设置合理的等待时间
@@ -336,7 +330,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 			try
 			{
 				// 第二次从缓存获取（双重检查）
-				Object value2 = redisString.getValue(cacheKey);
+				Object value2 = redisService.getValue(cacheKey);
 				log.debug("第2次从缓存获取Map结果：{}", value2);
 				if (value2 != null)
 				{
@@ -353,7 +347,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						catch (ClassCastException e)
 						{
 							log.warn("缓存Map值类型转换异常（第二次检查），key: {}，删除异常缓存", cacheKey, e);
-							redisCommon.remove(cacheKey);
+							redisService.remove(cacheKey);
 						}
 					}
 				}
@@ -370,7 +364,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 					// 使用新HashMap确保序列化兼容性
 					Map<K, V> cacheMap = new HashMap<>(dbResult);
 					// 写入缓存（建议同步写入确保一致性）
-					redisString.setValue(cacheKey, cacheMap,
+					redisService.setValue(cacheKey, cacheMap,
 						TimeUnit.MILLISECONDS.convert(expired, timeUnit));
 					return Optional.of(dbResult); // 返回原始数据，避免重复创建对象
 				}
@@ -401,6 +395,6 @@ public abstract class AbstractValueRepository implements IValueRepository
 	
 	protected void setNULLToCache(String cacheKey)
 	{
-		redisString.setValue(cacheKey, NULL, TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES));
+		redisService.setValue(cacheKey, NULL, TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES));
 	}
 }

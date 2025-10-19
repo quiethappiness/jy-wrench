@@ -22,18 +22,18 @@ public class ValueRepository extends AbstractValueRepository
 	@Override
 	public <T, R> Optional<R> cacheOne(String cacheKey, Supplier<T> dbFallback, Function<T, R> mapper)
 	{
-		return cacheOne(cacheKey, dbFallback, mapper, 12, TimeUnit.HOURS);
+		return cacheOne(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS);
 	}
 	
 	@Override
 	public <T, R> Optional<List<R>> cacheList(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper)
 	{
-		return cacheList(cacheKey, dbFallback, mapper, 12, TimeUnit.HOURS);
+		return cacheList(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS);
 	}
 	
 	@Override
 	public <K, V> Optional<Map<K, V>> cacheMap(String cacheKey, Supplier<Map<K, V>> dbFallback)
 	{
-		return cacheMap(cacheKey, dbFallback, 12, TimeUnit.HOURS);
+		return cacheMap(cacheKey, dbFallback, 6, TimeUnit.HOURS);
 	}
 }
