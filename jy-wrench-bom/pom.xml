@@ -73,7 +73,7 @@
 			</dependency>
 			
 			<!-- jy wrench design framework  -->
-			
+			<!-- 一般用在domain 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-design-framework</artifactId>
@@ -81,6 +81,7 @@
 			</dependency>
 			
 			<!-- jy wrench traffic control -->
+			<!-- 一般用在trigger 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-traffic-control</artifactId>
@@ -88,6 +89,7 @@
 			</dependency>
 			
 			<!-- jy wrench task job -->
+			<!-- 一般用在domain 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-task-job</artifactId>
@@ -129,12 +131,14 @@
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<!-- jy wrench redisson util -->
+			<!-- 一般在infrastucture + trigger 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-redisson-starter</artifactId>
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<!-- jy wrench mq message util -->
+			<!-- 一般用在domain 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-mq-message-starter</artifactId>
@@ -142,6 +146,7 @@
 			</dependency>
 			
 			<!-- jy wrench mq listener util -->
+			<!-- 一般用在trigger 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-mq-listener-starter</artifactId>
@@ -149,6 +154,7 @@
 			</dependency>
 			
 			<!-- jy wrench threadpool manager -->
+			<!-- 一般用在app 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-starter-threadpool-manager</artifactId>
@@ -161,9 +167,24 @@
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 			<!-- jy wrench util mq publisher -->
+			<!-- 一般用在infrastructure 层使用  -->
 			<dependency>
 				<groupId>io.github.quiethappiness</groupId>
 				<artifactId>jy-wrench-util-mq-publisher</artifactId>
+				<version>1.3.1-SNAPSHOT</version>
+			</dependency>
+			<!-- jy wrench web util  -->
+			<!-- 一般用在app 层使用  -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-util-web-config-starter</artifactId>
+				<version>1.3.1-SNAPSHOT</version>
+			</dependency>
+			<!-- jy wrench util types common  -->
+			<!-- 一般用在types 层使用  -->
+			<dependency>
+				<groupId>io.github.quiethappiness</groupId>
+				<artifactId>jy-wrench-util-types-common</artifactId>
 				<version>1.3.1-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
