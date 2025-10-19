@@ -86,6 +86,12 @@ jy:
                 host: 127.0.0.1
                 # redis port
                 port: 16379
+            mq-listener:
+                enabled: true
+                dl:
+                    routing_key: dl-queue
+                    exchange: dl-exchange
+                    queue: dl-queue
 mybatis:
     mapper-locations: classpath:/mybatis/mapper/*.xml
     config-location: classpath:/mybatis/config/mybatis-config.xml
