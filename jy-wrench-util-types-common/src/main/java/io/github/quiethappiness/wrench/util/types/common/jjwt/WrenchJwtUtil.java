@@ -1,10 +1,8 @@
-package io.github.quiethappiness.wrench.util.infrastructure.types.jjwt;
-
+package io.github.quiethappiness.wrench.util.types.common.jjwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -18,7 +16,6 @@ import java.util.concurrent.TimeUnit;
  * @description jwt工具类
  * @date 2025/8/14 23:00
  */
-@Component
 @Slf4j
 public class WrenchJwtUtil
 {
