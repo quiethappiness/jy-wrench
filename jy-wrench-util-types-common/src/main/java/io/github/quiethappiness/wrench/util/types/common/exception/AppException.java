@@ -1,10 +1,11 @@
 package io.github.quiethappiness.wrench.util.types.common.exception;
 
 import io.github.quiethappiness.wrench.util.types.common.enums.AppExceptionType;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data
