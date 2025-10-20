@@ -12,7 +12,7 @@ public class OnWhiteListCondition extends AnyNestedCondition
 	
 	public OnWhiteListCondition()
 	{
-		super(ConfigurationPhase.REGISTER_BEAN);
+		super(ConfigurationPhase.PARSE_CONFIGURATION);
 	}
 	
 	@Conditional(OnWhiteListPropertyCondition.class)

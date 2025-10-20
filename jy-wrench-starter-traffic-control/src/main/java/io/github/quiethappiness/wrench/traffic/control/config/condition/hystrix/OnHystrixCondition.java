@@ -12,7 +12,7 @@ public class OnHystrixCondition extends AnyNestedCondition
 	
 	public OnHystrixCondition()
 	{
-		super(ConfigurationPhase.REGISTER_BEAN);
+		super(ConfigurationPhase.PARSE_CONFIGURATION);
 	}
 	
 	@Conditional(OnHystrixPropertyCondition.class)

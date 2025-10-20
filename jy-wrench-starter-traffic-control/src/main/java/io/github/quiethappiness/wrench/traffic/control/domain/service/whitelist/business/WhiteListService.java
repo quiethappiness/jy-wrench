@@ -4,6 +4,7 @@ import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoPrope
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RKeys;
 import org.redisson.api.RLocalCachedMap;
@@ -11,7 +12,6 @@ import org.redisson.api.options.LocalCachedMapOptions;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 // 你的组件核心服务

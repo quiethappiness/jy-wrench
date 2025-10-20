@@ -12,7 +12,7 @@ public class OnRateLimiterCondition extends AnyNestedCondition
 	
 	public OnRateLimiterCondition()
 	{
-		super(ConfigurationPhase.REGISTER_BEAN);
+		super(ConfigurationPhase.PARSE_CONFIGURATION);
 	}
 	
 	@Conditional(OnRateLimiterPropertyCondition.class)
