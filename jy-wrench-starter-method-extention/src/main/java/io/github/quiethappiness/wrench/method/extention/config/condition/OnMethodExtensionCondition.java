@@ -12,7 +12,7 @@ public class OnMethodExtensionCondition extends AnyNestedCondition
 	
 	public OnMethodExtensionCondition()
 	{
-		super(ConfigurationPhase.REGISTER_BEAN);
+		super(ConfigurationPhase.PARSE_CONFIGURATION);
 	}
 	
 	@Conditional(OnMePropertyCondition.class)
