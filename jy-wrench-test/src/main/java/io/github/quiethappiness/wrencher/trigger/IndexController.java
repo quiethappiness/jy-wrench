@@ -8,6 +8,7 @@ import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhite
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
 /**

@@ -5,6 +5,7 @@ import io.github.quiethappiness.wrench.dynamic.config.center.domain.model.valobj
 import io.github.quiethappiness.wrench.dynamic.config.center.types.annotations.DCCValue;
 import io.github.quiethappiness.wrencher.infrastructure.dao.IUserDao;
 import io.github.quiethappiness.wrencher.infrastructure.po.User;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,6 @@ import org.redisson.api.RTopic;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
 import java.util.concurrent.CountDownLatch;
 
 @Slf4j

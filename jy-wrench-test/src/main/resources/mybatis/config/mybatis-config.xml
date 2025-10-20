@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <package name="cn.bugstack.middleware.test.infrastructure.po.User"/>
+        <package name="io.github.quiethappiness.wrencher.infrastructure.po.User"/>
     </typeAliases>
 </configuration>

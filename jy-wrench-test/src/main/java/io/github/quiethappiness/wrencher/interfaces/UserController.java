@@ -2,13 +2,14 @@ package io.github.quiethappiness.wrencher.interfaces;
 
 import io.github.quiethappiness.wrencher.infrastructure.dao.IUserDao;
 import io.github.quiethappiness.wrencher.infrastructure.po.User;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+
 
 /**
  * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！

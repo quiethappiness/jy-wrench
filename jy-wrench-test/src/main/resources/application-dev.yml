@@ -6,6 +6,26 @@ server:
     # 如果ES启用了安全认证，还需配置用户名和密码
     # username: elastic
     # password: your_password
+spring:
+    datasource:
+#        username: root
+#        password: 123456
+#        url: jdbc:mysql://127.0.0.1:13306/bugstack_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true&useCursorFetch=true
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+        hikari:
+            pool-name: Retail_HikariCP
+            minimum-idle: 15 #最小空闲连接数量
+            idle-timeout: 180000 #空闲连接存活最大时间，默认600000（10分钟）
+            maximum-pool-size: 25 #连接池最大连接数，默认是10
+            auto-commit: true  #此属性控制从池返回的连接的默认自动提交行为,默认值：true
+            max-lifetime: 1800000 #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+            connection-timeout: 30000 #数据库连接超时时间,默认30秒，即30000
+            connection-test-query: SELECT 1
+        type: com.zaxxer.hikari.HikariDataSource
+    rabbitmq:
+        addresses: 192.168.247.133:6672
+        username: admin
+        password: admin
 # 小傅哥扳手通用组件配置
 jy:
     wrench:
@@ -80,6 +100,7 @@ jy:
                                 url: jdbc:mysql://127.0.0.1:13306/bugstack_02?useUnicode=true
                                 username: root
                                 password: 123456
+                        enabled: true
         util:
             redisson:
                 # redis host

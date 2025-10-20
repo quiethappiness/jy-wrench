@@ -4,13 +4,14 @@ import com.alibaba.fastjson.JSON;
 import io.github.quiethappiness.wrench.util.design_framework.link.model2.proceed_check.chain.BranchLinkedList;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.factory.Rule02TradeRuleFactory;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule02.logic.XxxResponse;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.annotation.Resource;
+
 
 @Slf4j
 @RunWith(SpringRunner.class)

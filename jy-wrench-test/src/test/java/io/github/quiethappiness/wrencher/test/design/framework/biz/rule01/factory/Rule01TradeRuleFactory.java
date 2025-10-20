@@ -3,13 +3,14 @@ package io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.facto
 import io.github.quiethappiness.wrench.util.design_framework.link.model1.ILogicLink;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.logic.RuleLogic101;
 import io.github.quiethappiness.wrencher.test.design.framework.biz.rule01.logic.RuleLogic102;
+import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+
 
 @Service
 public class Rule01TradeRuleFactory {
