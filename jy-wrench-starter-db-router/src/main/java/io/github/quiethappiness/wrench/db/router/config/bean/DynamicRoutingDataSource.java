@@ -1,8 +1,8 @@
-package io.github.quiethappiness.wrench.db.router.config.configuration;
+package io.github.quiethappiness.wrench.db.router.config.bean;
 
+import com.zaxxer.hikari.HikariDataSource;
 import io.github.quiethappiness.wrench.db.router.config.property.DBRouterProperties;
 import io.github.quiethappiness.wrench.db.router.domain.model.DBContextHolder;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.springframework.stereotype.Component;
 
@@ -21,18 +21,35 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource
 	{
 		//  创建数据源
 		Map<Object, Object> targetDataSources = new HashMap<>();
+		String defaultDataSourceKey = null;
 		for (Map.Entry<String, DBRouterProperties.WrenchDBRouterDataSourceProperty> dbInfo : dataSourceEnvironment.getDataSourceMap()
 			.entrySet())
 		{
 			String dbInfoKey = dbInfo.getKey();
 			DBRouterProperties.WrenchDBRouterDataSourceProperty objMap = dbInfo.getValue();
-			targetDataSources.put(
-				dbInfoKey,
-				new DriverManagerDataSource(objMap.getUrl(), objMap.getUsername(), objMap.getPassword())
-			);
+			
+			// 创建数据源并设置驱动类名
+			HikariDataSource dataSource = new HikariDataSource();
+			dataSource.setDriverClassName(objMap.getDriverClassName());
+			dataSource.setJdbcUrl(objMap.getUrl());
+			dataSource.setUsername(objMap.getUsername());
+			dataSource.setPassword(objMap.getPassword());
+			
+			
+			targetDataSources.put(dbInfoKey, dataSource);
+			
+			// 设置第一个数据源为默认数据源
+			if (defaultDataSourceKey == null) {
+				defaultDataSourceKey = dbInfoKey;
+			}
 		}
-		//  设置数据源
+		
+		// 设置数据源
 		this.setTargetDataSources(targetDataSources);
+		// 设置默认数据源
+		if (defaultDataSourceKey != null) {
+			this.setDefaultTargetDataSource(targetDataSources.get(defaultDataSourceKey));
+		}
 	}
 	
 	@Override

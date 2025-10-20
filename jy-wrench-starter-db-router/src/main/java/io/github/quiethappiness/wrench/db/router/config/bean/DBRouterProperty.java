@@ -1,10 +1,10 @@
-package io.github.quiethappiness.wrench.db.router.config.configuration;
+package io.github.quiethappiness.wrench.db.router.config.bean;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
 @Data
-@Component("dbRouterConfig")
+@Component
 public class DBRouterProperty
 {
 	private int dbCount;  //分库数

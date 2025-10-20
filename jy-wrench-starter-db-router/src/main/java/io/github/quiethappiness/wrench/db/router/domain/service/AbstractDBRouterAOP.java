@@ -1,13 +1,14 @@
 package io.github.quiethappiness.wrench.db.router.domain.service;
 
 import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil;
-import io.github.quiethappiness.wrench.db.router.config.configuration.DBRouterProperty;
+import io.github.quiethappiness.wrench.db.router.config.bean.DBRouterProperty;
 import io.github.quiethappiness.wrench.db.router.domain.model.DBContextHolder;
+import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-import javax.annotation.Resource;
+
 
 public abstract class AbstractDBRouterAOP implements IDBRouterAOP
 {
