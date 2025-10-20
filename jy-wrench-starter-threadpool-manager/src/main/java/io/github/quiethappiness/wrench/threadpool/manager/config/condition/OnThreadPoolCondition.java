@@ -12,7 +12,7 @@ public class OnThreadPoolCondition extends AnyNestedCondition
 	
 	public OnThreadPoolCondition()
 	{
-		super(ConfigurationPhase.REGISTER_BEAN);
+		super(ConfigurationPhase.PARSE_CONFIGURATION);
 	}
 	
 	@Conditional(OnThreadPoolPropertyCondition.class)
