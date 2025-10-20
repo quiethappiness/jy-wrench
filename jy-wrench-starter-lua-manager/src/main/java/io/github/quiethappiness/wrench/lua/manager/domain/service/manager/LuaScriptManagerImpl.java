@@ -1,10 +1,10 @@
 package io.github.quiethappiness.wrench.lua.manager.domain.service.manager;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RScript;
 import org.redisson.api.RedissonClient;
 import org.redisson.client.RedisException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,18 +26,13 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 {
 	private final RedissonClient redissonClient;
 	
 	{
 		log.info("luaScriptManager 正在初始化...");
-	}
-	
-	public LuaScriptManagerImpl(
-		@Autowired RedissonClient redissonClient)
-	{
-		this.redissonClient = redissonClient;
 	}
 	
 	@Override

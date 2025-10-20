@@ -44,6 +44,7 @@ public interface ILuaScriptManager
 		private String name;
 		private String cache;
 		private String sha;
+		@Builder.Default
 		private Long lastModified = 0L;
 		private String version;
 		private String path;

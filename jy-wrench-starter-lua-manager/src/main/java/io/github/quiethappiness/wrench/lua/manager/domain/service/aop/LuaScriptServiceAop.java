@@ -3,6 +3,7 @@ package io.github.quiethappiness.wrench.lua.manager.domain.service.aop;
 import io.github.quiethappiness.wrench.lua.manager.config.LuaManagerProperties;
 import io.github.quiethappiness.wrench.lua.manager.domain.model.valobj.ScriptNameContext;
 import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -12,7 +13,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.time.Instant;
@@ -58,6 +58,14 @@ public class LuaScriptServiceAop
 	
 	/**
 	 * 环绕通知：处理 Lua 脚本方法调用
+	 * <p>
+	 * 该方法使用AOP环绕通知来拦截带有@LuaScriptPath注解的类或方法，
+	 * 实现对Lua脚本执行的监控和上下文管理功能
+	 * </p>
+	 * 
+	 * @param joinPoint 连接点对象，包含目标方法的信息
+	 * @return 原方法执行的结果
+	 * @throws Throwable 原方法可能抛出的异常
 	 */
 	@Around("luaScriptClassPointcut()||luaScriptMethodPointcut()")
 	public Object aroundLuaScriptService(ProceedingJoinPoint joinPoint) throws Throwable
@@ -69,7 +77,8 @@ public class LuaScriptServiceAop
 		Method method = signature.getMethod();
 		String methodName = method.getName();
 		log.info("正在处理 Lua 脚本方法: {}", methodName);
-		// 获取类上的注解
+		
+		// 获取类和方法上的注解
 		LuaScriptPath classAnnotation = targetClass.getAnnotation(LuaScriptPath.class);
 		LuaScriptPath methodAnnotation = method.getAnnotation(LuaScriptPath.class);
 		if (methodAnnotation == null && classAnnotation == null)
@@ -77,7 +86,10 @@ public class LuaScriptServiceAop
 			// 如果没有注解，直接执行原方法
 			return joinPoint.proceed();
 		}
+		
+		// 根据注解配置确定Lua脚本文件路径
 		String fileFullPath = "";
+		// 如果有注解，优先使用方法上的注解
 		if (methodAnnotation != null && methodAnnotation.autoRegister())
 		{
 			fileFullPath = methodAnnotation.fileFullPath();
@@ -88,21 +100,17 @@ public class LuaScriptServiceAop
 			// String serviceName = getDefaultServiceName(targetClass);
 			fileFullPath = spliceLuaFilePath(luaManagerProperties.getPath(), classAnnotation.folderPath(), methodName);
 		}
+		
+		// 验证脚本文件路径
 		if (!StringUtils.hasText(fileFullPath))
 		{
 			throw new IllegalArgumentException("脚本lua文件路径不能为空");
 		}
+		
+		// 设置脚本名称上下文
 		String scriptName = fileFullPath.substring(0, fileFullPath.lastIndexOf(".lua"));
 		ScriptNameContext.setScriptName(scriptName);
-		// Object[] args = joinPoint.getArgs();
-		// if (args == null || args.length == 0)
-		// {
-		// 	throw new IllegalArgumentException("参数不能为空");
-		// }
-		//
-		// ILuaScriptManager.LuaScriptExecuteVO luaScriptExecuteVO = (ILuaScriptManager.LuaScriptExecuteVO) args[0];
-		// luaScriptExecuteVO.setScriptName(scriptName);
-		// log.info("Lua 脚本正在填充参数: {}", luaScriptExecuteVO);
+
 		log.info("准备执行 Lua 脚本: {}", scriptName);
 		Instant startTime = Instant.now();
 		Instant endTime = null;
@@ -126,6 +134,7 @@ public class LuaScriptServiceAop
 		}
 		finally
 		{
+			// 清理脚本名称上下文
 			ScriptNameContext.clear();
 		}
 	}
