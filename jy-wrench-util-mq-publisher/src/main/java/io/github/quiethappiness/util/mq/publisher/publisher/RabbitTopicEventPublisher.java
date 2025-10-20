@@ -7,7 +7,6 @@ import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -48,45 +47,73 @@ public abstract class RabbitTopicEventPublisher
 		}
 	}
 	
-	protected CorrelationData buildCorrelationData(String onlyId, Consumer<String> failedMethod)
+	protected CorrelationData buildCorrelationData2(String onlyId, Consumer<String> failedMethod)
 	{
-		// 1.创建CorrelationData
 		CorrelationData cd = new CorrelationData(onlyId);
-		// 2.给Future添加ConfirmCallback
 		cd.getFuture()
-			.addCallback(new ListenableFutureCallback<CorrelationData.Confirm>()
+			.whenComplete((result, ex) ->
 			{
-				@Override
-				public void onFailure(Throwable ex)
+				if (ex != null)
 				{
-					// 2.1.Future发生异常时的处理逻辑，基本不会触发
+					// 处理异常情况
 					log.error("send message fail", ex);
 				}
-				
-				@Override
-				public void onSuccess(CorrelationData.Confirm result)
+				else if (result.isAck())
 				{
-					// 2.2.Future接收到回执的处理逻辑，参数中的result就是回执内容
-					if (result.isAck())
-					{ // result.isAck()，boolean类型，true代表ack回执，false 代表 nack回执
-						log.debug("发送消息成功，收到 ack!");
-						// 在这里修改订单状态为已发送
-					}
-					else
-					{ // result.getReason()，String类型，返回nack时的异常描述
-						// 更新消息状态为失败
-						try
-						{
-							failedMethod.accept(onlyId);
-						}
-						catch (Exception e)
-						{
-							log.error("补偿处理失败，原因：", e);
-						}
-						// return;
-						log.error("发送消息失败，收到 nack, reason : {}", result.getReason());
-					}
+					// 成功确认
+					log.debug("发送消息成功，收到 ack!");
 				}
+				else
+				{
+					// 否定确认
+					try
+					{
+						failedMethod.accept(onlyId);
+					}
+					catch (Exception e)
+					{
+						log.error("补偿处理失败，原因：", e);
+					}
+					log.error("发送消息失败，收到 nack, reason : {}", result.getReason());
+				}
+			});
+		return cd;
+	}
+	
+	protected CorrelationData buildCorrelationData(String onlyId, Consumer<String> failedMethod)
+	{
+		CorrelationData cd = new CorrelationData(onlyId);
+		cd.getFuture()
+			.thenApply(confirm ->
+			{
+				// 这里可以转换结果
+				return confirm;
+			})
+			.thenAccept(confirm ->
+			{
+				// 处理确认结果
+				if (confirm.isAck())
+				{
+					log.debug("发送消息成功，收到 ack!");
+				}
+				else
+				{
+					try
+					{
+						failedMethod.accept(onlyId);
+					}
+					catch (Exception e)
+					{
+						log.error("补偿处理失败，原因：", e);
+					}
+					log.error("发送消息失败，收到 nack, reason : {}", confirm.getReason());
+				}
+			})
+			.exceptionally(throwable ->
+			{
+				// 处理异常
+				log.error("send message fail", throwable);
+				return null;
 			});
 		return cd;
 	}
@@ -129,7 +156,7 @@ public abstract class RabbitTopicEventPublisher
 		rabbitTemplate.convertAndSend(this_exchange, routingKey, message, msg ->
 		{
 			msg.getMessageProperties()
-				.setDelay((int) timeUnit.toMillis(delay));
+				.setDelayLong(timeUnit.toMillis(delay));
 			return msg;
 		});
 	}
