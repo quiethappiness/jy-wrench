@@ -1,9 +1,10 @@
 package io.github.quiethappiness.wrench.util.infrastructure.gateway;
 
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 
-import javax.annotation.Resource;
+
 
 /**
  * CommonRequestService
