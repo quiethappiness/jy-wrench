@@ -2,10 +2,10 @@ package io.github.quiethappiness.wrench.util.redisson.domain.repository.impl;
 
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
 import io.github.quiethappiness.wrench.util.redisson.domain.repository.ILockRepository;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 
-import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
