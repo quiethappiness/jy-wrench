@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.util.mq.listener.config;
 
+import jakarta.annotation.Resource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.Resource;
+
 
 @Configuration
 @Slf4j
