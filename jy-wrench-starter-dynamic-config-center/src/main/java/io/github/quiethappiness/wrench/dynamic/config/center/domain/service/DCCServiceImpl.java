@@ -3,6 +3,7 @@ package io.github.quiethappiness.wrench.dynamic.config.center.domain.service;
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.dynamic.config.center.domain.model.valobj.AttributeVO;
 import io.github.quiethappiness.wrench.dynamic.config.center.types.annotations.DCCValue;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.redisson.api.RBucket;
@@ -11,7 +12,6 @@ import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

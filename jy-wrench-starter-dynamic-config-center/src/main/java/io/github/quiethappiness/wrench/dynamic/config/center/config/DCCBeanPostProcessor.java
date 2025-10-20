@@ -1,12 +1,13 @@
 package io.github.quiethappiness.wrench.dynamic.config.center.config;
 
 import io.github.quiethappiness.wrench.dynamic.config.center.domain.service.IDCCService;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 
-import javax.annotation.Resource;
+
 
 /**
  * DCCBeanPostProcessor
