@@ -48,6 +48,23 @@ public interface IRuleEnumRegistry
 	}
 	
 	/**
+	 * 根据类型和值获取枚举
+	 */
+	@SuppressWarnings("unchecked")
+	default <T extends Enum<T> & TypedEnum> T getAnyEnum(String type)
+	{
+		Map<String, TypedEnum> typeMap = registry.get(type);
+		if (typeMap == null)
+		{
+			throw new IllegalArgumentException("未知的枚举类型: " + type);
+		}
+		TypedEnum result = typeMap.values()
+			.iterator()
+			.next();
+		return (T) result;
+	}
+	
+	/**
 	 * 安全获取枚举，找不到时返回null
 	 */
 	@SuppressWarnings("unchecked")
@@ -67,30 +84,5 @@ public interface IRuleEnumRegistry
 	default Set<String> getSupportedTypes()
 	{
 		return Collections.unmodifiableSet(registry.keySet());
-	}
-	
-	/**
-	 * TypedEnum
-	 * @author quietHappiness @jingyue
-	 * @version 1.0
-	 * @description
-	 * @date 2025/10/23 11:06
-	 */
-	interface TypedEnum
-	{
-		
-		default String getType()
-		{
-			return this.getClass()
-				.getSimpleName();
-		}
-		
-		String getValue();
-		
-		default boolean equals(TypedEnum other)
-		{
-			return this.getValue()
-				.equals(other.getValue());
-		}
 	}
 }

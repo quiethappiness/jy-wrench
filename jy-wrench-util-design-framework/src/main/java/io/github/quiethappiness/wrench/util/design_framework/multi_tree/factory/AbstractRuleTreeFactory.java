@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.util.design_framework.multi_tree.factory;
 
-import io.github.quiethappiness.wrench.util.design_framework.multi_tree.valobj.RuleTreeVO;
+import io.github.quiethappiness.wrench.util.design_framework.multi_tree.valobj.RuleTreeR;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,5 +14,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractRuleTreeFactory<PT,PR>
 {
-	public abstract IDecisionTreeEngine<PT,PR> openLogicTree(RuleTreeVO ruleTreeVO);
+	public abstract IDecisionTreeEngine<PT,PR> openLogicTree(RuleTreeR.RuleTreeVO<Object> ruleTreeVO);
 }
