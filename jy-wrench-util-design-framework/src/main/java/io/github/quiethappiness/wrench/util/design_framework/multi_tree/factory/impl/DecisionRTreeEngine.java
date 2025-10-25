@@ -20,10 +20,10 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class DecisionTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
+public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 {
 	private Map<String, ? extends ILogicTreeNode<PT, PR>> logicTreeNodeGroup;
-	private RuleTreeR.RuleTreeVO<Object> ruleTreeVO;
+	private RuleTreeR.RuleTreeVO<?> ruleTreeVO;
 	
 	@Override
 	public PR process(PT data)
@@ -31,9 +31,9 @@ public class DecisionTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 		PR returnData = null;
 		// 获取基础信息
 		String nextNode = ruleTreeVO.getTreeRootRuleNode();
-		Map<String, RuleTreeR.RuleTreeNodeVO<Object>> treeNodeMap = ruleTreeVO.getTreeNodeMap();
+		Map<String, ? extends RuleTreeR.RuleTreeNodeVO<?>> treeNodeMap = ruleTreeVO.getTreeNodeMap();
 		// 获取起始节点「根节点记录了第一个要执行的规则」
-		RuleTreeR.RuleTreeNodeVO<Object> ruleTreeNode;
+		RuleTreeR.RuleTreeNodeVO<?> ruleTreeNode;
 		while (null != nextNode)
 		{
 			// 获取节点
@@ -54,13 +54,13 @@ public class DecisionTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 		return returnData;
 	}
 	
-	public String nextNode(Object matterValue, List<RuleTreeR.RuleTreeNodeLineVO<Object>> treeNodeLineVOList)
+	public String nextNode(Object matterValue, List<? extends RuleTreeR.RuleTreeNodeLineVO<?>> treeNodeLineVOList)
 	{
 		if (null == treeNodeLineVOList || treeNodeLineVOList.isEmpty())
 		{
 			return null;
 		}
-		for (RuleTreeR.RuleTreeNodeLineVO<Object> nodeLine : treeNodeLineVOList)
+		for (RuleTreeR.RuleTreeNodeLineVO<?> nodeLine : treeNodeLineVOList)
 		{
 			if (decisionLogic(matterValue, nodeLine))
 			{
@@ -70,7 +70,7 @@ public class DecisionTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 		throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
 	}
 	
-	public boolean decisionLogic(Object matterValue, RuleTreeR.RuleTreeNodeLineVO<Object> nodeLine)
+	public boolean decisionLogic(Object matterValue, RuleTreeR.RuleTreeNodeLineVO<?> nodeLine)
 	{
 		if (nodeLine == null)
 		{

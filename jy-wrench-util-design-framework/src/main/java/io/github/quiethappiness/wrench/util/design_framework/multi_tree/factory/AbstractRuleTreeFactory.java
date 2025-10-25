@@ -14,5 +14,5 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractRuleTreeFactory<PT,PR>
 {
-	public abstract IDecisionTreeEngine<PT,PR> openLogicTree(RuleTreeR.RuleTreeVO<Object> ruleTreeVO);
+	public abstract IDecisionTreeEngine<PT,PR> openLogicTree(RuleTreeR.RuleTreeVO<?> ruleTreeVO);
 }
