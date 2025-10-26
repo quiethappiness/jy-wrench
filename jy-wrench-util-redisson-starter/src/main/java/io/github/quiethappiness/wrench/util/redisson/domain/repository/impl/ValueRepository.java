@@ -22,18 +22,37 @@ public class ValueRepository extends AbstractValueRepository
 	@Override
 	public <T, R> Optional<R> cacheOne(String cacheKey, Supplier<T> dbFallback, Function<T, R> mapper)
 	{
-		return cacheOne(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS);
+		return cacheOne(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS, 0.1);
+	}
+	
+	@Override
+	public <T, R> Optional<R> cacheOne(
+		String cacheKey, Supplier<T> dbFallback, Function<T, R> mapper, long expired, TimeUnit timeUnit)
+	{
+		return cacheOne(cacheKey, dbFallback, mapper, expired, timeUnit, 0.1);
 	}
 	
 	@Override
 	public <T, R> Optional<List<R>> cacheList(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper)
 	{
-		return cacheList(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS);
+		return cacheList(cacheKey, dbFallback, mapper, 6, TimeUnit.HOURS, 0.1);
+	}
+	
+	@Override
+	public <T, R> Optional<List<R>> cacheList(String cacheKey, Supplier<List<T>> dbFallback, Function<T, R> mapper, long expired, TimeUnit timeUnit)
+	{
+		return cacheList(cacheKey, dbFallback, mapper, expired, timeUnit, 0.1);
 	}
 	
 	@Override
 	public <K, V> Optional<Map<K, V>> cacheMap(String cacheKey, Supplier<Map<K, V>> dbFallback)
 	{
-		return cacheMap(cacheKey, dbFallback, 6, TimeUnit.HOURS);
+		return cacheMap(cacheKey, dbFallback, 6, TimeUnit.HOURS, 0.1);
+	}
+	
+	@Override
+	public <K, V> Optional<Map<K, V>> cacheMap(String cacheKey, Supplier<Map<K, V>> dbFallback, long expired, TimeUnit timeUnit)
+	{
+		return cacheMap(cacheKey, dbFallback, expired, timeUnit, 0.1);
 	}
 }

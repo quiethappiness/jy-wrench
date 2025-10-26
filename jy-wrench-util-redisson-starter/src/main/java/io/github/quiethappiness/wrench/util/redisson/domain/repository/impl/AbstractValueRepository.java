@@ -24,6 +24,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 	/**
 	 * 通用缓存处理方法
 	 * 优先从缓存获取，缓存不存在则从数据库获取并写入缓存
+	 * @param rate 偏移概率，范围[0,1)，如果是01，则为正负10%的随机过期时间
 	 * @param cacheKey
 	 * 	缓存键
 	 * @param dbFallback
@@ -38,7 +39,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 		Supplier<T> dbFallback,
 		Function<T, R> mapper,
 		long expired,
-		TimeUnit timeUnit)
+		TimeUnit timeUnit, double rate)
 	{
 		try
 		{
@@ -50,7 +51,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 				{
 					return Optional.empty();
 				}
-				return Optional.of(( R) cached);
+				return Optional.of((R) cached);
 			}
 			// 获取分布式锁
 			String lockKey = "lock:" + cacheKey;
@@ -68,7 +69,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 						{
 							return Optional.empty();
 						}
-						return Optional.of(( R) secondCheck);
+						return Optional.of((R) secondCheck);
 					}
 					// 查询数据库
 					T dbResult = dbFallback.get();
@@ -81,8 +82,8 @@ public abstract class AbstractValueRepository implements IValueRepository
 					else
 					{
 						R result = mapper.apply(dbResult);
-						// 同步缓存实际值
-						redisService.setValue(cacheKey, result, TimeUnit.MILLISECONDS.convert(expired, timeUnit));
+						long randomExpire = generateRandomExpiredTime(expired, timeUnit, rate);
+						redisService.setValue(cacheKey, result, randomExpire);
 						return Optional.of(result);
 					}
 				}
@@ -114,6 +115,14 @@ public abstract class AbstractValueRepository implements IValueRepository
 		}
 	}
 	
+	private static long generateRandomExpiredTime(long expired, TimeUnit timeUnit, double rate)
+	{
+		// 同步缓存实际值
+		long convert = TimeUnit.MILLISECONDS.convert(expired, timeUnit);
+		// 添加随机过期时间防止缓存雪崩，范围±10%
+		return (long) (convert + (long) (Math.random() * convert * rate * 2) - (convert * rate));
+	}
+	
 	// 辅助方法
 	private boolean isNullValue(Object value)
 	{
@@ -141,7 +150,8 @@ public abstract class AbstractValueRepository implements IValueRepository
 		Supplier<List<T>> dbFallback,
 		Function<T, R> mapper,
 		long expired,
-		TimeUnit timeUnit)
+		TimeUnit timeUnit,
+		double rate)
 	{
 		// 第一次从缓存获取
 		Object value = redisService.getValue(cacheKey);
@@ -232,7 +242,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 					// 写入缓存（建议同步写入确保一致性）
 					// 使用ArrayList确保序列化兼容性
 					redisService.setValue(cacheKey, new ArrayList<>(resultList),
-						TimeUnit.MILLISECONDS.convert(expired, timeUnit));
+						generateRandomExpiredTime(expired, timeUnit, rate));
 					return Optional.of(resultList);
 				}
 			}
@@ -278,7 +288,8 @@ public abstract class AbstractValueRepository implements IValueRepository
 		String cacheKey,
 		Supplier<Map<K, V>> dbFallback,
 		long expired,
-		TimeUnit timeUnit)
+		TimeUnit timeUnit,
+		double rate)
 	{
 		// 第一次从缓存获取
 		Object value = redisService.getValue(cacheKey);
@@ -365,7 +376,7 @@ public abstract class AbstractValueRepository implements IValueRepository
 					Map<K, V> cacheMap = new HashMap<>(dbResult);
 					// 写入缓存（建议同步写入确保一致性）
 					redisService.setValue(cacheKey, cacheMap,
-						TimeUnit.MILLISECONDS.convert(expired, timeUnit));
+						generateRandomExpiredTime(expired, timeUnit, rate));
 					return Optional.of(dbResult); // 返回原始数据，避免重复创建对象
 				}
 			}
@@ -397,4 +408,6 @@ public abstract class AbstractValueRepository implements IValueRepository
 	{
 		redisService.setValue(cacheKey, NULL, TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES));
 	}
+	
+
 }

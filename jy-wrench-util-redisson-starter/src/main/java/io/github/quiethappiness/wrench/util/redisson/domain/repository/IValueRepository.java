@@ -14,7 +14,12 @@ public interface IValueRepository
 		Supplier<T> dbFallback,
 		Function<T, R> mapper,
 		long expired,
+		TimeUnit timeUnit, double rate);
+	
+	<T, R> Optional<R> cacheOne(
+		String cacheKey, Supplier<T> dbFallback, Function<T, R> mapper, long expired,
 		TimeUnit timeUnit);
+	
 	<T, R> Optional<R> cacheOne(
 		String cacheKey,
 		Supplier<T> dbFallback,
@@ -25,7 +30,15 @@ public interface IValueRepository
 		Supplier<List<T>> dbFallback,
 		Function<T, R> mapper,
 		long expired,
+		TimeUnit timeUnit, double rate);
+	
+	<T, R> Optional<List<R>> cacheList(
+		String cacheKey,
+		Supplier<List<T>> dbFallback,
+		Function<T, R> mapper,
+		long expired,
 		TimeUnit timeUnit);
+	
 	<T, R> Optional<List<R>> cacheList(
 		String cacheKey,
 		Supplier<List<T>> dbFallback,
@@ -35,7 +48,14 @@ public interface IValueRepository
 		String cacheKey,
 		Supplier<Map<K, V>> dbFallback,
 		long expired,
+		TimeUnit timeUnit, double rate);
+	
+	<K, V> Optional<Map<K, V>> cacheMap(
+		String cacheKey,
+		Supplier<Map<K, V>> dbFallback,
+		long expired,
 		TimeUnit timeUnit);
+	
 	<K, V> Optional<Map<K, V>> cacheMap(
 		String cacheKey,
 		Supplier<Map<K, V>> dbFallback);
