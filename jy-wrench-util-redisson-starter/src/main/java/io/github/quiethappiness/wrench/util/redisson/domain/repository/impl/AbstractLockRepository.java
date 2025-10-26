@@ -20,13 +20,17 @@ public abstract class AbstractLockRepository implements ILockRepository
 	public <T> T lockAndGet(String lockkey, Supplier<T> supplier)
 	{
 		// 假设是多实例运行，则使用分布式锁防止重复执行
-		RLock lock = redisService.getLock(lockkey);
+		RLock lock = redisService.getLock("RLock:" + lockkey);
 		try
 		{
 			boolean isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
-			if (!isLocked)
+			if (isLocked)
 			{
 				return supplier.get();
+			}
+			else
+			{
+				log.warn("Lock is already locked, skip execution");
 			}
 		}
 		catch (InterruptedException e)
@@ -54,13 +58,17 @@ public abstract class AbstractLockRepository implements ILockRepository
 	public <T> void lockAndRun(String lockkey, Consumer<T> supplier, T t)
 	{
 		// 假设是多实例运行，则使用分布式锁防止重复执行
-		RLock lock = redisService.getLock(lockkey);
+		RLock lock = redisService.getLock("RLock:" + lockkey);
 		try
 		{
 			boolean isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
-			if (!isLocked)
+			if (isLocked)
 			{
 				supplier.accept(t);
+			}
+			else
+			{
+				log.warn("Lock is already locked, skip execution");
 			}
 		}
 		catch (InterruptedException e)
