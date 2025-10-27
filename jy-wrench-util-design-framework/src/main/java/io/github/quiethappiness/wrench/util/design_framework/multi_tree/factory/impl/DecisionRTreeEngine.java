@@ -41,7 +41,11 @@ public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 			// 获取节点对应的逻辑实现
 			ILogicTreeNode<PT, PR> logicTreeNode = logicTreeNodeGroup.get(ruleTreeNode.getRuleKey());
 			// 执行节点计算
-			ILogicTreeNode.TreeActionEntity<?, PR> actionEntity = logicTreeNode.logic(data);
+			ILogicTreeNode.TreeActionEntity<?, PR> actionEntity = logicTreeNode.logic(
+				ILogicTreeNode.TreeParamEntity.<PT>builder()
+					.data(data)
+					.nodeVO(ruleTreeNode)
+					.build());
 			// 获取“下一步往哪走”
 			Object actionGoValue = actionEntity.getActionGoValue();
 			// 获取“暂时下一步传递的数据”

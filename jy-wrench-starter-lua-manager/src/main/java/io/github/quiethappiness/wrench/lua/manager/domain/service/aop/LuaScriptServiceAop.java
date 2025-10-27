@@ -47,8 +47,8 @@ public class LuaScriptServiceAop
 	{
 	}
 	
-	/**
-	 * 定义切点：拦截带有 @LuaScriptMethod 注解的方法
+	/*
+	  定义切点：拦截带有 @LuaScriptMethod 注解的方法
 	 */
 	// @Pointcut("@annotation(io.github.quiethappiness.lua.manager.types.annotations.LuaScriptPath)")
 	// default void luaScriptMethodPointcut(LuaScriptPath luaScriptMethod) {}
