@@ -71,7 +71,8 @@ public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 				return nodeLine.getTo();
 			}
 		}
-		throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
+		log.warn("决策树引擎，nextNode 计算失败，未找到可执行节点,似乎已经进入分支树末尾！");
+		return null;
 	}
 	
 	public boolean decisionLogic(Object matterValue, RuleTreeR.RuleTreeNodeLineVO<?> nodeLine)

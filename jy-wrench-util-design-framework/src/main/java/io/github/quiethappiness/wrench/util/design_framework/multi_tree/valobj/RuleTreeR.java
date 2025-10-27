@@ -294,6 +294,7 @@ public record RuleTreeR()
 					// 严格的类型检查
 					if (!expectedType.isInstance(matterValue))
 					{
+						log.error("节点检查分支，输入类型不匹配");
 						return false;
 					}
 					Object typedMatterValue = getEnumType().cast(matterValue);

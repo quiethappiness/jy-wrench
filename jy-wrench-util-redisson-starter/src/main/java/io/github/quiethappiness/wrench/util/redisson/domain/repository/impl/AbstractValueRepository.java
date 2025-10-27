@@ -24,7 +24,8 @@ public abstract class AbstractValueRepository implements IValueRepository
 	/**
 	 * 通用缓存处理方法
 	 * 优先从缓存获取，缓存不存在则从数据库获取并写入缓存
-	 * @param rate 偏移概率，范围[0,1)，如果是01，则为正负10%的随机过期时间
+	 * @param rate
+	 * 	偏移概率，范围[0,1)，如果是01，则为正负10%的随机过期时间
 	 * @param cacheKey
 	 * 	缓存键
 	 * @param dbFallback
@@ -408,6 +409,4 @@ public abstract class AbstractValueRepository implements IValueRepository
 	{
 		redisService.setValue(cacheKey, NULL, TimeUnit.MILLISECONDS.convert(5, TimeUnit.MINUTES));
 	}
-	
-
 }
