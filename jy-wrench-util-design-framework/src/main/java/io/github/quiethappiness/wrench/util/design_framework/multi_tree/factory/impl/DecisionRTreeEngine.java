@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 		Map<String, ? extends RuleTreeR.RuleTreeNodeVO<?>> treeNodeMap = ruleTreeVO.getTreeNodeMap();
 		// 获取起始节点「根节点记录了第一个要执行的规则」
 		RuleTreeR.RuleTreeNodeVO<?> ruleTreeNode;
-		while (null != nextNode)
+		while (StringUtils.isNotBlank(nextNode))
 		{
 			// 获取节点
 			ruleTreeNode = treeNodeMap.get(nextNode);
@@ -71,8 +72,8 @@ public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 				return nodeLine.getTo();
 			}
 		}
-		log.warn("决策树引擎，nextNode 计算失败，未找到可执行节点,似乎已经进入分支树末尾！");
-		return null;
+		log.error("决策树引擎，nextNode 计算失败，未找到可执行节点,似乎已经进入分支树末尾！");
+		throw new RuntimeException("决策树引擎，nextNode 逻辑错误，未找到可执行节点,似乎已经进入分支树末尾！");
 	}
 	
 	public boolean decisionLogic(Object matterValue, RuleTreeR.RuleTreeNodeLineVO<?> nodeLine)

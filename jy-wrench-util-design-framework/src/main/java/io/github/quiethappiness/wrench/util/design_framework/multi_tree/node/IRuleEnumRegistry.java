@@ -1,4 +1,6 @@
-package io.github.quiethappiness.wrench.util.design_framework.multi_tree.valobj;
+package io.github.quiethappiness.wrench.util.design_framework.multi_tree.node;
+
+import io.github.quiethappiness.wrench.util.design_framework.multi_tree.valobj.TypedEnum;
 
 import java.util.Collections;
 import java.util.Map;

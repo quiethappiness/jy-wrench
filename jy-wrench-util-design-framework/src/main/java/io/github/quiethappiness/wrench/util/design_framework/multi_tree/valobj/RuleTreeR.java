@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.util.design_framework.multi_tree.valobj;
 
+import io.github.quiethappiness.wrench.util.design_framework.multi_tree.node.IRuleEnumRegistry;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
