@@ -26,7 +26,7 @@ public interface ILogicTreeNode<T, R>
 	@NoArgsConstructor
 	class TreeParamEntity<T>
 	{
-		private T data;
+		private T parameter;
 		private RuleTreeR.RuleTreeNodeVO<?> nodeVO;
 	}
 	
@@ -40,6 +40,6 @@ public interface ILogicTreeNode<T, R>
 	class TreeActionEntity<T, R>
 	{
 		private T actionGoValue;
-		private R passData;
+		private R returnData;
 	}
 }

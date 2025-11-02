@@ -1,12 +1,10 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.RateLimiterMode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -46,7 +44,7 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 	 * 	处理过程中可能抛出的异常
 	 */
 	@Override
-	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doApply(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：开始执行限流处理流程的初始化阶段
 		log.info("【RateLimitSwitchNode】:限流-开始");
@@ -55,10 +53,10 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 		dynamicContext.setDecideLimit(false);
 		// 获取限流访问拦截器实例，用于获取限流相关的配置信息
 		// 该实例包含了注解中定义的各种限流参数
-		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.tcRateLimiter();
 		// 获取连接点信息，包含方法调用的相关上下文信息
 		// 包括方法签名、参数列表等，用于解析限流字段值
-		final ProceedingJoinPoint jp = requestParameter.getJp();
+		final ProceedingJoinPoint jp = requestParameter.jp();
 		// 获取限流注解中的key属性值，该值用于生成限流的唯一标识符
 		// 这个key通常是一个SpEL表达式，用于从方法参数中提取特定字段
 		String key = tcRateLimiter.key();
@@ -82,21 +80,21 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 	}
 	
 	@Override
-	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	public StrategyHandler<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity> get(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
-		final TcRateLimiter interceptor = requestParameter.getTcRateLimiter();
-		RateLimiterMode mode = interceptor.mode();
-		if (mode.equals(RateLimiterMode.PPS_BLACKLIST) || mode.equals(RateLimiterMode.SWR_BLACKLIST))
+		final TcRateLimiter interceptor = requestParameter.tcRateLimiter();
+		TcRateLimiter.RateLimiterMode mode = interceptor.mode();
+		if (mode.equals(TcRateLimiter.RateLimiterMode.PPS_BLACKLIST) || mode.equals(TcRateLimiter.RateLimiterMode.SWR_BLACKLIST))
 		{
 			log.warn("【RateLimitSwitchNode】:限流-即将进入黑名单节点");
 			return RateLimitBlackListNode;
 		}
-		else if (mode.equals(RateLimiterMode.PPS))
+		else if (mode.equals(TcRateLimiter.RateLimiterMode.PPS))
 		{
 			log.warn("【RateLimitSwitchNode】:限流-即将进入PPS节点");
 			return RateLimitPPSNode;
 		}
-		else if (mode.equals(RateLimiterMode.SWR))
+		else if (mode.equals(TcRateLimiter.RateLimiterMode.SWR))
 		{
 			log.warn("【RateLimitSwitchNode】:限流-即将进入SWR节点");
 			return RateLimitSWRNode;

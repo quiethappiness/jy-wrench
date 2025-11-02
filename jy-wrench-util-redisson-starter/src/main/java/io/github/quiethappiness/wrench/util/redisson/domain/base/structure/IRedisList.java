@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.structure;
 
 import org.redisson.api.RList;
 import org.redisson.api.RListMultimap;

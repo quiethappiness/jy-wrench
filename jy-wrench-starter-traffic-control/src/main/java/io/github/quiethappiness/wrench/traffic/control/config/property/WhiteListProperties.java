@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.config.property;
 
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +30,6 @@ public class WhiteListProperties
 		private String uri;
 		private Integer limit;
 		private TimeUnit timeUnit;
-		private Map<WhiteListType, List<String>> whiteList;
+		private Map<TcWhiteList.WhiteListType, List<String>> whiteList;
 	}
 }

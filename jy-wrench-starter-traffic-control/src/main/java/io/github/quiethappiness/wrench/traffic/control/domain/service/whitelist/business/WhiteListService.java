@@ -2,7 +2,7 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist
 
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
@@ -49,9 +49,9 @@ public class WhiteListService extends AbstractWhiteListService
 							String spliceHashMapName = spliceHashMapName(data.getUri());
 							log.info("Creating local cached map for {}", spliceHashMapName);
 							// 使用新的包路径创建配置选项
-							LocalCachedMapOptions<WhiteListType, List<String>> options = LocalCachedMapOptions.name(spliceHashMapName);
+							LocalCachedMapOptions<TcWhiteList.WhiteListType, List<String>> options = LocalCachedMapOptions.name(spliceHashMapName);
 							setLocalCacheMapOptions(options);
-							RLocalCachedMap<WhiteListType, List<String>> map = redisService.getLocalCachedMap(options);
+							RLocalCachedMap<TcWhiteList.WhiteListType, List<String>> map = redisService.getLocalCachedMap(options);
 							map.putAll(data.getWhiteList());
 						});
 				}
@@ -59,12 +59,12 @@ public class WhiteListService extends AbstractWhiteListService
 	}
 	
 	@Override
-	public boolean checkWhitelistId(String uri, WhiteListType type, String userId)
+	public boolean checkWhitelistId(String uri, TcWhiteList.WhiteListType type, String actualValue)
 	{
 		// 这个只是全匹配，没法模糊匹配
-		log.info("Checking whitelist for {}", userId);
+		log.info("Checking whitelist for {}", actualValue);
 		String spliceHashMapName = spliceHashMapName(uri);
-		boolean result = doCheckFromRMap(type, spliceHashMapName, userId);
+		boolean result = doCheckFromRMap(type, spliceHashMapName, actualValue);
 		if (result)
 		{
 			return true;
@@ -82,7 +82,7 @@ public class WhiteListService extends AbstractWhiteListService
 			{
 				continue;
 			}
-			if (doCheckFromRMap(type, key, userId))
+			if (doCheckFromRMap(type, key, actualValue))
 			{
 				return true;
 			}

@@ -1,4 +1,6 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.structure;
+
+import java.util.concurrent.TimeUnit;
 
 public interface IRedisString
 {
@@ -22,6 +24,16 @@ public interface IRedisString
 	 */
 	<T> void setValue(String key, T value, long expired);
 	
+	/**
+	 * 获取指定 key 的值
+	 * @param key
+	 * 	键
+	 * @param expired
+	 * 	过期时间
+	 * @param timeUnit
+	 * 	时间单位
+	 */
+	public <T> void setValue(String key, T value, long expired, TimeUnit timeUnit);
 	/**
 	 * 获取指定 key 的值
 	 * @param key

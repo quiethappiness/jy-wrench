@@ -44,13 +44,13 @@ public class DecisionRTreeEngine<PT, PR> implements IDecisionTreeEngine<PT, PR>
 			// 执行节点计算
 			ILogicTreeNode.TreeActionEntity<?, PR> actionEntity = logicTreeNode.logic(
 				ILogicTreeNode.TreeParamEntity.<PT>builder()
-					.data(data)
+					.parameter(data)
 					.nodeVO(ruleTreeNode)
 					.build());
 			// 获取“下一步往哪走”
 			Object actionGoValue = actionEntity.getActionGoValue();
 			// 获取“暂时下一步传递的数据”
-			returnData = actionEntity.getPassData();
+			returnData = actionEntity.getReturnData();
 			log.info("决策树引擎【{}】treeId:{} node:{} result:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, actionGoValue);
 			// 获取下个节点的名称
 			nextNode = nextNode(actionGoValue, ruleTreeNode.getTreeNodeLineVOList());

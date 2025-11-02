@@ -3,8 +3,7 @@ package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.util.concurrent.RateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IRateLimiterAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
@@ -36,11 +35,12 @@ public abstract class AbstractRateLimiterAop implements IRateLimiterAOP
 	@Resource
 	protected RateLimiterStrategyFactory rateLimiterStrategyFactory;
 	
-	protected RateLimiterReturnResultEntity doAccess(final ProceedingJoinPoint jp, final TcRateLimiter tcRateLimiter, String rateLimiterSwitch) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doAccess(final ProceedingJoinPoint jp, final TcRateLimiter tcRateLimiter, String rateLimiterSwitch) throws Throwable
 	{
-		StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> strategyHandler = rateLimiterStrategyFactory.strategyHandler();
+		StrategyHandler<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity> strategyHandler = rateLimiterStrategyFactory.strategyHandler();
 		return strategyHandler.apply(
-			RateLimiterParameterEntity.builder()
+			RateLimiterVO.ParameterEntity
+				.builder()
 				.rateLimiterSwitch(rateLimiterSwitch)
 				.blacklist(blacklist)
 				.loginRecord(loginRecord)

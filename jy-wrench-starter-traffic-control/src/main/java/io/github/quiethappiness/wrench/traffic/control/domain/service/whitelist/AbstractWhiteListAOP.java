@@ -1,9 +1,8 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IWhiteListAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
@@ -21,10 +20,10 @@ public abstract class AbstractWhiteListAOP implements IWhiteListAOP
 		this.whiteListStrategyFactory = whiteListStrategyFactory;
 	}
 	
-	protected WhiteListResultEntity doCheck(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
+	protected WhiteListVO.WhiteListResultEntity doTreeCheck(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
-		StrategyHandler<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity> strategyHandler = whiteListStrategyFactory.strategyHandler();
-		return strategyHandler.apply(new WhiteListParameterEntity(tcWhiteList, jp, whiteListProperties), new WhiteListStrategyFactory.DynamicContext());
+		StrategyHandler<WhiteListVO.WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListVO.WhiteListResultEntity> strategyHandler = whiteListStrategyFactory.strategyHandler();
+		return strategyHandler.apply(new WhiteListVO.WhiteListParameterEntity(tcWhiteList, jp, whiteListProperties), new WhiteListStrategyFactory.DynamicContext());
 	}
 	
 }

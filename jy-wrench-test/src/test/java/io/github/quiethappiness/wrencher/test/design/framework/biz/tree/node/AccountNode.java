@@ -54,7 +54,7 @@ public class AccountNode extends AbstractXxxSupport
     @Override
     protected String doApply(String requestParameter, DefaultStrategyFactory.DynamicContext dynamicContext) throws Throwable
     {
-        log.info("【账户节点】规则决策树 userId:{}", requestParameter);
+        log.info("【账户节点】规则决策树 actualValue:{}", requestParameter);
 
         // 模拟查询用户级别
         int level = new Random().nextInt(2);

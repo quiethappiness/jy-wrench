@@ -2,7 +2,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist;
 
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
@@ -32,8 +32,8 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 	public Object doWhitelistCheck(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
 		// 解析key表达式获取userId
-		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
-		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
+		WhiteListVO.WhiteListResultEntity resultEntity = doTreeCheck(jp, tcWhiteList);
+		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.inWhitListResult();
 		if (inWhitListResult == null || inWhitListResult.userId() == null)
 		{
 			return jp.proceed();
@@ -64,8 +64,8 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 	public Object doWhitelistCheckWithoutRateLimiter(ProceedingJoinPoint jp, TcWhiteList tcWhiteList) throws Throwable
 	{
 		// 解析key表达式获取userId
-		WhiteListResultEntity resultEntity = doCheck(jp, tcWhiteList);
-		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.getInWhitListResult();
+		WhiteListVO.WhiteListResultEntity resultEntity = doTreeCheck(jp, tcWhiteList);
+		AbstractWhiteListSupport.InWhitListResult inWhitListResult = resultEntity.inWhitListResult();
 		if (inWhitListResult == null || inWhitListResult.userId() == null)
 		{
 			return jp.proceed();

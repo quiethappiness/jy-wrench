@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.aop.util;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
@@ -16,10 +17,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-
 public interface WrenchAopUtil
 {
 	Logger log = LoggerFactory.getLogger(WrenchAopUtil.class);
+	
 	/**
 	 * 执行降级方法并返回结果
 	 * @param jp
@@ -34,7 +35,8 @@ public interface WrenchAopUtil
 	{
 		if (!StringUtils.hasText(fallbackMethod))
 		{
-			return "fallbackMethodResult";
+			log.error("fallbackMethod is null or empty, please check the configuration");
+			return new Object();
 		}
 		Method method;
 		try
@@ -46,7 +48,8 @@ public interface WrenchAopUtil
 		catch (NoSuchMethodException e)
 		{
 			e.printStackTrace();
-			return "fallbackMethodResult";
+			log.error("fallbackMethod is not found, please check the configuration");
+			return new Object();
 		}
 	}
 	
@@ -66,12 +69,16 @@ public interface WrenchAopUtil
 		// - 方法名称等
 		MethodSignature methodSignature = (MethodSignature) sig;
 		// 通过反射获取降级方法并执行
-		Method method = jp.getTarget()
+		Method method = jp
+			.getTarget()
 			.getClass()
 			.getMethod(fallbackMethod, methodSignature.getParameterTypes());
 		return method;
 	}
-	
+	static Class<?> getTargetClassFromJP(JoinPoint jp)
+	{
+		return jp.getTarget().getClass();
+	}
 	static Method getTargetMethodFromJP(JoinPoint jp) throws NoSuchMethodException
 	{
 		// 获取目标方法的签名信息
@@ -88,10 +95,16 @@ public interface WrenchAopUtil
 		// - 方法名称等
 		MethodSignature methodSignature = (MethodSignature) sig;
 		// 通过反射获取降级方法并执行
-		Method method = jp.getTarget()
+		Method method = jp
+			.getTarget()
 			.getClass()
 			.getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
 		return method;
+	}
+	
+	static String getAttrValue(String attrName, ProceedingJoinPoint jp)
+	{
+		return getAttrValue(attrName, jp.getArgs());
 	}
 	
 	/**
@@ -170,12 +183,14 @@ public interface WrenchAopUtil
 			Field field;
 			try
 			{
-				field = bean.getClass()
+				field = bean
+					.getClass()
 					.getDeclaredField(name);
 			}
 			catch (NoSuchFieldException e)
 			{
-				field = bean.getClass()
+				field = bean
+					.getClass()
 					.getSuperclass()
 					.getDeclaredField(name);
 			}
@@ -205,11 +220,13 @@ public interface WrenchAopUtil
 		try
 		{
 			// 获取所有已注册的Bean定义名称
-			String[] beanNames = context.getRegistry()
+			String[] beanNames = context
+				.getRegistry()
 				.getBeanDefinitionNames();
 			for (String beanName : beanNames)
 			{
-				BeanDefinition beanDef = context.getRegistry()
+				BeanDefinition beanDef = context
+					.getRegistry()
 					.getBeanDefinition(beanName);
 				if (beanDef instanceof AnnotatedBeanDefinition annotatedDef)
 				{

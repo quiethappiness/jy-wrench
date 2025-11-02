@@ -1,9 +1,8 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
 import com.google.common.cache.Cache;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.business.SlidingWindowRateLimiter;
@@ -22,14 +21,14 @@ public class RateLimitSWRNode extends AbstractRateLimiterSupport
 	private final RateLimitEndNode RateLimitEndNode;
 	private final SlidingWindowRateLimiter slidingWindowRateLimiter;
 	@Override
-	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doApply(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：开始执行PPS校验逻辑
 		log.info("【RateLimitSWRNode】：SWR 校验...");
 		// 获取黑名单缓存实例，用于记录超频请求
-		final Cache<String, Long> blacklist = requestParameter.getBlacklist();
+		final Cache<String, Long> blacklist = requestParameter.blacklist();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.tcRateLimiter();
 		String keyAttr = dynamicContext.getKeyAttr();
 		long windowSizeMs = tcRateLimiter.windowSizeMs();
 		long maxRequests = tcRateLimiter.maxRequests();
@@ -54,7 +53,7 @@ public class RateLimitSWRNode extends AbstractRateLimiterSupport
 	}
 	
 	@Override
-	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	public StrategyHandler<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity> get(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		// 决定限流
 		if (dynamicContext.isDecideLimit())

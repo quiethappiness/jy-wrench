@@ -1,14 +1,13 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.AbstractMultiThreadStrategyRouter;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 
-public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStrategyRouter<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity>
+public abstract class AbstractRateLimiterSupport extends AbstractMultiThreadStrategyRouter<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity>
 {
 	
 	@Override
-	protected void multiThread(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	protected void multiThread(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		// 缺省的方法
 	}

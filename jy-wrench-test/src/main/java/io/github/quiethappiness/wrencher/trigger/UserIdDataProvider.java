@@ -2,7 +2,7 @@ package io.github.quiethappiness.wrencher.trigger;
 
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,9 +14,9 @@ import java.util.concurrent.TimeUnit;
 public class UserIdDataProvider implements WhiteListDataProvider
 {
 	@Override
-	public WhiteListType getType()
+	public TcWhiteList.WhiteListType getType()
 	{
-		return WhiteListType.USER_ID;
+		return TcWhiteList.WhiteListType.USER_ID;
 	}
 	
 	@Override
@@ -30,7 +30,7 @@ public class UserIdDataProvider implements WhiteListDataProvider
 		rule.setWhiteList(new HashMap<>());
 		ArrayList<String> strings = new ArrayList<>();
 		strings.add("admin123");
-		rule.getWhiteList().put(WhiteListType.USER_ID, strings);
+		rule.getWhiteList().put(TcWhiteList.WhiteListType.USER_ID, strings);
 		rules.add(rule);
 		return rules;
 	}

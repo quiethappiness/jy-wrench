@@ -111,7 +111,7 @@ public class LuaScriptServiceAop
 		String scriptName = fileFullPath.substring(0, fileFullPath.lastIndexOf(".lua"));
 		ScriptNameContext.setScriptName(scriptName);
 
-		log.info("准备执行 Lua 脚本: {}", scriptName);
+		// log.info("准备执行 Lua 脚本: {}", scriptName);
 		Instant startTime = Instant.now();
 		Instant endTime = null;
 		try

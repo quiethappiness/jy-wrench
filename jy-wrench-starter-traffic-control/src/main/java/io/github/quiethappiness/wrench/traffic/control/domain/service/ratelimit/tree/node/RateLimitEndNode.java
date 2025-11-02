@@ -1,7 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +25,14 @@ public class RateLimitEndNode extends AbstractRateLimiterSupport
 	 * 	处理过程中可能抛出的异常
 	 */
 	@Override
-	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doApply(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：输出最终的限流决策结果
 		log.warn("【结束节点】:是否限流-->{}", dynamicContext.isDecideLimit());
 		// 构建并返回限流处理结果实体
 		// 结果中包含最终的限流决策标志位，供上层调用者使用
-		return RateLimiterReturnResultEntity.builder()
+		return RateLimiterVO.ReturnResultEntity
+			.builder()
 			.decideLimit(dynamicContext.isDecideLimit())
 			.build();
 	}

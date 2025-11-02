@@ -18,7 +18,7 @@ public class SwitchRoot extends AbstractXxxSupport
     @Override
     protected String doApply(String requestParameter, DefaultStrategyFactory.DynamicContext dynamicContext) throws Throwable
     {
-        log.info("【开关节点】规则决策树 userId:{}", requestParameter);
+        log.info("【开关节点】规则决策树 actualValue:{}", requestParameter);
         return router(requestParameter, dynamicContext);
     }
 

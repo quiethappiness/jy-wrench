@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.business;
 
+import io.github.quiethappiness.wrench.lua.manager.domain.model.valobj.ScriptNameContext;
 import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
@@ -30,7 +31,7 @@ public class SlidingWindowRateLimiter
 	 * 	窗口内最大请求数
 	 * @return true 如果请求允许，false 如果被限流
 	 */
-	@LuaScriptPath(fileFullPath = "script/rateLimit.lua")
+	@LuaScriptPath(fileFullPath = "script/ratelimit/slide_window.lua")
 	public boolean tryAcquire(String key, long windowSizeMs, long maxRequests)
 	{
 		String name = RATE_LIMIT;
@@ -40,7 +41,7 @@ public class SlidingWindowRateLimiter
 		// 执行脚本（返回值1代表通过，0代表拒绝）
 		long result = (long) scriptManager.executeScript(
 			ILuaScriptManager.LuaScriptExecuteVO.builder()
-				.scriptName(name)
+				.scriptName(ScriptNameContext.getScriptName())
 				.mode(RScript.Mode.READ_WRITE)
 				.returnType(RScript.ReturnType.INTEGER)
 				.keys(Collections.singletonList(rateLimitKey))

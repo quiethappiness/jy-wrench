@@ -4,9 +4,8 @@ import com.google.common.cache.Cache;
 import com.google.common.util.concurrent.RateLimiter;
 import com.google.common.util.concurrent.SimpleTimeLimiter;
 import com.google.common.util.concurrent.TimeLimiter;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
@@ -51,16 +50,16 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 	 * 	处理过程中可能抛出的异常
 	 */
 	@Override
-	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doApply(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		// 记录日志：开始执行PPS校验逻辑
 		log.info("【RateLimitPPSNode】：PPS 校验...");
 		// 获取黑名单缓存实例，用于记录超频请求
-		final Cache<String, Long> blacklist = requestParameter.getBlacklist();
+		final Cache<String, Long> blacklist = requestParameter.blacklist();
 		// 获取登录记录缓存实例，存储各请求的限流器
-		final Cache<String, RateLimiter> loginRecord = requestParameter.getLoginRecord();
+		final Cache<String, RateLimiter> loginRecord = requestParameter.loginRecord();
 		// 获取限流访问拦截器实例，用于获取相关配置信息
-		final TcRateLimiter tcRateLimiter = requestParameter.getTcRateLimiter();
+		final TcRateLimiter tcRateLimiter = requestParameter.tcRateLimiter();
 		double permitsPerSecond = tcRateLimiter.permitsPerSecond();
 		long warmupPeriod = tcRateLimiter.warmupPeriod();
 		TimeUnit unit = tcRateLimiter.unit();
@@ -105,7 +104,7 @@ public class RateLimitPPSNode extends AbstractRateLimiterSupport
 	}
 	
 	@Override
-	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	public StrategyHandler<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity> get(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		return RateLimitEndNode;
 	}

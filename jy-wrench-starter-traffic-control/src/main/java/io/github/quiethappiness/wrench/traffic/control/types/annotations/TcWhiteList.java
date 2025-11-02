@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.types.annotations;
 
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -43,5 +44,23 @@ public @interface TcWhiteList
 	 * 降级方法，仅在只使用白名单服务时并且失败时触发
 	 */
 	String fallbackMethod();
+	
+	@Getter
+	@AllArgsConstructor
+	enum WhiteListType
+	{
+		USER_ID("actualValue", "UserId", String.class,"userIdWhiteListDataProvider"),
+		IP("ip", "IP", String.class,"ipWhiteListDataProvider"),
+		PHONE("phone", "Phone", String.class,"phoneWhiteListDataProvider"),
+		// EMAIL("email", "Email"),
+		// HEADER("header", "Header"),
+		// COOKIE("cookie", "Cookie"),
+		// ALL("all", "All"),
+		;
+		private final String code;
+		private final String desc;
+		private final Class<?> clazz;
+		private final String dataProviderName;
+	}
 }
 

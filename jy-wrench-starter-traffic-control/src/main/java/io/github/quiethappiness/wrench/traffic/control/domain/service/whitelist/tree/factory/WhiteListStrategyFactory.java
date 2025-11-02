@@ -1,7 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory;
 
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.node.WhiteListRootNode;
 import io.github.quiethappiness.wrench.util.design_framework.tree.AbstractStrategyFactory;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
@@ -11,12 +10,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Service
 @RequiredArgsConstructor
-public class WhiteListStrategyFactory extends AbstractStrategyFactory<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity>
+public class WhiteListStrategyFactory extends AbstractStrategyFactory<WhiteListVO.WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListVO.WhiteListResultEntity>
 {
 	private final WhiteListRootNode whiteListRootNode;
 	
 	@Override
-	public StrategyHandler<WhiteListParameterEntity, DynamicContext, WhiteListResultEntity> strategyHandler() throws Exception
+	public StrategyHandler<WhiteListVO.WhiteListParameterEntity, DynamicContext, WhiteListVO.WhiteListResultEntity> strategyHandler() throws Exception
 	{
 		return whiteListRootNode;
 	}

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
 import io.github.quiethappiness.wrench.dynamic.config.center.config.DCCAutoProperties;
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
 import org.redisson.api.RLocalCachedMap;
 import org.redisson.api.map.WriteMode;
@@ -20,10 +20,10 @@ public abstract class AbstractWhiteListService
 	
 	protected String spliceHashMapName(String name)
 	{
-		return DCCAutoProperties.getSystem() + MAO_HAO + "whitelist" + MAO_HAO + getClass().getSimpleName() + MAO_HAO + name;
+		return DCCAutoProperties.getSystem()+MAO_HAO+"JY" + MAO_HAO + "whitelist" + MAO_HAO + getClass().getSimpleName() + MAO_HAO + name;
 	}
 	
-	protected static void setLocalCacheMapOptions(LocalCachedMapOptions<WhiteListType, List<String>> options)
+	protected static void setLocalCacheMapOptions(LocalCachedMapOptions<TcWhiteList.WhiteListType, List<String>> options)
 	{
 		// 定义本地缓存的淘汰策略，如LRU（最近最少使用）、LFU（最不经常使用）[3,5](@ref)
 		options.evictionPolicy(LocalCachedMapOptions.EvictionPolicy.LRU)
@@ -48,11 +48,11 @@ public abstract class AbstractWhiteListService
 		;
 	}
 	
-	protected boolean doCheckFromRMap(WhiteListType type, String spliceHashMapName, String id)
+	protected boolean doCheckFromRMap(TcWhiteList.WhiteListType type, String spliceHashMapName, String id)
 	{
-		LocalCachedMapOptions<WhiteListType, List<String>> options = LocalCachedMapOptions.<WhiteListType, List<String>>name(spliceHashMapName);
+		LocalCachedMapOptions<TcWhiteList.WhiteListType, List<String>> options = LocalCachedMapOptions.<TcWhiteList.WhiteListType, List<String>>name(spliceHashMapName);
 		setLocalCacheMapOptions(options);
-		RLocalCachedMap<WhiteListType, List<String>> whiteList = redisService.getLocalCachedMap(options);
+		RLocalCachedMap<TcWhiteList.WhiteListType, List<String>> whiteList = redisService.getLocalCachedMap(options);
 		List<String> strings = whiteList.get(type);
 		return strings != null && strings.contains(id);
 	}
@@ -60,5 +60,5 @@ public abstract class AbstractWhiteListService
 	// @PostConstruct
 	protected abstract void initWhitelist();
 	
-	public abstract boolean checkWhitelistId(String uri, WhiteListType type, String userId);
+	public abstract boolean checkWhitelistId(String uri, TcWhiteList.WhiteListType type, String userId);
 }

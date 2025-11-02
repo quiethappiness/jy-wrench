@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.func;
 
 public interface IRedisAtom
 {

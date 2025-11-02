@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit;
 
 import io.github.quiethappiness.wrench.dynamic.config.center.types.annotations.DCCValue;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
 import lombok.RequiredArgsConstructor;
@@ -48,9 +48,9 @@ public class RateLimiterAOP extends AbstractRateLimiterAop
 			return jp.proceed();
 		}
 		// 构造限流参数和上下文信息，执行限流策略判断
-		RateLimiterReturnResultEntity result = doAccess(jp, tcRateLimiter, rateLimiterSwitch);
+		RateLimiterVO.ReturnResultEntity result = doAccess(jp, tcRateLimiter, rateLimiterSwitch);
 		// 如果策略决定进行限流，则执行降级方法并返回结果
-		if (result.isDecideLimit())
+		if (result.decideLimit())
 		{
 			return fallbackMethodResult(jp, tcRateLimiter.fallbackMethod());
 		}

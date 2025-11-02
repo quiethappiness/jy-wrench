@@ -1,8 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterReturnResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
 import lombok.RequiredArgsConstructor;
@@ -20,17 +19,17 @@ public class RateLimitRootNode extends AbstractRateLimiterSupport
 	private final RateLimitEndNode RateLimitEndNode;
 	
 	@Override
-	protected RateLimiterReturnResultEntity doApply(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected RateLimiterVO.ReturnResultEntity doApply(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
-		log.info("【根节点】限流开关:{}", requestParameter.getRateLimiterSwitch());
+		log.info("【根节点】限流开关:{}", requestParameter.rateLimiterSwitch());
 		// 0. 限流开关【open 开启、close, '' 关闭】关闭后，不会走限流策略
-		String rateLimiterSwitch = requestParameter.getRateLimiterSwitch();
+		String rateLimiterSwitch = requestParameter.rateLimiterSwitch();
 		dynamicContext.setSwitchOpen(!StringUtils.isBlank(rateLimiterSwitch) && !"close".equals(rateLimiterSwitch));
 		return router(requestParameter, dynamicContext);
 	}
 	
 	@Override
-	public StrategyHandler<RateLimiterParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterReturnResultEntity> get(RateLimiterParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
+	public StrategyHandler<RateLimiterVO.ParameterEntity, RateLimiterStrategyFactory.DynamicContext, RateLimiterVO.ReturnResultEntity> get(RateLimiterVO.ParameterEntity requestParameter, RateLimiterStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		// 开关确定关闭，即不开启限流，则直接返回结果
 		if (!dynamicContext.isSwitchOpen())

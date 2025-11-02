@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.config;
 
 import io.github.quiethappiness.wrench.traffic.control.config.configuration.HystrixConfiguration;
+import io.github.quiethappiness.wrench.traffic.control.config.configuration.IdempotentConfiguration;
 import io.github.quiethappiness.wrench.traffic.control.config.configuration.RateLimiterConfiguration;
 import io.github.quiethappiness.wrench.traffic.control.config.configuration.WhiteListConfiguration;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
 /**
- * TrafficControlAutoConfig
+ * TrafficControlAutoConfiguration
  * @author quietHappiness @jingyue
  * @version 1.0
  * @description 限流切片的自动配置
@@ -17,8 +18,8 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableAspectJAutoProxy
 // @ComponentScan(basePackages = "io.github.quiethappiness.wrench.traffic.control.config.configuration")
-@Import({RateLimiterConfiguration.class, WhiteListConfiguration.class, HystrixConfiguration.class})
-public class TrafficControlAutoConfig
+@Import({RateLimiterConfiguration.class, WhiteListConfiguration.class, HystrixConfiguration.class, IdempotentConfiguration.class})
+public class TrafficControlAutoConfiguration
 {
 	// @Bean
 	// public RateLimiterAOP rateLimiterAOP() {

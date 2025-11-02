@@ -7,10 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IUserDao {
 
-     @DBRouter(field = "userId")
+     @DBRouter(field = "actualValue")
      User queryUserInfoByUserId(User req);
 
-     @DBRouter(field = "userId")
+     @DBRouter(field = "actualValue")
      void insertUser(User req);
 
 }

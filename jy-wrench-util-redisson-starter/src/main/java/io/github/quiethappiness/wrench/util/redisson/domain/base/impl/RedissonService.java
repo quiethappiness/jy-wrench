@@ -5,10 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
 import org.redisson.api.map.WriteMode;
 import org.redisson.api.options.LocalCachedMapOptions;
+import org.redisson.api.stream.StreamCreateGroupArgs;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -27,11 +29,97 @@ public class RedissonService implements IRedisService
 	}
 	
 	@Override
+	public RRateLimiter getRateLimiter(String name)
+	{
+		return redissonClient.getRateLimiter(name);
+	}
+	
+	@Override
+	public RSearch getSearch()
+	{
+		return redissonClient.getSearch();
+	}
+	
+	@Override
+	public <T> void indexProduct(String id, T product)
+	{
+		RBucket<T> productBucket = redissonClient.getBucket(id);
+		productBucket.set(product);
+	}
+	
+	@Override
+	public <V, L> RTimeSeries<V, L> getTimeSeries(String name)
+	{
+		return redissonClient.getTimeSeries(name);
+	}
+	
+	@Override
+	public <V, L> Collection<TimeSeriesEntry<V, L>> entryRange(String name, long startTimestamp, long endTimestamp)
+	{
+		return redissonClient.<V, L>getTimeSeries(name)
+			.entryRange(startTimestamp, endTimestamp);
+	}
+	
+	@Override
+	public <V, L> Collection<TimeSeriesEntry<V, L>> entryRange(String name, long startTimestamp, long endTimestamp, int limit)
+	{
+		return redissonClient.<V, L>getTimeSeries(name)
+			.entryRange(startTimestamp, endTimestamp, limit);
+	}
+	
+	@Override
+	public <K, V> RStream<K, V> getStream(String streamName)
+	{
+		return redissonClient.getStream(streamName);
+	}
+	
+	@Override
+	public <K, V> Map<StreamMessageId, Map<K, V>> range(String streamName, StreamMessageId startId, StreamMessageId endId)
+	{
+		return redissonClient.<K, V>getStream(streamName)
+			.range(startId, endId);
+	}
+	
+	@Override
+	public void createGroup(String streamName, StreamCreateGroupArgs args)
+	{
+		redissonClient.getStream(streamName)
+			.createGroup(args);
+	}
+	
+	@Override
+	public void createConsumer(String streamName, String groupName, String consumerName)
+	{
+		redissonClient.getStream(streamName)
+			.createConsumer(groupName, consumerName);
+	}
+	
+	@Override
+	public void updateGroupMessageId(String streamName, String groupName, StreamMessageId id)
+	{
+		redissonClient.getStream(streamName)
+			.updateGroupMessageId(groupName, id);
+	}
+	
+	@Override
+	public long ack(String streamName, String groupName, StreamMessageId... ids)
+	{
+		return 0;
+	}
+	
+	@Override
+	public <T> RBucket<T> getBucket(String key)
+	{
+		return redissonClient.getBucket(key);
+	}
+	
+	@Override
 	public RKeys getKey()
 	{
 		return this.redissonClient.getKeys();
 	}
 	
+	@Override
 	public <T> void setValue(String key, T value)
 	{
 		redissonClient.<T>getBucket(key)
@@ -45,6 +133,14 @@ public class RedissonService implements IRedisService
 		bucket.set(value, Duration.ofMillis(expired));
 	}
 	
+	@Override
+	public <T> void setValue(String key, T value, long expired, TimeUnit timeUnit)
+	{
+		RBucket<T> bucket = redissonClient.getBucket(key);
+		bucket.set(value, Duration.ofMillis(TimeUnit.MILLISECONDS.convert(expired, timeUnit)));
+	}
+	
+	@Override
 	public <T> T getValue(String key)
 	{
 		return redissonClient.<T>getBucket(key)
@@ -126,37 +222,44 @@ public class RedissonService implements IRedisService
 	
 	// 方式1：使用RKeys接口
 	@Override
-	public void deleteKey(String... keyArray) {
+	public void deleteKey(String... keyArray)
+	{
 		RKeys keys = redissonClient.getKeys();
 		keys.delete(keyArray);
 	}
 	
 	// 方式2：使用RBucket接口
 	@Override
-	public void deleteBucket(String key) {
+	public void deleteBucket(String key)
+	{
 		RBucket<Object> bucket = redissonClient.getBucket(key);
 		bucket.delete();
 	}
 	
 	// 方式3：批量删除
 	@Override
-	public void deleteKeys(Collection<String> keys) {
+	public void deleteKeys(Collection<String> keys)
+	{
 		RKeys rKeys = redissonClient.getKeys();
 		rKeys.delete(keys.toArray(new String[0]));
 	}
+	
 	// 异步删除
 	@Override
-	public RFuture<Long> deleteAsync(String key) {
+	public RFuture<Long> deleteAsync(String key)
+	{
 		RKeys keys = redissonClient.getKeys();
 		return keys.deleteAsync(key);
 	}
 	
 	// 异步批量删除
 	@Override
-	public RFuture<Long> deleteByPatternAsync(String pattern) {
+	public RFuture<Long> deleteByPatternAsync(String pattern)
+	{
 		RKeys keys = redissonClient.getKeys();
 		return keys.deleteByPatternAsync(pattern);
 	}
+	
 	@Override
 	public boolean isExists(String key)
 	{
@@ -433,6 +536,7 @@ public class RedissonService implements IRedisService
 		Duration duration = Duration.ofMillis(timeUnit.toMillis(expired));
 		return setNx(key, duration);
 	}
+	
 	@Override
 	public Boolean setNx(String key, Duration duration)
 	{

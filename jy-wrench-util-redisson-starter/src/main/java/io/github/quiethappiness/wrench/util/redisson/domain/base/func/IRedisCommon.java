@@ -1,6 +1,7 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.base.inter;
+package io.github.quiethappiness.wrench.util.redisson.domain.base.func;
 
 import org.redisson.api.RBloomFilter;
+import org.redisson.api.RBucket;
 import org.redisson.api.RFuture;
 import org.redisson.api.RKeys;
 
@@ -10,6 +11,7 @@ public interface IRedisCommon
 {
 	public static final String EXPIRE = "_expire";
 	
+	<T>RBucket<T> getBucket(String key);
 	RKeys getKey();
 	
 	/**

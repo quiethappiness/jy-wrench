@@ -13,7 +13,7 @@ public class MemberLevel2Node extends AbstractXxxSupport
 
     @Override
     protected String doApply(String requestParameter, DefaultStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        log.info("【级别节点-2】规则决策树 userId:{}", requestParameter);
+        log.info("【级别节点-2】规则决策树 actualValue:{}", requestParameter);
         return "level2" + JSON.toJSONString(dynamicContext);
     }
 }

@@ -1,6 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.business;
 
-import io.github.quiethappiness.wrench.traffic.control.types.enumvo.WhiteListType;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class WhiteListFilter extends OncePerRequestFilter
 		String ip = request.getRemoteAddr();
 		String requestURI = request.getRequestURI();
 		// 检查IP是否在白名单中
-		if (!whitelistService.checkWhitelistId(requestURI, WhiteListType.IP, ip))
+		if (!whitelistService.checkWhitelistId(requestURI, TcWhiteList.WhiteListType.IP, ip))
 		{
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 		}

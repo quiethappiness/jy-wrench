@@ -1,8 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.node;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListParameterEntity;
-import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.WhiteListResultEntity;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.AbstractWhiteListSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.tree.factory.WhiteListStrategyFactory;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +18,14 @@ public class WhiteListRootNode extends AbstractWhiteListSupport
 	private final WhiteListBranchNode whiteListBranchNode;
 	
 	@Override
-	protected WhiteListResultEntity doApply(WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Throwable
+	protected WhiteListVO.WhiteListResultEntity doApply(WhiteListVO.WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Throwable
 	{
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		if (attributes == null)
 		{
 			log.error("Request attributes not found, cannot proceed with whitelist check");
-			return WhiteListResultEntity.builder()
+			return WhiteListVO.WhiteListResultEntity
+				.builder()
 				.inWhitListResult(new InWhitListResult(null, false))
 				.build();
 		}
@@ -35,7 +35,7 @@ public class WhiteListRootNode extends AbstractWhiteListSupport
 	}
 	
 	@Override
-	public StrategyHandler<WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListResultEntity> get(WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Exception
+	public StrategyHandler<WhiteListVO.WhiteListParameterEntity, WhiteListStrategyFactory.DynamicContext, WhiteListVO.WhiteListResultEntity> get(WhiteListVO.WhiteListParameterEntity requestParameter, WhiteListStrategyFactory.DynamicContext dynamicContext) throws Exception
 	{
 		return whiteListBranchNode;
 	}
