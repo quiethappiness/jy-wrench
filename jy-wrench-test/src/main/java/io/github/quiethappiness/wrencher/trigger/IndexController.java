@@ -3,18 +3,15 @@ package io.github.quiethappiness.wrencher.trigger;
 import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentToken;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcHystrix;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcRateLimiter;
-import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcWhiteList;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.*;
+import io.github.quiethappiness.wrencher.interfaces.dto.UserInfo;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -35,13 +32,18 @@ public class IndexController
 	private ILuaScriptManager luaScriptManager;
 	@Resource
 	private IIdempotentToken idempotentToken;
+	
 	@GetMapping(value = "idempotent")
 	@TcIdempotent
-	public String idempotent(String userId) throws InterruptedException
+	public Map<String, Object> idempotent(
+		@RequestBody @UniqueIdentifier(fieldPaths = {"code", "info"}, Connector = ":", algorithm = UniqueIdentifier.HashAlgorithm.MD5, separator = "|") UserInfo user) throws InterruptedException
 	{
 		// Thread.sleep(2000);
 		// throw new InterruptedException("test");
-		return "test";
+		HashMap<String, Object> hashMap = new HashMap<>();
+		hashMap.put("code", user.getCode());
+		hashMap.put("info", user.getInfo());
+		return hashMap;
 	}
 	
 	@GetMapping(value = "token")
@@ -60,28 +62,33 @@ public class IndexController
 		// throw new InterruptedException("test");
 		return "test";
 	}
+	
 	public String before(String userId) throws InterruptedException
 	{
 		log.info("before");
 		// throw new InterruptedException("test");
 		return "before";
 	}
+	
 	public String after(String userId) throws InterruptedException
 	{
 		log.info("after");
 		return "after";
 	}
+	
 	public String afterReturn(String userId) throws InterruptedException
 	{
 		log.info("afterReturn");
 		return "afterReturn";
 	}
+	
 	public String afterThrowing(String userId) throws InterruptedException
 	{
 		log.info("afterThrowing");
 		return "afterThrowing";
 	}
-	@TcHystrix(timeout = 100,returnJson = "", fallbackMethod = "drawHystrix")
+	
+	@TcHystrix(timeout = 100, returnJson = "", fallbackMethod = "drawHystrix")
 	@GetMapping(value = "hystrix")
 	public String HYSTRIX(String userId) throws InterruptedException
 	{

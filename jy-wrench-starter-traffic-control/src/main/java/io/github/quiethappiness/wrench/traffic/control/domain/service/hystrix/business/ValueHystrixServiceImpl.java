@@ -9,7 +9,7 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.fallbackMethodResult;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.execFallbackMethodAndReturn;
 
 @Slf4j
 public class ValueHystrixServiceImpl extends HystrixCommand<Object> implements IValveHystrixService
@@ -84,7 +84,7 @@ public class ValueHystrixServiceImpl extends HystrixCommand<Object> implements I
 		}
 		try
 		{
-			return fallbackMethodResult(jp, doHystrix.fallbackMethod());
+			return execFallbackMethodAndReturn(jp, doHystrix.fallbackMethod());
 		}
 		catch (Exception e)
 		{

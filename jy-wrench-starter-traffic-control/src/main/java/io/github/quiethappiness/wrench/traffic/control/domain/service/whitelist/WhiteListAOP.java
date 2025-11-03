@@ -14,7 +14,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.fallbackMethodResult;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.execFallbackMethodAndReturn;
 
 @Aspect
 @Component
@@ -81,7 +81,7 @@ public class WhiteListAOP extends AbstractWhiteListAOP
 			log.info("User {} is not in whitelist, access denied", inWhitListResult.userId());
 			// 用户不在白名单中，抛出异常或返回错误
 			log.error("User not in whitelist");
-			return fallbackMethodResult(jp, tcWhiteList.fallbackMethod());
+			return execFallbackMethodAndReturn(jp, tcWhiteList.fallbackMethod());
 		}
 	}
 }

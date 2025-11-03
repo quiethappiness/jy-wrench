@@ -31,7 +31,7 @@ public interface WrenchAopUtil
 	 * @throws Exception
 	 * 	当方法调用过程中发生异常时抛出
 	 */
-	static Object fallbackMethodResult(JoinPoint jp, String fallbackMethod) throws Exception
+	static Object execFallbackMethodAndReturn(JoinPoint jp, String fallbackMethod) throws Exception
 	{
 		if (!StringUtils.hasText(fallbackMethod))
 		{
@@ -102,15 +102,15 @@ public interface WrenchAopUtil
 		return method;
 	}
 	
-	static String getAttrValue(String attrName, ProceedingJoinPoint jp)
+	static String getAttrValueFromArgOrField(String attrName, ProceedingJoinPoint jp)
 	{
-		return getAttrValue(attrName, jp.getArgs());
+		return getAttrValueFromArgOrField(attrName, jp.getArgs());
 	}
 	
 	/**
 	 * 实际根据自身业务调整，主要是为了获取通过某个值做拦截
 	 */
-	static String getAttrValue(String attrName, Object[] args)
+	static String getAttrValueFromArgOrField(String attrName, Object[] args)
 	{
 		if (args[0] instanceof String)
 		{
@@ -122,13 +122,13 @@ public interface WrenchAopUtil
 		{
 			try
 			{
-				if (org.apache.commons.lang.StringUtils.isNotBlank(filedValue))
+				if (StringUtils.hasText(filedValue))
 				{
 					break;
 				}
 				// filedValue = BeanUtils.getProperty(arg, attrName);
 				// fix: 使用lombok时，uId这种字段的get方法与idea生成的get方法不同，会导致获取不到属性值，改成反射获取解决
-				filedValue = String.valueOf(getValueByFieldName(arg, attrName));
+				filedValue = String.valueOf(getCompositionFieldValueByFieldName(arg, attrName));
 			}
 			catch (Exception e)
 			{
@@ -147,11 +147,11 @@ public interface WrenchAopUtil
 	 * @return 属性值
 	 * @author tang
 	 */
-	static Object getValueByFieldName(Object bean, String name)
+	static Object getCompositionFieldValueByFieldName(Object bean, String name)
 	{
 		try
 		{
-			Field field = getFieldByName(bean, name);
+			Field field = getCompositionAndSuperFieldByFieldName(bean, name);
 			if (field == null)
 			{
 				return null;
@@ -166,7 +166,33 @@ public interface WrenchAopUtil
 			return null;
 		}
 	}
-	
+	/**
+	 * 获取字段值（支持嵌套对象）
+	 */
+	static Object getCompositionFieldValueByFieldPath(Object obj, String fieldPath, String separator) throws Exception
+	{
+		String[] fieldNames = fieldPath.split(separator);
+		Object current = obj;
+		
+		for (String fieldName : fieldNames)
+		{
+			if (current == null)
+			{
+				return null;
+			}
+			
+			Field field = getCompositionAndInheritanceFieldByFieldNameRecursive(current.getClass(), fieldName);
+			if (field == null)
+			{
+				throw new NoSuchFieldException("字段不存在: " + fieldName);
+			}
+			
+			field.setAccessible(true);
+			current = field.get(current);
+		}
+		
+		return current;
+	}
 	/**
 	 * 根据名称获取方法，该方法同时兼顾继承类获取父类的属性
 	 * @param bean
@@ -176,7 +202,7 @@ public interface WrenchAopUtil
 	 * @return 该属性对应方法
 	 * @author tang
 	 */
-	static Field getFieldByName(Object bean, String name)
+	static Field getCompositionAndSuperFieldByFieldName(Object bean, String name)
 	{
 		try
 		{
@@ -198,6 +224,31 @@ public interface WrenchAopUtil
 		}
 		catch (NoSuchFieldException e)
 		{
+			return null;
+		}
+	}
+	
+	/**
+	 * 递归地在类及其父类中查找指定名称的字段
+	 * 
+	 * @param clazz 要查找的类
+	 * @param fieldName 字段名称
+	 * @return 找到的字段对象，如果未找到则返回null
+	 */
+	static Field getCompositionAndInheritanceFieldByFieldNameRecursive(Class<?> clazz, String fieldName)
+	{
+		try
+		{
+			return clazz.getDeclaredField(fieldName);
+		}
+		catch (NoSuchFieldException e)
+		{
+			// 尝试从父类查找
+			Class<?> superClass = clazz.getSuperclass();
+			if (superClass != null && superClass != Object.class)
+			{
+				return getCompositionAndInheritanceFieldByFieldNameRecursive(superClass, fieldName);
+			}
 			return null;
 		}
 	}

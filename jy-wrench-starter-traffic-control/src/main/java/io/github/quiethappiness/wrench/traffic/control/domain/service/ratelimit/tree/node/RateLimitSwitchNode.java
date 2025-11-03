@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.util.design_framework.tree.StrategyHandler;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
@@ -11,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
 
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getAttrValue;
+import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getAttrValueFromArgOrField;
 
 @Slf4j
 @Component("RateLimitSwitchNode")
@@ -68,7 +69,7 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 		}
 		// 根据key和方法参数获取具体的限流字段值
 		// 通过解析SpEL表达式，从方法参数中提取实际的限流标识
-		String keyAttr = getAttrValue(key, jp.getArgs());
+		String keyAttr = WrenchAopUtil.getAttrValueFromArgOrField(key, jp.getArgs());
 		// 记录日志：获取到AOP限流字段的值，便于调试和监控
 		log.info("【RateLimitSwitchNode】:限流-获取aop attr {}", keyAttr);
 		// 将获取到的限流字段值设置到动态上下文中，供后续流程节点使用

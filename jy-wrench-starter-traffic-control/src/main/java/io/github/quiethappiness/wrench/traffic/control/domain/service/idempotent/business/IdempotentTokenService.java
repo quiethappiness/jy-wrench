@@ -4,12 +4,17 @@ import com.alibaba.fastjson.JSON;
 import io.github.quiethappiness.wrench.lua.manager.domain.model.valobj.ScriptNameContext;
 import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.check.FieldBasedIdentifierGenerator;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.redisson.api.*;
+import org.redisson.api.RMap;
+import org.redisson.api.RRateLimiter;
+import org.redisson.api.RScript;
+import org.redisson.api.RateType;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -18,16 +23,43 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class IdempotentService implements IIdempotentToken
+public class IdempotentTokenService implements IIdempotentToken, IIdempotentCheck
 {
 	
 	@Resource
 	private IRedisService redisService;
-	
+	@Resource
+	private FieldBasedIdentifierGenerator generator;
 	@Resource
 	private ILuaScriptManager luaScriptManager;
 	@Resource
 	protected HttpServletRequest request;
+	
+	@Override
+	public boolean isRequestTooFrequent(String businessType, TcIdempotent tcIdempotent)
+	{
+		String id = tcIdempotent
+			.attrKey()
+			.isEmpty() ? "" : tcIdempotent.attrKey();
+		int limit = tcIdempotent.rateLimit();
+		Duration duration = Duration.ofSeconds(tcIdempotent.rateLimitDuration());
+		// 实现频率检查逻辑
+		// 可以使用Redisson的RRateLimiter
+		String key = IIdempotentToken.spliceRateLimiterKey(businessType, id);
+		RRateLimiter rateLimiter = redisService.getRateLimiter(key);
+		// 设置key的过期时间
+		rateLimiter.setRate(RateType.OVERALL, limit, duration,Duration.ofMinutes(2*duration.toMinutes())); // 每分钟10次
+		return !rateLimiter.tryAcquire(1);
+	}
+	
+	@Override
+	public boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType)
+	{
+		// 实现相似请求检查
+		Object[] args = joinPoint.getArgs();
+		// 可以根据方法参数生成指纹进行比较
+		return false; // 示例
+	}
 	
 	@Override
 	public String generateToken()
@@ -38,20 +70,18 @@ public class IdempotentService implements IIdempotentToken
 		redisService.setValue(tokenKey, "VALID", 1, TimeUnit.HOURS);
 		return token;
 	}
+	
+	@Override
 	public String getTokenFromRequest(String headerName)
 	{
 		return request.getHeader(headerName);
 	}
-	public boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType)
-	{
-		// 实现相似请求检查
-		// 可以根据方法参数生成指纹进行比较
-		return false; // 示例
-	}
+	
 	/**
 	 * 检查并标记令牌为已使用（原子操作）
 	 */
 	@LuaScriptPath(fileFullPath = "script/idempotent/mark_token_used.lua")
+	@Override
 	public boolean checkAndMarkToken(String token)
 	{
 		String tokenKey = IIdempotentToken.spliceTokenKey(token);
@@ -75,6 +105,7 @@ public class IdempotentService implements IIdempotentToken
 	 * 存储业务执行结果
 	 */
 	@LuaScriptPath(fileFullPath = "script/idempotent/cache_request_result.lua")
+	@Override
 	public void cacheResult(String token, Object result)
 	{
 		String resultKey = IIdempotentToken.spliceResultKey(token);
@@ -95,6 +126,7 @@ public class IdempotentService implements IIdempotentToken
 	/**
 	 * 获取之前执行的结果
 	 */
+	@Override
 	public <T> T getPreviousResult(String token, Class<T> clazz)
 	{
 		String resultKey = IIdempotentToken.spliceResultKey(token);
@@ -111,7 +143,8 @@ public class IdempotentService implements IIdempotentToken
 	 * 删除令牌及相关数据
 	 */
 	@LuaScriptPath(fileFullPath = "script/idempotent/delete_token_and_result.lua")
-	public boolean deleteToken(String token)
+	@Override
+	public boolean preReleaseToken(String token)
 	{
 		Object result = luaScriptManager.executeScript(
 			ILuaScriptManager.LuaScriptExecuteVO
@@ -126,6 +159,7 @@ public class IdempotentService implements IIdempotentToken
 		
 		return ((Long) result) > 0;
 	}
+	
 	public boolean shouldReleaseToken(Exception e)
 	{
 		// 根据异常类型决定是否释放令牌
@@ -133,6 +167,7 @@ public class IdempotentService implements IIdempotentToken
 		return e instanceof NullPointerException ||
 			e instanceof IllegalArgumentException;
 	}
+	
 	/**
 	 * 清理过期令牌（定时任务调用）
 	 */
@@ -141,18 +176,7 @@ public class IdempotentService implements IIdempotentToken
 		// Redisson会自动处理过期的key
 		// 如果需要额外的清理逻辑可以在这里实现
 	}
-	public boolean isRequestTooFrequent(String businessType, String id)
-	{
-		// 实现频率检查逻辑
-		// 可以使用Redisson的RRateLimiter
-		
-		String key = IIdempotentToken.spliceRateLimiterKey(businessType, id);
-		RRateLimiter rateLimiter = redisService.getRateLimiter(key);
-		// 设置key的过期时间
-		redisService.getBucket(key).expire(Duration.ofMinutes(RATE_LIMITER_DURATION.toMinutes()));
-		rateLimiter.trySetRate(RateType.OVERALL, 4,RATE_LIMITER_DURATION ); // 每分钟10次
-		return !rateLimiter.tryAcquire(1);
-	}
+	
 	/**
 	 * 获取令牌信息
 	 */

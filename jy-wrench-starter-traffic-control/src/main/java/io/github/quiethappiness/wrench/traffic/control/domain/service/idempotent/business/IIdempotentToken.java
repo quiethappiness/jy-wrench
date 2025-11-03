@@ -1,5 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business;
 
+import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
+
 import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -48,5 +50,18 @@ public interface IIdempotentToken
 	
 	String generateToken();
 	
-	IdempotentService.TokenInfo getTokenInfo(String token);
+	String getTokenFromRequest(String headerName);
+	
+	@LuaScriptPath(fileFullPath = "script/idempotent/mark_token_used.lua")
+	boolean checkAndMarkToken(String token);
+	
+	@LuaScriptPath(fileFullPath = "script/idempotent/cache_request_result.lua")
+	void cacheResult(String token, Object result);
+	
+	<T> T getPreviousResult(String token, Class<T> clazz);
+	
+	@LuaScriptPath(fileFullPath = "script/idempotent/delete_token_and_result.lua")
+	boolean preReleaseToken(String token);
+	
+	IdempotentTokenService.TokenInfo getTokenInfo(String token);
 }

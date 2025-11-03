@@ -17,7 +17,7 @@ public abstract class AbstractDBRouterAOP implements IDBRouterAOP
 	
 	protected CalRouterResult doCalRouter(ProceedingJoinPoint jp, String dbKey)
 	{
-		String dbKeyAttr = WrenchAopUtil.getAttrValue(dbKey, jp.getArgs());
+		String dbKeyAttr = WrenchAopUtil.getAttrValueFromArgOrField(dbKey, jp.getArgs());
 		// 检查键值是否为空
 		if (dbKeyAttr == null)
 		{
