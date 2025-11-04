@@ -56,6 +56,6 @@ public class IdempotentAOP extends AbstractIdempotentAOP
 		strategy.frequencyCheck(joinPoint, idempotent, token);
 		// 相似请求检查
 		strategy.similarCheck(joinPoint, token);
-		return strategy.execJoinPoint(joinPoint, token);
+		return strategy.execJoinPoint(joinPoint,idempotent , token);
 	}
 }

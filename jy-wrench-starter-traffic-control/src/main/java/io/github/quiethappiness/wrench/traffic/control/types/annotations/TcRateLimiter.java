@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public @interface TcRateLimiter
 {
 	/**
-	 * 用哪个字段作为拦截标识，未配置则默认走全部
+	 * 用哪个字段作为拦截标识，未配置则报错
 	 */
 	String key();
 	
@@ -36,9 +36,9 @@ public @interface TcRateLimiter
 	
 	// 以下为 PPS 模式下的参数--------------------------------------------------
 	/**
-	 * PPS限制频次规则（每秒请求次数）
+	 * PPS限制频次规则（每秒请求次数）（对于单个实例）
 	 */
-	double permitsPerSecond() default 50;
+	double permitsPerSecond() default 3;
 	
 	/**
 	 * 预热期，在预热期内不进行限制

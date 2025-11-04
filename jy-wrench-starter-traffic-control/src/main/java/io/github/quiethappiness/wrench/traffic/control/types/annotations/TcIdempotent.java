@@ -17,11 +17,6 @@ public @interface TcIdempotent
 	String tokenHeader() default "Idempotency-Token";
 	
 	/**
-	 * 请求唯一标识，用于生成幂等性令牌以及其他频次限制
-	 */
-	String attrKey() default "id";
-	
-	/**
 	 * 幂等性级别
 	 */
 	Level level() default Level.NORMAL;
@@ -33,14 +28,18 @@ public @interface TcIdempotent
 	
 	// 仅用于normal,strict级别
 	/**
-	 * 频次限制
+	 * 请求唯一标识，用于生成幂等性令牌以及其他频次限制
 	 */
-	int rateLimit() default 1;
+	String rateMark() default "userId";
+	/**
+	 * 频次限制(对于一整个服务）
+	 */
+	int rateLimit() default 10;
 	
 	/**
 	 * 频率限制时间,单位s
 	 */
-	long rateLimitDuration() default 15;
+	long rateLimitDuration() default 5;
 	
 	/*
 	  幂等性

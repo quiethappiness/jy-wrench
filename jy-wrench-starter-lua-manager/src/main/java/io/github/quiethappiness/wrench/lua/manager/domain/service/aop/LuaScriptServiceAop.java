@@ -76,7 +76,7 @@ public class LuaScriptServiceAop
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
 		String methodName = method.getName();
-		log.info("正在处理 Lua 脚本方法: {}", methodName);
+		// log.info("正在处理 Lua 脚本方法: {}", methodName);
 		
 		// 获取类和方法上的注解
 		LuaScriptPath classAnnotation = targetClass.getAnnotation(LuaScriptPath.class);

@@ -8,16 +8,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.aspectj.lang.ProceedingJoinPoint;
 
-
+import java.lang.reflect.Method;
 
 public abstract class AbstractDBRouterAOP implements IDBRouterAOP
 {
 	@Resource
 	protected DBRouterProperty dbRouterProperty;
 	
-	protected CalRouterResult doCalRouter(ProceedingJoinPoint jp, String dbKey)
+	protected CalRouterResult doCalRouter(ProceedingJoinPoint jp, String dbKey) throws NoSuchMethodException
 	{
-		String dbKeyAttr = WrenchAopUtil.getAttrValueFromArgOrField(dbKey, jp.getArgs());
+		Method method = WrenchAopUtil.MethodPart.getTargetMethodFromJP(jp);
+		String dbKeyAttr = WrenchAopUtil.FieldPart.getFelidStringFromArgOrField(dbKey, method.getParameters(),jp.getArgs());
 		// 检查键值是否为空
 		if (dbKeyAttr == null)
 		{

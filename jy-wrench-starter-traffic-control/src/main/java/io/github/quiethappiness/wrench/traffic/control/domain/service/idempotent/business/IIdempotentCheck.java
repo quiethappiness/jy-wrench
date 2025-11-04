@@ -14,7 +14,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 public interface IIdempotentCheck
 {
 	
-	boolean isRequestTooFrequent(String businessType, TcIdempotent tcIdempotent);
+	boolean isRequestTooFrequent(String businessType, TcIdempotent tcIdempotent,String mark);
 	
-	boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType);
+	boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType) throws NoSuchMethodException;
 }

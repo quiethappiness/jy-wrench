@@ -26,7 +26,7 @@ public class DBRouterAOP extends AbstractDBRouterAOP
 		}
 		// 计算路由
 		CalRouterResult result = doCalRouter(jp, dbKey);
-		log.info("数据库路由 method：{} dbIdx：{} tbIdx：{}", WrenchAopUtil.getTargetMethodFromJP(jp)
+		log.info("数据库路由 method：{} dbIdx：{} tbIdx：{}", WrenchAopUtil.MethodPart.getTargetMethodFromJP(jp)
 			.getName(), result.dbIdx, result.tbIdx);
 		// 返回结果
 		try

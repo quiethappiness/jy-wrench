@@ -140,7 +140,7 @@ public class LuaScriptManagerImpl extends AbstractLuaScriptManager
 		List<Object> keys = luaScriptExecuteVO.getKeys();
 		String[] args = luaScriptExecuteVO.getArgs();
 		// 添加详细的调试日志
-		log.info("Executing script: [{}], Keys: {}, Args: {}", scriptName, keys, Arrays.toString(args));
+		log.warn("Executing script: [{}], \n\t\tKeys: {}, Args: {}", scriptName, keys, Arrays.toString(args));
 		LuaScriptVO vo = uriToVOMap.get(scriptName);
 		String sha = vo.getSha();
 		if (sha == null)

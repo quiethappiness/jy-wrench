@@ -20,10 +20,12 @@ public interface IIdempotentToken
 	
 	String TOKEN_PREFIX = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":token:";
 	String RESULT_PREFIX = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":result:";
+	String SIMILAR_HASH_MAP_KEY = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":similar";
 	String RATE_LIMITER_PREFIX = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":rate_limit:";
 	Long TOKEN_EXPIRE_TIME = TimeUnit.HOURS.toSeconds(1);
 	Long RESULT_EXPIRE_TIME = TimeUnit.HOURS.toSeconds(1);
 	Duration RATE_LIMITER_DURATION = Duration.ofMinutes(1);
+	Duration SIMILAR_HASH_DURATION = Duration.ofSeconds(30);
 	Long DELETE_KEY_EXPIRE_TIME = TimeUnit.MINUTES.toSeconds(5);
 	static String spliceTokenKey(String token)
 	{
@@ -37,6 +39,10 @@ public interface IIdempotentToken
 	{
 		return RATE_LIMITER_PREFIX + businessType + ":" + id;
 	}
+	static String spliceSimilarHashRMapCacheKey()
+	{
+		return SIMILAR_HASH_MAP_KEY;
+	}
 	static String generateUniqueToken()
 	{
 		return String.format("%d_%s",
@@ -47,6 +53,8 @@ public interface IIdempotentToken
 				.substring(0, 8)
 		);
 	}
+	
+	void preReleaseRateLimiter(String businessType, String mark, long duration);
 	
 	String generateToken();
 	

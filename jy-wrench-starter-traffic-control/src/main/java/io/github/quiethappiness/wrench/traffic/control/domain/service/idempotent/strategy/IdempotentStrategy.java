@@ -1,14 +1,13 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.strategy;
 
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.strategy.impl.FastLevelIdempotentStrategy;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.strategy.impl.NormalLevelIdempotentStrategy;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.strategy.impl.StrictLevelIdempotentStrategy;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
 import io.github.quiethappiness.wrench.util.types.common.util.StringCaseUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.aspectj.lang.ProceedingJoinPoint;
-
-import java.lang.reflect.Method;
-
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getTargetMethodFromJP;
 
 /**
  * IdempotentStrategy
@@ -19,13 +18,7 @@ import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getTargetMe
  */
 public interface IdempotentStrategy
 {
-	 static String spliceBusinessType(ProceedingJoinPoint joinPoint) throws NoSuchMethodException
-	{
-		Method method = getTargetMethodFromJP(joinPoint);
-		return method
-			.getDeclaringClass()
-			.getSimpleName() + "." + method.getName();
-	}
+
 	
 	Object tokenCheck(ProceedingJoinPoint joinPoint, TcIdempotent idempotent, String token) throws NoSuchMethodException;
 	
@@ -33,7 +26,7 @@ public interface IdempotentStrategy
 	
 	void similarCheck(ProceedingJoinPoint joinPoint, String token) throws NoSuchMethodException;
 	
-	Object execJoinPoint(ProceedingJoinPoint joinPoint, String token) throws Throwable;
+	Object execJoinPoint(ProceedingJoinPoint joinPoint,TcIdempotent idempotent, String token) throws Throwable;
 	
 	@AllArgsConstructor
 	@Getter

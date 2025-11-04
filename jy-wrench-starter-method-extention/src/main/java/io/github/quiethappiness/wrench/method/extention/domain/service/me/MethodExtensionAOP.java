@@ -1,6 +1,7 @@
 package io.github.quiethappiness.wrench.method.extention.domain.service.me;
 
 import com.alibaba.fastjson.JSON;
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
 import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -10,8 +11,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
-
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getTargetMethodFromJP;
 
 @Aspect
 @Component
@@ -23,7 +22,7 @@ public class MethodExtensionAOP extends AbstractMethodExtensionAOP
 	@Around(value = "methodExtensionPointcut() &&@annotation(methodExtension)")
 	public Object doMethodExtension(ProceedingJoinPoint jp, MeMethodExtension methodExtension) throws Throwable
 	{
-		Method method = getTargetMethodFromJP(jp);
+		Method method = MethodPart.getTargetMethodFromJP(jp);
 		Object proceed = null;
 		// 1. 前置处理
 		if (doBefore(jp, methodExtension))

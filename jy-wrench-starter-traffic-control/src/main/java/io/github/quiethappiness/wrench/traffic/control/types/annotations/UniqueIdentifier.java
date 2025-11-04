@@ -19,22 +19,19 @@ public @interface UniqueIdentifier
 	/**
 	 * 参与生成唯一标识的字段名
 	 */
-	String[] fieldPaths() default {};
+	String[] fieldPathsOrExpressions() default {};
 	
 	/**
 	 * 连接符,这里是语法连接符号，可以用于多层字段
 	 */
 	String Connector() default ".";
 	
+	Type type() default Type.SPEL;
+	
 	/**
 	 * 哈希算法
 	 */
 	HashAlgorithm algorithm() default HashAlgorithm.MD5;
-	
-	/**
-	 * 分隔符，用于生成唯一标识使用，一般不需要用户配置
-	 */
-	String separator() default "|";
 	
 	enum HashAlgorithm
 	{
@@ -42,5 +39,12 @@ public @interface UniqueIdentifier
 		SHA256,
 		SHA1,
 		MURMUR
+	}
+	
+	enum Type
+	{
+		SPEL,
+		CUSTOM,
+		;
 	}
 }

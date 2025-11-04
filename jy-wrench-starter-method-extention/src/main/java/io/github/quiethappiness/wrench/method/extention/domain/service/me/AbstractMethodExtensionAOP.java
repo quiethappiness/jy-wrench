@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.method.extention.domain.service.me;
 
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
 import io.github.quiethappiness.wrench.method.extention.domain.service.IMethodExtensionAOP;
 import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +8,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
-
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getFallBackMethodFromJP;
 
 @Slf4j
 public abstract class AbstractMethodExtensionAOP implements IMethodExtensionAOP
@@ -22,7 +21,7 @@ public abstract class AbstractMethodExtensionAOP implements IMethodExtensionAOP
 		}
 		try
 		{
-			Method afterThrowingMethod = getFallBackMethodFromJP(jp, methodExtension);
+			Method afterThrowingMethod = MethodPart.getFallBackMethodFromJP(jp, methodExtension);
 			afterThrowingMethod.invoke(jp.getThis(), jp.getArgs());
 		}
 		catch (Exception e)
@@ -37,7 +36,7 @@ public abstract class AbstractMethodExtensionAOP implements IMethodExtensionAOP
 		{
 			try
 			{
-				Method beforeMethod = getFallBackMethodFromJP(jp, methodExtension.beforeMethod());
+				Method beforeMethod = MethodPart.getFallBackMethodFromJP(jp, methodExtension.beforeMethod());
 				beforeMethod.invoke(jp.getThis(), jp.getArgs());
 			}
 			catch (Exception e)

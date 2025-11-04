@@ -4,6 +4,7 @@ import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaSc
 import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentToken;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.*;
+import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent.Level;
 import io.github.quiethappiness.wrencher.interfaces.dto.UserInfo;
 import io.github.quiethappiness.wrencher.sample.IRedisWithLua;
 import jakarta.annotation.Resource;
@@ -34,9 +35,10 @@ public class IndexController
 	private IIdempotentToken idempotentToken;
 	
 	@GetMapping(value = "idempotent")
-	@TcIdempotent
+	@TcIdempotent(level = Level.STRICT, rateMark = "#code")
 	public Map<String, Object> idempotent(
-		@RequestBody @UniqueIdentifier(fieldPaths = {"code", "info"}, Connector = ":", algorithm = UniqueIdentifier.HashAlgorithm.MD5, separator = "|") UserInfo user) throws InterruptedException
+		@RequestBody @UniqueIdentifier(fieldPathsOrExpressions = {"#code", "#info"}, algorithm = UniqueIdentifier.HashAlgorithm.MD5) UserInfo user
+	) throws InterruptedException
 	{
 		// Thread.sleep(2000);
 		// throw new InterruptedException("test");

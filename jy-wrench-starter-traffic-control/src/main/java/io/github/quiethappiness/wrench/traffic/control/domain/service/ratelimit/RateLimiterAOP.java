@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit;
 
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
 import io.github.quiethappiness.wrench.dynamic.config.center.types.annotations.DCCValue;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.valobj.TrafficControlContext;
@@ -10,8 +11,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.execFallbackMethodAndReturn;
 
 /**
  * RateLimiterAOP
@@ -52,7 +51,7 @@ public class RateLimiterAOP extends AbstractRateLimiterAop
 		// 如果策略决定进行限流，则执行降级方法并返回结果
 		if (result.decideLimit())
 		{
-			return execFallbackMethodAndReturn(jp, tcRateLimiter.fallbackMethod());
+			return MethodPart.execFallbackMethodAndReturn(jp, tcRateLimiter.fallbackMethod());
 		}
 		// 返回结果
 		return jp.proceed();

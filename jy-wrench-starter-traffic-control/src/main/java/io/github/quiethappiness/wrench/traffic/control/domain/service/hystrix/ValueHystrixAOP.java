@@ -1,5 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.hystrix;
 
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IValueHystrixAOP;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.hystrix.business.IValveHystrixService;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.hystrix.business.ValueHystrixServiceImpl;
@@ -10,8 +11,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-
-import static io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.getTargetMethodFromJP;
 
 @Service
 @Slf4j
@@ -25,6 +24,6 @@ public class ValueHystrixAOP implements IValueHystrixAOP
 	{
 		// 配置超时时间
 		IValveHystrixService valueHystrixService = new ValueHystrixServiceImpl(tcHystrix.timeout());
-		return valueHystrixService.access(jp, getTargetMethodFromJP(jp), tcHystrix, jp.getArgs());
+		return valueHystrixService.access(jp, MethodPart.getTargetMethodFromJP(jp), tcHystrix, jp.getArgs());
 	}
 }
