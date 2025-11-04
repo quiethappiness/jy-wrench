@@ -31,6 +31,7 @@ public class FieldBasedIdentifierGenerator
 {
 	private static final String DEFAULT_CONNECTOR = ".";
 	private static final String DEFAULT_SEPARATOR = "|";
+	public static final String NULL_IDENTITY = "NULL_IDENTITY";
 	
 	/**
 	 * 根据注解配置生成唯一标识
@@ -70,7 +71,7 @@ public class FieldBasedIdentifierGenerator
 		// 默认以逗号分隔
 		return identifiers
 			.stream()
-			.reduce("", (a, b) -> a + ";" + b);
+			.reduce( (a, b) -> a + ";" + b).orElse(NULL_IDENTITY);
 	}
 	
 	/**
