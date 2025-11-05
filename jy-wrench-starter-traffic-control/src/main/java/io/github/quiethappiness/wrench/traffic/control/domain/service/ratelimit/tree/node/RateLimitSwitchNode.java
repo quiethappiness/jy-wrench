@@ -1,7 +1,6 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.node;
 
-import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil;
-import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
+import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.FieldPart;
 import io.github.quiethappiness.wrench.traffic.control.domain.model.entity.RateLimiterVO;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.AbstractRateLimiterSupport;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.ratelimit.tree.factory.RateLimiterStrategyFactory;
@@ -12,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.stereotype.Component;
-
-import java.lang.reflect.Method;
 
 @Slf4j
 @Component("RateLimitSwitchNode")
@@ -70,14 +67,14 @@ public class RateLimitSwitchNode extends AbstractRateLimiterSupport
 		}
 		// 根据key和方法参数获取具体的限流字段值
 		// 通过解析SpEL表达式，从方法参数中提取实际的限流标识
-		Method method = MethodPart.getTargetMethodFromJP(jp);
-		
-		String keyAttr = WrenchAopUtil.FieldPart.getFelidStringFromArgOrField(key,method.getParameters(), jp.getArgs());
+		String keyAttrValue = FieldPart.extractSpelExpressionValue(jp, key,String.class);
+		// Method method = MethodPart.getTargetMethodFromJP(jp);
+		// String keyAttrValue = WrenchAopUtil.FieldPart.getFelidStringFromArgOrField(key,method.getParameters(), jp.getArgs());
 		// 记录日志：获取到AOP限流字段的值，便于调试和监控
-		log.info("【RateLimitSwitchNode】:限流-获取aop attr {}", keyAttr);
+		log.info("【RateLimitSwitchNode】:限流-获取aop attr {}", keyAttrValue);
 		// 将获取到的限流字段值设置到动态上下文中，供后续流程节点使用
 		// 这个值将成为后续所有限流判断的基础标识
-		dynamicContext.setKeyAttr(keyAttr);
+		dynamicContext.setKeyAttr(keyAttrValue);
 		// 调用路由方法，根据限流参数和上下文信息继续执行后续的限流处理
 		// 这里会将控制权交给下一个节点，形成完整的处理链路
 		return router(requestParameter, dynamicContext);

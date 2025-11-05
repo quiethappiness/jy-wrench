@@ -29,6 +29,10 @@ public @interface TcIdempotent
 	// 仅用于normal,strict级别
 	/**
 	 * 请求唯一标识，用于生成幂等性令牌以及其他频次限制，比如用户ID
+	 * <p>spel表达式</p>
+	 * <pre>
+	 *     #{user.id}
+	 * </pre>
 	 */
 	String rateMark() ;
 	/**

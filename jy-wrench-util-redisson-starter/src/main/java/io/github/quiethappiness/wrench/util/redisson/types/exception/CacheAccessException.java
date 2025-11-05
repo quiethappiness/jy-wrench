@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.util.redisson.domain.execption;
+package io.github.quiethappiness.wrench.util.redisson.types.exception;
 
 public class CacheAccessException extends RuntimeException
 {

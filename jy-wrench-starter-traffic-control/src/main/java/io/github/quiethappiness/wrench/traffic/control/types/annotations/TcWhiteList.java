@@ -22,12 +22,24 @@ public @interface TcWhiteList
 	/**
 	 * 白名单字段属性名称,这里可以使用SpEL表达式
 	 * 使用#{}作为定界符
-	 * 支持属性访问：#{user.name}
-	 * 支持方法调用：#{user.getName()}
-	 * 支持运算符：+、-、&&、||等
-	 * 支持集合操作：#{users.?[age > 18]}
-	 * 支持字符串操作：#{user.name.toUpperCase()}
-	 * 支持正则匹配：#{user.name.matches('[a-zA-Z]+')}
+	 * <p>支持属性访问：<pre>
+	 *     #{user.name}
+	 * </pre></p>
+	 * <p>支持方法调用：<pre>
+	 *     #{user.getName()}
+	 * </pre></p>
+	 * <p>支持运算符：<pre>
+	 *     +、-、&&、||等
+	 * </pre></p>
+	 * <p>支持集合操作：<pre>
+	 *     #{users.?[age > 18]}
+	 * </pre></p>
+	 * <p>支持字符串操作：<pre>
+	 *     #{user.name.toUpperCase()}
+	 * </pre></p>
+	 * <p>支持正则匹配：<pre>
+	 *     #{user.name.matches('[a-zA-Z]+')}
+	 * </pre></p>
 	 */
 	@AliasFor("whiteListField")
 	String key() default "";
@@ -63,4 +75,3 @@ public @interface TcWhiteList
 		private final String dataProviderName;
 	}
 }
-

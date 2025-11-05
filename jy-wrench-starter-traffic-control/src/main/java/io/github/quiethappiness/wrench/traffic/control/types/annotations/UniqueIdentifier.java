@@ -18,6 +18,10 @@ public @interface UniqueIdentifier
 {
 	/**
 	 * 参与生成唯一标识的字段名.例如
+	 * <p>spel表达式</p>
+	 * <pre>
+	 *     #{user.id}
+	 * </pre>
 	 * <pre>
 	 *     fieldPathsOrExpressions = {"#code", "#info"}
 	 * </pre>

@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.util.redisson.domain.repository.impl;
 
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
-import io.github.quiethappiness.wrench.util.redisson.domain.execption.CacheAccessException;
+import io.github.quiethappiness.wrench.util.redisson.types.exception.CacheAccessException;
 import io.github.quiethappiness.wrench.util.redisson.domain.repository.IValueRepository;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;

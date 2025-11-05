@@ -18,7 +18,6 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public interface IdempotentStrategy
 {
-
 	
 	Object tokenCheck(ProceedingJoinPoint joinPoint, TcIdempotent idempotent, String token) throws NoSuchMethodException;
 	

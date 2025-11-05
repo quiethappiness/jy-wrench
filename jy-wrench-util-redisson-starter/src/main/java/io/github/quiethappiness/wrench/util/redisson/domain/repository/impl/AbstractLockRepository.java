@@ -5,25 +5,27 @@ import io.github.quiethappiness.wrench.util.redisson.domain.repository.ILockRepo
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Slf4j
+@Validated
 public abstract class AbstractLockRepository implements ILockRepository
 {
 	@Resource
 	protected IRedisService redisService;
 	
 	@Override
-	public <T> T lockAndGet(String lockkey, Supplier<T> supplier)
+	public <T> T lockAndGet(String prefix, String lockkey, Supplier<T> supplier, long waitTime, long leaseTime, TimeUnit unit)
 	{
 		// 假设是多实例运行，则使用分布式锁防止重复执行
-		RLock lock = redisService.getLock("RLock:" + lockkey);
+		RLock lock = redisService.getLock(prefix + lockkey);
 		try
 		{
-			boolean isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
+			boolean isLocked = lock.tryLock(waitTime, leaseTime, unit);
 			if (isLocked)
 			{
 				return supplier.get();
@@ -37,7 +39,7 @@ public abstract class AbstractLockRepository implements ILockRepository
 		{
 			// 如果是中断异常，需要恢复中断状态
 			Thread.currentThread()
-				.interrupt();
+			      .interrupt();
 		}
 		catch (Exception e)
 		{
@@ -55,13 +57,13 @@ public abstract class AbstractLockRepository implements ILockRepository
 	}
 	
 	@Override
-	public <T> void lockAndRun(String lockkey, Consumer<T> supplier, T t)
+	public <T> void lockAndRun(String lockkey, Consumer<T> supplier, T t, long waitTime, long leaseTime, TimeUnit unit)
 	{
 		// 假设是多实例运行，则使用分布式锁防止重复执行
 		RLock lock = redisService.getLock("RLock:" + lockkey);
 		try
 		{
-			boolean isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
+			boolean isLocked = lock.tryLock(waitTime, leaseTime, unit);
 			if (isLocked)
 			{
 				supplier.accept(t);
@@ -75,7 +77,7 @@ public abstract class AbstractLockRepository implements ILockRepository
 		{
 			// 如果是中断异常，需要恢复中断状态
 			Thread.currentThread()
-				.interrupt();
+			      .interrupt();
 		}
 		catch (Exception e)
 		{

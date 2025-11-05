@@ -7,6 +7,7 @@ import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPa
 import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.check.FieldBasedIdentifierGenerator;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
 import io.github.quiethappiness.wrench.util.redisson.domain.base.impl.IRedisService;
+import io.github.quiethappiness.wrench.util.redisson.types.annotations.LockAndGet;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
@@ -32,18 +33,7 @@ public class IdempotentTokenService implements IIdempotentToken, IIdempotentChec
 	@Resource
 	protected HttpServletRequest request;
 	
-	@Override
-	public void preReleaseRateLimiter(String businessType, String mark, long duration)
-	{
-		Duration doubleDuration = Duration.ofSeconds(duration*2);
-		// 实现频率检查逻辑
-		// 可以使用Redisson的RRateLimiter
-		String key = IIdempotentToken.spliceRateLimiterKey(businessType, mark);
-		RRateLimiter rateLimiter = redisService.getRateLimiter(key);
-		// 设置key的过期时间
-		rateLimiter.expire(doubleDuration);
-	}
-	public boolean isRequestTooFrequent(String businessType, TcIdempotent tcIdempotent,String mark)
+	public boolean isRequestTooFrequent(String businessType, TcIdempotent tcIdempotent, String mark)
 	{
 		int limit = tcIdempotent.rateLimit();
 		Duration duration = Duration.ofSeconds(tcIdempotent.rateLimitDuration());
@@ -53,12 +43,14 @@ public class IdempotentTokenService implements IIdempotentToken, IIdempotentChec
 		RRateLimiter rateLimiter = redisService.getRateLimiter(key);
 		// 设置key的过期时间
 		Duration doubleDuration = Duration.ofMinutes(2 * duration.toMinutes());
-		rateLimiter.setRate(RateType.OVERALL, limit, duration,doubleDuration); // 每分钟10次
+		rateLimiter.setRate(RateType.OVERALL, limit, duration, doubleDuration); // 每分钟10次
 		return !rateLimiter.tryAcquire(1);
 	}
 	
 	@Override
-	public boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType) throws NoSuchMethodException
+	@LockAndGet(lockKey = "#{businessType}")
+	public boolean hasSimilarRecentRequest(ProceedingJoinPoint joinPoint, String businessType)
+	throws NoSuchMethodException
 	{
 		// 实现相似请求检查
 		String string = generator.generateIdentifier(joinPoint);
@@ -122,7 +114,6 @@ public class IdempotentTokenService implements IIdempotentToken, IIdempotentChec
 	{
 		String resultKey = IIdempotentToken.spliceResultKey(token);
 		String resultJson = JSON.toJSONString(result);
-		
 		luaScriptManager.executeScript(
 			ILuaScriptManager.LuaScriptExecuteVO
 				.builder()
@@ -168,8 +159,19 @@ public class IdempotentTokenService implements IIdempotentToken, IIdempotentChec
 				.args(new String[] {Long.toString(DELETE_KEY_EXPIRE_TIME)})
 				.build()
 		);
-		
 		return ((Long) result) > 0;
+	}
+	
+	@Override
+	public void preReleaseRateLimiter(String businessType, String mark, long duration)
+	{
+		Duration doubleDuration = Duration.ofSeconds(duration * 2);
+		// 实现频率检查逻辑
+		// 可以使用Redisson的RRateLimiter
+		String key = IIdempotentToken.spliceRateLimiterKey(businessType, mark);
+		RRateLimiter rateLimiter = redisService.getRateLimiter(key);
+		// 设置key的过期时间
+		rateLimiter.expire(doubleDuration);
 	}
 	
 	public boolean shouldReleaseToken(Exception e)

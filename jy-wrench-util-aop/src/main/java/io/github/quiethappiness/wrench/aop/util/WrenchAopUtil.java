@@ -23,7 +23,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
-
 public record WrenchAopUtil()
 {
 	static Logger log = LoggerFactory.getLogger(WrenchAopUtil.class);
@@ -57,7 +56,7 @@ public record WrenchAopUtil()
 			}
 			catch (NoSuchMethodException e)
 			{
-				log.error("fallbackMethod is not found, please check the configuration, exception:",e);
+				log.error("fallbackMethod is not found, please check the configuration, exception:", e);
 				return new Object();
 			}
 		}
@@ -113,6 +112,7 @@ public record WrenchAopUtil()
 				.getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
 		}
 	}
+	
 	public interface FieldPart
 	{
 		static <T> T extractSpelExpressionValue(ProceedingJoinPoint jp, String expression, Class<T> clazz)
@@ -149,10 +149,13 @@ public record WrenchAopUtil()
 					log.error("Failed to parse expression: {}, using default value", expression, e);
 				}
 			}
+			if (value == null)
+			{
+				log.error("Failed to extract value from expression: {}, using default value", expression);
+				throw new RuntimeException("Failed to extract value from expression: " + expression);
+			}
 			return value;
 		}
-		
-
 		
 		static String getFelidStringFromArgOrField(String attrName, ProceedingJoinPoint jp) throws NoSuchMethodException
 		{
@@ -379,6 +382,7 @@ public record WrenchAopUtil()
 			return evalContext;
 		}
 	}
+	
 	static String simplifyParameterName(Parameter parameter)
 	{
 		String name = parameter

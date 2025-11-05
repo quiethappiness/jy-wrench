@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrencher.trigger;
+package io.github.quiethappiness.wrencher.bean;
 
 import io.github.quiethappiness.wrench.traffic.control.config.property.WhiteListProperties;
 import io.github.quiethappiness.wrench.traffic.control.domain.service.whitelist.data.WhiteListDataProvider;

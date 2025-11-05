@@ -35,10 +35,11 @@ public class IndexController
 	private IIdempotentToken idempotentToken;
 	
 	@GetMapping(value = "idempotent")
-	@TcIdempotent(level = Level.STRICT, rateMark = "#code")
+	@TcIdempotent(level = Level.STRICT, rateMark = "#{user.code}")
 	public Map<String, Object> idempotent(
-		@RequestBody @UniqueIdentifier(fieldPathsOrExpressions = {"#code", "#info"}) UserInfo user
-	) throws InterruptedException
+		@RequestBody @UniqueIdentifier(fieldPathsOrExpressions = {"#{user.code}", "#{user.info}"}) UserInfo user
+	)
+	throws InterruptedException
 	{
 		// Thread.sleep(2000);
 		// throw new InterruptedException("test");
@@ -49,7 +50,8 @@ public class IndexController
 	}
 	
 	@GetMapping(value = "token")
-	public String token(String userId) throws InterruptedException
+	public String token(String userId)
+	throws InterruptedException
 	{
 		// Thread.sleep(2000);
 		// throw new InterruptedException("test");
@@ -58,33 +60,38 @@ public class IndexController
 	
 	@MeMethodExtension(beforeMethod = "before", beforeReturnJson = "{}", afterReturnMethod = "afterReturn", afterThrowingMethod = "afterThrowing", afterMethod = "after")
 	@GetMapping(value = "method")
-	public String methodExtension(String userId) throws InterruptedException
+	public String methodExtension(String userId)
+	throws InterruptedException
 	{
 		// Thread.sleep(2000);
 		// throw new InterruptedException("test");
 		return "test";
 	}
 	
-	public String before(String userId) throws InterruptedException
+	public String before(String userId)
+	throws InterruptedException
 	{
 		log.info("before");
 		// throw new InterruptedException("test");
 		return "before";
 	}
 	
-	public String after(String userId) throws InterruptedException
+	public String after(String userId)
+	throws InterruptedException
 	{
 		log.info("after");
 		return "after";
 	}
 	
-	public String afterReturn(String userId) throws InterruptedException
+	public String afterReturn(String userId)
+	throws InterruptedException
 	{
 		log.info("afterReturn");
 		return "afterReturn";
 	}
 	
-	public String afterThrowing(String userId) throws InterruptedException
+	public String afterThrowing(String userId)
+	throws InterruptedException
 	{
 		log.info("afterThrowing");
 		return "afterThrowing";
@@ -92,7 +99,8 @@ public class IndexController
 	
 	@TcHystrix(timeout = 100, returnJson = "", fallbackMethod = "drawHystrix")
 	@GetMapping(value = "hystrix")
-	public String HYSTRIX(String userId) throws InterruptedException
+	public String HYSTRIX(String userId)
+	throws InterruptedException
 	{
 		Thread.sleep(2000);
 		return "test";
@@ -102,36 +110,36 @@ public class IndexController
 	 * curl --request GET \
 	 * --url 'http://127.0.0.1:9191/api/v1/index/draw?userId=xiaofuge'
 	 */
-	@TcWhiteList(key = "#{actualValue}", type = TcWhiteList.WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
+	@TcWhiteList(key = "#{userId}", type = TcWhiteList.WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
 	@GetMapping(value = "whitelist")
 	public String WHITELIST(String userId)
 	{
 		return "test";
 	}
 	
-	@TcWhiteList(key = "#{actualValue}", type = TcWhiteList.WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
-	@TcRateLimiter(key = "actualValue", mode = TcRateLimiter.RateLimiterMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
+	@TcWhiteList(key = "#{userId}", type = TcWhiteList.WhiteListType.USER_ID, fallbackMethod = "drawErrorRateLimiter")
+	@TcRateLimiter(key = "#userId", mode = TcRateLimiter.RateLimiterMode.PPS_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1.0d, blacklistCount = 3)
 	@GetMapping(value = "PPS_BLACKLIST")
 	public String PPS_BLACKLIST(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "actualValue", mode = TcRateLimiter.RateLimiterMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
+	@TcRateLimiter(key = "#userId", mode = TcRateLimiter.RateLimiterMode.PPS, fallbackMethod = "drawErrorRateLimiter", permitsPerSecond = 1, blacklistCount = 3)
 	@GetMapping(value = "PPS")
 	public String PPS(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "actualValue", mode = TcRateLimiter.RateLimiterMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
+	@TcRateLimiter(key = "#userId", mode = TcRateLimiter.RateLimiterMode.SWR, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 3)
 	@GetMapping(value = "SWR")
 	public String SWR(String userId)
 	{
 		return "test";
 	}
 	
-	@TcRateLimiter(key = "actualValue", mode = TcRateLimiter.RateLimiterMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
+	@TcRateLimiter(key = "#userId", mode = TcRateLimiter.RateLimiterMode.SWR_BLACKLIST, fallbackMethod = "drawErrorRateLimiter", maxRequests = 2, blacklistCount = 2)
 	@GetMapping(value = "SWR_BLACKLIST")
 	public String SWR_BLACKLIST(String userId)
 	{

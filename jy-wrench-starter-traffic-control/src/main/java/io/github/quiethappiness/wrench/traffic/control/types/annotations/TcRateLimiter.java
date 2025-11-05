@@ -21,6 +21,10 @@ public @interface TcRateLimiter
 {
 	/**
 	 * 用哪个字段作为拦截标识，未配置则报错
+	 * <p>spel表达式</p>
+	 * <pre>
+	 *     #{user.id}
+	 * </pre>
 	 */
 	String key();
 	
@@ -72,8 +76,8 @@ public @interface TcRateLimiter
 	@Getter
 	enum RateLimiterMode
 	{
-		/**
-		 * 白名单模式，白名单内的用户不受限，其他用户受限
+		/*
+		  白名单模式，白名单内的用户不受限，其他用户受限
 		 */
 		// WHITELIST("whitelist", "Whitelist mode"),
 		/**
