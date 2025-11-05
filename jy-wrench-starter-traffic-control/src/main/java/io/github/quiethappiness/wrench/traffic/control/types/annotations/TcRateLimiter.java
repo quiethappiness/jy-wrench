@@ -6,17 +6,14 @@ import lombok.Getter;
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
 
+
 /**
- * TcRateLimiter
- *
- * @author quietHappiness @jingyue
- * @version 1.0
- * @description 限流拦截器
- * @date 2025/9/12 15:38
+ * 自定义注解 TcRateLimiter，用于实现限流功能
+ * 该注解可以应用于方法级别，并在运行时保留
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-@Documented
+@Retention(RetentionPolicy.RUNTIME)  // 注解会在运行时保留，可通过反射读取
+@Target({ElementType.METHOD})       // 注解只能应用于方法上
+@Documented                         // 表明注解会被包含在JavaDoc中
 public @interface TcRateLimiter
 {
 	/**
@@ -76,10 +73,6 @@ public @interface TcRateLimiter
 	@Getter
 	enum RateLimiterMode
 	{
-		/*
-		  白名单模式，白名单内的用户不受限，其他用户受限
-		 */
-		// WHITELIST("whitelist", "Whitelist mode"),
 		/**
 		 * 频率模式，用户请求的频率超过限制则被限制
 		 */
@@ -91,10 +84,6 @@ public @interface TcRateLimiter
 		// PPS+
 		PPS_BLACKLIST("pps_blacklist", "Requests per second with blacklist"),
 		SWR_BLACKLIST("swr_blacklist", "Slide window rate limiter with blacklist"),
-		// WHITELIST_PPS("whitelist_pps", "whitelist mode with Requests per second"),
-		// WHITELIST_PPS_BLACKLIST("whitelist_pps_blacklist", "whitelist mode with Requests per second with blacklist"),
-		// WHITELIST_SWR("whitelist_swr", "whitelist mode with Slide window rate limiter"),
-		// WHITELIST_SWR_BLACKLIST("whitelist_swr_blacklist", "whitelist mode with Slide window rate limiter with blacklist"),
 		;
 		private final String name;
 		private final String desc;

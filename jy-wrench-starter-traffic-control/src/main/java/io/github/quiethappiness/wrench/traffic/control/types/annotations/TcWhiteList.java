@@ -6,17 +6,16 @@ import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
 
+
 /**
- * TcWhiteList
- * @author quietHappiness @jingyue
- * @version 1.0
- * @description 在需要使用到的白名单服务的接口上，添加此注解并配置必要的信息。接口入参提取字段属性名称、拦截后的返回信息
- * @date 2025/9/28 22:16
+ * <p>在需要使用到的白名单服务的接口上，添加此注解并配置必要的信息。接口入参提取字段属性名称、拦截后的返回信息</p>
+ * 自定义注解 TcWhiteList，用于标记白名单相关的方法
+ * 该注解具有运行时保留、可继承、可文档化等特性，并只能用于方法上
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-@Inherited
-@Documented
+@Retention(RetentionPolicy.RUNTIME)  // 注解保留在运行时
+@Target(ElementType.METHOD)         // 注解只能用于方法上
+@Inherited                          // 注解可被继承
+@Documented                         // 注解会包含在JavaDoc中
 public @interface TcWhiteList
 {
 	/**
@@ -42,15 +41,15 @@ public @interface TcWhiteList
 	 * </pre></p>
 	 */
 	@AliasFor("whiteListField")
-	String key() default "";
+	String key() default "";         // 指定白名单的key，默认为空
 	
 	@AliasFor("key")
-	String whiteListField() default "";
+	String whiteListField() default "";  // 指定白名单的字段，默认为空
 	
 	/**
 	 * 白名单类型
 	 */
-	WhiteListType type() default WhiteListType.USER_ID;
+	WhiteListType type() default WhiteListType.USER_ID;  // 指定白名单类型，默认为USER_ID
 	
 	/**
 	 * 降级方法，仅在只使用白名单服务时并且失败时触发

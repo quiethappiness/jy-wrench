@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business;
+package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token;
 
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
 import org.aspectj.lang.ProceedingJoinPoint;

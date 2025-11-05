@@ -5,15 +5,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 /**
- * UniqueIdentifier
- * @description 唯一标识，用于重复内容的请求
- * @author quietHappiness @jingyue
- * @date 2025/11/3 10:34
- * @version 1.0
+ * 自定义注解：用于标记参数作为唯一标识
+ * 该注解可以应用于方法的参数上，用于指定生成唯一标识所需的字段和配置
  */
-@Target(ElementType.PARAMETER)
-@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.PARAMETER)  // 指定该注解只能用于参数上
+@Retention(RetentionPolicy.RUNTIME)  // 指定该注解的保留策略为运行时
 public @interface UniqueIdentifier
 {
 	/**
@@ -23,7 +21,7 @@ public @interface UniqueIdentifier
 	 *     #{user.id}
 	 * </pre>
 	 * <pre>
-	 *     fieldPathsOrExpressions = {"#code", "#info"}
+	 *     fieldPathsOrExpressions = {"#user.code", "#user.info"}
 	 * </pre>
 	 * 不配置默认走所有字段
 	 */

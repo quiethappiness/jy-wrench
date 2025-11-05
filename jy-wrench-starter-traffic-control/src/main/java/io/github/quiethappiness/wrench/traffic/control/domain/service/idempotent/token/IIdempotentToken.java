@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business;
+package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token;
 
 import io.github.quiethappiness.wrench.lua.manager.types.annotations.LuaScriptPath;
 
@@ -22,11 +22,11 @@ public interface IIdempotentToken
 	String RESULT_PREFIX = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":result:";
 	String SIMILAR_HASH_MAP_KEY = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":similar";
 	String RATE_LIMITER_PREFIX = JY_TRAFFIC_CONTROL_IDEMPOTENT + ":rate_limit:";
-	Long TOKEN_EXPIRE_TIME = TimeUnit.HOURS.toSeconds(1);
-	Long RESULT_EXPIRE_TIME = TimeUnit.HOURS.toSeconds(1);
+	Long TOKEN_EXPIRE_TIME = TimeUnit.MINUTES.toSeconds(15);
+	Long RESULT_EXPIRE_TIME = TimeUnit.MINUTES.toSeconds(15);
 	Duration RATE_LIMITER_DURATION = Duration.ofMinutes(1);
 	Duration SIMILAR_HASH_DURATION = Duration.ofSeconds(30);
-	Long DELETE_KEY_EXPIRE_TIME = TimeUnit.MINUTES.toSeconds(5);
+	Long DELETE_KEY_EXPIRE_TIME = TimeUnit.MINUTES.toSeconds(2);
 	static String spliceTokenKey(String token)
 	{
 		return TOKEN_PREFIX + token;

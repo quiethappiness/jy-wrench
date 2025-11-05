@@ -1,4 +1,4 @@
-package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business;
+package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token;
 
 import com.alibaba.fastjson.JSON;
 import io.github.quiethappiness.wrench.lua.manager.domain.model.valobj.ScriptNameContext;
@@ -71,7 +71,7 @@ public class IdempotentTokenService implements IIdempotentToken, IIdempotentChec
 		String token = IIdempotentToken.generateUniqueToken();
 		String tokenKey = IIdempotentToken.spliceTokenKey(token);
 		// 存储令牌，设置过期时间
-		redisService.setValue(tokenKey, "VALID", 1, TimeUnit.HOURS);
+		redisService.setValue(tokenKey, "VALID", 15, TimeUnit.MINUTES);
 		return token;
 	}
 	

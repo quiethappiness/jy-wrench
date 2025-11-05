@@ -2,7 +2,7 @@ package io.github.quiethappiness.wrencher.trigger;
 
 import io.github.quiethappiness.wrench.lua.manager.domain.service.manager.ILuaScriptManager;
 import io.github.quiethappiness.wrench.method.extention.type.annotations.MeMethodExtension;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentToken;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token.IIdempotentToken;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.*;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent.Level;
 import io.github.quiethappiness.wrencher.interfaces.dto.UserInfo;

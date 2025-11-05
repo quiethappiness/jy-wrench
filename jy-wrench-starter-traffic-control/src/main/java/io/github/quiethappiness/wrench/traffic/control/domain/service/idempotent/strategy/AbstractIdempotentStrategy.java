@@ -1,8 +1,8 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.strategy;
 
 import io.github.quiethappiness.wrench.aop.util.WrenchAopUtil.MethodPart;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentCheck;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentToken;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token.IIdempotentCheck;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token.IIdempotentToken;
 import io.github.quiethappiness.wrench.traffic.control.types.annotations.TcIdempotent;
 import io.github.quiethappiness.wrench.traffic.control.types.exception.IdempotentException;
 import jakarta.annotation.Resource;

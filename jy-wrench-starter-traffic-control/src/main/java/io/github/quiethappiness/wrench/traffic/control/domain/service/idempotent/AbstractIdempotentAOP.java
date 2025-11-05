@@ -1,7 +1,7 @@
 package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent;
 
 import io.github.quiethappiness.wrench.traffic.control.domain.service.IIdempotentAOP;
-import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.business.IIdempotentToken;
+import io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.token.IIdempotentToken;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 

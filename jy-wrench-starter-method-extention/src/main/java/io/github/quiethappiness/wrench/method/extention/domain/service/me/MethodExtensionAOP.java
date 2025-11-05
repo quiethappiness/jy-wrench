@@ -38,7 +38,7 @@ public class MethodExtensionAOP extends AbstractMethodExtensionAOP
 		}
 		catch (Throwable throwable)
 		{
-			log.error("MethodExtensionAOP: business method invoke error", throwable);
+			log.error("MethodExtensionAOP: token method invoke error", throwable);
 			// 2.1 异常处理
 			doExec(jp, methodExtension.afterThrowingMethod(), "MethodExtensionAOP: afterThrowingMethod invoke error");
 			// 重要决策点：是返回默认值还是抛出异常？
