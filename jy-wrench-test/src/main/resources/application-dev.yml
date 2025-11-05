@@ -58,8 +58,8 @@ jy:
                 enabled: true
             traffic:
                 hystrix:
-                    enabled: true
-                ratemiter:
+                    enabled: false
+                ratelimiter:
                     enabled: true
                 whitelist:
                     enabled: true

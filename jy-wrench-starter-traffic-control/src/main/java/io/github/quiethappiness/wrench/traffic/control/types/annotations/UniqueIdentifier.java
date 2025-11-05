@@ -17,16 +17,24 @@ import java.lang.annotation.Target;
 public @interface UniqueIdentifier
 {
 	/**
-	 * 参与生成唯一标识的字段名
+	 * 参与生成唯一标识的字段名.例如
+	 * <pre>
+	 *     fieldPathsOrExpressions = {"#code", "#info"}
+	 * </pre>
+	 * 不配置默认走所有字段
 	 */
-	String[] fieldPathsOrExpressions() default {};
+	String[] fieldPathsOrExpressions() ;
 	
 	/**
-	 * 连接符,这里是语法连接符号，可以用于多层字段
+	 * 定义一个默认值为Type.SPEL的type()方法
+	 * 这是一个注解中的默认值设置，当使用该注解但没有显式指定type值时，将自动使用Type.SPEL作为默认值
+	 */
+	Type type() default Type.SPEL;
+	
+	/**
+	 * 连接符,这里是语法连接符号，可以用于多层字段。当选择自定义时需要考虑配置
 	 */
 	String Connector() default ".";
-	
-	Type type() default Type.SPEL;
 	
 	/**
 	 * 哈希算法

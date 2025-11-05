@@ -1,5 +1,6 @@
-package io.github.quiethappiness.wrench.traffic.control.types.exception;
+package io.github.quiethappiness.wrench.traffic.control.domain.service.idempotent.exception;
 
+import io.github.quiethappiness.wrench.traffic.control.types.exception.IdempotentException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

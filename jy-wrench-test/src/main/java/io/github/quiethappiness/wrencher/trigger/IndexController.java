@@ -37,7 +37,7 @@ public class IndexController
 	@GetMapping(value = "idempotent")
 	@TcIdempotent(level = Level.STRICT, rateMark = "#code")
 	public Map<String, Object> idempotent(
-		@RequestBody @UniqueIdentifier(fieldPathsOrExpressions = {"#code", "#info"}, algorithm = UniqueIdentifier.HashAlgorithm.MD5) UserInfo user
+		@RequestBody @UniqueIdentifier(fieldPathsOrExpressions = {"#code", "#info"}) UserInfo user
 	) throws InterruptedException
 	{
 		// Thread.sleep(2000);

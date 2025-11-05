@@ -28,9 +28,9 @@ public @interface TcIdempotent
 	
 	// 仅用于normal,strict级别
 	/**
-	 * 请求唯一标识，用于生成幂等性令牌以及其他频次限制
+	 * 请求唯一标识，用于生成幂等性令牌以及其他频次限制，比如用户ID
 	 */
-	String rateMark() default "userId";
+	String rateMark() ;
 	/**
 	 * 频次限制(对于一整个服务）
 	 */
@@ -55,7 +55,7 @@ public @interface TcIdempotent
 		 */
 		NORMAL,
 		/**
-		 * 严格接口：会进行严格的相似性检查,相似性检查是根据equals方法进行的，因此需要保证对象的一致性
+		 * 严格接口：会进行基本的频率检查+会进行严格的相似性检查,相似性检查是根据equals方法进行的，因此需要保证对象的一致性
 		 */
 		STRICT
 	}

@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@ConfigurationProperties(prefix = "jy.wrench.config.traffic.whitelist", ignoreInvalidFields = true)
+@ConfigurationProperties(prefix = WhiteListProperties.JY_WRENCH_CONFIG_TRAFFIC_WHITELIST, ignoreInvalidFields = true)
 @Data
 public class WhiteListProperties
 {
+	public static final String JY_WRENCH_CONFIG_TRAFFIC_WHITELIST = "jy.wrench.config.traffic.whitelist";
 	private boolean enabled = true;
 	private Rule[] rules;
 	
@@ -32,4 +33,5 @@ public class WhiteListProperties
 		private TimeUnit timeUnit;
 		private Map<TcWhiteList.WhiteListType, List<String>> whiteList;
 	}
+	public static final String JY_WRENCH_CONFIG_TRAFFIC_WHITELIST_ENABLED = JY_WRENCH_CONFIG_TRAFFIC_WHITELIST+".enabled";
 }

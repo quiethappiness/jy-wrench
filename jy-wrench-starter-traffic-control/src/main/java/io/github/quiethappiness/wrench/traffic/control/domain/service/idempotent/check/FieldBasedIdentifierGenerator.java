@@ -57,7 +57,7 @@ public class FieldBasedIdentifierGenerator
 		{
 			// 遍历当前参数的所有注解
 			UniqueIdentifier[] uniqueIdentifiers = parameters[i].getAnnotationsByType(UniqueIdentifier.class);
-			if (uniqueIdentifiers.length > 0)
+			if (uniqueIdentifiers.length > 0&& uniqueIdentifiers[0].fieldPathsOrExpressions().length > 0)
 			{
 				// 如果有@UniqueIdentifier注解，则根据注解配置生成标识并添加到列表
 				identifiers.add(generateIdentifierFromFields(parameters[i].getType(), parameters[i].getName(), args[i], uniqueIdentifiers[0]));
